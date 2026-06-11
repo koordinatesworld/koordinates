@@ -159,25 +159,47 @@
     for(var a=0;a<13;a++){ var ang=(a-6)/6*0.95; mesh(new THREE.SphereGeometry(0.013,8,8),GO,null,Math.sin(ang)*0.12,1.46-Math.abs(ang)*0.03,Math.cos(ang)*0.1+0.02); }
     mesh(new THREE.SphereGeometry(0.022,10,8),GEM,null,0,1.36,0.14); // pendant
 
-    // ════ ARMS — pivot at shoulder, hang naturally ════
+    // ════ ARMS — fully jointed: shoulder→upper→elbow→forearm→wrist→hand ════
     function buildArm(side){
-      var g=new THREE.Group(); g.position.set(0.15*side,1.42,0); root.add(g);
-      mesh(capsule(0.045,0.26,12),RO,g,0,-0.14,0);            // upper arm (sleeve)
-      mesh(capsule(0.036,0.24,12),SK,g,0,-0.42,0);            // forearm
-      mesh(new THREE.SphereGeometry(0.04,12,10),SK,g,0,-0.58,0); // hand
-      // fingers
-      for(var f=-1;f<=2;f++){ mesh(capsule(0.009,0.05,6),SK,g,f*0.016,-0.63,0.005); }
-      // bangles (choodiyan)
-      [0,1,2,3].forEach(function(b){ mesh(new THREE.TorusGeometry(0.04,0.007,6,16),GO,g,0,-0.5-b*0.018,0,PI/2,0,0); });
-      mesh(new THREE.TorusGeometry(0.047,0.006,6,16),GEM,g,0,-0.28,0,PI/2,0,0); // armlet
-      return g;
+      // shoulder pivot
+      var g=new THREE.Group(); g.position.set(0.145*side,1.42,0); root.add(g);
+      // deltoid / shoulder cap (fills the gap to torso)
+      mesh(new THREE.SphereGeometry(0.058,14,12),RO,g,0,0,0);
+      // UPPER ARM (sleeve) — top of capsule sits right at shoulder
+      mesh(capsule(0.044,0.18,14),RO,g,0,-0.13,0);
+      mesh(new THREE.TorusGeometry(0.046,0.006,6,16),GEM,g,0,-0.22,0,PI/2,0,0); // bajuband
+      // ELBOW joint sphere (no gap)
+      mesh(new THREE.SphereGeometry(0.042,12,10),SK,g,0,-0.25,0);
+
+      // FOREARM subgroup — pivots at elbow so it can bend
+      var fore=new THREE.Group(); fore.position.set(0,-0.25,0); g.add(fore);
+      mesh(capsule(0.038,0.17,14),SK,fore,0,-0.11,0);          // forearm
+      // wrist
+      mesh(new THREE.SphereGeometry(0.034,12,10),SK,fore,0,-0.21,0);
+      // bangles (choodiyan) stacked on wrist
+      [0,1,2,3,4].forEach(function(b){ mesh(new THREE.TorusGeometry(0.039,0.006,6,16),(b%2?GEM:GO),fore,0,-0.18-b*0.015,0,PI/2,0,0); });
+      // PALM
+      mesh(new THREE.SphereGeometry(0.04,12,10),SK,fore,0,-0.26,0.005,0,0,0,1,1.05,0.6);
+      // mehndi dot on palm
+      mesh(new THREE.CircleGeometry(0.014,10),M(0x8a2010,0.6),fore,0,-0.27,0.03,-0.3,0,0);
+      // FINGERS (4 + thumb), each slightly bent
+      for(var f=0;f<4;f++){
+        mesh(capsule(0.0085,0.055,6),SK,fore,(f-1.5)*0.018,-0.31,0.01,0.25,0,0);
+        mesh(new THREE.SphereGeometry(0.008,6,6),SK,fore,(f-1.5)*0.018,-0.345,0.025); // fingertip nail
+      }
+      mesh(capsule(0.009,0.04,6),SK,fore,0.038*side*-1,-0.285,0.02,0.2,0,0.5); // thumb
+      return {g:g,fore:fore};
     }
     var armL=buildArm(-1), armR=buildArm(1);
 
-    // ── Feet (peeking from under ghagra) ──
+    // ════ LEGS (peek under ghagra) — jointed ════
     [-0.09,0.09].forEach(function(x){
-      mesh(capsule(0.04,0.06,8),SK,null,x,0.035,0.06,PI/2,0,0);
-      mesh(new THREE.TorusGeometry(0.038,0.005,6,16),GO,null,x,0.05,0.02,0,0,0); // payal
+      mesh(capsule(0.05,0.14,10),SK,null,x,0.18,0.02);          // shin
+      mesh(new THREE.SphereGeometry(0.04,10,8),SK,null,x,0.07,0.02); // ankle
+      mesh(capsule(0.04,0.08,8),SK,null,x,0.035,0.07,PI/2.2,0,0);    // foot
+      mesh(new THREE.TorusGeometry(0.042,0.005,6,16),GO,null,x,0.055,0.02); // payal (anklet)
+      // toe rings
+      mesh(new THREE.TorusGeometry(0.012,0.003,5,12),GO,null,x,0.025,0.11);
     });
 
     // ── Floor ring ──
@@ -192,14 +214,15 @@
 
     // ── Poses (arms hang down from shoulders; +X forward, Z inward) ──
     // armLZ: left arm tuck-in, armRZ: right arm tuck-in (mirrored), armX: raise forward
+    // elb = elbow bend (forearm forward)
     var POSES={
-      idle:   {armLZ:0.06,armRZ:0.06,armLX:0.0,armRX:0.0,by:0.0, bp:0,    hp:0},
-      sit:    {armLZ:0.10,armRZ:0.10,armLX:0.35,armRX:0.35,by:-0.32,bp:0.04,hp:0.04},
-      stand:  {armLZ:0.04,armRZ:0.04,armLX:0.0,armRX:0.0,by:0.03,bp:0,    hp:-0.04},
-      clap:   {armLZ:0.55,armRZ:0.55,armLX:1.25,armRX:1.25,by:0.0, bp:0.03,hp:0.08},
-      pranaam:{armLZ:0.62,armRZ:0.62,armLX:1.45,armRX:1.45,by:-0.04,bp:0.14,hp:0.2}
+      idle:   {armZ:0.06,armX:0.0, elb:0.25, by:0.0, bp:0,    hp:0},
+      sit:    {armZ:0.10,armX:0.30,elb:0.55, by:-0.32,bp:0.04,hp:0.04},
+      stand:  {armZ:0.04,armX:0.0, elb:0.15, by:0.03,bp:0,    hp:-0.04},
+      clap:   {armZ:0.40,armX:0.85,elb:1.15, by:0.0, bp:0.03,hp:0.08},
+      pranaam:{armZ:0.48,armX:0.75,elb:1.35, by:-0.04,bp:0.14,hp:0.2}
     };
-    var pose='idle', tgt=POSES.idle, cur={armLZ:0.06,armRZ:0.06,armLX:0,armRX:0,by:0,bp:0,hp:0};
+    var pose='idle', tgt=POSES.idle, cur={armZ:0.06,armX:0,elb:0.25,by:0,bp:0,hp:0};
     window.setPose=function(p,el){
       pose=p; tgt=POSES[p];
       document.querySelectorAll('.btn').forEach(function(b){b.classList.remove('on');});
@@ -230,11 +253,15 @@
       for(var key in cur){ cur[key]+=(tgt[key]-cur[key])*k; }
 
       var clapOff=0;
-      if(pose==='clap'){ clapOff=Math.abs(Math.sin(t*6))*0.18; }
-      armL.rotation.z=cur.armLZ+clapOff;     // left tucks toward centre (+z)
-      armR.rotation.z=-(cur.armRZ+clapOff);  // right mirrored (-z)
-      armL.rotation.x=cur.armLX;
-      armR.rotation.x=cur.armRX;
+      if(pose==='clap'){ clapOff=Math.abs(Math.sin(t*6))*0.16; }
+      // shoulder
+      armL.g.rotation.z=cur.armZ+clapOff;     // left tucks toward centre (+z)
+      armR.g.rotation.z=-(cur.armZ+clapOff);  // right mirrored
+      armL.g.rotation.x=cur.armX;
+      armR.g.rotation.x=cur.armX;
+      // elbow bend (forearm forward, toward centre on clap)
+      armL.fore.rotation.x=cur.elb;
+      armR.fore.rotation.x=cur.elb;
 
       head.position.y=1.66+cur.by+Math.sin(t*0.65)*0.01;
       head.rotation.x=cur.hp;
