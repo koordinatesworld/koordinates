@@ -170,14 +170,15 @@ function build(){
   /* ════ TORSO / CHOLI ════ */
   mk(cyl(.115,.13,.42,20),CHOLI,body,0,1.18,0);        // waist→ribs
   mk(sph(.14,20,16),CHOLI,body,0,1.4,0,0,0,0,1.08,.78,1); // chest
-  // bust curves (feminine shape)
+  // bust (subtle, feminine — not protruding)
   [-1,1].forEach(function(s){
-    mk(sph(.07,14,12),CHOLI,body,s*.065,1.36,.07,0,0,0,1,.88,.95);
+    mk(sph(.052,14,12),CHOLI,body,s*.05,1.345,.04,0,0,0,1,.82,.62);
   });
   // choli back
   mk(cyl(.115,.12,.38,20),CHOLI,body,0,1.17,.01);
-  // odhni / dupatta over shoulder (draped cloth hint)
-  var odh=mk(new THREE.PlaneGeometry(.28,.72),new THREE.MeshPhysicalMaterial({color:0xffcc44,roughness:.8,metalness:.02,side:THREE.DoubleSide,transparent:true,opacity:.82}),body,-.12,1.38,.04,-.3,.3,.1);
+  // odhni / dupatta draped over left shoulder + down the back
+  mk(cyl(.14,.17,.5,16,1,true),new THREE.MeshPhysicalMaterial({color:0xffc233,roughness:.8,metalness:.03,side:THREE.DoubleSide,transparent:true,opacity:.7}),body,-.02,1.25,-.08,.1,0,.05);
+  mk(new THREE.TorusGeometry(.04,.012,8,24),GOLD,body,-.16,1.46,.02,.4,.3,.2); // shoulder pin
 
   /* ════ NECK ════ */
   mk(cyl(.048,.056,.12,16),SK,body,0,1.56,0);
@@ -261,11 +262,11 @@ function build(){
   mk(sph(.006,8,8),new THREE.MeshPhysicalMaterial({color:0xff2030,emissive:new THREE.Color(0xaa0010),emissiveIntensity:.5,roughness:.2}),head,0,.075,.124);
 
   // ── HAIR (parted, long, braid) ──
-  mk(sph(.136,28,22),HAIR,head,0,.02,-.008,0,0,0,.97,1.06,1); // main scalp
-  mk(sph(.1,20,16),HAIR,head,0,.04,.06,0,0,0,1,.8,.7);  // front hair
+  mk(sph(.138,28,22),HAIR,head,0,.025,-.012,0,0,0,.98,1.05,1.02); // main scalp
+  mk(sph(.105,20,16),HAIR,head,0,.05,.04,0,0,0,1,.78,.62);  // front hairline
   [-1,1].forEach(function(s){
-    mk(sph(.08,16,14),HAIR,head,s*.1,-.04,.02,0,0,0,1,.9,1.1); // side hair
-    mk(cyl(.03,.025,.3,12),HAIR,head,s*.095,-.24,-.02,0,0,s*.12); // loose strands
+    mk(sph(.062,16,14),HAIR,head,s*.1,-.01,-.03,0,0,0,.7,1.15,.95); // side hair flowing down
+    mk(cyl(.026,.018,.26,12),HAIR,head,s*.1,-.2,-.04,0,0,s*.06); // strands behind ears
   });
   // parting line
   mk(new THREE.PlaneGeometry(.005,.2),new THREE.MeshStandardMaterial({color:0xc0784a}),head,0,.13,.085,-.2,0,0);
@@ -369,12 +370,14 @@ function build(){
      Each pose: {shZ=shoulder lean, uaX=upper arm forward, faX=elbow bend,
                  by=body offset, bp=body pitch, hp=head pitch}
   */
+  // shZ=shoulder tuck-in | uaX=upper arm raise FORWARD | faX=elbow bend up
+  // faZ=forearm swing toward centre (so hands meet) | danceOff=sway amount
   var POSES={
-    idle:   {shZ:.05, uaX:.0,  faX:.28, danceOff:0, by:0,   bp:0,   hp:0},
-    clap:   {shZ:.42, uaX:.75, faX:1.1, danceOff:0, by:0,   bp:.03, hp:.08},
-    dance:  {shZ:.15, uaX:.35, faX:.5,  danceOff:1, by:0,   bp:.04, hp:.06},
-    pranaam:{shZ:.45, uaX:.6,  faX:1.3, danceOff:0, by:-.03,bp:.12, hp:.18},
-    sit:    {shZ:.08, uaX:.25, faX:.6,  danceOff:0, by:-.3, bp:.04, hp:.04}
+    idle:   {shZ:.08, uaX:.05, faX:.32, faZ:.05, danceOff:0, by:0,   bp:0,   hp:0},
+    clap:   {shZ:.30, uaX:.55, faX:1.55,faZ:.85, danceOff:0, by:0,   bp:.04, hp:.06},
+    dance:  {shZ:.55, uaX:.95, faX:.7,  faZ:.2,  danceOff:1, by:0,   bp:.05, hp:.05},
+    pranaam:{shZ:.34, uaX:.5,  faX:1.75,faZ:.95, danceOff:0, by:-.03,bp:.1,  hp:.16},
+    sit:    {shZ:.1,  uaX:.3,  faX:.65, faZ:.1,  danceOff:0, by:-.3, bp:.04, hp:.04}
   };
   var pose='idle', tgt=JSON.parse(JSON.stringify(POSES.idle));
   var cur=JSON.parse(JSON.stringify(POSES.idle));
@@ -410,34 +413,64 @@ function build(){
     ox=e.touches[0].clientX;oy=e.touches[0].clientY;e.preventDefault();
   },{passive:false});
 
+  /* ── Realistic clap sound (Web Audio, no files) ── */
+  var actx=null, clapArmed=false;
+  function getCtx(){ if(!actx){ try{ actx=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){} } return actx; }
+  // unlock audio on first interaction (browsers require gesture)
+  window.addEventListener('pointerdown',function(){ var c=getCtx(); if(c&&c.state==='suspended')c.resume(); },{once:false});
+  function playClap(){
+    var c=getCtx(); if(!c) return;
+    var now=c.currentTime;
+    // layer 1: sharp noise burst (the slap)
+    var len=Math.floor(c.sampleRate*0.13);
+    var buf=c.createBuffer(1,len,c.sampleRate), d=buf.getChannelData(0);
+    for(var i=0;i<len;i++){ d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2.5); }
+    var src=c.createBufferSource(); src.buffer=buf;
+    var bp=c.createBiquadFilter(); bp.type='bandpass'; bp.frequency.value=1700; bp.Q.value=0.8;
+    var g=c.createGain(); g.gain.setValueAtTime(0.9,now); g.gain.exponentialRampToValueAtTime(0.001,now+0.13);
+    src.connect(bp); bp.connect(g); g.connect(c.destination); src.start(now);
+    // layer 2: low body thud (palm cup)
+    var o=c.createOscillator(); o.type='sine'; o.frequency.setValueAtTime(320,now); o.frequency.exponentialRampToValueAtTime(110,now+0.08);
+    var g2=c.createGain(); g2.gain.setValueAtTime(0.5,now); g2.gain.exponentialRampToValueAtTime(0.001,now+0.1);
+    o.connect(g2); g2.connect(c.destination); o.start(now); o.stop(now+0.12);
+  }
+
   /* ── Animate ── */
   var t=0;
-  var clock=typeof THREE.Clock!=='undefined'?new THREE.Clock():null;
   function animate(){
     requestAnimationFrame(animate);
     t+=.016;
     var k=.08;
     for(var key in cur){if(tgt[key]!=null)cur[key]+=(tgt[key]-cur[key])*k;}
 
-    var clapW=pose==='clap'?Math.abs(Math.sin(t*7))*.15:0;
     var danceW=cur.danceOff;
+    // clap cycle: forearms swing apart & together; sound on contact
+    var clapCyc=Math.sin(t*6.5);              // -1..1
+    var clapOpen=pose==='clap'?(clapCyc*.5+.5)*.5:0; // 0..0.5 extra opening
+    if(pose==='clap'){
+      if(clapCyc>.85 && !clapArmed){ playClap(); clapArmed=true; }
+      if(clapCyc<.4) clapArmed=false;
+    }
 
-    // shoulder
-    aL.sh.rotation.z= cur.shZ+clapW+Math.sin(t*.9)*danceW*.18;
-    aR.sh.rotation.z=-(cur.shZ+clapW+Math.sin(t*.9+PI)*danceW*.18);
-    // upper arm
-    aL.ua.rotation.x=cur.uaX;
-    aR.ua.rotation.x=cur.uaX;
-    // elbow
-    aL.fa.rotation.x=cur.faX;
-    aR.fa.rotation.x=cur.faX;
-    // wrist twist (idle natural droop)
-    aL.hnd.rotation.z= .12+Math.sin(t*.8)*.04;
-    aR.hnd.rotation.z=-.12+Math.sin(t*.8+1)*.04;
+    // SHOULDER — left tucks inward (+z), right mirrored
+    aL.sh.rotation.z= cur.shZ+Math.sin(t*1.1)*danceW*.5;
+    aR.sh.rotation.z=-(cur.shZ+Math.sin(t*1.1+PI)*danceW*.5);
+    // UPPER ARM — NEGATIVE x = raise FORWARD (toward camera)
+    aL.ua.rotation.x=-cur.uaX - danceW*Math.max(0,Math.sin(t*1.1))*.4;
+    aR.ua.rotation.x=-cur.uaX - danceW*Math.max(0,Math.sin(t*1.1+PI))*.4;
+    // ELBOW — bend forearm up/forward
+    aL.fa.rotation.x=-cur.faX;
+    aR.fa.rotation.x=-cur.faX;
+    // FOREARM swing toward centre so palms meet (minus clap opening)
+    aL.fa.rotation.z= (cur.faZ-clapOpen);
+    aR.fa.rotation.z=-(cur.faZ-clapOpen);
+    // wrist natural
+    aL.hnd.rotation.z= .1;
+    aR.hnd.rotation.z=-.1;
 
     // dance sway
-    body.rotation.z=Math.sin(t*.9)*danceW*.06;
-    body.rotation.y+=.0002+danceW*.004;
+    body.rotation.z=Math.sin(t*1.1)*danceW*.08;
+    body.rotation.y+=.0003+danceW*.006;
 
     head.position.y=1.72+cur.by+Math.sin(t*.6)*.009;
     head.rotation.x=cur.hp+Math.sin(t*.5)*.008;
