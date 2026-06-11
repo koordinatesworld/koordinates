@@ -9,6 +9,7 @@
   <meta name="author" content="koordinates/" />
   <meta name="copyright" content="© 2025 koordinates/. All rights reserved." />
   <meta name="robots" content="index, follow, noarchive" />
+  <meta name="google-site-verification" content="Oo35rEXcn4y4y2I70NX5GQQDoqbgjiBd9486LJJ2wVM" />
   <meta name="dcterms.rights" content="All content on this site is original and protected under copyright law. Unauthorised reproduction is prohibited." />
   <meta property="og:site_name" content="koordinates/" />
   <meta property="og:type" content="website" />
@@ -16,27 +17,28 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #0f0f14;
-      --surface: #16161e;
-      --surface2: #1e1e2a;
-      --line: #252535;
-      --accent: #7c6af7;
-      --accent2: #00ddd6;
+      --bg: #0c0c2e;
+      --surface: #13133a;
+      --surface2: #1e1e45;
+      --line: #2e2e5e;
+      --accent: #917aff;
+      --accent2: #00f5ed;
       --light-bg: #f5f2ee;
       --light-surface: #ffffff;
       --light-text: #1a1a2e;
       --accent3: #ff6b9d;
-      --gold: #f0a500;
-      --text: #ededf5;
-      --muted: #707089;
-      --dim: #383850;
+      --gold: #f5b800;
+      --neon: #c084fc;
+      --text: #ffffff;
+      --muted: #9090c0;
+      --dim: #4a4a80;
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
 
     body {
-      background: var(--bg);
+      background: linear-gradient(180deg, #0c0c2e 0%, #0a0a28 30%, #0e0a30 60%, #0c0c2e 100%);
       color: var(--text);
       font-family: 'Inter', sans-serif;
       overflow-x: hidden;
@@ -48,14 +50,14 @@
       position: fixed; top: 0; width: 100%; z-index: 100;
       display: flex; justify-content: space-between; align-items: center;
       padding: 1.3rem 3rem;
-      background: rgba(15,15,20,0.88);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--line);
+      background: rgba(8,8,26,0.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(145,122,255,0.18);
     }
     .logo { font-family: 'Space Mono', monospace; font-size: 1rem; color: var(--text); letter-spacing: -0.5px; }
     .logo em { color: var(--accent); font-style: normal; }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-links a { color: #555570; text-decoration: none; font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a { color: #7070a0; text-decoration: none; font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
     .nav-links a:hover { color: var(--text); }
 
     /* HERO */
@@ -67,16 +69,18 @@
     }
     .hero-grid {
       position: absolute; inset: 0; pointer-events: none;
-      background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
-      background-size: 60px 60px; opacity: 0.35;
+      background-image: linear-gradient(rgba(145,122,255,0.25) 1px, transparent 1px), linear-gradient(90deg, rgba(145,122,255,0.25) 1px, transparent 1px);
+      background-size: 60px 60px; opacity: 0.6;
       mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 80%);
     }
     .hero-glow {
       position: absolute; inset: 0; pointer-events: none;
       background:
-        radial-gradient(ellipse 60% 55% at 50% 0%, rgba(124,106,247,0.2) 0%, transparent 60%),
-        radial-gradient(ellipse 35% 35% at 85% 85%, rgba(0,221,214,0.1) 0%, transparent 50%),
-        radial-gradient(ellipse 30% 30% at 15% 70%, rgba(255,107,157,0.07) 0%, transparent 50%);
+        radial-gradient(ellipse 80% 70% at 50% -10%, rgba(145,122,255,0.55) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 50% at 85% 80%, rgba(0,245,237,0.35) 0%, transparent 50%),
+        radial-gradient(ellipse 45% 45% at 15% 65%, rgba(255,107,157,0.25) 0%, transparent 50%),
+        radial-gradient(ellipse 35% 35% at 75% 15%, rgba(192,132,252,0.28) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 50% 100%, rgba(0,245,237,0.15) 0%, transparent 60%);
     }
     .hero-inner {
       max-width: 1000px; width: 100%; position: relative; z-index: 1;
@@ -93,20 +97,20 @@
 
     h1 { font-size: clamp(2.8rem, 6vw, 5.5rem); font-weight: 900; line-height: 0.95; letter-spacing: -3px; margin-bottom: 2rem; }
     h1 .l1 { display: block; color: var(--text); }
-    h1 .l2 { display: block; background: linear-gradient(100deg, var(--accent), var(--accent2) 60%, var(--accent3)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    h1 .l2 { display: block; background: linear-gradient(100deg, var(--accent), var(--neon) 40%, var(--accent2) 70%, var(--accent3)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: drop-shadow(0 0 20px rgba(145,122,255,0.3)); }
 
     .hero-quote {
-      font-size: 0.95rem; color: #55556a; line-height: 1.9; margin-bottom: 2.5rem;
+      font-size: 0.95rem; color: #8080b0; line-height: 1.9; margin-bottom: 2.5rem;
       font-style: italic; max-width: 420px;
-      border-left: 2px solid var(--accent); padding-left: 1.2rem;
+      border-left: 2px solid var(--accent); padding-left: 1.2rem; border-left-color: var(--accent2);
     }
     .hero-quote cite { display: block; margin-top: 0.6rem; font-style: normal; font-size: 0.72rem; color: var(--accent); font-family: 'Space Mono', monospace; letter-spacing: 1px; }
 
     .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
 
     .btn { padding: 0.8rem 1.8rem; border-radius: 6px; font-size: 0.82rem; font-weight: 700; text-decoration: none; letter-spacing: 0.5px; text-transform: uppercase; transition: all 0.2s; display: inline-block; border: none; cursor: pointer; }
-    .btn-primary { background: var(--accent); color: #fff; }
-    .btn-primary:hover { background: #6a58e0; transform: translateY(-2px); box-shadow: 0 10px 28px rgba(124,106,247,0.35); }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), var(--neon)); color: #fff; box-shadow: 0 0 20px rgba(145,122,255,0.4); }
+    .btn-primary:hover { background: linear-gradient(135deg, #7a62e8, var(--accent2)); transform: translateY(-2px); box-shadow: 0 10px 35px rgba(145,122,255,0.55); }
     .btn-ghost { background: transparent; color: #55556a; border: 1px solid var(--line); }
     .btn-ghost:hover { border-color: var(--accent2); color: var(--accent2); }
 
@@ -114,8 +118,8 @@
     .hero-visual { display: flex; justify-content: center; align-items: center; }
     .globe-wrap { position: relative; width: 340px; height: 340px; }
     .globe-wrap svg { width: 100%; height: 100%; }
-    .globe-ring { position: absolute; inset: -20px; border: 1px solid rgba(124,106,247,0.15); border-radius: 50%; animation: spin 30s linear infinite; }
-    .globe-ring-2 { position: absolute; inset: -45px; border: 1px dashed rgba(0,221,214,0.1); border-radius: 50%; animation: spin 50s linear infinite reverse; }
+    .globe-ring { position: absolute; inset: -20px; border: 1px solid rgba(145,122,255,0.45); border-radius: 50%; animation: spin 30s linear infinite; box-shadow: 0 0 20px rgba(145,122,255,0.2); }
+    .globe-ring-2 { position: absolute; inset: -45px; border: 1px dashed rgba(0,245,237,0.35); border-radius: 50%; animation: spin 50s linear infinite reverse; box-shadow: 0 0 15px rgba(0,245,237,0.1); }
     @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     .globe-dot { position: absolute; width: 8px; height: 8px; border-radius: 50%; background: var(--accent2); box-shadow: 0 0 10px var(--accent2); }
     .globe-dot:nth-child(3) { top: 15%; left: 55%; }
@@ -123,15 +127,55 @@
     .globe-dot:nth-child(5) { top: 40%; left: 75%; background: var(--gold); box-shadow: 0 0 10px var(--gold); }
 
     /* TICKER */
-    .ticker { overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 1rem 0; background: var(--surface); }
+    .ticker { overflow: hidden; border-top: 1px solid rgba(145,122,255,0.3); border-bottom: 1px solid rgba(145,122,255,0.3); padding: 1rem 0; background: linear-gradient(90deg, #111136, #13133a, #111136); }
     .ticker-inner { display: flex; gap: 4rem; animation: ticker 28s linear infinite; width: max-content; }
-    .ticker-item { white-space: nowrap; font-family: 'Space Mono', monospace; font-size: 0.72rem; color: #404055; }
+    .ticker-item { white-space: nowrap; font-family: 'Space Mono', monospace; font-size: 0.72rem; color: #8080b0; }
     .ticker-item span { color: var(--accent); margin-right: 0.5rem; }
-    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .ticker-item .eq { color: var(--accent2); font-size: 0.8rem; }
+@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    /* FLOATING MATH */
+    .math-float {
+      position: absolute; pointer-events: none; font-family: 'Space Mono', monospace;
+      color: rgba(145,122,255,0.28); font-size: clamp(0.7rem, 1.5vw, 1rem);
+      animation: mathDrift 18s ease-in-out infinite; user-select: none;
+    }
+    .math-float:nth-child(odd) { animation-direction: reverse; animation-duration: 22s; color: rgba(0,245,237,0.25); }
+    @keyframes mathDrift {
+      0%,100% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+      33% { transform: translateY(-18px) rotate(2deg); opacity: 0.5; }
+      66% { transform: translateY(10px) rotate(-2deg); opacity: 0.9; }
+    }
+
+    /* MATH AXIOMS STRIP */
+    .math-strip {
+      background: linear-gradient(180deg, #0c0c2e 0%, #100e3a 50%, #0c0c2e 100%);
+      border-top: 1px solid rgba(145,122,255,0.3); border-bottom: 1px solid rgba(145,122,255,0.3);
+      padding: 4rem 3rem; overflow: hidden; position: relative;
+    }
+    .math-strip-inner { max-width: 1200px; margin: 0 auto; }
+    .math-strip-label { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--accent2); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 2.5rem; display: flex; align-items: center; gap: 1rem; }
+    .math-strip-label::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--accent2), transparent); }
+    .axioms-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+    @media (max-width: 900px) { .axioms-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 500px) { .axioms-grid { grid-template-columns: 1fr; } }
+    .axiom-cell {
+      background: var(--surface); padding: 1.8rem 1.5rem; transition: background 0.25s;
+      display: flex; flex-direction: column; gap: 0.7rem;
+    }
+    .axiom-cell:hover { background: var(--surface2); }
+    .axiom-eq { font-family: 'Space Mono', monospace; font-size: 1rem; color: var(--accent); letter-spacing: -0.5px; line-height: 1.3; }
+    .axiom-eq .eq-gold { color: var(--gold); }
+    .axiom-eq .eq-teal { color: var(--accent2); }
+    .axiom-eq .eq-pink { color: var(--accent3); }
+    .axiom-wit { font-size: 0.75rem; color: var(--muted); line-height: 1.6; font-style: italic; margin-top: 0.3rem; }
+    .axiom-tag { font-size: 0.6rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--dim); font-family: 'Space Mono', monospace; }
+
+    /* TICKER brighter */
+
 
     /* PHILOSOPHY STRIP */
     .philosophy {
-      background: linear-gradient(135deg, #13131c 0%, #1a1428 100%);
+      background: linear-gradient(135deg, #111136 0%, #1a1048 100%);
       border-bottom: 1px solid var(--line);
       padding: 5rem 3rem; text-align: center; position: relative; overflow: hidden;
     }
@@ -140,13 +184,13 @@
       font-size: 18rem; line-height: 1; color: rgba(124,106,247,0.04);
       font-family: Georgia, serif; pointer-events: none;
     }
-    .philosophy blockquote { max-width: 680px; margin: 0 auto; font-size: clamp(1.2rem, 3vw, 1.9rem); font-weight: 300; line-height: 1.65; color: #7070a0; font-style: italic; letter-spacing: -0.5px; }
+    .philosophy blockquote { max-width: 680px; margin: 0 auto; font-size: clamp(1.2rem, 3vw, 1.9rem); font-weight: 300; line-height: 1.65; color: #9090c8; font-style: italic; letter-spacing: -0.5px; }
     .philosophy blockquote strong { color: var(--text); font-weight: 700; font-style: normal; }
     .philosophy cite { display: block; margin-top: 1.5rem; font-size: 0.72rem; font-style: normal; color: var(--accent); font-family: 'Space Mono', monospace; letter-spacing: 3px; text-transform: uppercase; }
 
     /* SECTION */
     .section { max-width: 1200px; margin: 0 auto; padding: 7rem 3rem; }
-    .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; padding-bottom: 2rem; border-bottom: 1px solid var(--line); }
+    .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(145,122,255,0.25); }
     .section-label { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--accent2); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 0.8rem; }
     h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; letter-spacing: -1.5px; line-height: 1.05; }
     .section-count { font-family: 'Space Mono', monospace; font-size: 3.5rem; font-weight: 700; color: var(--dim); letter-spacing: -3px; line-height: 1; }
@@ -158,13 +202,13 @@
       margin-bottom: 1.5rem; text-decoration: none; color: inherit;
       transition: border-color 0.25s, transform 0.25s; position: relative; overflow: hidden;
     }
-    .featured-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3)); }
+    .featured-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3), var(--neon)); box-shadow: 0 0 12px rgba(145,122,255,0.4); }
     .featured-card:hover { border-color: var(--accent); transform: translateY(-3px); }
     @media (max-width: 768px) { .featured-card { grid-template-columns: 1fr; } }
 
     .featured-tag { display: inline-block; padding: 0.3rem 0.9rem; background: rgba(124,106,247,0.15); border: 1px solid rgba(124,106,247,0.3); border-radius: 999px; font-size: 0.68rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; }
     .featured-card h3 { font-size: 1.7rem; font-weight: 900; letter-spacing: -0.8px; line-height: 1.2; margin-bottom: 1rem; }
-    .featured-card p { color: #55556a; font-size: 0.92rem; line-height: 1.8; margin-bottom: 1.5rem; }
+    .featured-card p { color: #7070a0; font-size: 0.92rem; line-height: 1.8; margin-bottom: 1.5rem; }
     .read-link { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--accent); letter-spacing: 1px; text-transform: uppercase; }
 
     .feat-visual { width: 100%; aspect-ratio: 4/3; background: var(--surface2); border-radius: 12px; border: 1px solid var(--line); display: grid; place-items: center; overflow: hidden; position: relative; }
@@ -179,7 +223,7 @@
     .blog-card-icon { width: 44px; height: 44px; background: var(--surface2); border-radius: 10px; display: grid; place-items: center; font-size: 1.3rem; margin-bottom: 1.2rem; border: 1px solid var(--line); }
     .blog-cat { font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent2); margin-bottom: 0.7rem; }
     .blog-card h3 { font-size: 0.95rem; font-weight: 700; line-height: 1.45; margin-bottom: 0.8rem; letter-spacing: -0.2px; }
-    .blog-card p { font-size: 0.82rem; color: #55556a; line-height: 1.7; }
+    .blog-card p { font-size: 0.82rem; color: #7070a0; line-height: 1.7; }
     .blog-arrow { margin-top: 1.5rem; font-size: 1rem; color: var(--dim); display: inline-block; transition: color 0.2s, transform 0.2s; }
     .blog-card:hover .blog-arrow { color: var(--accent); transform: translateX(4px); }
 
@@ -190,7 +234,7 @@
     .osho-card { background: linear-gradient(135deg, var(--surface) 0%, #1a1428 100%); border: 1px solid var(--line); border-radius: 12px; padding: 2.5rem; position: relative; overflow: hidden; transition: border-color 0.2s; }
     .osho-card:hover { border-color: rgba(240,165,0,0.3); }
     .osho-card::after { content: ''; position: absolute; bottom: 0; right: 0; width: 100px; height: 100px; background: radial-gradient(circle, rgba(240,165,0,0.06) 0%, transparent 70%); }
-    .osho-card blockquote { font-size: 1rem; font-style: italic; color: #7070a0; line-height: 1.75; margin-bottom: 1rem; }
+    .osho-card blockquote { font-size: 1rem; font-style: italic; color: #9090b8; line-height: 1.75; margin-bottom: 1rem; }
     .osho-card blockquote strong { color: var(--text); font-style: normal; }
     .osho-link { font-size: 0.78rem; color: var(--gold); font-family: 'Space Mono', monospace; letter-spacing: 1px; text-decoration: none; }
     .osho-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); opacity: 0.7; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
@@ -255,6 +299,13 @@
 <section class="hero">
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
+  <span class="math-float" style="top:12%;left:6%">e<sup>iπ</sup>+1=0</span>
+  <span class="math-float" style="top:22%;left:88%">φ=1.618…</span>
+  <span class="math-float" style="top:65%;left:5%">∇²ψ=0</span>
+  <span class="math-float" style="top:75%;left:82%">S=k ln Ω</span>
+  <span class="math-float" style="top:45%;left:92%">∮E·dA=Q/ε₀</span>
+  <span class="math-float" style="top:8%;left:50%">∫₋∞^∞ e⁻ˣ²dx=√π</span>
+  <span class="math-float" style="top:85%;left:40%">ds²=−c²dt²+dx²+dy²+dz²</span>
   <div class="hero-inner">
     <div>
       <p class="hero-eyebrow">Independent Content Studio</p>
@@ -323,32 +374,90 @@
 <!-- TICKER -->
 <div class="ticker">
   <div class="ticker-inner">
-    <span class="ticker-item"><span>◆</span> Earth Observation</span>
-    <span class="ticker-item"><span>◆</span> Spatial Science</span>
-    <span class="ticker-item"><span>◆</span> Biology of Place</span>
-    <span class="ticker-item"><span>◆</span> Northeast India</span>
-    <span class="ticker-item"><span>◆</span> Visual Thinking</span>
-    <span class="ticker-item"><span>◆</span> Philosophy of Science</span>
-    <span class="ticker-item"><span>◆</span> Independent Research</span>
-    <span class="ticker-item"><span>◆</span> Content Studio</span>
-    <span class="ticker-item"><span>◆</span> Earth Observation</span>
-    <span class="ticker-item"><span>◆</span> Spatial Science</span>
-    <span class="ticker-item"><span>◆</span> Biology of Place</span>
-    <span class="ticker-item"><span>◆</span> Northeast India</span>
-    <span class="ticker-item"><span>◆</span> Visual Thinking</span>
-    <span class="ticker-item"><span>◆</span> Philosophy of Science</span>
-    <span class="ticker-item"><span>◆</span> Independent Research</span>
-    <span class="ticker-item"><span>◆</span> Content Studio</span>
+    <span class="ticker-item"><span class="eq">e^(iπ)+1=0</span> &nbsp;Euler's identity — God's signature</span>
+    <span class="ticker-item"><span>◆</span> Every coordinate has a story</span>
+    <span class="ticker-item"><span class="eq">φ = 1.618…</span> &nbsp;nature's obsessive ratio</span>
+    <span class="ticker-item"><span>◆</span> GPS works because Einstein was right</span>
+    <span class="ticker-item"><span class="eq">S = k ln Ω</span> &nbsp;entropy always wins</span>
+    <span class="ticker-item"><span>◆</span> Biology is chemistry pretending to be alive</span>
+    <span class="ticker-item"><span class="eq">∇·B = 0</span> &nbsp;no magnetic monopoles (yet)</span>
+    <span class="ticker-item"><span>◆</span> A map is a controlled hallucination of reality</span>
+    <span class="ticker-item"><span class="eq">∫₋∞^∞ e⁻ˣ²dx = √π</span> &nbsp;infinity that converges</span>
+    <span class="ticker-item"><span>◆</span> Meditation: the only instrument with no signal noise</span>
+    <span class="ticker-item"><span class="eq">ds²=−c²dt²+dx²</span> &nbsp;spacetime is not what it seems</span>
+    <span class="ticker-item"><span>◆</span> Northeast India — where rivers know topology better than maps</span>
+    <span class="ticker-item"><span class="eq">e^(iπ)+1=0</span> &nbsp;Euler's identity — God's signature</span>
+    <span class="ticker-item"><span>◆</span> Every coordinate has a story</span>
+    <span class="ticker-item"><span class="eq">φ = 1.618…</span> &nbsp;nature's obsessive ratio</span>
+    <span class="ticker-item"><span>◆</span> GPS works because Einstein was right</span>
+    <span class="ticker-item"><span class="eq">S = k ln Ω</span> &nbsp;entropy always wins</span>
+    <span class="ticker-item"><span>◆</span> Biology is chemistry pretending to be alive</span>
+    <span class="ticker-item"><span class="eq">∇·B = 0</span> &nbsp;no magnetic monopoles (yet)</span>
+    <span class="ticker-item"><span>◆</span> A map is a controlled hallucination of reality</span>
+    <span class="ticker-item"><span class="eq">∫₋∞^∞ e⁻ˣ²dx = √π</span> &nbsp;infinity that converges</span>
+    <span class="ticker-item"><span>◆</span> Meditation: the only instrument with no signal noise</span>
+    <span class="ticker-item"><span class="eq">ds²=−c²dt²+dx²</span> &nbsp;spacetime is not what it seems</span>
+    <span class="ticker-item"><span>◆</span> Northeast India — where rivers know topology better than maps</span>
+  </div>
+</div>
+
+
+<!-- MATH AXIOMS -->
+<div class="math-strip">
+  <div class="math-strip-inner">
+    <div class="math-strip-label">Mathematical Axioms of Existence</div>
+    <div class="axioms-grid">
+      <div class="axiom-cell">
+        <div class="axiom-tag">Euler · 1748</div>
+        <div class="axiom-eq">e<sup>iπ</sup> + 1 = <span class="eq-teal">0</span></div>
+        <div class="axiom-wit">"Five constants. One equation. The universe had no choice but to be beautiful."</div>
+      </div>
+      <div class="axiom-cell">
+        <div class="axiom-tag">Boltzmann · 1877</div>
+        <div class="axiom-eq">S = <span class="eq-gold">k</span> ln Ω</div>
+        <div class="axiom-wit">"Disorder is just order you haven't zoomed out far enough to see."</div>
+      </div>
+      <div class="axiom-cell">
+        <div class="axiom-tag">Golden Ratio</div>
+        <div class="axiom-eq">φ = <span class="eq-pink">(1+√5)</span>/2</div>
+        <div class="axiom-wit">"Nature doesn't do straight lines. It does spirals, fractals, and 1.618."</div>
+      </div>
+      <div class="axiom-cell">
+        <div class="axiom-tag">Schrödinger · 1926</div>
+        <div class="axiom-eq">iℏ ∂ψ/∂t = <span class="eq-teal">Ĥψ</span></div>
+        <div class="axiom-wit">"Reality is probabilistic until observed. Even the universe needs an audience."</div>
+      </div>
+      <div class="axiom-cell">
+        <div class="axiom-tag">Gauss · Integral</div>
+        <div class="axiom-eq">∫₋∞<sup>∞</sup> e<sup>-x²</sup>dx = <span class="eq-gold">√π</span></div>
+        <div class="axiom-wit">"An infinite integral that gives a finite answer. Mathematics has a sense of humour."</div>
+      </div>
+      <div class="axiom-cell">
+        <div class="axiom-tag">Einstein · 1915</div>
+        <div class="axiom-eq">G<sub>μν</sub> = <span class="eq-pink">8πT</span><sub>μν</sub></div>
+        <div class="axiom-wit">"Mass tells spacetime how to curve. Spacetime tells mass how to move. No one asked for permission."</div>
+      </div>
+      <div class="axiom-cell">
+        <div class="axiom-tag">Heisenberg · 1927</div>
+        <div class="axiom-eq">Δx·Δp ≥ <span class="eq-teal">ℏ/2</span></div>
+        <div class="axiom-wit">"The more precisely you know where you are, the less you know where you're going. Applies to life too."</div>
+      </div>
+      <div class="axiom-cell">
+        <div class="axiom-tag">Riemann · Zeta</div>
+        <div class="axiom-eq">ζ(s) = <span class="eq-gold">Σ 1/nˢ</span></div>
+        <div class="axiom-wit">"The most dangerous unsolved problem in mathematics. The primes are hiding something."</div>
+      </div>
+    </div>
   </div>
 </div>
 
 <!-- PHILOSOPHY STRIP -->
 <div class="philosophy">
   <blockquote>
-    "Science gives you <strong>the map.</strong>
-    Meditation gives you <strong>the territory.</strong>
-    The real journey begins only when you stop
-    <strong>confusing the two.</strong>"
+    "The universe runs on <strong>mathematics.</strong>
+    Life runs on <strong>biology.</strong>
+    Meaning runs on <strong>something neither can fully describe.</strong>
+    We're here to figure out all three."
   </blockquote>
   <cite>— koordinates perspective</cite>
 </div>
@@ -1625,16 +1734,19 @@ const VEDA_DATA = {
     <span class="contact-email">koordinates [at] gmail [dot] com</span>
   </div>
   <div class="contact-right" style="display:flex; align-items:center;">
-    <form id="query-form" style="width:100%;" onsubmit="handleQuery(event)">
+    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field"
+      id="query-form" style="width:100%;" onsubmit="handleQuery(event)">
+      <input type="hidden" name="form-name" value="contact" />
+      <p style="display:none;"><input name="bot-field" /></p>
       <div style="margin-bottom:1.2rem;">
         <label style="font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:2px; color:var(--muted); text-transform:uppercase; display:block; margin-bottom:0.5rem;">Your email</label>
-        <input type="email" id="q-email" required placeholder="you@somewhere.com"
+        <input type="email" name="email" id="q-email" required placeholder="you@somewhere.com"
           style="width:100%; background:var(--surface2); border:1px solid var(--line); border-radius:8px; padding:0.9rem 1.2rem; color:var(--text); font-size:0.9rem; font-family:'Inter',sans-serif; outline:none; transition:border-color 0.2s;"
           onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--line)'"/>
       </div>
       <div style="margin-bottom:1.5rem;">
         <label style="font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:2px; color:var(--muted); text-transform:uppercase; display:block; margin-bottom:0.5rem;">Your question or message</label>
-        <textarea id="q-msg" required placeholder="What's on your mind..." rows="4"
+        <textarea name="message" id="q-msg" required placeholder="What's on your mind..." rows="4"
           style="width:100%; background:var(--surface2); border:1px solid var(--line); border-radius:8px; padding:0.9rem 1.2rem; color:var(--text); font-size:0.9rem; font-family:'Inter',sans-serif; outline:none; resize:vertical; transition:border-color 0.2s;"
           onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--line)'"></textarea>
       </div>
@@ -1748,7 +1860,7 @@ const VEDA_DATA = {
 <div class="popup-overlay" id="pop-welcome">
   <div class="popup-box">
     <button class="popup-close" onclick="closePopup('welcome')">×</button>
-    <span class="popup-tag" style="color:var(--gold);">🌀 osho · welcome</span>
+    <span class="popup-tag" style="color:var(--gold);">the man with 93 rolls royces — and still the most ungraspable person of the 20th century</span>
     <p class="popup-title" id="osho-welcome-title"></p>
     <p class="popup-body" id="osho-welcome-body"></p>
     <p class="popup-footer-note">// koordinates/ — ideas that seek truth</p>
@@ -1917,33 +2029,378 @@ const VEDA_DATA = {
     }
   });
 
-  /* devtools detection — show warning */
+  /* devtools detection — desktop only */
   (function() {
-    const threshold = 160;
+    const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || screen.width < 900;
+    if (isMobile) return;
+    const threshold = 220;
     setInterval(function() {
-      if (window.outerWidth - window.innerWidth > threshold ||
-          window.outerHeight - window.innerHeight > threshold) {
+      if (window.outerWidth - window.innerWidth > threshold) {
         document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#0f0f14;color:#7c6af7;font-family:monospace;font-size:1.2rem;text-align:center;padding:2rem;">⚠️ Access restricted.<br/><br/>This content is protected under copyright law.<br/>© 2025 koordinates/</div>';
       }
     }, 1000);
   })();
 
   /* copyright console message */
-  /* contact form handler */
+  /* contact form handler — Netlify Forms */
   function handleQuery(e) {
     e.preventDefault();
-    const email = document.getElementById('q-email').value;
-    const msg = document.getElementById('q-msg').value;
-    // Open mailto with prefilled content
-    const subject = encodeURIComponent('Query from koordinates/ visitor');
-    const body = encodeURIComponent('From: ' + email + '\n\n' + msg);
-    window.location.href = 'mailto:koordinates@gmail.com?subject=' + subject + '&body=' + body;
-    document.getElementById('q-confirm').style.display = 'block';
-    document.getElementById('query-form').reset();
+    const form = document.getElementById('query-form');
+    const btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    const data = new FormData(form);
+    fetch('/', { method: 'POST', headers: {'Content-Type': 'application/x-www-form-urlencoded'}, body: new URLSearchParams(data).toString() })
+      .then(() => {
+        document.getElementById('q-confirm').style.display = 'block';
+        form.reset();
+        btn.textContent = 'Sent ✓';
+      })
+      .catch(() => {
+        btn.disabled = false;
+        btn.textContent = 'Send message →';
+        alert('Could not send. Try emailing directly: koordinates@gmail.com');
+      });
   }
 
   console.log('%c© 2025 koordinates/ — All Rights Reserved.', 'color:#7c6af7; font-size:14px; font-weight:bold;');
   console.log('%cAll content is original and copyright protected. Scraping or copying without permission is illegal.', 'color:#ff6b9d; font-size:11px;');
+</script>
+
+
+<!-- GURU WALKERS + ROLLS ROYCE -->
+<style>
+  .guru-wrap {
+    position: fixed;
+    z-index: 600;
+    pointer-events: all;
+    cursor: pointer;
+    transition: left 4s cubic-bezier(0.4,0,0.2,1), top 4s cubic-bezier(0.4,0,0.2,1), opacity 1s;
+    filter: drop-shadow(0 6px 18px rgba(124,106,247,0.25));
+    user-select: none;
+  }
+  .guru-wrap.hidden { opacity: 0 !important; pointer-events: none; }
+  .guru-inner { text-align: center; position: relative; }
+  .guru-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.52rem;
+    color: var(--gold);
+    letter-spacing: 2px;
+    opacity: 0.65;
+    margin-top: 3px;
+    text-transform: uppercase;
+  }
+  .guru-tooltip {
+    position: absolute;
+    bottom: 115%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(19,16,30,0.97);
+    border: 1px solid rgba(240,165,0,0.35);
+    border-radius: 10px;
+    padding: 0.6rem 1rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: #c0c0d0;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    z-index: 700;
+  }
+  .guru-wrap:hover .guru-tooltip { opacity: 1; }
+
+  /* pose animations */
+  @keyframes breathe { 0%,100%{transform:scaleY(1)} 50%{transform:scaleY(1.03)} }
+  @keyframes sway { 0%,100%{transform:rotate(-1.5deg)} 50%{transform:rotate(1.5deg)} }
+  @keyframes walk { 0%,100%{transform:rotate(-3deg) translateY(0)} 50%{transform:rotate(3deg) translateY(-4px)} }
+  @keyframes lookup { 0%,100%{transform:rotate(0deg)} 50%{transform:rotate(-8deg) translateY(-3px)} }
+  @keyframes meditate { 0%,100%{transform:scale(1)} 50%{transform:scale(1.02)} }
+
+  .pose-sit svg  { animation: breathe 4s ease-in-out infinite; }
+  .pose-walk svg { animation: walk 0.9s ease-in-out infinite; }
+  .pose-read svg { animation: sway 5s ease-in-out infinite; }
+  .pose-sky svg  { animation: lookup 6s ease-in-out infinite; }
+  .pose-meditate svg { animation: meditate 6s ease-in-out infinite; }
+
+  /* Rolls Royce */
+  #rr-widget {
+    position: fixed;
+    bottom: 1.8rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 600;
+    cursor: pointer;
+    transition: transform 0.3s, opacity 1s;
+    opacity: 0.7;
+  }
+  #rr-widget:hover { opacity: 1; transform: translateX(-50%) scale(1.06); }
+  #rr-widget.hidden { opacity: 0; pointer-events: none; }
+  .rr-label {
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.5rem;
+    color: var(--gold);
+    letter-spacing: 3px;
+    opacity: 0.6;
+    margin-top: 2px;
+  }
+
+  /* Quote popup */
+  #rr-quote-pop {
+    position: fixed;
+    bottom: 7rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(13,10,22,0.98);
+    border: 1px solid rgba(240,165,0,0.4);
+    border-radius: 14px;
+    padding: 1.4rem 2rem;
+    max-width: 420px;
+    width: 90vw;
+    z-index: 700;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: #c0c0d0;
+    line-height: 1.8;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(240,165,0,0.12);
+    display: none;
+  }
+  #rr-quote-pop .rr-q-author {
+    font-size: 0.58rem;
+    color: var(--gold);
+    letter-spacing: 2px;
+    margin-top: 0.8rem;
+    opacity: 0.7;
+  }
+  #rr-quote-pop .rr-q-close {
+    position: absolute;
+    top: 0.6rem; right: 0.9rem;
+    background: none; border: none;
+    color: #55556a; font-size: 1.1rem;
+    cursor: pointer;
+  }
+
+  @media(max-width:600px){
+    .guru-wrap svg { transform: scale(0.8); transform-origin: bottom center; }
+  }
+</style>
+
+<!-- OSHO FIGURE -->
+<div class="guru-wrap pose-sit" id="guru-osho" style="left:4%;bottom:12%;" onclick="guruClick('osho')">
+  <div class="guru-inner">
+    <svg width="62" height="96" viewBox="0 0 62 96" xmlns="http://www.w3.org/2000/svg">
+      <!-- Halo glow -->
+      <circle cx="31" cy="17" r="16" fill="none" stroke="rgba(240,165,0,0.12)" stroke-width="8"/>
+      <!-- Head - bald, smooth -->
+      <ellipse cx="31" cy="17" rx="12" ry="13" fill="#c89070"/>
+      <!-- Closed eyes - serene -->
+      <path d="M24 15 Q27.5 13.5 31 15" stroke="#6b4226" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <path d="M31 15 Q34.5 13.5 38 15" stroke="#6b4226" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <!-- Long beard -->
+      <path d="M21 22 Q17 32 19 44 Q24 52 31 53 Q38 52 43 44 Q45 32 41 22 Q36 26 31 26 Q26 26 21 22Z" fill="#7a6045" opacity="0.92"/>
+      <!-- Beard highlight -->
+      <path d="M28 30 Q30 50 31 53" stroke="#9a8060" stroke-width="0.8" fill="none" opacity="0.5"/>
+      <!-- Gentle smile -->
+      <path d="M27 21 Q31 24.5 35 21" stroke="#6b4226" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      <!-- Robe - deep maroon/purple -->
+      <path d="M19 50 Q9 58 7 90 Q7 96 31 96 Q55 96 55 90 Q53 58 43 50Z" fill="#6347c7" opacity="0.9"/>
+      <!-- Robe fold lines -->
+      <path d="M31 50 L28 96" stroke="#5238a8" stroke-width="0.8" opacity="0.4"/>
+      <path d="M31 50 L34 96" stroke="#5238a8" stroke-width="0.8" opacity="0.4"/>
+      <!-- Neck -->
+      <rect x="27" y="28" width="8" height="10" rx="3" fill="#c89070"/>
+      <!-- Necklace/mala -->
+      <path d="M24 36 Q31 42 38 36" stroke="#f0a500" stroke-width="1.2" fill="none" opacity="0.6" stroke-dasharray="2,1.5"/>
+      <!-- Hands in mudra -->
+      <ellipse cx="22" cy="72" rx="6" ry="4" fill="#6347c7" opacity="0.8"/>
+      <ellipse cx="40" cy="72" rx="6" ry="4" fill="#6347c7" opacity="0.8"/>
+      <circle cx="22" cy="74" r="5" fill="#c89070"/>
+      <circle cx="40" cy="74" r="5" fill="#c89070"/>
+    </svg>
+    <div class="guru-label">the ungraspable</div>
+    <div class="guru-tooltip">93 rolls royces. still homeless.</div>
+  </div>
+</div>
+
+<!-- KRISHNAMURTI FIGURE -->
+<div class="guru-wrap pose-stand" id="guru-jk" style="right:4%;bottom:12%;" onclick="guruClick('jk')">
+  <div class="guru-inner">
+    <svg width="58" height="96" viewBox="0 0 58 96" xmlns="http://www.w3.org/2000/svg">
+      <!-- Halo glow - subtler -->
+      <circle cx="29" cy="15" r="15" fill="none" stroke="rgba(0,221,214,0.1)" stroke-width="6"/>
+      <!-- Head -->
+      <ellipse cx="29" cy="15" rx="11" ry="12" fill="#c4956a"/>
+      <!-- White silver hair -->
+      <path d="M18 10 Q19 3 29 2 Q39 3 40 10 Q37 7 29 7 Q21 7 18 10Z" fill="#ddd"/>
+      <path d="M18 10 Q16 13 17 17" stroke="#ccc" stroke-width="2" fill="none"/>
+      <path d="M40 10 Q42 13 41 17" stroke="#ccc" stroke-width="2" fill="none"/>
+      <!-- Clear observant eyes -->
+      <ellipse cx="24" cy="14" rx="2.5" ry="2.2" fill="#1a1a2e"/>
+      <ellipse cx="34" cy="14" rx="2.5" ry="2.2" fill="#1a1a2e"/>
+      <circle cx="24.8" cy="13.3" r="0.8" fill="white"/>
+      <circle cx="34.8" cy="13.3" r="0.8" fill="white"/>
+      <!-- Composed expression -->
+      <path d="M25 20 Q29 22.5 33 20" stroke="#7a4f30" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+      <!-- Neck -->
+      <rect x="25" y="25" width="8" height="9" rx="3" fill="#c4956a"/>
+      <!-- Simple white kurta -->
+      <path d="M17 32 Q9 42 8 88 Q8 96 29 96 Q50 96 50 88 Q49 42 41 32Z" fill="#e8e6e0" opacity="0.92"/>
+      <!-- Kurta V collar -->
+      <path d="M22 32 Q29 40 36 32" stroke="#ccc" stroke-width="1.2" fill="none"/>
+      <!-- Kurta button line -->
+      <path d="M29 40 L29 96" stroke="#d0cec8" stroke-width="0.7" opacity="0.5"/>
+      <!-- Arms - one slightly raised (questioning gesture) -->
+      <path d="M17 45 Q10 50 9 60" stroke="#e8e6e0" stroke-width="8" stroke-linecap="round" fill="none" opacity="0.9"/>
+      <circle cx="9" cy="61" r="5" fill="#c4956a"/>
+      <path d="M41 45 Q50 50 51 58" stroke="#e8e6e0" stroke-width="8" stroke-linecap="round" fill="none" opacity="0.9"/>
+      <circle cx="51" cy="59" r="5" fill="#c4956a"/>
+    </svg>
+    <div class="guru-label">truth has no path</div>
+    <div class="guru-tooltip">refused to be anyone's guru.</div>
+  </div>
+</div>
+
+<!-- ROLLS ROYCE -->
+<div id="rr-widget" onclick="showRollsQuote()">
+  <svg width="130" height="52" viewBox="0 0 130 52" xmlns="http://www.w3.org/2000/svg">
+    <rect x="6" y="22" width="118" height="22" rx="5" fill="#0d0d1a" stroke="#f0a500" stroke-width="1"/>
+    <path d="M32 22 L44 8 L86 8 L98 22Z" fill="#13101e" stroke="#f0a500" stroke-width="1"/>
+    <rect x="46" y="10" width="16" height="10" rx="2" fill="#7c6af7" opacity="0.35"/>
+    <rect x="68" y="10" width="16" height="10" rx="2" fill="#7c6af7" opacity="0.35"/>
+    <circle cx="32" cy="44" r="9" fill="#1a1a2e" stroke="#f0a500" stroke-width="1.5"/>
+    <circle cx="32" cy="44" r="4.5" fill="none" stroke="#f0a500" stroke-width="1" stroke-dasharray="3,2"/>
+    <circle cx="98" cy="44" r="9" fill="#1a1a2e" stroke="#f0a500" stroke-width="1.5"/>
+    <circle cx="98" cy="44" r="4.5" fill="none" stroke="#f0a500" stroke-width="1" stroke-dasharray="3,2"/>
+    <rect x="6" y="26" width="9" height="14" rx="2" fill="#f0a500" opacity="0.25"/>
+    <circle cx="65" cy="8" r="3" fill="none" stroke="#f0a500" stroke-width="1" opacity="0.5"/>
+    <path d="M63 8 L67 8 M65 6 L65 10" stroke="#f0a500" stroke-width="0.8" opacity="0.4"/>
+  </svg>
+  <div class="rr-label">roll to receive wisdom</div>
+</div>
+
+<!-- ROLLS ROYCE QUOTE POPUP -->
+<div id="rr-quote-pop">
+  <button class="rr-q-close" onclick="document.getElementById('rr-quote-pop').style.display='none'">×</button>
+  <div id="rr-quote-text"></div>
+  <div class="rr-q-author">— the man with 93 rolls royces</div>
+</div>
+
+<script>
+/* ── ROLLS ROYCE QUOTES ── */
+const rrQuotes = [
+  "I am the rich man's guru. The poor cannot afford me — not because of money, but because poverty is a state of mind, and a poor mind cannot receive what I give.",
+  "I have never told anyone to follow me. That is the only thing I ask — don't follow. Think. Question. Destroy every belief, including mine.",
+  "My communes are the most dangerous places on Earth — more dangerous than any army — because here, people start thinking for themselves.",
+  "Religion has been the greatest calamity for humanity. It has given you hope — and hope is the enemy of the present moment.",
+  "I am not a teacher. Teachers give you answers. I give you questions that will not leave you alone for the rest of your life.",
+  "The moment you feel certain, you have stopped growing. Certainty is spiritual death. I celebrate uncertainty.",
+  "Ninety-three Rolls Royces — and not one of them was mine. I owned nothing. That is what the jealous ones never understood.",
+  "Every serious person who has come to me has left — because I destroy their seriousness. Seriousness is a disease."
+];
+let rrIndex = 0;
+function showRollsQuote() {
+  document.getElementById('rr-quote-text').textContent = rrQuotes[rrIndex % rrQuotes.length];
+  rrIndex++;
+  document.getElementById('rr-quote-pop').style.display = 'block';
+}
+
+/* ── GURU MOVEMENT SYSTEM ── */
+const poses = {
+  osho: ['pose-sit','pose-meditate','pose-walk','pose-sky','pose-read'],
+  jk:   ['pose-stand','pose-walk','pose-sky','pose-meditate','pose-read']
+};
+
+const positions = [
+  { left:'4%',   bottom:'12%', right:'auto' },
+  { left:'8%',   bottom:'22%', right:'auto' },
+  { left:'3%',   bottom:'35%', right:'auto' },
+  { left:'6%',   bottom:'50%', right:'auto' },
+  { left:'3%',   bottom:'65%', right:'auto' },
+];
+const positionsR = [
+  { right:'4%',  bottom:'12%', left:'auto' },
+  { right:'8%',  bottom:'25%', left:'auto' },
+  { right:'3%',  bottom:'40%', left:'auto' },
+  { right:'6%',  bottom:'55%', left:'auto' },
+  { right:'3%',  bottom:'68%', left:'auto' },
+];
+
+let oshoPos = 0, jkPos = 0, oshoPose = 0, jkPose = 0;
+let isIdle = true, scrollTimer;
+
+function setPos(el, posObj) {
+  Object.keys(posObj).forEach(k => el.style[k] = posObj[k]);
+}
+
+function setPose(el, poseList, idx) {
+  el.classList.remove(...poseList);
+  el.classList.add(poseList[idx % poseList.length]);
+}
+
+function moveGurus() {
+  if (!isIdle) return;
+  const oshoEl = document.getElementById('guru-osho');
+  const jkEl   = document.getElementById('guru-jk');
+  oshoPos  = (oshoPos  + 1) % positions.length;
+  jkPos    = (jkPos    + 1) % positionsR.length;
+  oshoPose = (oshoPose + 1) % poses.osho.length;
+  jkPose   = (jkPose   + 1) % poses.jk.length;
+  setPos(oshoEl, positions[oshoPos]);
+  setPos(jkEl,   positionsR[jkPos]);
+  setPose(oshoEl, poses.osho, oshoPose);
+  setPose(jkEl,   poses.jk,   jkPose);
+}
+
+/* idle detection */
+function onScroll() {
+  isIdle = false;
+  document.getElementById('guru-osho').classList.add('hidden');
+  document.getElementById('guru-jk').classList.add('hidden');
+  document.getElementById('rr-widget').classList.add('hidden');
+  clearTimeout(scrollTimer);
+  scrollTimer = setTimeout(() => {
+    isIdle = true;
+    document.getElementById('guru-osho').classList.remove('hidden');
+    document.getElementById('guru-jk').classList.remove('hidden');
+    document.getElementById('rr-widget').classList.remove('hidden');
+  }, 2500);
+}
+
+window.addEventListener('scroll', onScroll, { passive: true });
+
+/* guru click — show a greeting */
+const guruGreets = {
+  osho: ["Sit. Be still. You are already where you need to be.", "You came looking for something. Good. Now forget what it was.", "Welcome, stranger — or perhaps not so strange after all."],
+  jk:   ["Can you look without the observer?", "Don't accept anything I say. Question everything.", "You are the world. And the world is you."]
+};
+function guruClick(who) {
+  const msgs = guruGreets[who];
+  const msg = msgs[Math.floor(Math.random() * msgs.length)];
+  document.getElementById('osho-welcome-title').textContent = msg;
+  document.getElementById('osho-welcome-body').innerHTML = who === 'osho'
+    ? '<em>— the man with 93 Rolls Royces</em>'
+    : '<em>— the man who refused to be your guru</em>';
+  openPopup('welcome');
+}
+
+/* start moving every 7 seconds */
+setInterval(moveGurus, 7000);
+
+/* initial welcome pose — gurus face inward like greeting visitors */
+window.addEventListener('load', function() {
+  const o = document.getElementById('guru-osho');
+  const j = document.getElementById('guru-jk');
+  o.style.opacity = '0';
+  j.style.opacity = '0';
+  setTimeout(() => {
+    o.style.opacity = '1';
+    j.style.opacity = '1';
+    o.style.transition += ', opacity 1.5s';
+    j.style.transition += ', opacity 1.5s';
+  }, 1200);
+});
 </script>
 
 </body>
