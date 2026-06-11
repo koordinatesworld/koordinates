@@ -17,28 +17,28 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #0c0c2e;
-      --surface: #13133a;
-      --surface2: #1e1e45;
-      --line: #2e2e5e;
-      --accent: #917aff;
-      --accent2: #00f5ed;
+      --bg: #faf8f3;
+      --surface: #ffffff;
+      --surface2: #f3efe7;
+      --line: #e8e2d5;
+      --accent: #7c5ff0;
+      --accent2: #00c4be;
       --light-bg: #f5f2ee;
       --light-surface: #ffffff;
       --light-text: #1a1a2e;
-      --accent3: #ff6b9d;
-      --gold: #f5b800;
-      --neon: #c084fc;
-      --text: #ffffff;
-      --muted: #9090c0;
-      --dim: #4a4a80;
+      --accent3: #e8567a;
+      --gold: #d4920a;
+      --neon: #9b6dde;
+      --text: #1a1530;
+      --muted: #8a7e6e;
+      --dim: #c8bfaf;
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
 
     body {
-      background: linear-gradient(180deg, #0c0c2e 0%, #0a0a28 30%, #0e0a30 60%, #0c0c2e 100%);
+      background: #faf8f3;
       color: var(--text);
       font-family: 'Inter', sans-serif;
       overflow-x: hidden;
@@ -50,15 +50,15 @@
       position: fixed; top: 0; width: 100%; z-index: 100;
       display: flex; justify-content: space-between; align-items: center;
       padding: 1.3rem 3rem;
-      background: rgba(8,8,26,0.92);
+      background: rgba(250,248,243,0.96);
       backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(145,122,255,0.18);
+      border-bottom: 1px solid var(--line);
     }
-    .logo { font-family: 'Space Mono', monospace; font-size: 1rem; color: var(--text); letter-spacing: -0.5px; }
+    .logo { font-family: 'Space Mono', monospace; font-size: 1rem; color: var(--text); letter-spacing: -0.5px; font-weight: 700; }
     .logo em { color: var(--accent); font-style: normal; }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-links a { color: #7070a0; text-decoration: none; font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--text); }
+    .nav-links a { color: #9a9080; text-decoration: none; font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
 
     /* HERO */
     .hero {
@@ -69,18 +69,16 @@
     }
     .hero-grid {
       position: absolute; inset: 0; pointer-events: none;
-      background-image: linear-gradient(rgba(145,122,255,0.25) 1px, transparent 1px), linear-gradient(90deg, rgba(145,122,255,0.25) 1px, transparent 1px);
-      background-size: 60px 60px; opacity: 0.6;
+      background-image: linear-gradient(rgba(124,95,240,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(124,95,240,0.1) 1px, transparent 1px);
+      background-size: 60px 60px; opacity: 0.8;
       mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 80%);
     }
     .hero-glow {
       position: absolute; inset: 0; pointer-events: none;
       background:
-        radial-gradient(ellipse 80% 70% at 50% -10%, rgba(145,122,255,0.55) 0%, transparent 55%),
-        radial-gradient(ellipse 50% 50% at 85% 80%, rgba(0,245,237,0.35) 0%, transparent 50%),
-        radial-gradient(ellipse 45% 45% at 15% 65%, rgba(255,107,157,0.25) 0%, transparent 50%),
-        radial-gradient(ellipse 35% 35% at 75% 15%, rgba(192,132,252,0.28) 0%, transparent 50%),
-        radial-gradient(ellipse 60% 40% at 50% 100%, rgba(0,245,237,0.15) 0%, transparent 60%);
+        radial-gradient(ellipse 70% 60% at 50% 0%, rgba(124,95,240,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 85% 80%, rgba(0,196,190,0.1) 0%, transparent 50%),
+        radial-gradient(ellipse 35% 35% at 15% 65%, rgba(232,86,122,0.08) 0%, transparent 50%);
     }
     .hero-inner {
       max-width: 1000px; width: 100%; position: relative; z-index: 1;
@@ -96,11 +94,11 @@
     .hero-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--accent2); }
 
     h1 { font-size: clamp(2.8rem, 6vw, 5.5rem); font-weight: 900; line-height: 0.95; letter-spacing: -3px; margin-bottom: 2rem; }
-    h1 .l1 { display: block; color: var(--text); }
+    h1 .l1 { display: block; color: #1a1530; }
     h1 .l2 { display: block; background: linear-gradient(100deg, var(--accent), var(--neon) 40%, var(--accent2) 70%, var(--accent3)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: drop-shadow(0 0 20px rgba(145,122,255,0.3)); }
 
     .hero-quote {
-      font-size: 0.95rem; color: #8080b0; line-height: 1.9; margin-bottom: 2.5rem;
+      font-size: 0.95rem; color: #9a8e7e; line-height: 1.9; margin-bottom: 2.5rem;
       font-style: italic; max-width: 420px;
       border-left: 2px solid var(--accent); padding-left: 1.2rem; border-left-color: var(--accent2);
     }
@@ -111,7 +109,7 @@
     .btn { padding: 0.8rem 1.8rem; border-radius: 6px; font-size: 0.82rem; font-weight: 700; text-decoration: none; letter-spacing: 0.5px; text-transform: uppercase; transition: all 0.2s; display: inline-block; border: none; cursor: pointer; }
     .btn-primary { background: linear-gradient(135deg, var(--accent), var(--neon)); color: #fff; box-shadow: 0 0 20px rgba(145,122,255,0.4); }
     .btn-primary:hover { background: linear-gradient(135deg, #7a62e8, var(--accent2)); transform: translateY(-2px); box-shadow: 0 10px 35px rgba(145,122,255,0.55); }
-    .btn-ghost { background: transparent; color: #55556a; border: 1px solid var(--line); }
+    .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--line); }
     .btn-ghost:hover { border-color: var(--accent2); color: var(--accent2); }
 
     /* GLOBE */
@@ -127,19 +125,19 @@
     .globe-dot:nth-child(5) { top: 40%; left: 75%; background: var(--gold); box-shadow: 0 0 10px var(--gold); }
 
     /* TICKER */
-    .ticker { overflow: hidden; border-top: 1px solid rgba(145,122,255,0.3); border-bottom: 1px solid rgba(145,122,255,0.3); padding: 1rem 0; background: linear-gradient(90deg, #111136, #13133a, #111136); }
+    .ticker { overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 1rem 0; background: #f0ece3; }
     .ticker-inner { display: flex; gap: 4rem; animation: ticker 28s linear infinite; width: max-content; }
-    .ticker-item { white-space: nowrap; font-family: 'Space Mono', monospace; font-size: 0.72rem; color: #8080b0; }
-    .ticker-item span { color: var(--accent); margin-right: 0.5rem; }
+    .ticker-item { white-space: nowrap; font-family: 'Space Mono', monospace; font-size: 0.72rem; color: #9a9080; }
+    .ticker-item span { color: var(--accent); margin-right: 0.5rem; font-weight: 700; }
     .ticker-item .eq { color: var(--accent2); font-size: 0.8rem; }
 @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     /* FLOATING MATH */
     .math-float {
       position: absolute; pointer-events: none; font-family: 'Space Mono', monospace;
-      color: rgba(145,122,255,0.28); font-size: clamp(0.7rem, 1.5vw, 1rem);
+      color: rgba(124,95,240,0.18); font-size: clamp(0.7rem, 1.5vw, 1rem);
       animation: mathDrift 18s ease-in-out infinite; user-select: none;
     }
-    .math-float:nth-child(odd) { animation-direction: reverse; animation-duration: 22s; color: rgba(0,245,237,0.25); }
+    .math-float:nth-child(odd) { animation-direction: reverse; animation-duration: 22s; color: rgba(0,196,190,0.2); }
     @keyframes mathDrift {
       0%,100% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
       33% { transform: translateY(-18px) rotate(2deg); opacity: 0.5; }
@@ -148,8 +146,8 @@
 
     /* MATH AXIOMS STRIP */
     .math-strip {
-      background: linear-gradient(180deg, #0c0c2e 0%, #100e3a 50%, #0c0c2e 100%);
-      border-top: 1px solid rgba(145,122,255,0.3); border-bottom: 1px solid rgba(145,122,255,0.3);
+      background: linear-gradient(180deg, #f0ece3 0%, #e8e2d8 50%, #f0ece3 100%);
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
       padding: 4rem 3rem; overflow: hidden; position: relative;
     }
     .math-strip-inner { max-width: 1200px; margin: 0 auto; }
@@ -159,15 +157,15 @@
     @media (max-width: 900px) { .axioms-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 500px) { .axioms-grid { grid-template-columns: 1fr; } }
     .axiom-cell {
-      background: var(--surface); padding: 1.8rem 1.5rem; transition: background 0.25s;
+      background: #ffffff; padding: 1.8rem 1.5rem; transition: background 0.25s;
       display: flex; flex-direction: column; gap: 0.7rem;
     }
-    .axiom-cell:hover { background: var(--surface2); }
+    .axiom-cell:hover { background: #f8f5ef; }
     .axiom-eq { font-family: 'Space Mono', monospace; font-size: 1rem; color: var(--accent); letter-spacing: -0.5px; line-height: 1.3; }
     .axiom-eq .eq-gold { color: var(--gold); }
     .axiom-eq .eq-teal { color: var(--accent2); }
     .axiom-eq .eq-pink { color: var(--accent3); }
-    .axiom-wit { font-size: 0.75rem; color: var(--muted); line-height: 1.6; font-style: italic; margin-top: 0.3rem; }
+    .axiom-wit { font-size: 0.75rem; color: #9a8e7e; line-height: 1.6; font-style: italic; margin-top: 0.3rem; }
     .axiom-tag { font-size: 0.6rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--dim); font-family: 'Space Mono', monospace; }
 
     /* TICKER brighter */
@@ -175,7 +173,7 @@
 
     /* PHILOSOPHY STRIP */
     .philosophy {
-      background: linear-gradient(135deg, #111136 0%, #1a1048 100%);
+      background: linear-gradient(135deg, #1a1530 0%, #241840 100%);
       border-bottom: 1px solid var(--line);
       padding: 5rem 3rem; text-align: center; position: relative; overflow: hidden;
     }
@@ -184,7 +182,7 @@
       font-size: 18rem; line-height: 1; color: rgba(124,106,247,0.04);
       font-family: Georgia, serif; pointer-events: none;
     }
-    .philosophy blockquote { max-width: 680px; margin: 0 auto; font-size: clamp(1.2rem, 3vw, 1.9rem); font-weight: 300; line-height: 1.65; color: #9090c8; font-style: italic; letter-spacing: -0.5px; }
+    .philosophy blockquote { max-width: 680px; margin: 0 auto; font-size: clamp(1.2rem, 3vw, 1.9rem); font-weight: 300; line-height: 1.65; color: #b8b0d8; font-style: italic; letter-spacing: -0.5px; }
     .philosophy blockquote strong { color: var(--text); font-weight: 700; font-style: normal; }
     .philosophy cite { display: block; margin-top: 1.5rem; font-size: 0.72rem; font-style: normal; color: var(--accent); font-family: 'Space Mono', monospace; letter-spacing: 3px; text-transform: uppercase; }
 
@@ -193,11 +191,11 @@
     .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(145,122,255,0.25); }
     .section-label { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--accent2); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 0.8rem; }
     h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; letter-spacing: -1.5px; line-height: 1.05; }
-    .section-count { font-family: 'Space Mono', monospace; font-size: 3.5rem; font-weight: 700; color: var(--dim); letter-spacing: -3px; line-height: 1; }
+    .section-count { font-family: 'Space Mono', monospace; font-size: 3.5rem; font-weight: 700; color: #d8d0c8; letter-spacing: -3px; line-height: 1; }
 
     /* FEATURED */
     .featured-card {
-      background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
+      background: #ffffff; border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.07);
       padding: 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
       margin-bottom: 1.5rem; text-decoration: none; color: inherit;
       transition: border-color 0.25s, transform 0.25s; position: relative; overflow: hidden;
@@ -208,33 +206,33 @@
 
     .featured-tag { display: inline-block; padding: 0.3rem 0.9rem; background: rgba(124,106,247,0.15); border: 1px solid rgba(124,106,247,0.3); border-radius: 999px; font-size: 0.68rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; }
     .featured-card h3 { font-size: 1.7rem; font-weight: 900; letter-spacing: -0.8px; line-height: 1.2; margin-bottom: 1rem; }
-    .featured-card p { color: #7070a0; font-size: 0.92rem; line-height: 1.8; margin-bottom: 1.5rem; }
+    .featured-card p { color: var(--muted); font-size: 0.92rem; line-height: 1.8; margin-bottom: 1.5rem; }
     .read-link { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--accent); letter-spacing: 1px; text-transform: uppercase; }
 
-    .feat-visual { width: 100%; aspect-ratio: 4/3; background: var(--surface2); border-radius: 12px; border: 1px solid var(--line); display: grid; place-items: center; overflow: hidden; position: relative; }
+    .feat-visual { width: 100%; aspect-ratio: 4/3; background: #f0ece3; border-radius: 12px; border: 1px solid var(--line); display: grid; place-items: center; overflow: hidden; position: relative; }
     .feat-visual svg { width: 100%; height: 100%; }
 
     /* BLOG GRID */
     .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
     @media (max-width: 900px) { .blog-grid { grid-template-columns: 1fr; } }
 
-    .blog-card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 2rem; text-decoration: none; color: inherit; transition: all 0.22s; display: block; position: relative; overflow: hidden; }
-    .blog-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.4); }
-    .blog-card-icon { width: 44px; height: 44px; background: var(--surface2); border-radius: 10px; display: grid; place-items: center; font-size: 1.3rem; margin-bottom: 1.2rem; border: 1px solid var(--line); }
+    .blog-card { background: #ffffff; border: 1px solid var(--line); border-radius: 12px; padding: 2rem; text-decoration: none; color: inherit; transition: all 0.22s; display: block; position: relative; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+    .blog-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 12px 32px rgba(124,95,240,0.15); }
+    .blog-card-icon { width: 44px; height: 44px; background: #f0ece3; border-radius: 10px; display: grid; place-items: center; font-size: 1.3rem; margin-bottom: 1.2rem; border: 1px solid var(--line); }
     .blog-cat { font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent2); margin-bottom: 0.7rem; }
     .blog-card h3 { font-size: 0.95rem; font-weight: 700; line-height: 1.45; margin-bottom: 0.8rem; letter-spacing: -0.2px; }
-    .blog-card p { font-size: 0.82rem; color: #7070a0; line-height: 1.7; }
+    .blog-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.7; }
     .blog-arrow { margin-top: 1.5rem; font-size: 1rem; color: var(--dim); display: inline-block; transition: color 0.2s, transform 0.2s; }
     .blog-card:hover .blog-arrow { color: var(--accent); transform: translateX(4px); }
 
-    /* OSHO CARDS */
+    /* THE 93 CARDS */
     .osho-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; margin-top: 0; }
     @media (max-width: 768px) { .osho-grid { grid-template-columns: 1fr; } }
 
-    .osho-card { background: linear-gradient(135deg, var(--surface) 0%, #1a1428 100%); border: 1px solid var(--line); border-radius: 12px; padding: 2.5rem; position: relative; overflow: hidden; transition: border-color 0.2s; }
+    .osho-card { background: linear-gradient(135deg, #1a1530 0%, #1e1040 100%); border: 1px solid #2e2858; border-radius: 12px; padding: 2.5rem; position: relative; overflow: hidden; transition: border-color 0.2s; }
     .osho-card:hover { border-color: rgba(240,165,0,0.3); }
     .osho-card::after { content: ''; position: absolute; bottom: 0; right: 0; width: 100px; height: 100px; background: radial-gradient(circle, rgba(240,165,0,0.06) 0%, transparent 70%); }
-    .osho-card blockquote { font-size: 1rem; font-style: italic; color: #9090b8; line-height: 1.75; margin-bottom: 1rem; }
+    .osho-card blockquote { font-size: 1rem; font-style: italic; color: #b0a8c8; line-height: 1.75; margin-bottom: 1rem; }
     .osho-card blockquote strong { color: var(--text); font-style: normal; }
     .osho-link { font-size: 0.78rem; color: var(--gold); font-family: 'Space Mono', monospace; letter-spacing: 1px; text-decoration: none; }
     .osho-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); opacity: 0.7; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
@@ -283,6 +281,251 @@
   </style>
 </head>
 <body>
+<!-- ENTRY PORTAL -->
+<style>
+  #entry-portal {
+    position: fixed; inset: 0; z-index: 99999;
+    background: #0a0820;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; font-family: 'Inter', sans-serif;
+  }
+  #exit-msg {
+    position: fixed; inset: 0; z-index: 99999;
+    background: #0a0820;
+    display: none; align-items: center; justify-content: center;
+    flex-direction: column; gap: 2rem; text-align: center; padding: 3rem;
+    font-family: 'Space Mono', monospace;
+  }
+  /* 3D rings */
+  .portal-scene {
+    position: absolute; inset: 0; display: flex;
+    align-items: center; justify-content: center;
+    perspective: 900px; pointer-events: none;
+  }
+  .p-ring {
+    position: absolute; border-radius: 50%;
+    border: 1.5px solid; animation: pRingSpin linear infinite;
+    transform-style: preserve-3d;
+  }
+  .p-ring-1 { width: 380px; height: 380px; border-color: rgba(124,95,240,0.5); animation-duration: 9s; transform: rotateX(72deg); }
+  .p-ring-2 { width: 540px; height: 540px; border-color: rgba(0,196,190,0.35); animation-duration: 14s; animation-direction: reverse; transform: rotateX(72deg) rotateZ(60deg); }
+  .p-ring-3 { width: 720px; height: 720px; border-color: rgba(232,86,122,0.2); animation-duration: 22s; transform: rotateX(72deg) rotateZ(120deg); }
+  .p-ring-4 { width: 900px; height: 900px; border-color: rgba(124,95,240,0.12); animation-duration: 32s; animation-direction: reverse; transform: rotateX(72deg) rotateZ(45deg); }
+  @keyframes pRingSpin {
+    from { transform: rotateX(72deg) rotateZ(0deg); }
+    to { transform: rotateX(72deg) rotateZ(360deg); }
+  }
+  /* Override for different base angles */
+  .p-ring-2 { animation: pRingSpin2 14s linear infinite reverse; }
+  .p-ring-3 { animation: pRingSpin3 22s linear infinite; }
+  .p-ring-4 { animation: pRingSpin4 32s linear infinite reverse; }
+  @keyframes pRingSpin2 {
+    from { transform: rotateX(72deg) rotateZ(60deg); }
+    to { transform: rotateX(72deg) rotateZ(420deg); }
+  }
+  @keyframes pRingSpin3 {
+    from { transform: rotateX(72deg) rotateZ(120deg); }
+    to { transform: rotateX(72deg) rotateZ(480deg); }
+  }
+  @keyframes pRingSpin4 {
+    from { transform: rotateX(72deg) rotateZ(45deg); }
+    to { transform: rotateX(72deg) rotateZ(405deg); }
+  }
+  /* central orb */
+  .p-orb {
+    position: absolute; width: 80px; height: 80px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #c084fc, #7c5ff0 50%, #0a0820);
+    box-shadow: 0 0 40px rgba(124,95,240,0.6), 0 0 80px rgba(124,95,240,0.3);
+    animation: orbPulse 3s ease-in-out infinite;
+  }
+  @keyframes orbPulse {
+    0%,100% { transform: scale(1); box-shadow: 0 0 40px rgba(124,95,240,0.6), 0 0 80px rgba(124,95,240,0.3); }
+    50% { transform: scale(1.1); box-shadow: 0 0 60px rgba(124,95,240,0.8), 0 0 120px rgba(124,95,240,0.4); }
+  }
+  /* particles */
+  .p-particle {
+    position: absolute; width: 3px; height: 3px; border-radius: 50%;
+    background: rgba(124,95,240,0.6); animation: pFloat linear infinite;
+  }
+  @keyframes pFloat {
+    0% { transform: translateY(0) translateX(0); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-100vh) translateX(var(--dx,20px)); opacity: 0; }
+  }
+  /* content box */
+  .portal-box {
+    position: relative; z-index: 2; max-width: 560px; width: 90%;
+    background: rgba(10,8,32,0.88); backdrop-filter: blur(24px);
+    border: 1px solid rgba(124,95,240,0.3); border-radius: 20px;
+    padding: 3rem 2.5rem; text-align: center;
+    box-shadow: 0 0 60px rgba(124,95,240,0.15), inset 0 0 60px rgba(124,95,240,0.04);
+  }
+  .portal-eyebrow {
+    font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 4px;
+    color: rgba(0,196,190,0.8); text-transform: uppercase; margin-bottom: 1.5rem;
+  }
+  .portal-title {
+    font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 900; color: #fff;
+    letter-spacing: -1px; margin-bottom: 0.5rem; line-height: 1.1;
+  }
+  .portal-sub {
+    font-size: 0.8rem; color: rgba(255,255,255,0.35); font-family: 'Space Mono', monospace;
+    margin-bottom: 2rem; letter-spacing: 1px;
+  }
+  .portal-disclaimer {
+    background: rgba(124,95,240,0.08); border: 1px solid rgba(124,95,240,0.2);
+    border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; text-align: left;
+  }
+  .portal-disclaimer p {
+    font-size: 0.88rem; color: rgba(255,255,255,0.65); line-height: 1.85;
+    margin: 0;
+  }
+  .portal-disclaimer em {
+    color: rgba(0,196,190,0.9); font-style: normal;
+    font-family: 'Space Mono', monospace; font-size: 0.78rem;
+  }
+  .portal-check-label {
+    display: flex; align-items: flex-start; gap: 0.8rem; cursor: pointer;
+    margin-bottom: 2rem; text-align: left;
+  }
+  .portal-check-label input[type="checkbox"] {
+    width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent, #7c5ff0);
+    cursor: pointer; flex-shrink: 0;
+  }
+  .portal-check-label span {
+    font-size: 0.82rem; color: rgba(255,255,255,0.55); line-height: 1.6;
+  }
+  .portal-btns { display: flex; gap: 1rem; }
+  #enter-btn {
+    flex: 1; padding: 0.9rem; border-radius: 8px; border: none; cursor: pointer;
+    background: linear-gradient(135deg, #7c5ff0, #00c4be);
+    color: #fff; font-weight: 700; font-size: 0.88rem; letter-spacing: 1px;
+    text-transform: uppercase; transition: all 0.2s; opacity: 0.35;
+    font-family: 'Space Mono', monospace;
+  }
+  #enter-btn:not(:disabled) { opacity: 1; box-shadow: 0 0 20px rgba(124,95,240,0.4); }
+  #enter-btn:not(:disabled):hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(124,95,240,0.5); }
+  #exit-btn {
+    flex: 0 0 auto; padding: 0.9rem 1.5rem; border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.15); cursor: pointer;
+    background: transparent; color: rgba(255,255,255,0.4); font-size: 0.82rem;
+    font-family: 'Space Mono', monospace; transition: all 0.2s;
+  }
+  #exit-btn:hover { border-color: rgba(232,86,122,0.4); color: rgba(232,86,122,0.7); }
+  /* exit screen */
+  #exit-msg .exit-big {
+    font-size: clamp(1rem, 3vw, 1.5rem); color: rgba(255,255,255,0.7);
+    line-height: 1.8; max-width: 500px;
+  }
+  #exit-msg .exit-big strong { color: #fff; }
+  #exit-msg .exit-note {
+    font-size: 0.72rem; color: rgba(124,95,240,0.7);
+    font-family: 'Space Mono', monospace; letter-spacing: 2px;
+  }
+  #exit-back {
+    padding: 0.7rem 2rem; border-radius: 8px; border: 1px solid rgba(124,95,240,0.4);
+    background: transparent; color: rgba(124,95,240,0.8); font-size: 0.78rem;
+    font-family: 'Space Mono', monospace; cursor: pointer; letter-spacing: 1px;
+    transition: all 0.2s;
+  }
+  #exit-back:hover { background: rgba(124,95,240,0.1); color: #c084fc; }
+</style>
+
+<div id="entry-portal">
+  <div class="portal-scene">
+    <div class="p-ring p-ring-1"></div>
+    <div class="p-ring p-ring-2"></div>
+    <div class="p-ring p-ring-3"></div>
+    <div class="p-ring p-ring-4"></div>
+    <div class="p-orb"></div>
+    <!-- particles generated by JS -->
+  </div>
+  <div class="portal-box">
+    <div class="portal-eyebrow">// transmission incoming</div>
+    <div class="portal-title">before you proceed</div>
+    <div class="portal-sub">a brief, entirely optional disclaimer</div>
+    <div class="portal-disclaimer">
+      <p>
+        This space does not need your approval.<br><br>
+        No intellectual credentials required.<br>
+        No prior enlightenment necessary.<br>
+        Bring your questions. Leave your conclusions.<br><br>
+        If something lands — sit with it.<br>
+        If nothing does — the exit is where you came from.<br><br>
+        <em>The universe has a refund policy. It's called tomorrow.</em>
+      </p>
+    </div>
+    <label class="portal-check-label">
+      <input type="checkbox" id="portal-checkbox" onchange="portalCheck()">
+      <span>I understand I'm entering at my own philosophical risk. Proceed with appropriate curiosity.</span>
+    </label>
+    <div class="portal-btns">
+      <button id="enter-btn" disabled onclick="enterSite()">enter the coordinates →</button>
+      <button id="exit-btn" onclick="exitPortal()">not yet</button>
+    </div>
+  </div>
+</div>
+
+<div id="exit-msg">
+  <div class="exit-big">
+    grateful you didn't open.<br>
+    otherwise you'd become<br>
+    <strong>dangerously intelligent.</strong><br><br>
+    the world has quite enough of those already.
+  </div>
+  <div class="exit-note">— koordinates/ wishes you a safe, uncomplicated existence</div>
+  <button id="exit-back" onclick="returnPortal()">wait. i changed my mind.</button>
+</div>
+
+<script>
+  // Spawn particles
+  (function() {
+    const scene = document.querySelector('.portal-scene');
+    for (let i = 0; i < 30; i++) {
+      const p = document.createElement('div');
+      p.className = 'p-particle';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.bottom = '-10px';
+      p.style.setProperty('--dx', (Math.random() * 80 - 40) + 'px');
+      p.style.animationDuration = (8 + Math.random() * 12) + 's';
+      p.style.animationDelay = (Math.random() * 10) + 's';
+      const colors = ['rgba(124,95,240,0.7)', 'rgba(0,196,190,0.7)', 'rgba(232,86,122,0.6)', 'rgba(192,132,252,0.6)'];
+      p.style.background = colors[Math.floor(Math.random() * colors.length)];
+      scene.appendChild(p);
+    }
+  })();
+
+  function portalCheck() {
+    const btn = document.getElementById('enter-btn');
+    btn.disabled = !document.getElementById('portal-checkbox').checked;
+  }
+
+  function enterSite() {
+    const portal = document.getElementById('entry-portal');
+    portal.style.transition = 'opacity 0.8s ease';
+    portal.style.opacity = '0';
+    setTimeout(() => { portal.style.display = 'none'; }, 800);
+  }
+
+  function exitPortal() {
+    document.getElementById('entry-portal').style.display = 'none';
+    const msg = document.getElementById('exit-msg');
+    msg.style.display = 'flex';
+  }
+
+  function returnPortal() {
+    document.getElementById('exit-msg').style.display = 'none';
+    const portal = document.getElementById('entry-portal');
+    portal.style.opacity = '0';
+    portal.style.display = 'flex';
+    setTimeout(() => {
+      portal.style.transition = 'opacity 0.5s ease';
+      portal.style.opacity = '1';
+    }, 50);
+  }
+</script>
+
 
 <!-- NAV -->
 <nav>
@@ -316,7 +559,7 @@
       <div class="hero-quote">
         "The moment you know yourself, you have known the most
         mysterious thing in the whole universe."
-        <cite>— Osho</cite>
+        <cite>— the 93</cite>
       </div>
       <div class="hero-cta">
         <a href="#writing" class="btn btn-primary">Explore the work</a>
@@ -475,8 +718,8 @@
   <a href="#post1" class="featured-card">
     <div>
       <span class="featured-tag">Featured Post</span>
-      <h3>The Map Is Not the Territory — Osho, Korzybski, and the Limits of GIS</h3>
-      <p>We build satellite maps of the entire earth — every river, every deforested patch, every shifting coastline — with millimetre precision. And yet, Osho kept saying: <em>"The map is not the territory. The word 'water' will not quench your thirst."</em> He was quoting Korzybski, a philosopher of language. But he was also, unknowingly, describing the deepest problem in geospatial science.</p>
+      <h3>The Map Is Not the Territory — the 93, Korzybski, and the Limits of GIS</h3>
+      <p>We build satellite maps of the entire earth — every river, every deforested patch, every shifting coastline — with millimetre precision. And yet, the 93 kept saying: <em>"The map is not the territory. The word 'water' will not quench your thirst."</em> He was quoting Korzybski, a philosopher of language. But he was also, unknowingly, describing the deepest problem in geospatial science.</p>
       <span class="read-link">Read the full piece →</span>
     </div>
     <div class="feat-visual">
@@ -570,7 +813,7 @@
       Click any sutra. See what they already knew.
     </p>
     <p style="font-family:'Space Mono',monospace; font-size:0.72rem; color:var(--accent); margin-bottom:3.5rem;">
-      ↓ tap a sutra to expand — Vedic text · science connection · Osho's lens
+      ↓ tap a sutra to expand — Vedic text · science connection · the 93's lens
     </p>
 
     <!-- VEDA TABS -->
@@ -1511,7 +1754,7 @@ const VEDA_DATA = {
                     <p>${s.bio}</p>
                   </div>
                   <div class="insight-box">
-                    <p class="insight-label" style="color:var(--gold);">🌀 Osho's Lens</p>
+                    <p class="insight-label" style="color:var(--gold);">🌀 the 93's Lens</p>
                     <p>${s.osho}</p>
                   </div>
                 </div>
@@ -1550,7 +1793,7 @@ const VEDA_DATA = {
   <div style="max-width: 720px; margin: 0 auto; padding: 7rem 3rem;">
 
     <p style="font-family:'Space Mono',monospace; font-size:0.68rem; color:var(--accent2); letter-spacing:3px; text-transform:uppercase; margin-bottom:1.5rem;">
-      // Osho × Geospatial Science — Full Essay
+      // the 93 × Geospatial Science — Full Essay
     </p>
 
     <h2 style="font-size:clamp(1.8rem,4vw,3rem); font-weight:900; letter-spacing:-1.5px; line-height:1.1; margin-bottom:2rem;">
@@ -1565,14 +1808,14 @@ const VEDA_DATA = {
 
       <p>We build satellite maps of the entire earth — every river bend, every deforested patch, every shifting coastline — with millimetre precision. Terabytes of data. Algorithms that can detect a single burned field from 700 kilometres above.</p>
 
-      <p style="margin-top:1.5rem;">And yet, Osho kept saying something that disturbs me every time I open QGIS:</p>
+      <p style="margin-top:1.5rem;">And yet, the 93 kept saying something that disturbs me every time I open QGIS:</p>
 
       <blockquote style="border-left:3px solid var(--accent); padding:1.2rem 1.5rem; margin:2rem 0; background:rgba(124,106,247,0.06); border-radius:0 8px 8px 0;">
         <p style="font-style:italic; color:#9090c0; font-size:1rem;">"The map is not the territory. The word 'water' will not quench your thirst. The word 'fire' will not burn your hand. All our knowledge is about maps — and we have completely forgotten the territory."</p>
-        <cite style="display:block; margin-top:0.8rem; font-style:normal; font-size:0.72rem; color:var(--accent); font-family:'Space Mono',monospace;">— Osho</cite>
+        <cite style="display:block; margin-top:0.8rem; font-style:normal; font-size:0.72rem; color:var(--accent); font-family:'Space Mono',monospace;">— the 93</cite>
       </blockquote>
 
-      <p>He was borrowing from Alfred Korzybski — a Polish-American philosopher who coined the phrase in 1931. But Osho took it further. He wasn't just talking about language. He was talking about the entire project of human knowledge — science included.</p>
+      <p>He was borrowing from Alfred Korzybski — a Polish-American philosopher who coined the phrase in 1931. But the 93 took it further. He wasn't just talking about language. He was talking about the entire project of human knowledge — science included.</p>
 
       <h3 style="font-size:1.3rem; font-weight:800; letter-spacing:-0.5px; margin:2.5rem 0 1rem; color:var(--text);">What GIS Actually Does</h3>
 
@@ -1584,18 +1827,18 @@ const VEDA_DATA = {
 
       <p style="margin-top:1.5rem;">The 0.73 NDVI value of a tree does not contain the sound of rain on its leaves. The polygon boundary of the Brahmaputra does not hold the terror of a flood. The land cover class "cropland" does not know the name of the farmer who planted it, or the prayer she said before sowing.</p>
 
-      <h3 style="font-size:1.3rem; font-weight:800; letter-spacing:-0.5px; margin:2.5rem 0 1rem; color:var(--text);">Osho's Radical Point</h3>
+      <h3 style="font-size:1.3rem; font-weight:800; letter-spacing:-0.5px; margin:2.5rem 0 1rem; color:var(--text);">the 93's Radical Point</h3>
 
-      <p>Osho wasn't anti-science. He was deeply read in physics, biology, psychology. What he was against was something subtler — the confusion of the representation with the reality.</p>
+      <p>the 93 wasn't anti-science. He was deeply read in physics, biology, psychology. What he was against was something subtler — the confusion of the representation with the reality.</p>
 
       <p style="margin-top:1.5rem;">When a GIS analyst looks at a deforestation map and says "the forest is 40% degraded" — they are right. The data says so. But they are also missing something enormous: the forest doesn't know it's 40% degraded. The forest is just the forest — complete, present, indifferent to our classifications.</p>
 
       <blockquote style="border-left:3px solid var(--gold); padding:1.2rem 1.5rem; margin:2rem 0; background:rgba(240,165,0,0.05); border-radius:0 8px 8px 0;">
         <p style="font-style:italic; color:#9090c0; font-size:1rem;">"Science is great — but it only touches the circumference of existence. The centre remains untouched, unknown. And that centre is you."</p>
-        <cite style="display:block; margin-top:0.8rem; font-style:normal; font-size:0.72rem; color:var(--gold); font-family:'Space Mono',monospace;">— Osho</cite>
+        <cite style="display:block; margin-top:0.8rem; font-style:normal; font-size:0.72rem; color:var(--gold); font-family:'Space Mono',monospace;">— the 93</cite>
       </blockquote>
 
-      <p>The "centre" Osho talks about — I think of it as the un-mappable. The thing that exists before you put a coordinate on it.</p>
+      <p>The "centre" the 93 talks about — I think of it as the un-mappable. The thing that exists before you put a coordinate on it.</p>
 
       <h3 style="font-size:1.3rem; font-weight:800; letter-spacing:-0.5px; margin:2.5rem 0 1rem; color:var(--text);">The Heisenberg Connection</h3>
 
@@ -1603,13 +1846,13 @@ const VEDA_DATA = {
 
       <p style="margin-top:1.5rem;">Remote sensing has its own version of this. When we fly a UAV over a wildlife corridor to map animal movement, the UAV disturbs the very animals we're mapping. When we classify a community's land use from satellite imagery, we impose categories that may not reflect how that community actually uses or understands the land.</p>
 
-      <p style="margin-top:1.5rem;"><strong style="color:var(--text);">The observer changes the observed.</strong> In quantum physics. In ecology. In GIS. And in Osho's meditation halls.</p>
+      <p style="margin-top:1.5rem;"><strong style="color:var(--text);">The observer changes the observed.</strong> In quantum physics. In ecology. In GIS. And in the 93's meditation halls.</p>
 
       <h3 style="font-size:1.3rem; font-weight:800; letter-spacing:-0.5px; margin:2.5rem 0 1rem; color:var(--text);">So What Do We Do With This?</h3>
 
       <p>I'm not suggesting we stop making maps. Maps are among the most powerful tools humanity has ever built. Climate science, disaster response, biodiversity conservation — none of it is possible without spatial data.</p>
 
-      <p style="margin-top:1.5rem;">But Osho's point — and Korzybski's — is a call for humility. The map is a tool, not a truth. The GIS layer is a reduction, not a revelation. The satellite image is a single wavelength of a reality that exists in infinite dimensions.</p>
+      <p style="margin-top:1.5rem;">But the 93's point — and Korzybski's — is a call for humility. The map is a tool, not a truth. The GIS layer is a reduction, not a revelation. The satellite image is a single wavelength of a reality that exists in infinite dimensions.</p>
 
       <p style="margin-top:1.5rem;">The best geospatial scientists I've read about — the ones doing genuinely groundbreaking work — always combine their spatial analysis with field visits, community interviews, indigenous knowledge systems. They know that the truth exists somewhere between the raster cell and the lived experience.</p>
 
@@ -1688,7 +1931,7 @@ const VEDA_DATA = {
       <p class="reel-num">002</p>
       <p class="reel-label">Osho Meets Science</p>
       <h3>"The Observer Changes the Observed" — Quantum + Consciousness</h3>
-      <p>Heisenberg's uncertainty principle and Osho's witness consciousness. Eerily similar.</p>
+      <p>Heisenberg's uncertainty principle and the 93's witness consciousness. Eerily similar.</p>
       <p class="reel-tags">#quantum #consciousness #philosophy #sciencereels</p>
     </div>
     <div class="reel-card">
@@ -1716,7 +1959,7 @@ const VEDA_DATA = {
       <p class="reel-num">006</p>
       <p class="reel-label">Rebel Thought</p>
       <h3>Why the Most Dangerous Question Is "Why?"</h3>
-      <p>Kids ask why. Systems suppress it. Science demands it. Osho insisted on it. A 60-second essay.</p>
+      <p>Kids ask why. Systems suppress it. Science demands it. the 93 insisted on it. A 60-second essay.</p>
       <p class="reel-tags">#philosophy #criticalthinking #rebel #genzmindset</p>
     </div>
   </div>
@@ -1856,7 +2099,7 @@ const VEDA_DATA = {
   <button class="ptrig" onclick="openPopup('fractal')" title="Fractals">∞</button>
 </div>
 
-<!-- OSHO WELCOME POPUP -->
+<!-- THE 93 WELCOME POPUP -->
 <div class="popup-overlay" id="pop-welcome">
   <div class="popup-box">
     <button class="popup-close" onclick="closePopup('welcome')">×</button>
@@ -1962,7 +2205,7 @@ const VEDA_DATA = {
     });
   });
 
-  /* ── OSHO WELCOME POPUP ── */
+  /* ── THE 93 WELCOME POPUP ── */
   const oshoMsgs = [
     {
       title: "You opened a website. Existence noticed.",
@@ -1970,7 +2213,7 @@ const VEDA_DATA = {
     },
     {
       title: "Still scrolling? Good. Stop when you find truth.",
-      body: "<strong>'A seeker is one who has the courage to open their eyes when everyone else is busy dreaming.'</strong> — Osho. You're here, on a page that refuses to simplify the world for you. That's not a coincidence. That's character."
+      body: "<strong>'A seeker is one who has the courage to open their eyes when everyone else is busy dreaming.'</strong> — the 93. You're here, on a page that refuses to simplify the world for you. That's not a coincidence. That's character."
     },
     {
       title: "The universe is 13.8 billion years old. You arrived just in time.",
@@ -1978,7 +2221,7 @@ const VEDA_DATA = {
     },
     {
       title: "Your brain has 86 billion neurons. Use at least 3.",
-      body: "<strong>'Intelligence is dangerous. Intelligence means you will start thinking on your own.'</strong> — Osho. The content on this page was made for the 3 neurons that are still asking questions. The other 85,999,999,997 can take a break."
+      body: "<strong>'Intelligence is dangerous. Intelligence means you will start thinking on your own.'</strong> — the 93. The content on this page was made for the 3 neurons that are still asking questions. The other 85,999,999,997 can take a break."
     },
     {
       title: "Warning: ideas ahead. Side effects include curiosity.",
@@ -2187,7 +2430,7 @@ const VEDA_DATA = {
   }
 </style>
 
-<!-- OSHO FIGURE -->
+<!-- THE 93 FIGURE -->
 <div class="guru-wrap pose-sit" id="guru-osho" style="left:4%;bottom:12%;" onclick="guruClick('osho')">
   <div class="guru-inner">
     <svg width="62" height="96" viewBox="0 0 62 96" xmlns="http://www.w3.org/2000/svg">
