@@ -2,304 +2,471 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Human Model · koordinates</title>
 <style>
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html,body{width:100%;height:100%;overflow:hidden;background:#07051a;font-family:monospace;}
-  #status{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);color:#c084fc;font-size:0.9rem;letter-spacing:2px;text-align:center;z-index:5;white-space:pre-wrap;line-height:1.6;}
-  #info{position:fixed;top:16px;left:50%;transform:translateX(-50%);color:rgba(145,122,255,0.55);font-size:0.6rem;letter-spacing:3px;z-index:10;white-space:nowrap;}
-  #controls{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:10;flex-wrap:wrap;justify-content:center;}
-  .btn{padding:8px 15px;background:rgba(145,122,255,0.12);border:1px solid rgba(145,122,255,0.4);color:#c084fc;border-radius:8px;cursor:pointer;font-family:monospace;font-size:0.7rem;letter-spacing:1px;text-transform:uppercase;}
-  .btn.on,.btn:active{background:rgba(145,122,255,0.3);color:#fff;}
-  canvas{display:block;position:fixed;top:0;left:0;}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#0a0812;font-family:'Segoe UI',sans-serif}
+#status{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);color:#c084fc;font-size:.9rem;letter-spacing:2px;text-align:center;z-index:5;white-space:pre-wrap;line-height:1.8}
+#hud{position:fixed;top:14px;left:50%;transform:translateX(-50%);color:rgba(255,200,120,.45);font-size:.58rem;letter-spacing:4px;z-index:10;white-space:nowrap;text-transform:uppercase}
+#ctrl{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:10;flex-wrap:wrap;justify-content:center}
+.btn{padding:9px 18px;background:rgba(20,10,40,.7);border:1px solid rgba(200,150,80,.4);color:#e0b87a;border-radius:6px;cursor:pointer;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;transition:all .2s;backdrop-filter:blur(6px)}
+.btn.on,.btn:hover{background:rgba(200,150,80,.18);border-color:#e0b87a;color:#fff}
+canvas{display:block;position:fixed;top:0;left:0}
 </style>
 </head>
 <body>
-<div id="status">loading 3D engine…</div>
-<div id="info">// human model · three.js · koordinates · drag to rotate</div>
+<div id="status">initialising…</div>
+<div id="hud">rajasthani woman · three.js · drag to rotate · scroll to zoom</div>
+<div id="ctrl">
+  <button class="btn on" onclick="setPose('idle',this)">Stand</button>
+  <button class="btn"    onclick="setPose('clap',this)">Clap</button>
+  <button class="btn"    onclick="setPose('dance',this)">Dance</button>
+  <button class="btn"    onclick="setPose('pranaam',this)">Namaste</button>
+  <button class="btn"    onclick="setPose('sit',this)">Sit</button>
+</div>
 
 <script>
-(function(){
-  // ── Robust loader: try multiple CDNs until THREE is defined ──
-  var CDNS=[
-    "https://cdn.jsdelivr.net/npm/three@0.134.0/build/three.min.js",
-    "https://unpkg.com/three@0.134.0/build/three.min.js",
-    "https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"
-  ];
-  var statusEl=document.getElementById('status');
-  function setStatus(t){ if(statusEl) statusEl.textContent=t; }
+/* ── multi-CDN loader ── */
+var CDNS=[
+  'https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.min.js',
+  'https://unpkg.com/three@0.150.1/build/three.min.js',
+  'https://cdnjs.cloudflare.com/ajax/libs/three.js/0.150.1/three.min.js'
+];
+var $s=document.getElementById('status');
+function st(t){if($s)$s.textContent=t}
+function loadCDN(i){
+  if(typeof THREE!=='undefined'){init();return}
+  if(i>=CDNS.length){st('CDN failed — check internet');return}
+  st('loading engine… ('+( i+1)+'/'+CDNS.length+')')
+  var s=document.createElement('script');s.src=CDNS[i];
+  s.onload=function(){typeof THREE!=='undefined'?init():loadCDN(i+1)};
+  s.onerror=function(){loadCDN(i+1)};
+  document.head.appendChild(s);
+}
 
-  function tryLoad(i){
-    if(typeof THREE!=='undefined'){ start(); return; }
-    if(i>=CDNS.length){ setStatus("3D engine load nahi hua.\nNetwork/CDN block ho sakta hai.\nWiFi badal ke try karo."); return; }
-    setStatus("loading 3D engine… ("+(i+1)+"/"+CDNS.length+")");
-    var s=document.createElement('script');
-    s.src=CDNS[i];
-    s.onload=function(){ if(typeof THREE!=='undefined') start(); else tryLoad(i+1); };
-    s.onerror=function(){ tryLoad(i+1); };
-    document.head.appendChild(s);
-  }
+function init(){
+  try{build()}catch(e){st('error: '+(e.message||e))}
+}
 
-  function start(){
-    try{ build(); }
-    catch(e){ setStatus("render error:\n"+(e&&e.message?e.message:e)); }
-  }
+/* ════════════════════════════════════════════════
+   REALISTIC RAJASTHANI WOMAN
+   Goal: PUBG/game-quality feel —
+   • MeshPhysicalMaterial skin (SSS approximation)
+   • Anatomical proportions (7.5-head rule)
+   • Smooth bone-like arm chain
+   • Lehenga with fabric folds
+   • Detailed face sculpt
+════════════════════════════════════════════════ */
+function build(){
+  if($s){$s.style.display='none'}
+  var PI=Math.PI, W=window.innerWidth, H=window.innerHeight;
 
-  // ── The actual 3D human model ──
-  function build(){
-    if(statusEl) statusEl.style.display='none';
-    var PI=Math.PI;
-    var W=window.innerWidth, H=window.innerHeight;
+  var renderer=new THREE.WebGLRenderer({antialias:true,alpha:false});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  renderer.setSize(W,H);
+  renderer.shadowMap.enabled=true;
+  renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+  renderer.toneMapping=THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure=1.1;
+  renderer.outputEncoding=THREE.sRGBEncoding||3001;
+  document.body.appendChild(renderer.domElement);
 
-    var renderer=new THREE.WebGLRenderer({antialias:true});
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-    renderer.setSize(W,H);
-    document.body.appendChild(renderer.domElement);
+  var scene=new THREE.Scene();
+  scene.background=new THREE.Color(0x0a0812);
+  scene.fog=new THREE.FogExp2(0x0a0812,0.055);
 
-    var scene=new THREE.Scene();
-    scene.background=new THREE.Color(0x07051a);
-    scene.fog=new THREE.Fog(0x07051a,9,18);
+  var camera=new THREE.PerspectiveCamera(42,W/H,.05,60);
+  camera.position.set(0,1.58,2.8);
 
-    var camera=new THREE.PerspectiveCamera(45,W/H,0.1,50);
-    camera.position.set(0,1.5,3.6);
+  /* ── Lighting (game-style 3-point + rim + fill) ── */
+  scene.add(new THREE.AmbientLight(0x3a2850,1.4));
+  var key=new THREE.DirectionalLight(0xfff0d8,3.2);
+  key.position.set(1.6,3.2,2.4);key.castShadow=true;
+  key.shadow.mapSize.set(1024,1024);key.shadow.bias=-.001;scene.add(key);
+  var fill=new THREE.DirectionalLight(0x8060ff,1.2);fill.position.set(-2,1.5,-1);scene.add(fill);
+  var rim=new THREE.DirectionalLight(0x00e8df,.9);rim.position.set(.5,2,-2.5);scene.add(rim);
+  var hair_light=new THREE.PointLight(0xff8040,.8,4);hair_light.position.set(0,2.5,.5);scene.add(hair_light);
 
-    scene.add(new THREE.AmbientLight(0x40307a,0.9));
-    var dl=new THREE.DirectionalLight(0xffe8d0,2.3); dl.position.set(1.5,3,2.5); scene.add(dl);
-    var rl=new THREE.DirectionalLight(0x917aff,1.6); rl.position.set(-2,2,-1); scene.add(rl);
-    var tl=new THREE.DirectionalLight(0x00e8df,1.0); tl.position.set(2,1.5,-1); scene.add(tl);
-    var pl=new THREE.PointLight(0xff6b9d,0.7,8); pl.position.set(1,2,1); scene.add(pl);
-
-    function M(c,r,m,ec,ei){
-      var o=new THREE.MeshStandardMaterial({color:c,roughness:r==null?0.7:r,metalness:m||0});
-      if(ec){o.emissive=new THREE.Color(ec);o.emissiveIntensity=ei||0.3;}
-      return o;
-    }
-    // capsule helper that works on r134 (no CapsuleGeometry)
-    function capsule(r,len,seg){ return new THREE.CylinderGeometry(r,r,len+r*2,seg||10); }
-
-    var SK=M(0xc88a52,0.62), SKD=M(0xa86a3a,0.7),
-        RO=M(0x9a1530,0.85), GO=M(0xd4920a,0.25,0.85),
-        GEM=M(0x7050cc,0.1,0.2,0x3020a0,0.5),
-        HA=M(0x140a06,0.9), EW=M(0xfff5e8,0.3), IR=M(0x140804,0.2),
-        LP=M(0xb84050,0.5), BD=M(0xdd1020,0.3,0,0x880010,0.4),
-        WH=M(0xfff8f0,0.35), FL=M(0x181430,0.95);
-
-    var root=new THREE.Group(); scene.add(root);
-    function mesh(geo,mt,par,x,y,z,rx,ry,rz,sx,sy,sz){
-      var o=new THREE.Mesh(geo,mt);
-      o.position.set(x||0,y||0,z||0);
-      if(rx||ry||rz) o.rotation.set(rx||0,ry||0,rz||0);
-      if(sx) o.scale.set(sx,sy||sx,sz||sx);
-      (par||root).add(o); return o;
-    }
-
-    // ════ FEMININE HUMAN FIGURE — natural proportions ════
-    // hips / pelvis (under ghagra)
-    mesh(new THREE.SphereGeometry(0.2,16,12),RO,null,0,0.92,0,0,0,0,1,0.7,0.85);
-    // ── Ghagra (flared skirt, graceful) ──
-    mesh(new THREE.CylinderGeometry(0.21,0.40,0.86,28),RO,null,0,0.47,0);
-    mesh(new THREE.TorusGeometry(0.40,0.02,8,40),GO,null,0,0.05,0,PI/2,0,0);
-    // skirt pleats hint (gold dashes near hem)
-    for(var pl=0;pl<16;pl++){ var pa2=pl/16*PI*2; mesh(new THREE.BoxGeometry(0.015,0.12,0.01),GO,null,Math.sin(pa2)*0.39,0.13,Math.cos(pa2)*0.39,0,-pa2,0); }
-    // gold kamarbandh (waist belt)
-    mesh(new THREE.TorusGeometry(0.165,0.022,8,28),GO,null,0,0.9,0,PI/2,0,0);
-
-    // ── Torso / choli — slim waist, soft bust (feminine) ──
-    mesh(new THREE.CylinderGeometry(0.155,0.16,0.34,18),RO,null,0,1.11,0);     // waist→ribs
-    mesh(new THREE.SphereGeometry(0.165,18,14),RO,null,0,1.3,0,0,0,0,1,0.82,0.9); // bust
-    [-0.075,0.075].forEach(function(x){ mesh(new THREE.SphereGeometry(0.072,12,10),RO,null,x,1.28,0.085,0,0,0,1,0.85,0.9); });
-    // shoulders (narrow, sloped)
-    mesh(new THREE.SphereGeometry(0.075,12,10),SK,null,-0.15,1.42,0);
-    mesh(new THREE.SphereGeometry(0.075,12,10),SK,null,0.15,1.42,0);
-
-    // ── Neck + Head ──
-    mesh(new THREE.CylinderGeometry(0.05,0.058,0.11,12),SK,null,0,1.5,0);
-    var head=new THREE.Group(); head.position.set(0,1.66,0); root.add(head);
-    mesh(new THREE.SphereGeometry(0.125,22,20),SK,head,0,0,0,0,0,0,0.92,1.1,0.95); // oval face
-    mesh(new THREE.SphereGeometry(0.07,12,10),SK,head,0,-0.085,0.02,0,0,0,0.85,0.9,0.85); // chin/jaw
-    // eyes (almond, feminine)
-    [-0.045,0.045].forEach(function(x){
-      mesh(new THREE.SphereGeometry(0.026,12,10),EW,head,x,0.015,0.1,0,0,0,1,0.55,0.5);
-      mesh(new THREE.SphereGeometry(0.013,10,8),IR,head,x,0.015,0.115);
-      mesh(new THREE.SphereGeometry(0.005,8,6),M(0xffffff,0.2),head,x+0.004,0.022,0.122); // glint
-      // lashes/liner
-      mesh(capsule(0.004,0.04,6),HA,head,x,0.032,0.1,0,0,x>0?-0.25:0.25);
-    });
-    // brows
-    [-0.045,0.045].forEach(function(x){ mesh(capsule(0.005,0.045,6),HA,head,x,0.058,0.105,0,0,x>0?-0.18:0.18); });
-    // nose (slim)
-    mesh(capsule(0.011,0.04,8),SK,head,0,-0.012,0.118,0.32,0,0);
-    mesh(new THREE.SphereGeometry(0.014,8,6),SK,head,0,-0.035,0.122);
-    // lips (fuller, feminine)
-    mesh(capsule(0.011,0.045,8),LP,head,0,-0.072,0.108,0,0,0,1,1,0.7);
-    mesh(new THREE.SphereGeometry(0.016,10,8),LP,head,0,-0.078,0.105,0,0,0,1,0.55,0.6);
-    // cheeks blush
-    [-0.07,0.07].forEach(function(x){ mesh(new THREE.CircleGeometry(0.022,12),M(0xd06a6a,0.6),head,x,-0.02,0.11); });
-    // bindi
-    mesh(new THREE.CircleGeometry(0.011,12),BD,head,0,0.072,0.118);
-    // ── Hair: parted, with long braid ──
-    mesh(new THREE.SphereGeometry(0.142,22,18),HA,head,0,0.025,-0.015,0,0,0,1,1.05,1.02);
-    mesh(new THREE.BoxGeometry(0.01,0.05,0.04),M(0x1a1008,0.5),head,0,0.1,0.1); // centre parting hint
-    // side hair framing face
-    [-0.115,0.115].forEach(function(x){ mesh(capsule(0.035,0.18,10),HA,head,x,-0.06,0.04); });
-    // long braid down the back
-    var braid=new THREE.Group(); braid.position.set(0,-0.08,-0.1); head.add(braid);
-    [0,1,2,3].forEach(function(s){ mesh(new THREE.SphereGeometry(0.05-s*0.007,12,10),HA,braid,0,-s*0.13,0); });
-    mesh(new THREE.ConeGeometry(0.025,0.1,8),M(0xc41040,0.5),braid,0,-0.5,0); // paranda tassel
-    // maang-tikka (forehead jewel)
-    mesh(new THREE.SphereGeometry(0.014,8,8),GO,head,0,0.14,0.06);
-    mesh(capsule(0.004,0.06,6),GO,head,0,0.105,0.085);
-    // earrings (jhumka)
-    [-0.118,0.118].forEach(function(x){ mesh(new THREE.SphereGeometry(0.016,8,8),GO,head,x,-0.05,0.01); mesh(new THREE.ConeGeometry(0.022,0.03,8),GO,head,x,-0.078,0.01,PI,0,0); });
-    // nose ring (nath)
-    mesh(new THREE.TorusGeometry(0.022,0.004,6,16),GO,head,-0.03,-0.04,0.1,0,0.4,0);
-
-    // ── Necklace (haar) layered ──
-    for(var a=0;a<13;a++){ var ang=(a-6)/6*0.95; mesh(new THREE.SphereGeometry(0.013,8,8),GO,null,Math.sin(ang)*0.12,1.46-Math.abs(ang)*0.03,Math.cos(ang)*0.1+0.02); }
-    mesh(new THREE.SphereGeometry(0.022,10,8),GEM,null,0,1.36,0.14); // pendant
-
-    // ════ ARMS — fully jointed: shoulder→upper→elbow→forearm→wrist→hand ════
-    function buildArm(side){
-      // shoulder pivot
-      var g=new THREE.Group(); g.position.set(0.145*side,1.42,0); root.add(g);
-      // deltoid / shoulder cap (fills the gap to torso)
-      mesh(new THREE.SphereGeometry(0.058,14,12),RO,g,0,0,0);
-      // UPPER ARM (sleeve) — top of capsule sits right at shoulder
-      mesh(capsule(0.044,0.18,14),RO,g,0,-0.13,0);
-      mesh(new THREE.TorusGeometry(0.046,0.006,6,16),GEM,g,0,-0.22,0,PI/2,0,0); // bajuband
-      // ELBOW joint sphere (no gap)
-      mesh(new THREE.SphereGeometry(0.042,12,10),SK,g,0,-0.25,0);
-
-      // FOREARM subgroup — pivots at elbow so it can bend
-      var fore=new THREE.Group(); fore.position.set(0,-0.25,0); g.add(fore);
-      mesh(capsule(0.038,0.17,14),SK,fore,0,-0.11,0);          // forearm
-      // wrist
-      mesh(new THREE.SphereGeometry(0.034,12,10),SK,fore,0,-0.21,0);
-      // bangles (choodiyan) stacked on wrist
-      [0,1,2,3,4].forEach(function(b){ mesh(new THREE.TorusGeometry(0.039,0.006,6,16),(b%2?GEM:GO),fore,0,-0.18-b*0.015,0,PI/2,0,0); });
-      // PALM
-      mesh(new THREE.SphereGeometry(0.04,12,10),SK,fore,0,-0.26,0.005,0,0,0,1,1.05,0.6);
-      // mehndi dot on palm
-      mesh(new THREE.CircleGeometry(0.014,10),M(0x8a2010,0.6),fore,0,-0.27,0.03,-0.3,0,0);
-      // FINGERS (4 + thumb), each slightly bent
-      for(var f=0;f<4;f++){
-        mesh(capsule(0.0085,0.055,6),SK,fore,(f-1.5)*0.018,-0.31,0.01,0.25,0,0);
-        mesh(new THREE.SphereGeometry(0.008,6,6),SK,fore,(f-1.5)*0.018,-0.345,0.025); // fingertip nail
-      }
-      mesh(capsule(0.009,0.04,6),SK,fore,0.038*side*-1,-0.285,0.02,0.2,0,0.5); // thumb
-      return {g:g,fore:fore};
-    }
-    var armL=buildArm(-1), armR=buildArm(1);
-
-    // ════ LEGS (peek under ghagra) — jointed ════
-    [-0.09,0.09].forEach(function(x){
-      mesh(capsule(0.05,0.14,10),SK,null,x,0.18,0.02);          // shin
-      mesh(new THREE.SphereGeometry(0.04,10,8),SK,null,x,0.07,0.02); // ankle
-      mesh(capsule(0.04,0.08,8),SK,null,x,0.035,0.07,PI/2.2,0,0);    // foot
-      mesh(new THREE.TorusGeometry(0.042,0.005,6,16),GO,null,x,0.055,0.02); // payal (anklet)
-      // toe rings
-      mesh(new THREE.TorusGeometry(0.012,0.003,5,12),GO,null,x,0.025,0.11);
-    });
-
-    // ── Floor ring ──
-    var fring=mesh(new THREE.TorusGeometry(0.9,0.02,8,48),M(0x917aff,0.3,0.2,0x4030a0,0.6),null,0,0.01,0,PI/2,0,0);
-    mesh(new THREE.CircleGeometry(0.85,40),FL,null,0,0,0,-PI/2,0,0);
-
-    // ── Particles ──
-    var pg=new THREE.BufferGeometry(), N=200, pos=new Float32Array(N*3);
-    for(var i=0;i<N*3;i+=3){ pos[i]=(Math.random()-0.5)*6; pos[i+1]=Math.random()*4-1; pos[i+2]=(Math.random()-0.5)*6; }
-    pg.setAttribute('position',new THREE.BufferAttribute(pos,3));
-    scene.add(new THREE.Points(pg,new THREE.PointsMaterial({color:0x917aff,size:0.02,transparent:true,opacity:0.5})));
-
-    // ── Poses (arms hang down from shoulders; +X forward, Z inward) ──
-    // armLZ: left arm tuck-in, armRZ: right arm tuck-in (mirrored), armX: raise forward
-    // elb = elbow bend (forearm forward)
-    var POSES={
-      idle:   {armZ:0.06,armX:0.0, elb:0.25, by:0.0, bp:0,    hp:0},
-      sit:    {armZ:0.10,armX:0.30,elb:0.55, by:-0.32,bp:0.04,hp:0.04},
-      stand:  {armZ:0.04,armX:0.0, elb:0.15, by:0.03,bp:0,    hp:-0.04},
-      clap:   {armZ:0.40,armX:0.85,elb:1.15, by:0.0, bp:0.03,hp:0.08},
-      pranaam:{armZ:0.48,armX:0.75,elb:1.35, by:-0.04,bp:0.14,hp:0.2}
-    };
-    var pose='idle', tgt=POSES.idle, cur={armZ:0.06,armX:0,elb:0.25,by:0,bp:0,hp:0};
-    window.setPose=function(p,el){
-      pose=p; tgt=POSES[p];
-      document.querySelectorAll('.btn').forEach(function(b){b.classList.remove('on');});
-      if(el) el.classList.add('on');
-    };
-
-    // ── Orbit controls ──
-    var sph={r:3.9,th:0,ph:1.3}, drag=false, px,py;
-    var dom=renderer.domElement;
-    dom.addEventListener('mousedown',function(e){drag=true;px=e.clientX;py=e.clientY;});
-    window.addEventListener('mouseup',function(){drag=false;});
-    window.addEventListener('mousemove',function(e){
-      if(!drag)return; sph.th-=(e.clientX-px)*0.008; sph.ph=Math.max(0.4,Math.min(2.4,sph.ph-(e.clientY-py)*0.006)); px=e.clientX;py=e.clientY;
-    });
-    dom.addEventListener('wheel',function(e){ sph.r=Math.max(2,Math.min(7,sph.r+e.deltaY*0.002)); e.preventDefault(); },{passive:false});
-    dom.addEventListener('touchstart',function(e){drag=true;px=e.touches[0].clientX;py=e.touches[0].clientY;});
-    dom.addEventListener('touchend',function(){drag=false;});
-    dom.addEventListener('touchmove',function(e){
-      if(!drag)return; sph.th-=(e.touches[0].clientX-px)*0.008; sph.ph=Math.max(0.4,Math.min(2.4,sph.ph-(e.touches[0].clientY-py)*0.006)); px=e.touches[0].clientX;py=e.touches[0].clientY; e.preventDefault();
-    },{passive:false});
-
-    // ── Animate ──
-    var t=0;
-    function animate(){
-      requestAnimationFrame(animate);
-      t+=0.016;
-      var k=0.09;
-      for(var key in cur){ cur[key]+=(tgt[key]-cur[key])*k; }
-
-      var clapOff=0;
-      if(pose==='clap'){ clapOff=Math.abs(Math.sin(t*6))*0.16; }
-      // shoulder
-      armL.g.rotation.z=cur.armZ+clapOff;     // left tucks toward centre (+z)
-      armR.g.rotation.z=-(cur.armZ+clapOff);  // right mirrored
-      armL.g.rotation.x=cur.armX;
-      armR.g.rotation.x=cur.armX;
-      // elbow bend (forearm forward, toward centre on clap)
-      armL.fore.rotation.x=cur.elb;
-      armR.fore.rotation.x=cur.elb;
-
-      head.position.y=1.66+cur.by+Math.sin(t*0.65)*0.01;
-      head.rotation.x=cur.hp;
-      root.position.y=cur.by+Math.sin(t*0.6)*0.006;
-      root.rotation.y=Math.sin(t*0.28)*0.04;
-      fring.material.emissiveIntensity=0.45+Math.sin(t*2)*0.25;
-
-      var pa=pg.attributes.position.array;
-      for(var i=1;i<N*3;i+=3){ pa[i]+=0.004; if(pa[i]>3) pa[i]=-1; }
-      pg.attributes.position.needsUpdate=true;
-
-      camera.position.set(
-        sph.r*Math.sin(sph.ph)*Math.sin(sph.th),
-        sph.r*Math.cos(sph.ph)+1.1,
-        sph.r*Math.sin(sph.ph)*Math.cos(sph.th)
-      );
-      camera.lookAt(0,1.1,0);
-      renderer.render(scene,camera);
-    }
-    animate();
-
-    window.addEventListener('resize',function(){
-      camera.aspect=window.innerWidth/window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth,window.innerHeight);
+  /* ── Materials ── */
+  function skin(c,r){
+    return new THREE.MeshPhysicalMaterial({
+      color:c||0xc48050,roughness:r!=null?r:.65,metalness:0,
+      sheen:.35,sheenColor:new THREE.Color(0xff9060),
+      clearcoat:.08,clearcoatRoughness:.6
     });
   }
+  var SK=skin(0xc47848,.62);
+  var SKD=skin(0xa85e35,.7);   // darker (ears, ankles)
+  var LIP=new THREE.MeshPhysicalMaterial({color:0xb83050,roughness:.4,metalness:0,clearcoat:.4});
+  var EYE_W=new THREE.MeshPhysicalMaterial({color:0xf5ede0,roughness:.2,clearcoat:.8});
+  var IRIS=new THREE.MeshPhysicalMaterial({color:0x1a0c08,roughness:.1,metalness:.05});
+  var HAIR=new THREE.MeshPhysicalMaterial({color:0x0e0804,roughness:.75,metalness:.05});
+  var HAIR2=new THREE.MeshStandardMaterial({color:0x1a0e09,roughness:.8});
 
-  tryLoad(0);
-})();
+  /* lehenga (deep magenta/maroon) */
+  var LEH=new THREE.MeshPhysicalMaterial({color:0x8a0a2a,roughness:.75,metalness:.02,side:THREE.DoubleSide});
+  var LEH2=new THREE.MeshPhysicalMaterial({color:0xa0102e,roughness:.7,metalness:.02});
+  var CHOLI=new THREE.MeshPhysicalMaterial({color:0x6a0822,roughness:.7,metalness:.02});
+  /* gold */
+  var GOLD=new THREE.MeshPhysicalMaterial({color:0xd4920a,roughness:.18,metalness:.92,clearcoat:.5});
+  var GOLD2=new THREE.MeshPhysicalMaterial({color:0xe8aa20,roughness:.12,metalness:.95});
+  var GEM=new THREE.MeshPhysicalMaterial({color:0x5830aa,roughness:.05,metalness:.2,transparent:true,opacity:.9,clearcoat:1});
+  var BINDI=new THREE.MeshPhysicalMaterial({color:0xdd1020,roughness:.2,metalness:.1,emissive:new THREE.Color(0x880010),emissiveIntensity:.4});
+  var FL=new THREE.MeshStandardMaterial({color:0x100820,roughness:.95});
+  var SHADOW=new THREE.MeshStandardMaterial({color:0x180828,roughness:1,transparent:true,opacity:.4});
+
+  /* helper: add mesh to parent */
+  function mk(geo,mat,par,x,y,z,rx,ry,rz,sx,sy,sz){
+    var m=new THREE.Mesh(geo,mat);
+    m.position.set(x||0,y||0,z||0);
+    if(rx||ry||rz)m.rotation.set(rx||0,ry||0,rz||0);
+    if(sx!=null)m.scale.set(sx,sy!=null?sy:sx,sz!=null?sz:sx);
+    m.castShadow=true;m.receiveShadow=true;
+    (par||scene).add(m);return m;
+  }
+  function cyl(rt,rb,h,s){return new THREE.CylinderGeometry(rt,rb,h,s||20)}
+  function sph(r,w,h){return new THREE.SphereGeometry(r,w||20,h||16)}
+  function box(w,h,d){return new THREE.BoxGeometry(w,h,d)}
+
+  /* ── ROOT group (whole body shifts for poses) ── */
+  var body=new THREE.Group();scene.add(body);
+
+  /* ════ FEET & LEGS ════ */
+  [-1,1].forEach(function(s){
+    var foot=mk(cyl(.036,.04,.2,14),SK,body,s*.072,.1,.04,PI/2,0,0);
+    mk(sph(.04,12,10),SK,body,s*.072,.2,.06);          // ankle
+    mk(new THREE.TorusGeometry(.04,.005,8,24),GOLD,body,s*.072,.2,.06,PI/2,0,0); // payal
+    mk(sph(.018,8,8),GOLD,body,s*.072,.195,.098);      // payal bead
+    mk(cyl(.048,.055,.52,16),SK,body,s*.078,.52,.0);   // shin
+    mk(sph(.054,14,12),SK,body,s*.078,.78,0);          // knee
+    mk(cyl(.052,.048,.48,16),SK,body,s*.074,1.02,0);   // thigh
+  });
+
+  /* ════ PELVIS / HIPS ════ */
+  mk(sph(.135,18,14),SK,body,0,.95,0,0,0,0,1.35,.8,1.08);
+
+  /* ════ LEHENGA (layered skirt — realistic flare) ════ */
+  // inner layer
+  mk(cyl(.17,.44,1.08,32),LEH,body,0,.42,0);
+  // outer flare (wider, slightly transparent)
+  var outLeh=mk(cyl(.22,.52,1.06,40),new THREE.MeshPhysicalMaterial({color:0x9a0f2f,roughness:.68,metalness:.01,side:THREE.DoubleSide,transparent:true,opacity:.92}),body,0,.42,0);
+  // hem gold border
+  mk(new THREE.TorusGeometry(.508,.014,8,60),GOLD,body,0,-.12,0,PI/2,0,0);
+  // pleats / gota patti (gold stripes around hem)
+  for(var p=0;p<20;p++){
+    var pa=p/20*PI*2;
+    mk(new THREE.PlaneGeometry(.04,.08),GOLD,body,Math.sin(pa)*.5,-.06,Math.cos(pa)*.5,0,-pa,0);
+  }
+  // waist band
+  mk(new THREE.TorusGeometry(.175,.014,8,40),GOLD,body,0,.96,0,PI/2,0,0);
+  // kamarbandh (waist chain)
+  mk(new THREE.TorusGeometry(.172,.006,6,40),GOLD2,body,0,.93,0,PI/2,0,0);
+  for(var k=0;k<8;k++){
+    var ka=k/8*PI*2;
+    mk(sph(.01,6,6),GEM,body,Math.sin(ka)*.172,.93,Math.cos(ka)*.172);
+  }
+
+  /* ════ TORSO / CHOLI ════ */
+  mk(cyl(.115,.13,.42,20),CHOLI,body,0,1.18,0);        // waist→ribs
+  mk(sph(.14,20,16),CHOLI,body,0,1.4,0,0,0,0,1.08,.78,1); // chest
+  // bust curves (feminine shape)
+  [-1,1].forEach(function(s){
+    mk(sph(.07,14,12),CHOLI,body,s*.065,1.36,.07,0,0,0,1,.88,.95);
+  });
+  // choli back
+  mk(cyl(.115,.12,.38,20),CHOLI,body,0,1.17,.01);
+  // odhni / dupatta over shoulder (draped cloth hint)
+  var odh=mk(new THREE.PlaneGeometry(.28,.72),new THREE.MeshPhysicalMaterial({color:0xffcc44,roughness:.8,metalness:.02,side:THREE.DoubleSide,transparent:true,opacity:.82}),body,-.12,1.38,.04,-.3,.3,.1);
+
+  /* ════ NECK ════ */
+  mk(cyl(.048,.056,.12,16),SK,body,0,1.56,0);
+  // neck chain (mangalsutra hint)
+  mk(new THREE.TorusGeometry(.052,.004,6,20),GOLD,body,0,1.58,0,PI/2,0,0);
+
+  /* ════ HEAD (detailed face sculpt) ════ */
+  var head=new THREE.Group();head.position.set(0,1.72,0);body.add(head);
+
+  // skull base
+  mk(sph(.122,28,24),SK,head,0,.01,0,0,0,0,.95,1.08,.98);
+  // jaw / lower face
+  mk(sph(.09,20,16),SK,head,0,-.07,.01,0,0,0,.9,.8,.85);
+  // cheekbones (subtle puff)
+  [-1,1].forEach(function(s){
+    mk(sph(.055,14,12),SK,head,s*.072,-.01,.04,0,0,0,1,.65,.85);
+  });
+  // forehead shape
+  mk(sph(.1,20,16),SK,head,0,.06,-.01,0,0,0,.88,.75,.78);
+  // chin (soft, feminine)
+  mk(sph(.032,12,10),SK,head,0,-.13,.04,0,0,0,.9,.7,.8);
+
+  // ── EYES (almond-shaped) ──
+  [-1,1].forEach(function(s){
+    var ex=s*.044;
+    // eye socket indent
+    mk(sph(.032,12,10),skin(0xb86a40,.7),head,ex,.016,.092,0,0,0,1,.7,.7);
+    // eyeball
+    mk(sph(.028,16,14),EYE_W,head,ex,.016,.105,0,0,0,1,.65,.55);
+    // iris
+    mk(sph(.016,12,10),IRIS,head,ex,.016,.126);
+    // pupil
+    mk(sph(.009,10,8),new THREE.MeshStandardMaterial({color:0x000000}),head,ex,.016,.133);
+    // eye glint
+    mk(sph(.005,8,8),new THREE.MeshPhysicalMaterial({color:0xffffff,clearcoat:1,roughness:.1}),head,ex+.006,.022,.134);
+    // upper eyelid (slight fold)
+    mk(new THREE.TorusGeometry(.026,.006,6,20),new THREE.MeshPhysicalMaterial({color:0x8a3030,roughness:.5}),head,ex,.024,.112,-.3,0,0,.9,1,1);
+    // kajal / eyeliner
+    mk(sph(.005,8,6),new THREE.MeshStandardMaterial({color:0x050205}),head,ex+s*.01,.01,.11,0,0,0,3,.5,1);
+    // eyebrow (thick, arched Indian style)
+    for(var b=0;b<5;b++){
+      var ba=((b-2)/2)*.35;
+      mk(sph(.006,8,6),HAIR,head,ex+ba*s,.065+Math.abs(ba)*.02,.098+ba*ba*.01);
+    }
+  });
+
+  // ── NOSE (sharp bridge, wide at base) ──
+  mk(cyl(.008,.014,.045,10),SK,head,0,-.008,.115,.3,0,0); // bridge
+  mk(sph(.018,12,10),SK,head,0,-.044,.118,0,0,0,.9,.8,.85); // tip
+  [-1,1].forEach(function(s){
+    mk(sph(.014,10,8),SK,head,s*.016,-.05,.114,0,0,0,1,.75,.8); // nostrils
+  });
+  // nose ring (nath)
+  mk(new THREE.TorusGeometry(.022,.0038,8,20),GOLD,head,-.03,-.05,.108,-.1,.5,.1);
+  mk(sph(.009,8,8),GEM,head,-.048,-.055,.108); // nath gem
+
+  // ── LIPS (fuller, defined cupid's bow) ──
+  mk(sph(.028,14,12),LIP,head,0,-.082,.116,0,0,0,1.4,.45,.8); // upper lip
+  mk(sph(.024,14,12),LIP,head,0,-.096,.116,0,0,0,1.4,.55,.85); // lower lip
+  mk(sph(.01,8,8),LIP,head,0,-.088,.122,0,0,0,3,.2,1); // lip line
+  // cupid's bow dips
+  [-1,1].forEach(function(s){mk(sph(.01,8,8),LIP,head,s*.012,-.078,.12,0,0,0,1,.6,1)});
+
+  // ── EARS ──
+  [-1,1].forEach(function(s){
+    mk(sph(.028,12,10),SKD,head,s*.118,-.008,0,0,0,0,.6,1,.7);
+    // jhumka earring (dangling)
+    mk(new THREE.TorusGeometry(.018,.004,8,20),GOLD,head,s*.118,-.022,0,PI*.4,0,0);
+    mk(sph(.024,10,10),GOLD,head,s*.118,-.048,.002,0,0,0,1,1.3,1);
+    mk(new THREE.ConeGeometry(.014,.032,8),GOLD,head,s*.118,-.068,0,PI,0,0);
+    mk(sph(.009,8,8),GEM,head,s*.118,-.05,.018);
+  });
+
+  // ── BLUSH ──
+  [-1,1].forEach(function(s){
+    mk(sph(.04,12,10),new THREE.MeshPhysicalMaterial({color:0xd06050,roughness:.9,transparent:true,opacity:.22}),head,s*.065,-.015,.1);
+  });
+
+  // ── BINDI ──
+  mk(new THREE.CircleGeometry(.012,16),BINDI,head,0,.075,.122);
+  mk(sph(.006,8,8),new THREE.MeshPhysicalMaterial({color:0xff2030,emissive:new THREE.Color(0xaa0010),emissiveIntensity:.5,roughness:.2}),head,0,.075,.124);
+
+  // ── HAIR (parted, long, braid) ──
+  mk(sph(.136,28,22),HAIR,head,0,.02,-.008,0,0,0,.97,1.06,1); // main scalp
+  mk(sph(.1,20,16),HAIR,head,0,.04,.06,0,0,0,1,.8,.7);  // front hair
+  [-1,1].forEach(function(s){
+    mk(sph(.08,16,14),HAIR,head,s*.1,-.04,.02,0,0,0,1,.9,1.1); // side hair
+    mk(cyl(.03,.025,.3,12),HAIR,head,s*.095,-.24,-.02,0,0,s*.12); // loose strands
+  });
+  // parting line
+  mk(new THREE.PlaneGeometry(.005,.2),new THREE.MeshStandardMaterial({color:0xc0784a}),head,0,.13,.085,-.2,0,0);
+  // long braid
+  var braid=new THREE.Group();braid.position.set(.02,-.18,-.1);head.add(braid);
+  for(var bi=0;bi<7;bi++){
+    mk(sph(.045-bi*.003,12,10),HAIR,braid,Math.sin(bi*.4)*.012,-(bi*.11),0);
+    if(bi%2===0)mk(new THREE.TorusGeometry(.042-.002*bi,.006,6,16),GOLD,braid,0,-(bi*.11),0,PI/2,0,0);
+  }
+  mk(new THREE.ConeGeometry(.022,.055,10),new THREE.MeshStandardMaterial({color:0xcc1040,roughness:.5}),braid,0,-.78,0,PI,0,0); // paranda tassel
+
+  // maang tikka
+  mk(sph(.012,10,10),GOLD,head,0,.145,.062);
+  mk(cyl(.003,.003,.06,8),GOLD,head,0,.114,.085,-.35,0,0);
+  mk(sph(.016,10,10),GEM,head,0,.092,.1);
+
+  // ── NECKLACE (layered haar) ──
+  for(var ni=0;ni<2;ni++){
+    var nr=.095+ni*.025;
+    for(var na=0;na<14;na++){
+      var a2=((na-6.5)/6.5)*.85;
+      var gx=Math.sin(a2)*nr, gy=1.48-ni*.04-Math.abs(a2)*.06, gz=Math.cos(a2)*nr;
+      mk(sph(.009+ni*.002,8,8),ni===0?GOLD:GEM,body,gx,gy,gz);
+    }
+  }
+  mk(sph(.02,10,10),GEM,body,0,1.37,.1);  // pendant gem
+  mk(sph(.015,8,8),GOLD,body,.016,1.36,.1);mk(sph(.015,8,8),GOLD,body,-.016,1.36,.1);
+
+  /* ════ ARMS — 4-segment bone chain ════
+     shoulder cap → upper arm → elbow → forearm → wrist → palm → fingers
+  ── each segment is a child of previous = proper joint rotation */
+  function makeArm(side){
+    // shoulder joint group (pivot at shoulder socket)
+    var sh=new THREE.Group();
+    sh.position.set(side*.148,1.44,-.008);
+    body.add(sh);
+
+    // shoulder cap (plugs torso gap)
+    mk(sph(.058,16,14),CHOLI,sh,0,0,0);
+
+    // upper arm — pivot = shoulder
+    var ua=new THREE.Group();ua.position.set(0,0,0);sh.add(ua);
+    mk(cyl(.044,.04,.26,18),CHOLI,ua,0,-.14,0); // sleeve
+    mk(sph(.042,14,12),SK,ua,0,-.28,0);           // elbow sphere
+
+    // forearm — pivot = elbow
+    var fa=new THREE.Group();fa.position.set(0,-.28,0);ua.add(fa);
+    mk(cyl(.036,.032,.24,16),SK,fa,0,-.13,0);
+    mk(sph(.034,14,12),SK,fa,0,-.27,0);            // wrist sphere
+    // bangles
+    [0,1,2,3,4].forEach(function(b){
+      mk(new THREE.TorusGeometry(.037,.007,8,24),(b%2?GEM:GOLD),fa,0,-.23-b*.016,0,PI/2,0,0);
+    });
+
+    // hand — pivot = wrist
+    var hnd=new THREE.Group();hnd.position.set(0,-.27,0);fa.add(hnd);
+    mk(sph(.036,16,14),SK,hnd,0,-.02,0,0,0,0,1,.85,.7); // palm
+    mk(new THREE.CircleGeometry(.018,12),new THREE.MeshPhysicalMaterial({color:0x8a2010,roughness:.6,transparent:true,opacity:.5}),hnd,0,-.038,.032,-.4,0,0); // mehndi
+    // thumb
+    var th=new THREE.Group();th.position.set(side*.024,-.03,.02);hnd.add(th);
+    th.rotation.z=side*.7;th.rotation.x=.4;
+    mk(cyl(.009,.008,.04,8),SK,th,0,-.02,0);
+    mk(sph(.009,8,8),SK,th,0,-.044,0);
+    // 4 fingers
+    [-1.5,-.5,.5,1.5].forEach(function(fp,fi){
+      var fg=new THREE.Group();fg.position.set(fp*.014,-.06,.004);hnd.add(fg);
+      fg.rotation.x=.22;
+      // proximal phalanx
+      mk(cyl(.009,.008,.04,8),SK,fg,0,-.02,0);
+      mk(sph(.009,8,8),SK,fg,0,-.044,0);  // mid joint
+      // middle phalanx
+      var mp=new THREE.Group();mp.position.set(0,-.044,0);fg.add(mp);
+      mp.rotation.x=.18;
+      mk(cyl(.008,.007,.032,8),SK,mp,0,-.016,0);
+      mk(sph(.008,8,8),SK,mp,0,-.034,0);
+      // distal (fingertip)
+      var dp=new THREE.Group();dp.position.set(0,-.034,0);mp.add(dp);
+      dp.rotation.x=.1;
+      mk(cyl(.007,.005,.022,8),SK,dp,0,-.011,0);
+      mk(sph(.007,8,8),SK,dp,0,-.024,0);
+      // nail
+      mk(new THREE.PlaneGeometry(.01,.014),new THREE.MeshPhysicalMaterial({color:0xffccbb,clearcoat:.9,roughness:.2}),dp,0,-.024,.007,-.2,0,0);
+    });
+    return {sh:sh,ua:ua,fa:fa,hnd:hnd};
+  }
+  var aL=makeArm(-1), aR=makeArm(1);
+
+  /* ════ FLOOR ════ */
+  mk(cyl(.85,.9,.02,60),FL,null,0,-.01,0);
+  mk(new THREE.TorusGeometry(.88,.015,8,80),new THREE.MeshPhysicalMaterial({color:0xd4920a,roughness:.2,metalness:.9,emissive:new THREE.Color(0x5a3800),emissiveIntensity:.4}),null,0,0,0,PI/2,0,0);
+  mk(new THREE.CircleGeometry(.85,60),SHADOW,null,0,.005,0,-PI/2,0,0);
+
+  /* ── Particles ── */
+  var pGeo=new THREE.BufferGeometry(),NP=250,pArr=new Float32Array(NP*3);
+  for(var i=0;i<NP*3;i+=3){pArr[i]=(Math.random()-.5)*8;pArr[i+1]=Math.random()*5-1;pArr[i+2]=(Math.random()-.5)*8;}
+  pGeo.setAttribute('position',new THREE.BufferAttribute(pArr,3));
+  var pts=new THREE.Points(pGeo,new THREE.PointsMaterial({color:0x917aff,size:.022,transparent:true,opacity:.45}));
+  scene.add(pts);
+
+  /* ════ POSE SYSTEM ════
+     Each pose: {shZ=shoulder lean, uaX=upper arm forward, faX=elbow bend,
+                 by=body offset, bp=body pitch, hp=head pitch}
+  */
+  var POSES={
+    idle:   {shZ:.05, uaX:.0,  faX:.28, danceOff:0, by:0,   bp:0,   hp:0},
+    clap:   {shZ:.42, uaX:.75, faX:1.1, danceOff:0, by:0,   bp:.03, hp:.08},
+    dance:  {shZ:.15, uaX:.35, faX:.5,  danceOff:1, by:0,   bp:.04, hp:.06},
+    pranaam:{shZ:.45, uaX:.6,  faX:1.3, danceOff:0, by:-.03,bp:.12, hp:.18},
+    sit:    {shZ:.08, uaX:.25, faX:.6,  danceOff:0, by:-.3, bp:.04, hp:.04}
+  };
+  var pose='idle', tgt=JSON.parse(JSON.stringify(POSES.idle));
+  var cur=JSON.parse(JSON.stringify(POSES.idle));
+  window.setPose=function(p,el){
+    pose=p;tgt=JSON.parse(JSON.stringify(POSES[p]));
+    document.querySelectorAll('.btn').forEach(function(b){b.classList.remove('on')});
+    if(el)el.classList.add('on');
+  };
+
+  /* ── Orbit ── */
+  var sph2={r:2.8,th:0,ph:1.25},drag=false,ox,oy;
+  var cv=renderer.domElement;
+  cv.addEventListener('mousedown',function(e){drag=true;ox=e.clientX;oy=e.clientY});
+  window.addEventListener('mouseup',function(){drag=false});
+  window.addEventListener('mousemove',function(e){
+    if(!drag)return;
+    sph2.th-=(e.clientX-ox)*.007;
+    sph2.ph=Math.max(.3,Math.min(2.2,sph2.ph-(e.clientY-oy)*.006));
+    ox=e.clientX;oy=e.clientY;
+  });
+  cv.addEventListener('wheel',function(e){sph2.r=Math.max(1.2,Math.min(6,sph2.r+e.deltaY*.002));e.preventDefault()},{passive:false});
+  var tp2=null;
+  cv.addEventListener('touchstart',function(e){drag=true;ox=e.touches[0].clientX;oy=e.touches[0].clientY;tp2=null});
+  cv.addEventListener('touchend',function(){drag=false;tp2=null});
+  cv.addEventListener('touchmove',function(e){
+    if(e.touches.length===2){
+      var d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
+      if(tp2)sph2.r=Math.max(1.2,Math.min(6,sph2.r-(d-tp2)*.003));tp2=d;return;
+    }
+    if(!drag)return;
+    sph2.th-=(e.touches[0].clientX-ox)*.007;
+    sph2.ph=Math.max(.3,Math.min(2.2,sph2.ph-(e.touches[0].clientY-oy)*.006));
+    ox=e.touches[0].clientX;oy=e.touches[0].clientY;e.preventDefault();
+  },{passive:false});
+
+  /* ── Animate ── */
+  var t=0;
+  var clock=typeof THREE.Clock!=='undefined'?new THREE.Clock():null;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=.016;
+    var k=.08;
+    for(var key in cur){if(tgt[key]!=null)cur[key]+=(tgt[key]-cur[key])*k;}
+
+    var clapW=pose==='clap'?Math.abs(Math.sin(t*7))*.15:0;
+    var danceW=cur.danceOff;
+
+    // shoulder
+    aL.sh.rotation.z= cur.shZ+clapW+Math.sin(t*.9)*danceW*.18;
+    aR.sh.rotation.z=-(cur.shZ+clapW+Math.sin(t*.9+PI)*danceW*.18);
+    // upper arm
+    aL.ua.rotation.x=cur.uaX;
+    aR.ua.rotation.x=cur.uaX;
+    // elbow
+    aL.fa.rotation.x=cur.faX;
+    aR.fa.rotation.x=cur.faX;
+    // wrist twist (idle natural droop)
+    aL.hnd.rotation.z= .12+Math.sin(t*.8)*.04;
+    aR.hnd.rotation.z=-.12+Math.sin(t*.8+1)*.04;
+
+    // dance sway
+    body.rotation.z=Math.sin(t*.9)*danceW*.06;
+    body.rotation.y+=.0002+danceW*.004;
+
+    head.position.y=1.72+cur.by+Math.sin(t*.6)*.009;
+    head.rotation.x=cur.hp+Math.sin(t*.5)*.008;
+    body.position.y=cur.by+Math.sin(t*.55)*.007;
+
+    // particles drift up
+    var pa=pGeo.attributes.position.array;
+    for(var i=1;i<NP*3;i+=3){pa[i]+=.003;if(pa[i]>4)pa[i]=-1;}
+    pGeo.attributes.position.needsUpdate=true;
+
+    // camera orbit
+    camera.position.set(
+      sph2.r*Math.sin(sph2.ph)*Math.sin(sph2.th),
+      sph2.r*Math.cos(sph2.ph)+1.3,
+      sph2.r*Math.sin(sph2.ph)*Math.cos(sph2.th)
+    );
+    camera.lookAt(0,1.2,0);
+    renderer.render(scene,camera);
+  }
+  animate();
+
+  window.addEventListener('resize',function(){
+    camera.aspect=window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth,window.innerHeight);
+  });
+}
+
+loadCDN(0);
 </script>
-
-<div id="controls">
-  <button class="btn on" onclick="setPose('idle',this)">Idle</button>
-  <button class="btn" onclick="setPose('sit',this)">Sit</button>
-  <button class="btn" onclick="setPose('stand',this)">Stand</button>
-  <button class="btn" onclick="setPose('clap',this)">Clap</button>
-  <button class="btn" onclick="setPose('pranaam',this)">Pranaam</button>
-</div>
 </body>
 </html>
