@@ -17,28 +17,28 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #faf8f3;
-      --surface: #ffffff;
-      --surface2: #f3efe7;
-      --line: #e8e2d5;
-      --accent: #7c5ff0;
-      --accent2: #00c4be;
+      --bg: #100e22;
+      --surface: #17152e;
+      --surface2: #1e1b3a;
+      --line: #2a2748;
+      --accent: #917aff;
+      --accent2: #00e8df;
       --light-bg: #f5f2ee;
       --light-surface: #ffffff;
       --light-text: #1a1a2e;
-      --accent3: #e8567a;
-      --gold: #d4920a;
-      --neon: #9b6dde;
-      --text: #1a1530;
-      --muted: #8a7e6e;
-      --dim: #c8bfaf;
+      --accent3: #ff6b9d;
+      --gold: #f5b800;
+      --neon: #c084fc;
+      --text: #f0eeff;
+      --muted: #8880b0;
+      --dim: #3e3a60;
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
 
     body {
-      background: #faf8f3;
+      background: linear-gradient(180deg,#100e22 0%,#0e0c1e 50%,#130f28 100%);
       color: var(--text);
       font-family: 'Inter', sans-serif;
       overflow-x: hidden;
@@ -50,15 +50,15 @@
       position: fixed; top: 0; width: 100%; z-index: 100;
       display: flex; justify-content: space-between; align-items: center;
       padding: 1.3rem 3rem;
-      background: rgba(250,248,243,0.96);
+      background: rgba(16,14,34,0.92);
       backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--line);
+      border-bottom: 1px solid rgba(145,122,255,0.2);
     }
     .logo { font-family: 'Space Mono', monospace; font-size: 1rem; color: var(--text); letter-spacing: -0.5px; font-weight: 700; }
     .logo em { color: var(--accent); font-style: normal; }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-links a { color: #9a9080; text-decoration: none; font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--accent); }
+    .nav-links a { color: #6060a0; text-decoration: none; font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
 
     /* HERO */
     .hero {
@@ -69,16 +69,17 @@
     }
     .hero-grid {
       position: absolute; inset: 0; pointer-events: none;
-      background-image: linear-gradient(rgba(124,95,240,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(124,95,240,0.1) 1px, transparent 1px);
-      background-size: 60px 60px; opacity: 0.8;
+      background-image: linear-gradient(rgba(145,122,255,0.18) 1px, transparent 1px), linear-gradient(90deg, rgba(145,122,255,0.18) 1px, transparent 1px);
+      background-size: 60px 60px; opacity: 0.55;
       mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 80%);
     }
     .hero-glow {
       position: absolute; inset: 0; pointer-events: none;
       background:
-        radial-gradient(ellipse 70% 60% at 50% 0%, rgba(124,95,240,0.12) 0%, transparent 60%),
-        radial-gradient(ellipse 40% 40% at 85% 80%, rgba(0,196,190,0.1) 0%, transparent 50%),
-        radial-gradient(ellipse 35% 35% at 15% 65%, rgba(232,86,122,0.08) 0%, transparent 50%);
+        radial-gradient(ellipse 70% 60% at 50% 0%, rgba(145,122,255,0.35) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 85% 80%, rgba(0,232,223,0.18) 0%, transparent 50%),
+        radial-gradient(ellipse 35% 35% at 15% 65%, rgba(255,107,157,0.12) 0%, transparent 50%),
+        radial-gradient(ellipse 30% 30% at 75% 15%, rgba(192,132,252,0.18) 0%, transparent 50%);
     }
     .hero-inner {
       max-width: 1000px; width: 100%; position: relative; z-index: 1;
@@ -94,11 +95,11 @@
     .hero-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--accent2); }
 
     h1 { font-size: clamp(2.8rem, 6vw, 5.5rem); font-weight: 900; line-height: 0.95; letter-spacing: -3px; margin-bottom: 2rem; }
-    h1 .l1 { display: block; color: #1a1530; }
+    h1 .l1 { display: block; color: var(--text); }
     h1 .l2 { display: block; background: linear-gradient(100deg, var(--accent), var(--neon) 40%, var(--accent2) 70%, var(--accent3)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: drop-shadow(0 0 20px rgba(145,122,255,0.3)); }
 
     .hero-quote {
-      font-size: 0.95rem; color: #9a8e7e; line-height: 1.9; margin-bottom: 2.5rem;
+      font-size: 0.95rem; color: #6060a0; line-height: 1.9; margin-bottom: 2.5rem;
       font-style: italic; max-width: 420px;
       border-left: 2px solid var(--accent); padding-left: 1.2rem; border-left-color: var(--accent2);
     }
@@ -109,7 +110,7 @@
     .btn { padding: 0.8rem 1.8rem; border-radius: 6px; font-size: 0.82rem; font-weight: 700; text-decoration: none; letter-spacing: 0.5px; text-transform: uppercase; transition: all 0.2s; display: inline-block; border: none; cursor: pointer; }
     .btn-primary { background: linear-gradient(135deg, var(--accent), var(--neon)); color: #fff; box-shadow: 0 0 20px rgba(145,122,255,0.4); }
     .btn-primary:hover { background: linear-gradient(135deg, #7a62e8, var(--accent2)); transform: translateY(-2px); box-shadow: 0 10px 35px rgba(145,122,255,0.55); }
-    .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--line); }
+    .btn-ghost { background: transparent; color: #505075; border: 1px solid var(--line); }
     .btn-ghost:hover { border-color: var(--accent2); color: var(--accent2); }
 
     /* GLOBE */
@@ -125,19 +126,19 @@
     .globe-dot:nth-child(5) { top: 40%; left: 75%; background: var(--gold); box-shadow: 0 0 10px var(--gold); }
 
     /* TICKER */
-    .ticker { overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 1rem 0; background: #f0ece3; }
+    .ticker { overflow: hidden; border-top: 1px solid rgba(145,122,255,0.2); border-bottom: 1px solid rgba(145,122,255,0.2); padding: 1rem 0; background: var(--surface); }
     .ticker-inner { display: flex; gap: 4rem; animation: ticker 28s linear infinite; width: max-content; }
-    .ticker-item { white-space: nowrap; font-family: 'Space Mono', monospace; font-size: 0.72rem; color: #9a9080; }
+    .ticker-item { white-space: nowrap; font-family: 'Space Mono', monospace; font-size: 0.72rem; color: #505075; }
     .ticker-item span { color: var(--accent); margin-right: 0.5rem; font-weight: 700; }
     .ticker-item .eq { color: var(--accent2); font-size: 0.8rem; }
 @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     /* FLOATING MATH */
     .math-float {
       position: absolute; pointer-events: none; font-family: 'Space Mono', monospace;
-      color: rgba(124,95,240,0.18); font-size: clamp(0.7rem, 1.5vw, 1rem);
+      color: rgba(145,122,255,0.22); font-size: clamp(0.7rem, 1.5vw, 1rem);
       animation: mathDrift 18s ease-in-out infinite; user-select: none;
     }
-    .math-float:nth-child(odd) { animation-direction: reverse; animation-duration: 22s; color: rgba(0,196,190,0.2); }
+    .math-float:nth-child(odd) { animation-direction: reverse; animation-duration: 22s; color: rgba(0,232,223,0.18); }
     @keyframes mathDrift {
       0%,100% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
       33% { transform: translateY(-18px) rotate(2deg); opacity: 0.5; }
@@ -146,8 +147,8 @@
 
     /* MATH AXIOMS STRIP */
     .math-strip {
-      background: linear-gradient(180deg, #f0ece3 0%, #e8e2d8 50%, #f0ece3 100%);
-      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, var(--bg) 0%, #0e0c20 50%, var(--bg) 100%);
+      border-top: 1px solid rgba(145,122,255,0.2); border-bottom: 1px solid rgba(145,122,255,0.2);
       padding: 4rem 3rem; overflow: hidden; position: relative;
     }
     .math-strip-inner { max-width: 1200px; margin: 0 auto; }
@@ -157,15 +158,15 @@
     @media (max-width: 900px) { .axioms-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 500px) { .axioms-grid { grid-template-columns: 1fr; } }
     .axiom-cell {
-      background: #ffffff; padding: 1.8rem 1.5rem; transition: background 0.25s;
+      background: var(--surface); padding: 1.8rem 1.5rem; transition: background 0.25s;
       display: flex; flex-direction: column; gap: 0.7rem;
     }
-    .axiom-cell:hover { background: #f8f5ef; }
+    .axiom-cell:hover { background: var(--surface2); }
     .axiom-eq { font-family: 'Space Mono', monospace; font-size: 1rem; color: var(--accent); letter-spacing: -0.5px; line-height: 1.3; }
     .axiom-eq .eq-gold { color: var(--gold); }
     .axiom-eq .eq-teal { color: var(--accent2); }
     .axiom-eq .eq-pink { color: var(--accent3); }
-    .axiom-wit { font-size: 0.75rem; color: #9a8e7e; line-height: 1.6; font-style: italic; margin-top: 0.3rem; }
+    .axiom-wit { font-size: 0.75rem; color: var(--muted); line-height: 1.6; font-style: italic; margin-top: 0.3rem; }
     .axiom-tag { font-size: 0.6rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--dim); font-family: 'Space Mono', monospace; }
 
     /* TICKER brighter */
@@ -188,14 +189,14 @@
 
     /* SECTION */
     .section { max-width: 1200px; margin: 0 auto; padding: 7rem 3rem; }
-    .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(145,122,255,0.25); }
+    .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; padding-bottom: 2rem; border-bottom: 1px solid var(--line); }
     .section-label { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--accent2); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 0.8rem; }
     h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; letter-spacing: -1.5px; line-height: 1.05; }
-    .section-count { font-family: 'Space Mono', monospace; font-size: 3.5rem; font-weight: 700; color: #d8d0c8; letter-spacing: -3px; line-height: 1; }
+    .section-count { font-family: 'Space Mono', monospace; font-size: 3.5rem; font-weight: 700; color: var(--dim); letter-spacing: -3px; line-height: 1; }
 
     /* FEATURED */
     .featured-card {
-      background: #ffffff; border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+      background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
       padding: 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
       margin-bottom: 1.5rem; text-decoration: none; color: inherit;
       transition: border-color 0.25s, transform 0.25s; position: relative; overflow: hidden;
@@ -206,22 +207,22 @@
 
     .featured-tag { display: inline-block; padding: 0.3rem 0.9rem; background: rgba(124,106,247,0.15); border: 1px solid rgba(124,106,247,0.3); border-radius: 999px; font-size: 0.68rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; }
     .featured-card h3 { font-size: 1.7rem; font-weight: 900; letter-spacing: -0.8px; line-height: 1.2; margin-bottom: 1rem; }
-    .featured-card p { color: var(--muted); font-size: 0.92rem; line-height: 1.8; margin-bottom: 1.5rem; }
+    .featured-card p { color: #5a5580; font-size: 0.92rem; line-height: 1.8; margin-bottom: 1.5rem; }
     .read-link { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--accent); letter-spacing: 1px; text-transform: uppercase; }
 
-    .feat-visual { width: 100%; aspect-ratio: 4/3; background: #f0ece3; border-radius: 12px; border: 1px solid var(--line); display: grid; place-items: center; overflow: hidden; position: relative; }
+    .feat-visual { width: 100%; aspect-ratio: 4/3; background: var(--surface2); border-radius: 12px; border: 1px solid var(--line); display: grid; place-items: center; overflow: hidden; position: relative; }
     .feat-visual svg { width: 100%; height: 100%; }
 
     /* BLOG GRID */
     .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
     @media (max-width: 900px) { .blog-grid { grid-template-columns: 1fr; } }
 
-    .blog-card { background: #ffffff; border: 1px solid var(--line); border-radius: 12px; padding: 2rem; text-decoration: none; color: inherit; transition: all 0.22s; display: block; position: relative; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-    .blog-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 12px 32px rgba(124,95,240,0.15); }
-    .blog-card-icon { width: 44px; height: 44px; background: #f0ece3; border-radius: 10px; display: grid; place-items: center; font-size: 1.3rem; margin-bottom: 1.2rem; border: 1px solid var(--line); }
+    .blog-card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 2rem; text-decoration: none; color: inherit; transition: all 0.22s; display: block; position: relative; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+    .blog-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.4); }
+    .blog-card-icon { width: 44px; height: 44px; background: var(--surface2); border-radius: 10px; display: grid; place-items: center; font-size: 1.3rem; margin-bottom: 1.2rem; border: 1px solid var(--line); }
     .blog-cat { font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent2); margin-bottom: 0.7rem; }
     .blog-card h3 { font-size: 0.95rem; font-weight: 700; line-height: 1.45; margin-bottom: 0.8rem; letter-spacing: -0.2px; }
-    .blog-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.7; }
+    .blog-card p { font-size: 0.82rem; color: #5a5580; line-height: 1.7; }
     .blog-arrow { margin-top: 1.5rem; font-size: 1rem; color: var(--dim); display: inline-block; transition: color 0.2s, transform 0.2s; }
     .blog-card:hover .blog-arrow { color: var(--accent); transform: translateX(4px); }
 
@@ -229,10 +230,10 @@
     .osho-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; margin-top: 0; }
     @media (max-width: 768px) { .osho-grid { grid-template-columns: 1fr; } }
 
-    .osho-card { background: linear-gradient(135deg, #1a1530 0%, #1e1040 100%); border: 1px solid #2e2858; border-radius: 12px; padding: 2.5rem; position: relative; overflow: hidden; transition: border-color 0.2s; }
+    .osho-card { background: linear-gradient(135deg, var(--surface) 0%, #1a1428 100%); border: 1px solid var(--line); border-radius: 12px; padding: 2.5rem; position: relative; overflow: hidden; transition: border-color 0.2s; }
     .osho-card:hover { border-color: rgba(240,165,0,0.3); }
     .osho-card::after { content: ''; position: absolute; bottom: 0; right: 0; width: 100px; height: 100px; background: radial-gradient(circle, rgba(240,165,0,0.06) 0%, transparent 70%); }
-    .osho-card blockquote { font-size: 1rem; font-style: italic; color: #b0a8c8; line-height: 1.75; margin-bottom: 1rem; }
+    .osho-card blockquote { font-size: 1rem; font-style: italic; color: #7070a0; line-height: 1.75; margin-bottom: 1rem; }
     .osho-card blockquote strong { color: var(--text); font-style: normal; }
     .osho-link { font-size: 0.78rem; color: var(--gold); font-family: 'Space Mono', monospace; letter-spacing: 1px; text-decoration: none; }
     .osho-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); opacity: 0.7; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
@@ -283,247 +284,380 @@
 <body>
 <!-- ENTRY PORTAL -->
 <style>
-  #entry-portal {
-    position: fixed; inset: 0; z-index: 99999;
-    background: #0a0820;
-    display: flex; align-items: center; justify-content: center;
-    overflow: hidden; font-family: 'Inter', sans-serif;
-  }
-  #exit-msg {
-    position: fixed; inset: 0; z-index: 99999;
-    background: #0a0820;
-    display: none; align-items: center; justify-content: center;
-    flex-direction: column; gap: 2rem; text-align: center; padding: 3rem;
-    font-family: 'Space Mono', monospace;
-  }
-  /* 3D rings */
-  .portal-scene {
-    position: absolute; inset: 0; display: flex;
-    align-items: center; justify-content: center;
-    perspective: 900px; pointer-events: none;
-  }
-  .p-ring {
-    position: absolute; border-radius: 50%;
-    border: 1.5px solid; animation: pRingSpin linear infinite;
-    transform-style: preserve-3d;
-  }
-  .p-ring-1 { width: 380px; height: 380px; border-color: rgba(124,95,240,0.5); animation-duration: 9s; transform: rotateX(72deg); }
-  .p-ring-2 { width: 540px; height: 540px; border-color: rgba(0,196,190,0.35); animation-duration: 14s; animation-direction: reverse; transform: rotateX(72deg) rotateZ(60deg); }
-  .p-ring-3 { width: 720px; height: 720px; border-color: rgba(232,86,122,0.2); animation-duration: 22s; transform: rotateX(72deg) rotateZ(120deg); }
-  .p-ring-4 { width: 900px; height: 900px; border-color: rgba(124,95,240,0.12); animation-duration: 32s; animation-direction: reverse; transform: rotateX(72deg) rotateZ(45deg); }
-  @keyframes pRingSpin {
-    from { transform: rotateX(72deg) rotateZ(0deg); }
-    to { transform: rotateX(72deg) rotateZ(360deg); }
-  }
-  /* Override for different base angles */
-  .p-ring-2 { animation: pRingSpin2 14s linear infinite reverse; }
-  .p-ring-3 { animation: pRingSpin3 22s linear infinite; }
-  .p-ring-4 { animation: pRingSpin4 32s linear infinite reverse; }
-  @keyframes pRingSpin2 {
-    from { transform: rotateX(72deg) rotateZ(60deg); }
-    to { transform: rotateX(72deg) rotateZ(420deg); }
-  }
-  @keyframes pRingSpin3 {
-    from { transform: rotateX(72deg) rotateZ(120deg); }
-    to { transform: rotateX(72deg) rotateZ(480deg); }
-  }
-  @keyframes pRingSpin4 {
-    from { transform: rotateX(72deg) rotateZ(45deg); }
-    to { transform: rotateX(72deg) rotateZ(405deg); }
-  }
-  /* central orb */
-  .p-orb {
-    position: absolute; width: 80px; height: 80px; border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, #c084fc, #7c5ff0 50%, #0a0820);
-    box-shadow: 0 0 40px rgba(124,95,240,0.6), 0 0 80px rgba(124,95,240,0.3);
-    animation: orbPulse 3s ease-in-out infinite;
-  }
-  @keyframes orbPulse {
-    0%,100% { transform: scale(1); box-shadow: 0 0 40px rgba(124,95,240,0.6), 0 0 80px rgba(124,95,240,0.3); }
-    50% { transform: scale(1.1); box-shadow: 0 0 60px rgba(124,95,240,0.8), 0 0 120px rgba(124,95,240,0.4); }
-  }
-  /* particles */
-  .p-particle {
-    position: absolute; width: 3px; height: 3px; border-radius: 50%;
-    background: rgba(124,95,240,0.6); animation: pFloat linear infinite;
-  }
-  @keyframes pFloat {
-    0% { transform: translateY(0) translateX(0); opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { transform: translateY(-100vh) translateX(var(--dx,20px)); opacity: 0; }
-  }
-  /* content box */
-  .portal-box {
-    position: relative; z-index: 2; max-width: 560px; width: 90%;
-    background: rgba(10,8,32,0.88); backdrop-filter: blur(24px);
-    border: 1px solid rgba(124,95,240,0.3); border-radius: 20px;
-    padding: 3rem 2.5rem; text-align: center;
-    box-shadow: 0 0 60px rgba(124,95,240,0.15), inset 0 0 60px rgba(124,95,240,0.04);
-  }
-  .portal-eyebrow {
-    font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 4px;
-    color: rgba(0,196,190,0.8); text-transform: uppercase; margin-bottom: 1.5rem;
-  }
-  .portal-title {
-    font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 900; color: #fff;
-    letter-spacing: -1px; margin-bottom: 0.5rem; line-height: 1.1;
-  }
-  .portal-sub {
-    font-size: 0.8rem; color: rgba(255,255,255,0.35); font-family: 'Space Mono', monospace;
-    margin-bottom: 2rem; letter-spacing: 1px;
-  }
-  .portal-disclaimer {
-    background: rgba(124,95,240,0.08); border: 1px solid rgba(124,95,240,0.2);
-    border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; text-align: left;
-  }
-  .portal-disclaimer p {
-    font-size: 0.88rem; color: rgba(255,255,255,0.65); line-height: 1.85;
-    margin: 0;
-  }
-  .portal-disclaimer em {
-    color: rgba(0,196,190,0.9); font-style: normal;
-    font-family: 'Space Mono', monospace; font-size: 0.78rem;
-  }
-  .portal-check-label {
-    display: flex; align-items: flex-start; gap: 0.8rem; cursor: pointer;
-    margin-bottom: 2rem; text-align: left;
-  }
-  .portal-check-label input[type="checkbox"] {
-    width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent, #7c5ff0);
-    cursor: pointer; flex-shrink: 0;
-  }
-  .portal-check-label span {
-    font-size: 0.82rem; color: rgba(255,255,255,0.55); line-height: 1.6;
-  }
-  .portal-btns { display: flex; gap: 1rem; }
-  #enter-btn {
-    flex: 1; padding: 0.9rem; border-radius: 8px; border: none; cursor: pointer;
-    background: linear-gradient(135deg, #7c5ff0, #00c4be);
-    color: #fff; font-weight: 700; font-size: 0.88rem; letter-spacing: 1px;
-    text-transform: uppercase; transition: all 0.2s; opacity: 0.35;
-    font-family: 'Space Mono', monospace;
-  }
-  #enter-btn:not(:disabled) { opacity: 1; box-shadow: 0 0 20px rgba(124,95,240,0.4); }
-  #enter-btn:not(:disabled):hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(124,95,240,0.5); }
-  #exit-btn {
-    flex: 0 0 auto; padding: 0.9rem 1.5rem; border-radius: 8px;
-    border: 1px solid rgba(255,255,255,0.15); cursor: pointer;
-    background: transparent; color: rgba(255,255,255,0.4); font-size: 0.82rem;
-    font-family: 'Space Mono', monospace; transition: all 0.2s;
-  }
-  #exit-btn:hover { border-color: rgba(232,86,122,0.4); color: rgba(232,86,122,0.7); }
-  /* exit screen */
-  #exit-msg .exit-big {
-    font-size: clamp(1rem, 3vw, 1.5rem); color: rgba(255,255,255,0.7);
-    line-height: 1.8; max-width: 500px;
-  }
-  #exit-msg .exit-big strong { color: #fff; }
-  #exit-msg .exit-note {
-    font-size: 0.72rem; color: rgba(124,95,240,0.7);
-    font-family: 'Space Mono', monospace; letter-spacing: 2px;
-  }
-  #exit-back {
-    padding: 0.7rem 2rem; border-radius: 8px; border: 1px solid rgba(124,95,240,0.4);
-    background: transparent; color: rgba(124,95,240,0.8); font-size: 0.78rem;
-    font-family: 'Space Mono', monospace; cursor: pointer; letter-spacing: 1px;
-    transition: all 0.2s;
-  }
-  #exit-back:hover { background: rgba(124,95,240,0.1); color: #c084fc; }
+#ep{position:fixed;inset:0;z-index:99999;background:#07051a;display:flex;align-items:center;justify-content:center;overflow:hidden;font-family:'Inter',sans-serif;}
+#ep-exit{position:fixed;inset:0;z-index:99999;background:#07051a;display:none;align-items:center;justify-content:center;flex-direction:column;gap:2rem;text-align:center;padding:3rem;}
+/* ── 3D BG ── */
+.ep-scene{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;perspective:1000px;pointer-events:none;}
+.ep-ring{position:absolute;border-radius:50%;animation:epSpin linear infinite;}
+.ep-r1{width:320px;height:320px;border:1.5px solid rgba(145,122,255,0.55);animation-duration:9s;transform:rotateX(70deg);}
+.ep-r2{width:500px;height:500px;border:1px solid rgba(0,232,223,0.38);animation-duration:15s;animation-direction:reverse;transform:rotateX(70deg) rotateZ(55deg);}
+.ep-r3{width:700px;height:700px;border:1px solid rgba(255,107,157,0.22);animation-duration:24s;transform:rotateX(70deg) rotateZ(110deg);}
+.ep-r4{width:950px;height:950px;border:1px dashed rgba(145,122,255,0.1);animation-duration:38s;animation-direction:reverse;transform:rotateX(70deg) rotateZ(30deg);}
+.ep-r5{width:220px;height:220px;border:2px solid rgba(192,132,252,0.4);animation-duration:6s;transform:rotateX(20deg);}
+@keyframes epSpin{from{transform:rotateX(70deg) rotateZ(0);}to{transform:rotateX(70deg) rotateZ(360deg);}}
+.ep-r2{animation:epSpin2 15s linear infinite reverse;}
+.ep-r3{animation:epSpin3 24s linear infinite;}
+.ep-r4{animation:epSpin4 38s linear infinite reverse;}
+.ep-r5{animation:epSpin5 6s linear infinite;}
+@keyframes epSpin2{from{transform:rotateX(70deg) rotateZ(55deg);}to{transform:rotateX(70deg) rotateZ(415deg);}}
+@keyframes epSpin3{from{transform:rotateX(70deg) rotateZ(110deg);}to{transform:rotateX(70deg) rotateZ(470deg);}}
+@keyframes epSpin4{from{transform:rotateX(70deg) rotateZ(30deg);}to{transform:rotateX(70deg) rotateZ(390deg);}}
+@keyframes epSpin5{from{transform:rotateX(20deg) rotateZ(0);}to{transform:rotateX(20deg) rotateZ(360deg);}}
+/* grid tunnel */
+.ep-tunnel{position:absolute;inset:0;background:
+  linear-gradient(rgba(145,122,255,0.06) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(145,122,255,0.06) 1px,transparent 1px);
+  background-size:50px 50px;
+  mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,black 10%,transparent 80%);}
+/* nebula blobs */
+.ep-neb{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none;}
+.ep-n1{width:400px;height:400px;background:rgba(145,122,255,0.12);top:-10%;left:-10%;}
+.ep-n2{width:350px;height:350px;background:rgba(0,232,223,0.08);bottom:-5%;right:-5%;}
+.ep-n3{width:300px;height:300px;background:rgba(255,107,157,0.07);top:40%;left:30%;}
+
+/* ── CHARACTER ── */
+.ep-char-wrap{position:relative;width:180px;height:320px;flex-shrink:0;}
+.ep-char-wrap svg{width:100%;height:100%;}
+/* Pose animations */
+#pose-sit{opacity:1;transition:opacity 0.7s;}
+#pose-stand{opacity:0;transition:opacity 0.7s;pointer-events:none;}
+#pose-clap{opacity:0;transition:opacity 0.5s;pointer-events:none;}
+#pose-pran{opacity:0;transition:opacity 0.5s;pointer-events:none;}
+@keyframes charFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+@keyframes robeWave{0%,100%{d:path("M20,180 Q5,230 8,290 Q50,315 90,316 Q130,315 172,290 Q175,230 160,180 Q125,172 90,170 Q55,172 20,180Z");}50%{d:path("M22,180 Q3,235 10,292 Q52,316 90,316 Q128,316 170,292 Q177,235 158,180 Q123,172 90,170 Q57,172 22,180Z");}}
+@keyframes veilSway{0%,100%{transform:translateX(0);}50%{transform:translateX(3px);}}
+@keyframes eyeGlow{0%,100%{opacity:0.5;}50%{opacity:1;}}
+@keyframes clapPop{0%{transform:scale(0);opacity:0;}50%{transform:scale(1.4);opacity:1;}100%{transform:scale(1);opacity:0.8;}}
+.robe-anim{animation:charFloat 4s ease-in-out infinite;}
+.veil-anim{animation:veilSway 3s ease-in-out infinite;}
+.eye-anim{animation:eyeGlow 2.5s ease-in-out infinite;}
+.clap-spark{animation:clapPop 0.4s ease-out forwards;}
+
+/* ── CONTENT BOX ── */
+.ep-box{position:relative;z-index:2;max-width:480px;width:90%;background:rgba(7,5,26,0.9);backdrop-filter:blur(28px);border:1px solid rgba(145,122,255,0.28);border-radius:20px;padding:2.5rem 2rem;text-align:left;box-shadow:0 0 80px rgba(145,122,255,0.1),inset 0 0 40px rgba(145,122,255,0.03);}
+.ep-eyebrow{font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:4px;color:rgba(0,232,223,0.75);text-transform:uppercase;margin-bottom:1rem;}
+.ep-title{font-size:clamp(1.2rem,2.5vw,1.7rem);font-weight:900;color:#fff;letter-spacing:-0.8px;margin-bottom:0.4rem;line-height:1.1;}
+.ep-sub{font-size:0.72rem;color:rgba(255,255,255,0.3);font-family:'Space Mono',monospace;margin-bottom:1.5rem;letter-spacing:1px;}
+.ep-disc{background:rgba(145,122,255,0.07);border:1px solid rgba(145,122,255,0.18);border-radius:10px;padding:1.2rem;margin-bottom:1.5rem;}
+.ep-disc p{font-size:0.83rem;color:rgba(255,255,255,0.6);line-height:1.9;margin:0;}
+.ep-disc em{color:rgba(0,232,223,0.85);font-style:normal;font-family:'Space Mono',monospace;font-size:0.75rem;}
+.ep-chk{display:flex;align-items:flex-start;gap:0.8rem;cursor:pointer;margin-bottom:1.5rem;}
+.ep-chk input{width:16px;height:16px;margin-top:3px;accent-color:#917aff;cursor:pointer;flex-shrink:0;}
+.ep-chk span{font-size:0.8rem;color:rgba(255,255,255,0.5);line-height:1.6;}
+.ep-btns{display:flex;gap:0.8rem;}
+#ep-enter{flex:1;padding:0.85rem;border-radius:8px;border:none;cursor:pointer;background:linear-gradient(135deg,#7c5ff0,#00c4be);color:#fff;font-weight:700;font-size:0.82rem;letter-spacing:1px;text-transform:uppercase;transition:all 0.2s;opacity:0.3;font-family:'Space Mono',monospace;}
+#ep-enter:not(:disabled){opacity:1;box-shadow:0 0 22px rgba(124,95,240,0.45);}
+#ep-enter:not(:disabled):hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(124,95,240,0.55);}
+#ep-no{padding:0.85rem 1.3rem;border-radius:8px;border:1px solid rgba(255,255,255,0.12);cursor:pointer;background:transparent;color:rgba(255,255,255,0.35);font-size:0.8rem;font-family:'Space Mono',monospace;transition:all 0.2s;}
+#ep-no:hover{border-color:rgba(255,107,157,0.4);color:rgba(255,107,157,0.6);}
+/* speech bubble */
+.ep-speech{position:absolute;top:-80px;left:50%;transform:translateX(-50%);background:rgba(145,122,255,0.15);border:1px solid rgba(145,122,255,0.35);border-radius:12px;padding:0.7rem 1rem;font-size:0.72rem;color:#d4c8ff;font-family:'Space Mono',monospace;white-space:nowrap;opacity:0;transition:opacity 0.4s;pointer-events:none;max-width:280px;white-space:normal;text-align:center;line-height:1.5;}
+.ep-speech::after{content:'';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);border:4px solid transparent;border-top-color:rgba(145,122,255,0.35);}
+.ep-speech.show{opacity:1;}
+/* exit screen */
+.ep-exit-big{font-size:clamp(1rem,2.5vw,1.4rem);color:rgba(255,255,255,0.65);line-height:2;max-width:520px;}
+.ep-exit-big strong{color:#fff;}
+.ep-exit-big .haryanvi{font-family:'Space Mono',monospace;font-size:0.85rem;color:rgba(0,232,223,0.8);display:block;margin:1rem 0 0.3rem;}
+.ep-exit-big .eng{font-size:0.78rem;color:rgba(255,255,255,0.4);display:block;font-style:italic;}
+.ep-exit-note{font-size:0.65rem;color:rgba(145,122,255,0.6);font-family:'Space Mono',monospace;letter-spacing:2px;}
+#ep-back{padding:0.65rem 1.8rem;border-radius:8px;border:1px solid rgba(145,122,255,0.35);background:transparent;color:rgba(145,122,255,0.75);font-size:0.75rem;font-family:'Space Mono',monospace;cursor:pointer;letter-spacing:1px;transition:all 0.2s;}
+#ep-back:hover{background:rgba(145,122,255,0.1);color:#c084fc;}
 </style>
 
-<div id="entry-portal">
-  <div class="portal-scene">
-    <div class="p-ring p-ring-1"></div>
-    <div class="p-ring p-ring-2"></div>
-    <div class="p-ring p-ring-3"></div>
-    <div class="p-ring p-ring-4"></div>
-    <div class="p-orb"></div>
-    <!-- particles generated by JS -->
+<div id="ep">
+  <div class="ep-scene">
+    <div class="ep-tunnel"></div>
+    <div class="ep-neb ep-n1"></div>
+    <div class="ep-neb ep-n2"></div>
+    <div class="ep-neb ep-n3"></div>
+    <div class="ep-ring ep-r1"></div>
+    <div class="ep-ring ep-r2"></div>
+    <div class="ep-ring ep-r3"></div>
+    <div class="ep-ring ep-r4"></div>
+    <div class="ep-ring ep-r5"></div>
   </div>
-  <div class="portal-box">
-    <div class="portal-eyebrow">// transmission incoming</div>
-    <div class="portal-title">before you proceed</div>
-    <div class="portal-sub">a brief, entirely optional disclaimer</div>
-    <div class="portal-disclaimer">
-      <p>
-        This space does not need your approval.<br><br>
-        No intellectual credentials required.<br>
-        No prior enlightenment necessary.<br>
-        Bring your questions. Leave your conclusions.<br><br>
-        If something lands — sit with it.<br>
-        If nothing does — the exit is where you came from.<br><br>
-        <em>The universe has a refund policy. It's called tomorrow.</em>
-      </p>
+
+  <!-- CHARACTER + CONTENT side by side -->
+  <div style="position:relative;z-index:2;display:flex;align-items:center;gap:2rem;max-width:780px;width:95%;padding:1rem;">
+
+    <!-- ANIMATED LADY SVG -->
+    <div class="ep-char-wrap" id="ep-char-wrap">
+      <div class="ep-speech" id="ep-speech"></div>
+      <svg id="ep-char" viewBox="0 0 180 320" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="aura" cx="50%" cy="60%" r="55%">
+            <stop offset="0%" stop-color="rgba(145,122,255,0.25)"/>
+            <stop offset="100%" stop-color="rgba(145,122,255,0)"/>
+          </radialGradient>
+          <linearGradient id="robeG" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#1a0e22"/>
+            <stop offset="60%" stop-color="#0f0610"/>
+            <stop offset="100%" stop-color="#080408"/>
+          </linearGradient>
+          <linearGradient id="goldG" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#8a5c04"/>
+            <stop offset="45%" stop-color="#f5c030"/>
+            <stop offset="100%" stop-color="#8a5c04"/>
+          </linearGradient>
+          <linearGradient id="shimG" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="rgba(145,122,255,0)"/>
+            <stop offset="50%" stop-color="rgba(145,122,255,0.12)"/>
+            <stop offset="100%" stop-color="rgba(145,122,255,0)"/>
+          </linearGradient>
+          <filter id="softG"><feGaussianBlur stdDeviation="6"/></filter>
+          <filter id="glow2"><feGaussianBlur stdDeviation="3" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter>
+        </defs>
+        <!-- aura -->
+        <ellipse cx="90" cy="190" rx="75" ry="145" fill="url(#aura)" filter="url(#softG)"/>
+
+        <!-- POSE: SITTING (hands on lap) -->
+        <g id="pose-sit" class="robe-anim">
+          <!-- robe spread -->
+          <path d="M20,178 Q5,225 8,284 Q45,308 90,310 Q135,308 172,284 Q175,225 160,178 Q128,170 90,168 Q52,170 20,178Z" fill="url(#robeG)"/>
+          <path d="M20,178 Q5,225 8,284 Q45,308 90,310 Q135,308 172,284 Q175,225 160,178 Q128,170 90,168 Q52,170 20,178Z" fill="url(#shimG)"/>
+          <!-- torso -->
+          <path d="M62,90 Q55,135 58,178 Q78,184 90,185 Q102,184 122,178 Q125,135 118,90 Q104,78 90,76 Q76,78 62,90Z" fill="#140820"/>
+          <!-- arms folded on lap -->
+          <path d="M58,148 Q42,162 38,180 Q60,190 90,192 Q120,190 142,180 Q138,162 122,148 Q106,158 90,160 Q74,158 58,148Z" fill="#1c0e26"/>
+          <!-- hands hint -->
+          <ellipse cx="68" cy="175" rx="10" ry="6" fill="#2a1535" opacity="0.7"/>
+          <ellipse cx="112" cy="175" rx="10" ry="6" fill="#2a1535" opacity="0.7"/>
+          <!-- jewelry belt -->
+          <path d="M64,162 Q90,169 116,162 Q114,167 90,171 Q66,167 64,162Z" fill="url(#goldG)" opacity="0.9"/>
+          <circle cx="78" cy="165" r="2.5" fill="#9b6dde" opacity="0.9"/>
+          <circle cx="90" cy="166.5" r="3" fill="#c084fc" opacity="0.9"/>
+          <circle cx="102" cy="165" r="2.5" fill="#9b6dde" opacity="0.9"/>
+          <!-- veil left -->
+          <path d="M55,50 Q32,88 34,135 Q48,140 46,115 Q44,85 56,62Z" fill="#0e0818" opacity="0.92" class="veil-anim"/>
+          <!-- veil right -->
+          <path d="M125,50 Q148,88 146,135 Q132,140 134,115 Q136,85 124,62Z" fill="#0e0818" opacity="0.92" class="veil-anim"/>
+          <!-- veil top -->
+          <path d="M52,30 Q90,18 128,30 Q132,50 126,64 Q90,72 54,64 Q48,50 52,30Z" fill="#0c0618"/>
+          <!-- head -->
+          <ellipse cx="90" cy="52" rx="28" ry="30" fill="#0c0618"/>
+          <!-- face shadow -->
+          <ellipse cx="90" cy="54" rx="18" ry="20" fill="#060308"/>
+          <!-- eyes -->
+          <ellipse cx="82" cy="50" rx="3" ry="2" fill="rgba(145,122,255,0.55)" class="eye-anim"/>
+          <ellipse cx="98" cy="50" rx="3" ry="2" fill="rgba(145,122,255,0.55)" class="eye-anim"/>
+          <!-- necklace -->
+          <path d="M70,100 Q90,112 110,100" stroke="url(#goldG)" stroke-width="1.2" fill="none" opacity="0.75"/>
+          <circle cx="90" cy="110" r="3.5" fill="url(#goldG)" opacity="0.8"/>
+        </g>
+
+        <!-- POSE: STANDING -->
+        <g id="pose-stand" class="robe-anim" style="opacity:0">
+          <!-- robe flowing -->
+          <path d="M48,178 Q30,228 34,295 Q58,315 90,316 Q122,315 146,295 Q150,228 132,178 Q112,168 90,166 Q68,168 48,178Z" fill="url(#robeG)"/>
+          <path d="M48,178 Q30,228 34,295 Q58,315 90,316 Q122,315 146,295 Q150,228 132,178 Q112,168 90,166 Q68,168 48,178Z" fill="url(#shimG)"/>
+          <!-- torso -->
+          <path d="M62,88 Q52,138 54,175 Q74,182 90,183 Q106,182 126,175 Q128,138 118,88 Q104,76 90,74 Q76,76 62,88Z" fill="#140820"/>
+          <!-- left arm down -->
+          <path d="M62,120 Q40,138 34,165 Q42,174 54,168 Q60,145 66,132Z" fill="#1a0c24"/>
+          <!-- right arm slightly raised -->
+          <path d="M118,120 Q140,138 146,165 Q138,174 126,168 Q120,145 114,132Z" fill="#1a0c24"/>
+          <!-- belt -->
+          <path d="M64,160 Q90,168 116,160 Q114,165 90,169 Q66,165 64,160Z" fill="url(#goldG)" opacity="0.9"/>
+          <circle cx="78" cy="163" r="2.5" fill="#9b6dde" opacity="0.9"/>
+          <circle cx="90" cy="164.5" r="3" fill="#c084fc" opacity="0.9"/>
+          <circle cx="102" cy="163" r="2.5" fill="#9b6dde" opacity="0.9"/>
+          <!-- veil -->
+          <path d="M55,48 Q32,86 34,132 Q48,137 46,113 Q44,83 56,60Z" fill="#0e0818" opacity="0.92" class="veil-anim"/>
+          <path d="M125,48 Q148,86 146,132 Q132,137 134,113 Q136,83 124,60Z" fill="#0e0818" opacity="0.92" class="veil-anim"/>
+          <path d="M52,28 Q90,16 128,28 Q132,48 126,62 Q90,70 54,62 Q48,48 52,28Z" fill="#0c0618"/>
+          <ellipse cx="90" cy="50" rx="28" ry="30" fill="#0c0618"/>
+          <ellipse cx="90" cy="52" rx="18" ry="20" fill="#060308"/>
+          <ellipse cx="82" cy="48" rx="3" ry="2" fill="rgba(145,122,255,0.6)" class="eye-anim"/>
+          <ellipse cx="98" cy="48" rx="3" ry="2" fill="rgba(145,122,255,0.6)" class="eye-anim"/>
+          <path d="M70,98 Q90,110 110,98" stroke="url(#goldG)" stroke-width="1.2" fill="none" opacity="0.75"/>
+          <circle cx="90" cy="108" r="3.5" fill="url(#goldG)" opacity="0.8"/>
+          <!-- raised foot hint -->
+          <ellipse cx="90" cy="308" rx="22" ry="8" fill="#0a0610" opacity="0.6"/>
+          <path d="M78,295 Q82,308 90,312 Q96,308 102,295" fill="#140820"/>
+        </g>
+
+        <!-- POSE: CLAP -->
+        <g id="pose-clap" style="opacity:0">
+          <path d="M48,178 Q30,228 34,295 Q58,315 90,316 Q122,315 146,295 Q150,228 132,178 Q112,168 90,166 Q68,168 48,178Z" fill="url(#robeG)"/>
+          <path d="M62,88 Q52,138 54,175 Q74,182 90,183 Q106,182 126,175 Q128,138 118,88 Q104,76 90,74 Q76,76 62,88Z" fill="#140820"/>
+          <!-- both arms coming to clap center -->
+          <path d="M62,120 Q72,112 85,110 Q90,122 86,138 Q72,142 60,138Z" fill="#1a0c24"/>
+          <path d="M118,120 Q108,112 95,110 Q90,122 94,138 Q108,142 120,138Z" fill="#1a0c24"/>
+          <!-- clap sparkles -->
+          <g id="clap-sparks">
+            <circle cx="90" cy="112" r="5" fill="#f5c030" class="clap-spark"/>
+            <circle cx="80" cy="104" r="3" fill="#917aff" class="clap-spark" style="animation-delay:0.05s"/>
+            <circle cx="100" cy="104" r="3" fill="#00e8df" class="clap-spark" style="animation-delay:0.1s"/>
+            <circle cx="90" cy="98" r="3.5" fill="#f5c030" class="clap-spark" style="animation-delay:0.08s"/>
+            <circle cx="76" cy="116" r="2" fill="#ff6b9d" class="clap-spark" style="animation-delay:0.12s"/>
+            <circle cx="104" cy="116" r="2" fill="#c084fc" class="clap-spark" style="animation-delay:0.06s"/>
+          </g>
+          <path d="M64,160 Q90,168 116,160 Q114,165 90,169 Q66,165 64,160Z" fill="url(#goldG)" opacity="0.9"/>
+          <path d="M52,28 Q90,16 128,28 Q132,48 126,62 Q90,70 54,62 Q48,48 52,28Z" fill="#0c0618"/>
+          <ellipse cx="90" cy="50" rx="28" ry="30" fill="#0c0618"/>
+          <ellipse cx="90" cy="52" rx="18" ry="20" fill="#060308"/>
+          <ellipse cx="82" cy="48" rx="4" ry="2.5" fill="rgba(200,170,255,0.9)" class="eye-anim"/>
+          <ellipse cx="98" cy="48" rx="4" ry="2.5" fill="rgba(200,170,255,0.9)" class="eye-anim"/>
+        </g>
+
+        <!-- POSE: PRANAAM -->
+        <g id="pose-pran" style="opacity:0">
+          <!-- body slight bow -->
+          <path d="M48,178 Q30,228 34,295 Q58,315 90,316 Q122,315 146,295 Q150,228 132,178 Q112,168 90,166 Q68,168 48,178Z" fill="url(#robeG)"/>
+          <path d="M65,90 Q55,138 57,175 Q76,183 90,184 Q104,183 123,175 Q125,138 115,90 Q104,80 90,78 Q76,80 65,90Z" fill="#140820" transform="rotate(8,90,160)"/>
+          <!-- joined hands namaste -->
+          <path d="M72,130 Q82,118 90,116 Q98,118 108,130 Q102,148 90,150 Q78,148 72,130Z" fill="#1c0e26"/>
+          <path d="M80,116 L90,105 L100,116 Q98,126 90,128 Q82,126 80,116Z" fill="#2a1535"/>
+          <!-- belt -->
+          <path d="M64,160 Q90,168 116,160 Q114,165 90,169 Q66,165 64,160Z" fill="url(#goldG)" opacity="0.9" transform="rotate(8,90,160)"/>
+          <!-- head bowing down -->
+          <path d="M52,28 Q90,16 128,28 Q132,48 126,62 Q90,70 54,62 Q48,48 52,28Z" fill="#0c0618" transform="rotate(18,90,80)"/>
+          <ellipse cx="90" cy="50" rx="28" ry="30" fill="#0c0618" transform="rotate(18,90,80)"/>
+          <ellipse cx="90" cy="56" rx="16" ry="18" fill="#060308" transform="rotate(18,90,80)"/>
+          <path d="M55,48 Q34,82 36,125 Q50,130 48,108 Q46,80 58,60Z" fill="#0e0818" opacity="0.9"/>
+          <path d="M125,48 Q146,82 144,125 Q130,130 132,108 Q134,80 122,60Z" fill="#0e0818" opacity="0.9"/>
+        </g>
+      </svg>
     </div>
-    <label class="portal-check-label">
-      <input type="checkbox" id="portal-checkbox" onchange="portalCheck()">
-      <span>I understand I'm entering at my own philosophical risk. Proceed with appropriate curiosity.</span>
-    </label>
-    <div class="portal-btns">
-      <button id="enter-btn" disabled onclick="enterSite()">enter the coordinates →</button>
-      <button id="exit-btn" onclick="exitPortal()">not yet</button>
+
+    <!-- CONTENT BOX -->
+    <div class="ep-box">
+      <div class="ep-eyebrow" id="ep-label">// she appears</div>
+      <div class="ep-title" id="ep-title">before you enter</div>
+      <div class="ep-sub">read. or don't. she'll know either way.</div>
+      <div class="ep-disc" id="ep-disc">
+        <p>
+          This space does not need your validation.<br><br>
+          No intellectual credentials required.<br>
+          No prior enlightenment necessary.<br>
+          Bring your questions. Leave your conclusions.<br><br>
+          If something lands — sit with it.<br>
+          If nothing does — the exit is where you came from.<br><br>
+          <em>The universe has a refund policy. It's called tomorrow.</em>
+        </p>
+      </div>
+      <label class="ep-chk" id="ep-chk-wrap">
+        <input type="checkbox" id="ep-chk" onchange="epCheck()">
+        <span>I understand I'm entering at my own philosophical risk.</span>
+      </label>
+      <div class="ep-btns">
+        <button id="ep-enter" disabled onclick="epEnter()">enter the coordinates →</button>
+        <button id="ep-no" onclick="epNo()">not yet</button>
+      </div>
     </div>
   </div>
 </div>
 
-<div id="exit-msg">
-  <div class="exit-big">
-    grateful you didn't open.<br>
+<!-- EXIT SCREEN -->
+<div id="ep-exit">
+  <div class="ep-exit-big">
+    <span class="haryanvi">"Chal laadle, theek hai —</span>
+    <span class="eng">Go on then, darling —</span>
+    <br>
+    <strong>grateful you didn't open.</strong><br>
     otherwise you'd become<br>
-    <strong>dangerously intelligent.</strong><br><br>
-    the world has quite enough of those already.
+    <strong>dangerously intelligent.</strong><br>
+    <span class="haryanvi" style="margin-top:0.8rem;">"Duniya mein itne samajhdaar log pehle se hi hain,</span>
+    <span class="eng">the world already has quite enough clever people,</span>
+    <span class="haryanvi">"ek aur ki zaroorat nahi thi." 🙏</span>
+    <span class="eng">one more wasn't really necessary." 🙏</span>
   </div>
-  <div class="exit-note">— koordinates/ wishes you a safe, uncomplicated existence</div>
-  <button id="exit-back" onclick="returnPortal()">wait. i changed my mind.</button>
+  <div class="ep-exit-note">— koordinates/ wishes you a safe, uncomplicated existence</div>
+  <button id="ep-back" onclick="epReturn()">wait. i changed my mind.</button>
 </div>
 
 <script>
+(function(){
   // Spawn particles
-  (function() {
-    const scene = document.querySelector('.portal-scene');
-    for (let i = 0; i < 30; i++) {
-      const p = document.createElement('div');
-      p.className = 'p-particle';
-      p.style.left = Math.random() * 100 + '%';
-      p.style.bottom = '-10px';
-      p.style.setProperty('--dx', (Math.random() * 80 - 40) + 'px');
-      p.style.animationDuration = (8 + Math.random() * 12) + 's';
-      p.style.animationDelay = (Math.random() * 10) + 's';
-      const colors = ['rgba(124,95,240,0.7)', 'rgba(0,196,190,0.7)', 'rgba(232,86,122,0.6)', 'rgba(192,132,252,0.6)'];
-      p.style.background = colors[Math.floor(Math.random() * colors.length)];
-      scene.appendChild(p);
-    }
-  })();
-
-  function portalCheck() {
-    const btn = document.getElementById('enter-btn');
-    btn.disabled = !document.getElementById('portal-checkbox').checked;
+  const scene = document.querySelector('.ep-scene');
+  if(!scene) return;
+  for(let i=0;i<35;i++){
+    const p=document.createElement('div');
+    p.style.cssText='position:absolute;width:'+(1+Math.random()*3)+'px;height:'+(1+Math.random()*3)+'px;border-radius:50%;animation:pFloat '+(7+Math.random()*12)+'s linear '+(Math.random()*8)+'s infinite;left:'+Math.random()*100+'%;bottom:-10px;';
+    p.style.setProperty('--dx',(Math.random()*80-40)+'px');
+    const cols=['rgba(145,122,255,0.7)','rgba(0,232,223,0.7)','rgba(255,107,157,0.5)','rgba(192,132,252,0.6)'];
+    p.style.background=cols[Math.floor(Math.random()*cols.length)];
+    scene.appendChild(p);
   }
 
-  function enterSite() {
-    const portal = document.getElementById('entry-portal');
-    portal.style.transition = 'opacity 0.8s ease';
-    portal.style.opacity = '0';
-    setTimeout(() => { portal.style.display = 'none'; }, 800);
+  // Particle float keyframe (inject if not present)
+  if(!document.getElementById('pf-style')){
+    const s=document.createElement('style');
+    s.id='pf-style';
+    s.textContent='@keyframes pFloat{0%{transform:translateY(0) translateX(0);opacity:0;}10%{opacity:1;}90%{opacity:1;}100%{transform:translateY(-100vh) translateX(var(--dx,20px));opacity:0;}}';
+    document.head.appendChild(s);
   }
 
-  function exitPortal() {
-    document.getElementById('entry-portal').style.display = 'none';
-    const msg = document.getElementById('exit-msg');
-    msg.style.display = 'flex';
-  }
+  // Phase 1 → sit, then stand after 2s, then show content after 3.5s
+  setTimeout(function(){
+    const sit=document.getElementById('pose-sit');
+    const stand=document.getElementById('pose-stand');
+    if(sit) sit.style.opacity='0';
+    if(stand) stand.style.opacity='1';
+    const lbl=document.getElementById('ep-label');
+    if(lbl) lbl.textContent='// she rises';
+  }, 2000);
+})();
 
-  function returnPortal() {
-    document.getElementById('exit-msg').style.display = 'none';
-    const portal = document.getElementById('entry-portal');
-    portal.style.opacity = '0';
-    portal.style.display = 'flex';
-    setTimeout(() => {
-      portal.style.transition = 'opacity 0.5s ease';
-      portal.style.opacity = '1';
-    }, 50);
+function epCheck(){
+  const btn=document.getElementById('ep-enter');
+  if(btn) btn.disabled=!document.getElementById('ep-chk').checked;
+}
+
+function epEnter(){
+  const sit=document.getElementById('pose-sit');
+  const stand=document.getElementById('pose-stand');
+  const clap=document.getElementById('pose-clap');
+  if(sit) sit.style.opacity='0';
+  if(stand) stand.style.opacity='0';
+  if(clap) clap.style.opacity='1';
+  const sp=document.getElementById('ep-speech');
+  if(sp){
+    sp.textContent='"darling — my whole work is to confuse you. and it seems to be working perfectly."';
+    sp.classList.add('show');
   }
+  setTimeout(function(){
+    const ep=document.getElementById('ep');
+    if(ep){ep.style.transition='opacity 1s ease';ep.style.opacity='0';setTimeout(()=>ep.style.display='none',1000);}
+  }, 2200);
+}
+
+function epNo(){
+  const sit=document.getElementById('pose-sit');
+  const stand=document.getElementById('pose-stand');
+  const pran=document.getElementById('pose-pran');
+  if(sit) sit.style.opacity='0';
+  if(stand) stand.style.opacity='0';
+  if(pran) pran.style.opacity='1';
+  const sp=document.getElementById('ep-speech');
+  if(sp){
+    sp.textContent='"chal laadle... 🙏 bahut shukriya — warna intelligent ho jaate."';
+    sp.classList.add('show');
+  }
+  setTimeout(function(){
+    document.getElementById('ep').style.display='none';
+    document.getElementById('ep-exit').style.display='flex';
+  }, 1800);
+}
+
+function epReturn(){
+  document.getElementById('ep-exit').style.display='none';
+  const ep=document.getElementById('ep');
+  ep.style.opacity='0'; ep.style.display='flex';
+  const pran=document.getElementById('pose-pran');
+  const stand=document.getElementById('pose-stand');
+  const sit=document.getElementById('pose-sit');
+  if(pran) pran.style.opacity='0';
+  if(sit) sit.style.opacity='1';
+  if(stand) stand.style.opacity='0';
+  const sp=document.getElementById('ep-speech');
+  if(sp) sp.classList.remove('show');
+  const chk=document.getElementById('ep-chk');
+  if(chk) chk.checked=false;
+  const btn=document.getElementById('ep-enter');
+  if(btn) btn.disabled=true;
+  setTimeout(()=>{ep.style.transition='opacity 0.5s';ep.style.opacity='1';},50);
+}
 </script>
 
 
