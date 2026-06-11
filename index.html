@@ -383,141 +383,414 @@
     <!-- ANIMATED LADY SVG -->
     <div class="ep-char-wrap" id="ep-char-wrap">
       <div class="ep-speech" id="ep-speech"></div>
-      <svg id="ep-char" viewBox="0 0 180 320" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="aura" cx="50%" cy="60%" r="55%">
-            <stop offset="0%" stop-color="rgba(145,122,255,0.25)"/>
-            <stop offset="100%" stop-color="rgba(145,122,255,0)"/>
-          </radialGradient>
-          <linearGradient id="robeG" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#1a0e22"/>
-            <stop offset="60%" stop-color="#0f0610"/>
-            <stop offset="100%" stop-color="#080408"/>
-          </linearGradient>
-          <linearGradient id="goldG" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#8a5c04"/>
-            <stop offset="45%" stop-color="#f5c030"/>
-            <stop offset="100%" stop-color="#8a5c04"/>
-          </linearGradient>
-          <linearGradient id="shimG" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="rgba(145,122,255,0)"/>
-            <stop offset="50%" stop-color="rgba(145,122,255,0.12)"/>
-            <stop offset="100%" stop-color="rgba(145,122,255,0)"/>
-          </linearGradient>
-          <filter id="softG"><feGaussianBlur stdDeviation="6"/></filter>
-          <filter id="glow2"><feGaussianBlur stdDeviation="3" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter>
-        </defs>
-        <!-- aura -->
-        <ellipse cx="90" cy="190" rx="75" ry="145" fill="url(#aura)" filter="url(#softG)"/>
+      <svg id="ep-char" viewBox="0 0 220 420" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="skinG" cx="45%" cy="38%" r="65%">
+      <stop offset="0%" stop-color="#d4956a"/>
+      <stop offset="60%" stop-color="#b87040"/>
+      <stop offset="100%" stop-color="#8a4e28"/>
+    </radialGradient>
+    <radialGradient id="skinFace" cx="42%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#dba070"/>
+      <stop offset="55%" stop-color="#c07848"/>
+      <stop offset="100%" stop-color="#9a5830"/>
+    </radialGradient>
+    <linearGradient id="ghagra" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8b1a2a"/>
+      <stop offset="40%" stop-color="#6b1020"/>
+      <stop offset="100%" stop-color="#3d0810"/>
+    </linearGradient>
+    <linearGradient id="choli" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9b2535"/>
+      <stop offset="100%" stop-color="#7a1525"/>
+    </linearGradient>
+    <linearGradient id="odhna" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#c4350a"/>
+      <stop offset="50%" stop-color="#a82808"/>
+      <stop offset="100%" stop-color="#8a1e06"/>
+    </linearGradient>
+    <linearGradient id="goldJ" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8a5c04"/>
+      <stop offset="30%" stop-color="#f5d050"/>
+      <stop offset="60%" stop-color="#e8b820"/>
+      <stop offset="100%" stop-color="#8a5c04"/>
+    </linearGradient>
+    <linearGradient id="silverJ" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#888"/>
+      <stop offset="45%" stop-color="#eee"/>
+      <stop offset="100%" stop-color="#999"/>
+    </linearGradient>
+    <radialGradient id="mirrorW" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#aaa" stop-opacity="0.3"/>
+    </radialGradient>
+    <filter id="bodyShadow"><feDropShadow dx="3" dy="6" stdDeviation="5" flood-color="rgba(0,0,0,0.5)"/></filter>
+    <filter id="faceShadow"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="rgba(80,30,10,0.4)"/></filter>
+    <filter id="jewelGlow"><feGaussianBlur stdDeviation="1.5" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter>
+    <filter id="auraBlur"><feGaussianBlur stdDeviation="12"/></filter>
+  </defs>
 
-        <!-- POSE: SITTING (hands on lap) -->
-        <g id="pose-sit" class="robe-anim">
-          <!-- robe spread -->
-          <path d="M20,178 Q5,225 8,284 Q45,308 90,310 Q135,308 172,284 Q175,225 160,178 Q128,170 90,168 Q52,170 20,178Z" fill="url(#robeG)"/>
-          <path d="M20,178 Q5,225 8,284 Q45,308 90,310 Q135,308 172,284 Q175,225 160,178 Q128,170 90,168 Q52,170 20,178Z" fill="url(#shimG)"/>
-          <!-- torso -->
-          <path d="M62,90 Q55,135 58,178 Q78,184 90,185 Q102,184 122,178 Q125,135 118,90 Q104,78 90,76 Q76,78 62,90Z" fill="#140820"/>
-          <!-- arms folded on lap -->
-          <path d="M58,148 Q42,162 38,180 Q60,190 90,192 Q120,190 142,180 Q138,162 122,148 Q106,158 90,160 Q74,158 58,148Z" fill="#1c0e26"/>
-          <!-- hands hint -->
-          <ellipse cx="68" cy="175" rx="10" ry="6" fill="#2a1535" opacity="0.7"/>
-          <ellipse cx="112" cy="175" rx="10" ry="6" fill="#2a1535" opacity="0.7"/>
-          <!-- jewelry belt -->
-          <path d="M64,162 Q90,169 116,162 Q114,167 90,171 Q66,167 64,162Z" fill="url(#goldG)" opacity="0.9"/>
-          <circle cx="78" cy="165" r="2.5" fill="#9b6dde" opacity="0.9"/>
-          <circle cx="90" cy="166.5" r="3" fill="#c084fc" opacity="0.9"/>
-          <circle cx="102" cy="165" r="2.5" fill="#9b6dde" opacity="0.9"/>
-          <!-- veil left -->
-          <path d="M55,50 Q32,88 34,135 Q48,140 46,115 Q44,85 56,62Z" fill="#0e0818" opacity="0.92" class="veil-anim"/>
-          <!-- veil right -->
-          <path d="M125,50 Q148,88 146,135 Q132,140 134,115 Q136,85 124,62Z" fill="#0e0818" opacity="0.92" class="veil-anim"/>
-          <!-- veil top -->
-          <path d="M52,30 Q90,18 128,30 Q132,50 126,64 Q90,72 54,64 Q48,50 52,30Z" fill="#0c0618"/>
-          <!-- head -->
-          <ellipse cx="90" cy="52" rx="28" ry="30" fill="#0c0618"/>
-          <!-- face shadow -->
-          <ellipse cx="90" cy="54" rx="18" ry="20" fill="#060308"/>
-          <!-- eyes -->
-          <ellipse cx="82" cy="50" rx="3" ry="2" fill="rgba(145,122,255,0.55)" class="eye-anim"/>
-          <ellipse cx="98" cy="50" rx="3" ry="2" fill="rgba(145,122,255,0.55)" class="eye-anim"/>
-          <!-- necklace -->
-          <path d="M70,100 Q90,112 110,100" stroke="url(#goldG)" stroke-width="1.2" fill="none" opacity="0.75"/>
-          <circle cx="90" cy="110" r="3.5" fill="url(#goldG)" opacity="0.8"/>
-        </g>
+  <!-- aura glow -->
+  <ellipse cx="110" cy="240" rx="85" ry="170" fill="rgba(145,100,50,0.18)" filter="url(#auraBlur)"/>
+  <ellipse cx="110" cy="130" rx="55" ry="100" fill="rgba(200,80,30,0.1)" filter="url(#auraBlur)"/>
 
-        <!-- POSE: STANDING -->
-        <g id="pose-stand" class="robe-anim" style="opacity:0">
-          <!-- robe flowing -->
-          <path d="M48,178 Q30,228 34,295 Q58,315 90,316 Q122,315 146,295 Q150,228 132,178 Q112,168 90,166 Q68,168 48,178Z" fill="url(#robeG)"/>
-          <path d="M48,178 Q30,228 34,295 Q58,315 90,316 Q122,315 146,295 Q150,228 132,178 Q112,168 90,166 Q68,168 48,178Z" fill="url(#shimG)"/>
-          <!-- torso -->
-          <path d="M62,88 Q52,138 54,175 Q74,182 90,183 Q106,182 126,175 Q128,138 118,88 Q104,76 90,74 Q76,76 62,88Z" fill="#140820"/>
-          <!-- left arm down -->
-          <path d="M62,120 Q40,138 34,165 Q42,174 54,168 Q60,145 66,132Z" fill="#1a0c24"/>
-          <!-- right arm slightly raised -->
-          <path d="M118,120 Q140,138 146,165 Q138,174 126,168 Q120,145 114,132Z" fill="#1a0c24"/>
-          <!-- belt -->
-          <path d="M64,160 Q90,168 116,160 Q114,165 90,169 Q66,165 64,160Z" fill="url(#goldG)" opacity="0.9"/>
-          <circle cx="78" cy="163" r="2.5" fill="#9b6dde" opacity="0.9"/>
-          <circle cx="90" cy="164.5" r="3" fill="#c084fc" opacity="0.9"/>
-          <circle cx="102" cy="163" r="2.5" fill="#9b6dde" opacity="0.9"/>
-          <!-- veil -->
-          <path d="M55,48 Q32,86 34,132 Q48,137 46,113 Q44,83 56,60Z" fill="#0e0818" opacity="0.92" class="veil-anim"/>
-          <path d="M125,48 Q148,86 146,132 Q132,137 134,113 Q136,83 124,60Z" fill="#0e0818" opacity="0.92" class="veil-anim"/>
-          <path d="M52,28 Q90,16 128,28 Q132,48 126,62 Q90,70 54,62 Q48,48 52,28Z" fill="#0c0618"/>
-          <ellipse cx="90" cy="50" rx="28" ry="30" fill="#0c0618"/>
-          <ellipse cx="90" cy="52" rx="18" ry="20" fill="#060308"/>
-          <ellipse cx="82" cy="48" rx="3" ry="2" fill="rgba(145,122,255,0.6)" class="eye-anim"/>
-          <ellipse cx="98" cy="48" rx="3" ry="2" fill="rgba(145,122,255,0.6)" class="eye-anim"/>
-          <path d="M70,98 Q90,110 110,98" stroke="url(#goldG)" stroke-width="1.2" fill="none" opacity="0.75"/>
-          <circle cx="90" cy="108" r="3.5" fill="url(#goldG)" opacity="0.8"/>
-          <!-- raised foot hint -->
-          <ellipse cx="90" cy="308" rx="22" ry="8" fill="#0a0610" opacity="0.6"/>
-          <path d="M78,295 Q82,308 90,312 Q96,308 102,295" fill="#140820"/>
-        </g>
+  <!-- ══════ SITTING POSE ══════ -->
+  <g id="pose-sit" style="opacity:1;transition:opacity 0.8s;">
 
-        <!-- POSE: CLAP -->
-        <g id="pose-clap" style="opacity:0">
-          <path d="M48,178 Q30,228 34,295 Q58,315 90,316 Q122,315 146,295 Q150,228 132,178 Q112,168 90,166 Q68,168 48,178Z" fill="url(#robeG)"/>
-          <path d="M62,88 Q52,138 54,175 Q74,182 90,183 Q106,182 126,175 Q128,138 118,88 Q104,76 90,74 Q76,76 62,88Z" fill="#140820"/>
-          <!-- both arms coming to clap center -->
-          <path d="M62,120 Q72,112 85,110 Q90,122 86,138 Q72,142 60,138Z" fill="#1a0c24"/>
-          <path d="M118,120 Q108,112 95,110 Q90,122 94,138 Q108,142 120,138Z" fill="#1a0c24"/>
-          <!-- clap sparkles -->
-          <g id="clap-sparks">
-            <circle cx="90" cy="112" r="5" fill="#f5c030" class="clap-spark"/>
-            <circle cx="80" cy="104" r="3" fill="#917aff" class="clap-spark" style="animation-delay:0.05s"/>
-            <circle cx="100" cy="104" r="3" fill="#00e8df" class="clap-spark" style="animation-delay:0.1s"/>
-            <circle cx="90" cy="98" r="3.5" fill="#f5c030" class="clap-spark" style="animation-delay:0.08s"/>
-            <circle cx="76" cy="116" r="2" fill="#ff6b9d" class="clap-spark" style="animation-delay:0.12s"/>
-            <circle cx="104" cy="116" r="2" fill="#c084fc" class="clap-spark" style="animation-delay:0.06s"/>
-          </g>
-          <path d="M64,160 Q90,168 116,160 Q114,165 90,169 Q66,165 64,160Z" fill="url(#goldG)" opacity="0.9"/>
-          <path d="M52,28 Q90,16 128,28 Q132,48 126,62 Q90,70 54,62 Q48,48 52,28Z" fill="#0c0618"/>
-          <ellipse cx="90" cy="50" rx="28" ry="30" fill="#0c0618"/>
-          <ellipse cx="90" cy="52" rx="18" ry="20" fill="#060308"/>
-          <ellipse cx="82" cy="48" rx="4" ry="2.5" fill="rgba(200,170,255,0.9)" class="eye-anim"/>
-          <ellipse cx="98" cy="48" rx="4" ry="2.5" fill="rgba(200,170,255,0.9)" class="eye-anim"/>
-        </g>
+    <!-- odhna draped behind (back layer) -->
+    <path d="M58,52 Q20,100 18,200 Q22,220 38,215 Q42,140 60,80 Z" fill="url(#odhna)" opacity="0.82"/>
+    <path d="M162,52 Q200,100 202,200 Q198,220 182,215 Q178,140 160,80 Z" fill="url(#odhna)" opacity="0.75"/>
 
-        <!-- POSE: PRANAAM -->
-        <g id="pose-pran" style="opacity:0">
-          <!-- body slight bow -->
-          <path d="M48,178 Q30,228 34,295 Q58,315 90,316 Q122,315 146,295 Q150,228 132,178 Q112,168 90,166 Q68,168 48,178Z" fill="url(#robeG)"/>
-          <path d="M65,90 Q55,138 57,175 Q76,183 90,184 Q104,183 123,175 Q125,138 115,90 Q104,80 90,78 Q76,80 65,90Z" fill="#140820" transform="rotate(8,90,160)"/>
-          <!-- joined hands namaste -->
-          <path d="M72,130 Q82,118 90,116 Q98,118 108,130 Q102,148 90,150 Q78,148 72,130Z" fill="#1c0e26"/>
-          <path d="M80,116 L90,105 L100,116 Q98,126 90,128 Q82,126 80,116Z" fill="#2a1535"/>
-          <!-- belt -->
-          <path d="M64,160 Q90,168 116,160 Q114,165 90,169 Q66,165 64,160Z" fill="url(#goldG)" opacity="0.9" transform="rotate(8,90,160)"/>
-          <!-- head bowing down -->
-          <path d="M52,28 Q90,16 128,28 Q132,48 126,62 Q90,70 54,62 Q48,48 52,28Z" fill="#0c0618" transform="rotate(18,90,80)"/>
-          <ellipse cx="90" cy="50" rx="28" ry="30" fill="#0c0618" transform="rotate(18,90,80)"/>
-          <ellipse cx="90" cy="56" rx="16" ry="18" fill="#060308" transform="rotate(18,90,80)"/>
-          <path d="M55,48 Q34,82 36,125 Q50,130 48,108 Q46,80 58,60Z" fill="#0e0818" opacity="0.9"/>
-          <path d="M125,48 Q146,82 144,125 Q130,130 132,108 Q134,80 122,60Z" fill="#0e0818" opacity="0.9"/>
-        </g>
-      </svg>
+    <!-- GHAGRA (skirt spread on floor) -->
+    <path d="M28,195 Q5,250 8,318 Q50,346 110,348 Q170,346 212,318 Q215,250 192,195 Q155,183 110,180 Q65,183 28,195Z" fill="url(#ghagra)" filter="url(#bodyShadow)"/>
+    <!-- ghagra folds/depth -->
+    <path d="M45,210 Q30,260 35,320 Q55,338 110,340 Q165,338 185,320 Q190,260 175,210 Q148,200 110,198 Q72,200 45,210Z" fill="none" stroke="rgba(180,30,50,0.35)" stroke-width="1.5"/>
+    <path d="M65,215 Q55,265 58,322 Q80,336 110,337 Q140,336 162,322 Q165,265 155,215" fill="none" stroke="rgba(180,30,50,0.25)" stroke-width="1"/>
+    <!-- gold border embroidery -->
+    <path d="M18,318 Q50,346 110,348 Q170,346 202,318" fill="none" stroke="url(#goldJ)" stroke-width="4.5" opacity="0.9"/>
+    <path d="M20,310 Q52,340 110,342 Q168,340 200,310" fill="none" stroke="url(#goldJ)" stroke-width="2" opacity="0.5"/>
+    <!-- mirror work dots on ghagra -->
+    <circle cx="70" cy="270" r="4" fill="url(#mirrorW)" opacity="0.85"/>
+    <circle cx="90" cy="295" r="3.5" fill="url(#mirrorW)" opacity="0.8"/>
+    <circle cx="110" cy="260" r="4" fill="url(#mirrorW)" opacity="0.85"/>
+    <circle cx="130" cy="285" r="3.5" fill="url(#mirrorW)" opacity="0.8"/>
+    <circle cx="150" cy="268" r="4" fill="url(#mirrorW)" opacity="0.85"/>
+    <circle cx="78" cy="308" r="3" fill="url(#mirrorW)" opacity="0.75"/>
+    <circle cx="142" cy="305" r="3" fill="url(#mirrorW)" opacity="0.75"/>
+    <circle cx="110" cy="318" r="3.5" fill="url(#mirrorW)" opacity="0.8"/>
+
+    <!-- CHOLI (blouse) torso -->
+    <path d="M68,120 Q58,155 60,196 Q82,203 110,205 Q138,203 160,196 Q162,155 152,120 Q134,106 110,104 Q86,106 68,120Z" fill="url(#choli)" filter="url(#bodyShadow)"/>
+    <!-- choli embroidery border -->
+    <path d="M68,120 Q86,106 110,104 Q134,106 152,120" fill="none" stroke="url(#goldJ)" stroke-width="2.5" opacity="0.85"/>
+    <path d="M60,196 Q82,203 110,205 Q138,203 160,196" fill="none" stroke="url(#goldJ)" stroke-width="2" opacity="0.8"/>
+    <!-- mirror work on choli -->
+    <circle cx="90" cy="148" r="4.5" fill="url(#mirrorW)" opacity="0.9"/>
+    <circle cx="110" cy="142" r="5" fill="url(#mirrorW)" opacity="0.9"/>
+    <circle cx="130" cy="148" r="4.5" fill="url(#mirrorW)" opacity="0.9"/>
+    <circle cx="110" cy="165" r="4" fill="url(#mirrorW)" opacity="0.85"/>
+
+    <!-- KAMARBANDH (waist belt) -->
+    <path d="M65,193 Q110,202 155,193 Q153,199 110,205 Q67,199 65,193Z" fill="url(#goldJ)" opacity="0.95"/>
+    <circle cx="82" cy="197" r="4" fill="#c084fc" opacity="0.9"/>
+    <circle cx="96" cy="198.5" r="3.5" fill="#ff6b9d" opacity="0.9"/>
+    <circle cx="110" cy="199.5" r="5" fill="url(#mirrorW)" opacity="0.95"/>
+    <circle cx="124" cy="198.5" r="3.5" fill="#ff6b9d" opacity="0.9"/>
+    <circle cx="138" cy="197" r="4" fill="#c084fc" opacity="0.9"/>
+
+    <!-- LEFT ARM resting -->
+    <path d="M68,128 Q50,148 46,175 Q56,185 68,182 Q70,162 72,140Z" fill="url(#skinG)"/>
+    <path d="M68,128 Q50,148 46,175 Q56,185 68,182 Q70,162 72,140Z" fill="none" stroke="rgba(100,40,10,0.3)" stroke-width="0.8"/>
+    <!-- RIGHT ARM resting -->
+    <path d="M152,128 Q170,148 174,175 Q164,185 152,182 Q150,162 148,140Z" fill="url(#skinG)"/>
+    <!-- hands on lap -->
+    <ellipse cx="60" cy="186" rx="16" ry="9" fill="url(#skinG)"/>
+    <ellipse cx="160" cy="186" rx="16" ry="9" fill="url(#skinG)"/>
+    <!-- finger lines -->
+    <path d="M48,184 Q54,180 58,186" stroke="rgba(100,40,10,0.4)" stroke-width="0.8" fill="none"/>
+    <path d="M172,184 Q166,180 162,186" stroke="rgba(100,40,10,0.4)" stroke-width="0.8" fill="none"/>
+
+    <!-- BANGLES left -->
+    <ellipse cx="52" cy="178" rx="8" ry="5" fill="none" stroke="#e8b820" stroke-width="2.5" opacity="0.9"/>
+    <ellipse cx="52" cy="174" rx="8" ry="5" fill="none" stroke="#c084fc" stroke-width="2" opacity="0.85"/>
+    <ellipse cx="52" cy="170" rx="8" ry="5" fill="none" stroke="#ff6b9d" stroke-width="2" opacity="0.85"/>
+    <!-- BANGLES right -->
+    <ellipse cx="168" cy="178" rx="8" ry="5" fill="none" stroke="#e8b820" stroke-width="2.5" opacity="0.9"/>
+    <ellipse cx="168" cy="174" rx="8" ry="5" fill="none" stroke="#c084fc" stroke-width="2" opacity="0.85"/>
+    <ellipse cx="168" cy="170" rx="8" ry="5" fill="none" stroke="#ff6b9d" stroke-width="2" opacity="0.85"/>
+
+    <!-- NECK -->
+    <path d="M96,102 Q96,118 110,120 Q124,118 124,102 Q118,96 110,95 Q102,96 96,102Z" fill="url(#skinFace)"/>
+    <!-- HASLI necklace -->
+    <path d="M88,112 Q110,122 132,112" fill="none" stroke="url(#silverJ)" stroke-width="4" opacity="0.9"/>
+    <path d="M88,112 Q110,122 132,112" fill="none" stroke="url(#goldJ)" stroke-width="2" opacity="0.7"/>
+    <!-- pendant -->
+    <ellipse cx="110" cy="124" rx="6" ry="8" fill="url(#goldJ)" opacity="0.9"/>
+    <circle cx="110" cy="122" r="3" fill="#c084fc" opacity="0.95"/>
+
+    <!-- FACE -->
+    <!-- Head shape -->
+    <ellipse cx="110" cy="68" rx="38" ry="44" fill="url(#skinFace)" filter="url(#faceShadow)"/>
+    <!-- forehead shadow -->
+    <path d="M76,52 Q90,42 110,40 Q130,42 144,52 Q138,38 110,36 Q82,38 76,52Z" fill="rgba(140,60,20,0.2)"/>
+    <!-- cheek definition -->
+    <ellipse cx="86" cy="74" rx="12" ry="10" fill="rgba(200,80,60,0.18)"/>
+    <ellipse cx="134" cy="74" rx="12" ry="10" fill="rgba(200,80,60,0.18)"/>
+
+    <!-- EYEBROWS -->
+    <path d="M88,52 Q96,48 104,50" stroke="#3a1a08" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M116,50 Q124,48 132,52" stroke="#3a1a08" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+    <!-- EYES -->
+    <!-- left eye -->
+    <ellipse cx="96" cy="62" rx="10" ry="7" fill="#fff"/>
+    <ellipse cx="97" cy="62" rx="6.5" ry="6" fill="#3a1a08"/>
+    <ellipse cx="97" cy="62" rx="4.5" ry="4.5" fill="#1a0805"/>
+    <circle cx="99" cy="60" r="1.8" fill="#fff" opacity="0.9"/>
+    <path d="M86,58 Q96,54 106,58" stroke="#3a1a08" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M86,66 Q96,70 106,66" stroke="#3a1a08" stroke-width="1.2" fill="none"/>
+    <!-- right eye -->
+    <ellipse cx="124" cy="62" rx="10" ry="7" fill="#fff"/>
+    <ellipse cx="123" cy="62" rx="6.5" ry="6" fill="#3a1a08"/>
+    <ellipse cx="123" cy="62" rx="4.5" ry="4.5" fill="#1a0805"/>
+    <circle cx="125" cy="60" r="1.8" fill="#fff" opacity="0.9"/>
+    <path d="M114,58 Q124,54 134,58" stroke="#3a1a08" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M114,66 Q124,70 134,66" stroke="#3a1a08" stroke-width="1.2" fill="none"/>
+    <!-- kajal -->
+    <path d="M86,64 Q94,68 100,66" stroke="#1a0805" stroke-width="1.2" fill="none" opacity="0.7"/>
+    <path d="M120,66 Q126,68 134,64" stroke="#1a0805" stroke-width="1.2" fill="none" opacity="0.7"/>
+
+    <!-- NOSE -->
+    <path d="M108,64 Q104,76 100,82 Q108,86 110,86 Q112,86 120,82 Q116,76 112,64" stroke="rgba(100,40,10,0.4)" stroke-width="1" fill="rgba(160,70,30,0.12)"/>
+    <path d="M104,81 Q110,84 116,81" stroke="rgba(100,40,10,0.3)" stroke-width="1" fill="none"/>
+
+    <!-- LIPS -->
+    <!-- upper lip -->
+    <path d="M98,89 Q104,85 110,87 Q116,85 122,89 Q116,92 110,91 Q104,92 98,89Z" fill="#b84040"/>
+    <!-- lower lip -->
+    <path d="M98,89 Q104,92 110,94 Q116,92 122,89 Q116,96 110,97 Q104,96 98,89Z" fill="#d05050"/>
+    <!-- lip highlight -->
+    <path d="M104,91 Q110,89 116,91" stroke="rgba(255,200,180,0.4)" stroke-width="1" fill="none"/>
+
+    <!-- bindi on forehead -->
+    <circle cx="110" cy="48" r="4.5" fill="#cc1020" opacity="0.95"/>
+    <circle cx="110" cy="48" r="2.5" fill="#ff3040" opacity="0.9"/>
+
+    <!-- MAANG TIKKA -->
+    <path d="M110,38 L110,28" stroke="url(#goldJ)" stroke-width="1.5"/>
+    <circle cx="110" cy="25" r="5" fill="url(#goldJ)"/>
+    <circle cx="110" cy="25" r="3" fill="#c084fc" opacity="0.95"/>
+
+    <!-- NATH (nose ring with chain) -->
+    <circle cx="116" cy="83" r="5" fill="none" stroke="url(#goldJ)" stroke-width="2" opacity="0.9"/>
+    <circle cx="118" cy="84" r="2" fill="url(#goldJ)" opacity="0.9"/>
+    <path d="M120,80 Q130,72 136,68" stroke="url(#goldJ)" stroke-width="1.2" fill="none" opacity="0.75"/>
+    <circle cx="136" cy="67" r="2.5" fill="url(#goldJ)" opacity="0.85"/>
+
+    <!-- EARS -->
+    <ellipse cx="72" cy="66" rx="7" ry="10" fill="url(#skinFace)"/>
+    <ellipse cx="148" cy="66" rx="7" ry="10" fill="url(#skinFace)"/>
+    <!-- jhumka earrings -->
+    <ellipse cx="72" cy="62" rx="5" ry="4" fill="url(#goldJ)" opacity="0.9"/>
+    <path d="M68,66 Q72,78 76,66" fill="url(#goldJ)" opacity="0.85"/>
+    <circle cx="72" cy="78" r="4" fill="url(#goldJ)" opacity="0.9"/>
+    <ellipse cx="148" cy="62" rx="5" ry="4" fill="url(#goldJ)" opacity="0.9"/>
+    <path d="M144,66 Q148,78 152,66" fill="url(#goldJ)" opacity="0.85"/>
+    <circle cx="148" cy="78" r="4" fill="url(#goldJ)" opacity="0.9"/>
+
+    <!-- ODHNA over head (front layer, semi-transparent) -->
+    <path d="M72,28 Q50,55 48,120 Q58,128 62,105 Q64,70 78,40Z" fill="url(#odhna)" opacity="0.55"/>
+    <path d="M148,28 Q170,55 172,120 Q162,128 158,105 Q156,70 142,40Z" fill="url(#odhna)" opacity="0.48"/>
+    <path d="M72,28 Q110,18 148,28 Q145,40 140,46 Q110,50 80,46 Q75,40 72,28Z" fill="url(#odhna)" opacity="0.7"/>
+    <!-- odhna gold border -->
+    <path d="M72,28 Q110,18 148,28" fill="none" stroke="url(#goldJ)" stroke-width="2" opacity="0.8"/>
+    <path d="M78,46 Q110,50 142,46" fill="none" stroke="url(#goldJ)" stroke-width="1.5" opacity="0.7"/>
+  </g>
+
+  <!-- ══════ STANDING POSE ══════ -->
+  <g id="pose-stand" style="opacity:0;transition:opacity 0.8s;">
+    <!-- odhna back -->
+    <path d="M58,50 Q22,110 20,230 Q28,248 44,242 Q48,158 65,80 Z" fill="url(#odhna)" opacity="0.78"/>
+    <path d="M162,50 Q198,110 200,230 Q192,248 176,242 Q172,158 155,80 Z" fill="url(#odhna)" opacity="0.7"/>
+    <!-- ghagra standing -->
+    <path d="M55,195 Q35,255 38,335 Q68,362 110,364 Q152,362 182,335 Q185,255 165,195 Q140,182 110,180 Q80,182 55,195Z" fill="url(#ghagra)" filter="url(#bodyShadow)"/>
+    <!-- folds -->
+    <path d="M75,208 Q62,262 65,335 Q85,355 110,357 Q135,355 155,335 Q158,262 145,208" fill="none" stroke="rgba(180,30,50,0.3)" stroke-width="1.5"/>
+    <path d="M92,210 Q82,265 84,336" fill="none" stroke="rgba(180,30,50,0.2)" stroke-width="1"/>
+    <path d="M128,210 Q138,265 136,336" fill="none" stroke="rgba(180,30,50,0.2)" stroke-width="1"/>
+    <!-- gold border -->
+    <path d="M38,335 Q68,362 110,364 Q152,362 182,335" fill="none" stroke="url(#goldJ)" stroke-width="4.5" opacity="0.9"/>
+    <path d="M40,326 Q70,354 110,356 Q150,354 180,326" fill="none" stroke="url(#goldJ)" stroke-width="2" opacity="0.5"/>
+    <!-- mirror work -->
+    <circle cx="72" cy="278" r="4" fill="url(#mirrorW)" opacity="0.85"/>
+    <circle cx="95" cy="308" r="3.5" fill="url(#mirrorW)" opacity="0.8"/>
+    <circle cx="110" cy="270" r="4" fill="url(#mirrorW)" opacity="0.85"/>
+    <circle cx="125" cy="295" r="3.5" fill="url(#mirrorW)" opacity="0.8"/>
+    <circle cx="148" cy="275" r="4" fill="url(#mirrorW)" opacity="0.85"/>
+    <!-- choli -->
+    <path d="M68,118 Q57,155 60,193 Q83,202 110,204 Q137,202 160,193 Q163,155 152,118 Q135,104 110,102 Q85,104 68,118Z" fill="url(#choli)" filter="url(#bodyShadow)"/>
+    <path d="M68,118 Q85,104 110,102 Q135,104 152,118" fill="none" stroke="url(#goldJ)" stroke-width="2.5" opacity="0.85"/>
+    <path d="M60,193 Q83,202 110,204 Q137,202 160,193" fill="none" stroke="url(#goldJ)" stroke-width="2" opacity="0.8"/>
+    <circle cx="90" cy="145" r="4.5" fill="url(#mirrorW)" opacity="0.9"/>
+    <circle cx="110" cy="138" r="5" fill="url(#mirrorW)" opacity="0.9"/>
+    <circle cx="130" cy="145" r="4.5" fill="url(#mirrorW)" opacity="0.9"/>
+    <!-- kamarbandh -->
+    <path d="M65,190 Q110,200 155,190 Q152,197 110,203 Q68,197 65,190Z" fill="url(#goldJ)" opacity="0.95"/>
+    <circle cx="82" cy="194" r="4" fill="#c084fc" opacity="0.9"/>
+    <circle cx="110" cy="197" r="5" fill="url(#mirrorW)" opacity="0.95"/>
+    <circle cx="138" cy="194" r="4" fill="#c084fc" opacity="0.9"/>
+    <!-- LEFT ARM -->
+    <path d="M68,126 Q45,150 40,180 Q50,190 64,185 Q66,160 72,140Z" fill="url(#skinG)"/>
+    <!-- RIGHT ARM slightly raised -->
+    <path d="M152,126 Q175,150 180,180 Q170,190 156,185 Q154,160 148,140Z" fill="url(#skinG)"/>
+    <!-- hands -->
+    <ellipse cx="46" cy="188" rx="14" ry="8" fill="url(#skinG)"/>
+    <ellipse cx="174" cy="188" rx="14" ry="8" fill="url(#skinG)"/>
+    <!-- bangles -->
+    <ellipse cx="48" cy="182" rx="9" ry="5" fill="none" stroke="#e8b820" stroke-width="2.5" opacity="0.9"/>
+    <ellipse cx="48" cy="178" rx="9" ry="5" fill="none" stroke="#c084fc" stroke-width="2" opacity="0.85"/>
+    <ellipse cx="48" cy="174" rx="9" ry="5" fill="none" stroke="#ff6b9d" stroke-width="2" opacity="0.85"/>
+    <ellipse cx="172" cy="182" rx="9" ry="5" fill="none" stroke="#e8b820" stroke-width="2.5" opacity="0.9"/>
+    <ellipse cx="172" cy="178" rx="9" ry="5" fill="none" stroke="#c084fc" stroke-width="2" opacity="0.85"/>
+    <ellipse cx="172" cy="174" rx="9" ry="5" fill="none" stroke="#ff6b9d" stroke-width="2" opacity="0.85"/>
+    <!-- neck + necklace -->
+    <path d="M96,100 Q96,116 110,118 Q124,116 124,100 Q118,94 110,93 Q102,94 96,100Z" fill="url(#skinFace)"/>
+    <path d="M88,110 Q110,120 132,110" fill="none" stroke="url(#silverJ)" stroke-width="4" opacity="0.9"/>
+    <path d="M88,110 Q110,120 132,110" fill="none" stroke="url(#goldJ)" stroke-width="2" opacity="0.7"/>
+    <ellipse cx="110" cy="122" rx="6" ry="8" fill="url(#goldJ)" opacity="0.9"/>
+    <circle cx="110" cy="120" r="3" fill="#c084fc" opacity="0.95"/>
+    <!-- FACE (same as sitting) -->
+    <ellipse cx="110" cy="66" rx="38" ry="44" fill="url(#skinFace)" filter="url(#faceShadow)"/>
+    <path d="M76,50 Q90,40 110,38 Q130,40 144,50 Q138,36 110,34 Q82,36 76,50Z" fill="rgba(140,60,20,0.2)"/>
+    <ellipse cx="86" cy="72" rx="12" ry="10" fill="rgba(200,80,60,0.18)"/>
+    <ellipse cx="134" cy="72" rx="12" ry="10" fill="rgba(200,80,60,0.18)"/>
+    <path d="M88,50 Q96,46 104,48" stroke="#3a1a08" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M116,48 Q124,46 132,50" stroke="#3a1a08" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <ellipse cx="96" cy="60" rx="10" ry="7" fill="#fff"/>
+    <ellipse cx="97" cy="60" rx="6.5" ry="6" fill="#3a1a08"/>
+    <ellipse cx="97" cy="60" rx="4.5" ry="4.5" fill="#1a0805"/>
+    <circle cx="99" cy="58" r="1.8" fill="#fff" opacity="0.9"/>
+    <path d="M86,56 Q96,52 106,56" stroke="#3a1a08" stroke-width="2" fill="none"/>
+    <path d="M86,64 Q96,68 106,64" stroke="#3a1a08" stroke-width="1.2" fill="none"/>
+    <ellipse cx="124" cy="60" rx="10" ry="7" fill="#fff"/>
+    <ellipse cx="123" cy="60" rx="6.5" ry="6" fill="#3a1a08"/>
+    <ellipse cx="123" cy="60" rx="4.5" ry="4.5" fill="#1a0805"/>
+    <circle cx="125" cy="58" r="1.8" fill="#fff" opacity="0.9"/>
+    <path d="M114,56 Q124,52 134,56" stroke="#3a1a08" stroke-width="2" fill="none"/>
+    <path d="M114,64 Q124,68 134,64" stroke="#3a1a08" stroke-width="1.2" fill="none"/>
+    <path d="M86,62 Q94,66 100,64" stroke="#1a0805" stroke-width="1.2" fill="none" opacity="0.7"/>
+    <path d="M120,64 Q126,66 134,62" stroke="#1a0805" stroke-width="1.2" fill="none" opacity="0.7"/>
+    <path d="M108,62 Q104,74 100,80 Q108,84 110,84 Q112,84 120,80 Q116,74 112,62" stroke="rgba(100,40,10,0.4)" stroke-width="1" fill="rgba(160,70,30,0.12)"/>
+    <path d="M98,87 Q104,83 110,85 Q116,83 122,87 Q116,90 110,89 Q104,90 98,87Z" fill="#b84040"/>
+    <path d="M98,87 Q104,90 110,92 Q116,90 122,87 Q116,94 110,95 Q104,94 98,87Z" fill="#d05050"/>
+    <circle cx="110" cy="46" r="4.5" fill="#cc1020" opacity="0.95"/>
+    <circle cx="110" cy="46" r="2.5" fill="#ff3040" opacity="0.9"/>
+    <path d="M110,36 L110,26" stroke="url(#goldJ)" stroke-width="1.5"/>
+    <circle cx="110" cy="23" r="5" fill="url(#goldJ)"/>
+    <circle cx="110" cy="23" r="3" fill="#c084fc" opacity="0.95"/>
+    <circle cx="116" cy="81" r="5" fill="none" stroke="url(#goldJ)" stroke-width="2" opacity="0.9"/>
+    <circle cx="118" cy="82" r="2" fill="url(#goldJ)" opacity="0.9"/>
+    <path d="M120,78 Q130,70 136,66" stroke="url(#goldJ)" stroke-width="1.2" fill="none" opacity="0.75"/>
+    <ellipse cx="72" cy="64" rx="7" ry="10" fill="url(#skinFace)"/>
+    <ellipse cx="148" cy="64" rx="7" ry="10" fill="url(#skinFace)"/>
+    <ellipse cx="72" cy="60" rx="5" ry="4" fill="url(#goldJ)" opacity="0.9"/>
+    <path d="M68,64 Q72,76 76,64" fill="url(#goldJ)" opacity="0.85"/>
+    <circle cx="72" cy="76" r="4" fill="url(#goldJ)" opacity="0.9"/>
+    <ellipse cx="148" cy="60" rx="5" ry="4" fill="url(#goldJ)" opacity="0.9"/>
+    <path d="M144,64 Q148,76 152,64" fill="url(#goldJ)" opacity="0.85"/>
+    <circle cx="148" cy="76" r="4" fill="url(#goldJ)" opacity="0.9"/>
+    <!-- odhna -->
+    <path d="M72,26 Q50,53 46,118 Q56,126 60,103 Q62,68 76,38Z" fill="url(#odhna)" opacity="0.52"/>
+    <path d="M148,26 Q170,53 174,118 Q164,126 160,103 Q158,68 144,38Z" fill="url(#odhna)" opacity="0.46"/>
+    <path d="M72,26 Q110,16 148,26 Q145,38 140,44 Q110,48 80,44 Q75,38 72,26Z" fill="url(#odhna)" opacity="0.7"/>
+    <path d="M72,26 Q110,16 148,26" fill="none" stroke="url(#goldJ)" stroke-width="2" opacity="0.8"/>
+    <!-- raised foot suggestion -->
+    <path d="M88,350 Q92,366 110,370 Q126,366 132,350" fill="url(#ghagra)" opacity="0.8"/>
+    <ellipse cx="110" cy="368" rx="20" ry="7" fill="rgba(60,8,16,0.6)"/>
+  </g>
+
+  <!-- ══════ CLAP POSE ══════ -->
+  <g id="pose-clap" style="opacity:0;transition:opacity 0.5s;">
+    <!-- body same as stand but arms clapping -->
+    <path d="M55,195 Q35,255 38,335 Q68,362 110,364 Q152,362 182,335 Q185,255 165,195 Q140,182 110,180 Q80,182 55,195Z" fill="url(#ghagra)" filter="url(#bodyShadow)"/>
+    <path d="M38,335 Q68,362 110,364 Q152,362 182,335" fill="none" stroke="url(#goldJ)" stroke-width="4.5" opacity="0.9"/>
+    <circle cx="72" cy="278" r="4" fill="url(#mirrorW)" opacity="0.85"/>
+    <circle cx="110" cy="270" r="4" fill="url(#mirrorW)" opacity="0.85"/>
+    <circle cx="148" cy="275" r="4" fill="url(#mirrorW)" opacity="0.85"/>
+    <path d="M68,118 Q57,155 60,193 Q83,202 110,204 Q137,202 160,193 Q163,155 152,118 Q135,104 110,102 Q85,104 68,118Z" fill="url(#choli)" filter="url(#bodyShadow)"/>
+    <path d="M65,190 Q110,200 155,190 Q152,197 110,203 Q68,197 65,190Z" fill="url(#goldJ)" opacity="0.95"/>
+    <!-- CLAPPING ARMS — both come forward and meet -->
+    <path d="M68,128 Q88,118 102,122 Q106,138 100,152 Q84,156 68,148Z" fill="url(#skinG)"/>
+    <path d="M152,128 Q132,118 118,122 Q114,138 120,152 Q136,156 152,148Z" fill="url(#skinG)"/>
+    <!-- hands meeting -->
+    <ellipse cx="110" cy="128" rx="22" ry="12" fill="url(#skinG)"/>
+    <!-- clap sparkles -->
+    <circle cx="110" cy="116" r="7" fill="#f5d050" opacity="0.9" id="cs1"/>
+    <circle cx="96" cy="106" r="4" fill="#917aff" opacity="0.85" id="cs2"/>
+    <circle cx="124" cy="106" r="4" fill="#00e8df" opacity="0.85" id="cs3"/>
+    <circle cx="110" cy="100" r="5" fill="#f5d050" opacity="0.8" id="cs4"/>
+    <circle cx="86" cy="120" r="3" fill="#ff6b9d" opacity="0.8" id="cs5"/>
+    <circle cx="134" cy="120" r="3" fill="#c084fc" opacity="0.8" id="cs6"/>
+    <circle cx="100" cy="96" r="3" fill="#fff" opacity="0.7" id="cs7"/>
+    <circle cx="120" cy="96" r="3" fill="#fff" opacity="0.7" id="cs8"/>
+    <!-- bangles on clapping arms -->
+    <ellipse cx="82" cy="138" rx="8" ry="4" fill="none" stroke="#e8b820" stroke-width="2.5" opacity="0.9"/>
+    <ellipse cx="138" cy="138" rx="8" ry="4" fill="none" stroke="#e8b820" stroke-width="2.5" opacity="0.9"/>
+    <!-- neck + necklace + face (reuse from stand) -->
+    <path d="M96,100 Q96,116 110,118 Q124,116 124,100 Q118,94 110,93 Q102,94 96,100Z" fill="url(#skinFace)"/>
+    <path d="M88,110 Q110,120 132,110" fill="none" stroke="url(#silverJ)" stroke-width="4" opacity="0.9"/>
+    <ellipse cx="110" cy="66" rx="38" ry="44" fill="url(#skinFace)" filter="url(#faceShadow)"/>
+    <ellipse cx="86" cy="72" rx="12" ry="10" fill="rgba(200,80,60,0.22)"/>
+    <ellipse cx="134" cy="72" rx="12" ry="10" fill="rgba(200,80,60,0.22)"/>
+    <path d="M88,50 Q96,46 104,48" stroke="#3a1a08" stroke-width="2.5" fill="none"/>
+    <path d="M116,48 Q124,46 132,50" stroke="#3a1a08" stroke-width="2.5" fill="none"/>
+    <!-- happy eyes (slightly squinted) -->
+    <ellipse cx="96" cy="61" rx="10" ry="6" fill="#fff"/>
+    <ellipse cx="97" cy="61" rx="6" ry="5" fill="#3a1a08"/>
+    <ellipse cx="97" cy="61" rx="4" ry="4" fill="#1a0805"/>
+    <circle cx="99" cy="59" r="1.8" fill="#fff" opacity="0.9"/>
+    <path d="M86,58 Q96,53 106,58" stroke="#3a1a08" stroke-width="2.2" fill="none"/>
+    <path d="M86,64 Q96,67 106,64" stroke="#3a1a08" stroke-width="1.5" fill="none"/>
+    <ellipse cx="124" cy="61" rx="10" ry="6" fill="#fff"/>
+    <ellipse cx="123" cy="61" rx="6" ry="5" fill="#3a1a08"/>
+    <ellipse cx="123" cy="61" rx="4" ry="4" fill="#1a0805"/>
+    <circle cx="125" cy="59" r="1.8" fill="#fff" opacity="0.9"/>
+    <path d="M114,58 Q124,53 134,58" stroke="#3a1a08" stroke-width="2.2" fill="none"/>
+    <path d="M114,64 Q124,67 134,64" stroke="#3a1a08" stroke-width="1.5" fill="none"/>
+    <!-- smile -->
+    <path d="M100,88 Q110,96 120,88" stroke="#b84040" stroke-width="2" fill="rgba(180,60,60,0.3)" stroke-linecap="round"/>
+    <circle cx="110" cy="46" r="4.5" fill="#cc1020" opacity="0.95"/>
+    <path d="M110,36 L110,26" stroke="url(#goldJ)" stroke-width="1.5"/>
+    <circle cx="110" cy="23" r="5" fill="url(#goldJ)"/>
+    <circle cx="110" cy="23" r="3" fill="#c084fc" opacity="0.95"/>
+    <ellipse cx="72" cy="64" rx="7" ry="10" fill="url(#skinFace)"/>
+    <ellipse cx="148" cy="64" rx="7" ry="10" fill="url(#skinFace)"/>
+    <ellipse cx="72" cy="60" rx="5" ry="4" fill="url(#goldJ)" opacity="0.9"/>
+    <path d="M68,64 Q72,76 76,64" fill="url(#goldJ)"/>
+    <circle cx="72" cy="76" r="4" fill="url(#goldJ)"/>
+    <ellipse cx="148" cy="60" rx="5" ry="4" fill="url(#goldJ)" opacity="0.9"/>
+    <path d="M144,64 Q148,76 152,64" fill="url(#goldJ)"/>
+    <circle cx="148" cy="76" r="4" fill="url(#goldJ)"/>
+    <path d="M72,26 Q110,16 148,26 Q145,38 140,44 Q110,48 80,44 Q75,38 72,26Z" fill="url(#odhna)" opacity="0.7"/>
+    <path d="M72,26 Q110,16 148,26" fill="none" stroke="url(#goldJ)" stroke-width="2" opacity="0.8"/>
+  </g>
+
+  <!-- ══════ PRANAAM POSE ══════ -->
+  <g id="pose-pran" style="opacity:0;transition:opacity 0.5s;">
+    <path d="M55,195 Q35,255 38,335 Q68,362 110,364 Q152,362 182,335 Q185,255 165,195 Q140,182 110,180 Q80,182 55,195Z" fill="url(#ghagra)" filter="url(#bodyShadow)"/>
+    <path d="M38,335 Q68,362 110,364 Q152,362 182,335" fill="none" stroke="url(#goldJ)" stroke-width="4.5" opacity="0.9"/>
+    <circle cx="72" cy="278" r="4" fill="url(#mirrorW)" opacity="0.85"/>
+    <circle cx="110" cy="270" r="4" fill="url(#mirrorW)" opacity="0.85"/>
+    <circle cx="148" cy="275" r="4" fill="url(#mirrorW)" opacity="0.85"/>
+    <path d="M70,120 Q58,155 62,195 Q84,204 110,206 Q136,204 158,195 Q162,155 150,120 Q133,106 110,104 Q87,106 70,120Z" fill="url(#choli)" filter="url(#bodyShadow)" transform="rotate(12,110,180)"/>
+    <path d="M65,190 Q110,200 155,190 Q152,197 110,203 Q68,197 65,190Z" fill="url(#goldJ)" opacity="0.9" transform="rotate(12,110,180)"/>
+    <!-- namaste hands joined -->
+    <path d="M82,148 Q94,132 110,130 Q126,132 138,148 Q130,165 110,168 Q90,165 82,148Z" fill="url(#skinG)"/>
+    <path d="M90,130 L110,115 L130,130 Q126,142 110,145 Q94,142 90,130Z" fill="url(#skinG)" opacity="0.9"/>
+    <!-- bangles visible -->
+    <ellipse cx="87" cy="148" rx="7" ry="4" fill="none" stroke="#e8b820" stroke-width="2" opacity="0.8"/>
+    <ellipse cx="133" cy="148" rx="7" ry="4" fill="none" stroke="#e8b820" stroke-width="2" opacity="0.8"/>
+    <!-- head bowed -->
+    <path d="M96,102 Q96,118 110,120 Q124,118 124,102 Q118,94 110,93 Q102,94 96,102Z" fill="url(#skinFace)" transform="rotate(20,110,140)"/>
+    <ellipse cx="112" cy="68" rx="38" ry="44" fill="url(#skinFace)" filter="url(#faceShadow)" transform="rotate(20,110,140)"/>
+    <path d="M72,26 Q110,16 148,26 Q145,38 140,44 Q110,48 80,44 Q75,38 72,26Z" fill="url(#odhna)" opacity="0.68" transform="rotate(20,110,100)"/>
+    <path d="M72,26 Q110,16 148,26" fill="none" stroke="url(#goldJ)" stroke-width="2" opacity="0.8" transform="rotate(20,110,100)"/>
+    <!-- eyes looking down -->
+    <ellipse cx="96" cy="63" rx="9" ry="5" fill="#fff" transform="rotate(20,110,140)"/>
+    <ellipse cx="97" cy="64" rx="5" ry="4" fill="#3a1a08" transform="rotate(20,110,140)"/>
+    <ellipse cx="124" cy="63" rx="9" ry="5" fill="#fff" transform="rotate(20,110,140)"/>
+    <ellipse cx="123" cy="64" rx="5" ry="4" fill="#3a1a08" transform="rotate(20,110,140)"/>
+    <circle cx="110" cy="48" r="4.5" fill="#cc1020" opacity="0.9" transform="rotate(20,110,140)"/>
+    <path d="M88,50 Q96,46 104,48" stroke="#3a1a08" stroke-width="2.5" fill="none" transform="rotate(20,110,140)"/>
+    <path d="M116,48 Q124,46 132,50" stroke="#3a1a08" stroke-width="2.5" fill="none" transform="rotate(20,110,140)"/>
+    <path d="M72,26 Q50,53 46,120 Q56,128 60,105 Q62,70 76,40Z" fill="url(#odhna)" opacity="0.5" transform="rotate(20,110,100)"/>
+    <path d="M148,26 Q170,53 174,120 Q164,128 160,105 Q158,70 144,40Z" fill="url(#odhna)" opacity="0.44" transform="rotate(20,110,100)"/>
+    <path d="M110,36 L110,26" stroke="url(#goldJ)" stroke-width="1.5" transform="rotate(20,110,140)"/>
+    <circle cx="110" cy="23" r="5" fill="url(#goldJ)" transform="rotate(20,110,140)"/>
+    <ellipse cx="72" cy="64" rx="7" ry="10" fill="url(#skinFace)" transform="rotate(20,110,140)"/>
+    <ellipse cx="148" cy="64" rx="7" ry="10" fill="url(#skinFace)" transform="rotate(20,110,140)"/>
+  </g>
+</svg>
     </div>
 
     <!-- CONTENT BOX -->
@@ -604,6 +877,33 @@ function epCheck(){
   if(btn) btn.disabled=!document.getElementById('ep-chk').checked;
 }
 
+function playClap(){
+  try{
+    const ctx=new(window.AudioContext||window.webkitAudioContext)();
+    // Layer 1: noise burst (main clap body)
+    const sr=ctx.sampleRate;
+    const buf1=ctx.createBuffer(1,sr*0.12,sr);
+    const d1=buf1.getChannelData(0);
+    for(let i=0;i<d1.length;i++) d1[i]=(Math.random()*2-1)*Math.pow(1-i/d1.length,2.5);
+    const src1=ctx.createBufferSource(); src1.buffer=buf1;
+    const f1=ctx.createBiquadFilter(); f1.type='bandpass'; f1.frequency.value=1100; f1.Q.value=0.6;
+    const g1=ctx.createGain(); g1.gain.setValueAtTime(0.85,ctx.currentTime); g1.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.18);
+    src1.connect(f1); f1.connect(g1); g1.connect(ctx.destination); src1.start();
+    // Layer 2: higher crack
+    const buf2=ctx.createBuffer(1,sr*0.06,sr);
+    const d2=buf2.getChannelData(0);
+    for(let i=0;i<d2.length;i++) d2[i]=(Math.random()*2-1)*Math.pow(1-i/d2.length,4);
+    const src2=ctx.createBufferSource(); src2.buffer=buf2;
+    const f2=ctx.createBiquadFilter(); f2.type='highpass'; f2.frequency.value=2200;
+    const g2=ctx.createGain(); g2.gain.setValueAtTime(0.5,ctx.currentTime); g2.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.1);
+    src2.connect(f2); f2.connect(g2); g2.connect(ctx.destination); src2.start();
+    // Layer 3: body thud
+    const osc=ctx.createOscillator(); osc.type='sine'; osc.frequency.value=180;
+    const g3=ctx.createGain(); g3.gain.setValueAtTime(0.3,ctx.currentTime); g3.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.08);
+    osc.connect(g3); g3.connect(ctx.destination); osc.start(); osc.stop(ctx.currentTime+0.08);
+  }catch(e){}
+}
+
 function epEnter(){
   const sit=document.getElementById('pose-sit');
   const stand=document.getElementById('pose-stand');
@@ -611,6 +911,7 @@ function epEnter(){
   if(sit) sit.style.opacity='0';
   if(stand) stand.style.opacity='0';
   if(clap) clap.style.opacity='1';
+  playClap(); setTimeout(playClap,200); setTimeout(playClap,380);
   const sp=document.getElementById('ep-speech');
   if(sp){
     sp.textContent='"darling — my whole work is to confuse you. and it seems to be working perfectly."';
