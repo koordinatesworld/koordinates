@@ -94,59 +94,91 @@
       (par||root).add(o); return o;
     }
 
-    // ── Torso (choli) ──
-    mesh(capsule(0.18,0.42,16),RO,null,0,1.12,0);
-    mesh(new THREE.SphereGeometry(0.185,16,12),RO,null,0,1.4,0,0,0,0,1,0.78,1);
-    // ── Ghagra (skirt) ──
-    mesh(new THREE.CylinderGeometry(0.40,0.60,0.95,24),RO,null,0,0.5,0);
-    mesh(new THREE.TorusGeometry(0.575,0.02,8,32),GO,null,0,0.05,0,PI/2,0,0);
-    // gold waist
-    mesh(new THREE.TorusGeometry(0.2,0.025,8,28),GO,null,0,0.9,0,PI/2,0,0);
+    // ════ FEMININE HUMAN FIGURE — natural proportions ════
+    // hips / pelvis (under ghagra)
+    mesh(new THREE.SphereGeometry(0.2,16,12),RO,null,0,0.92,0,0,0,0,1,0.7,0.85);
+    // ── Ghagra (flared skirt, graceful) ──
+    mesh(new THREE.CylinderGeometry(0.21,0.40,0.86,28),RO,null,0,0.47,0);
+    mesh(new THREE.TorusGeometry(0.40,0.02,8,40),GO,null,0,0.05,0,PI/2,0,0);
+    // skirt pleats hint (gold dashes near hem)
+    for(var pl=0;pl<16;pl++){ var pa2=pl/16*PI*2; mesh(new THREE.BoxGeometry(0.015,0.12,0.01),GO,null,Math.sin(pa2)*0.39,0.13,Math.cos(pa2)*0.39,0,-pa2,0); }
+    // gold kamarbandh (waist belt)
+    mesh(new THREE.TorusGeometry(0.165,0.022,8,28),GO,null,0,0.9,0,PI/2,0,0);
+
+    // ── Torso / choli — slim waist, soft bust (feminine) ──
+    mesh(new THREE.CylinderGeometry(0.155,0.16,0.34,18),RO,null,0,1.11,0);     // waist→ribs
+    mesh(new THREE.SphereGeometry(0.165,18,14),RO,null,0,1.3,0,0,0,0,1,0.82,0.9); // bust
+    [-0.075,0.075].forEach(function(x){ mesh(new THREE.SphereGeometry(0.072,12,10),RO,null,x,1.28,0.085,0,0,0,1,0.85,0.9); });
+    // shoulders (narrow, sloped)
+    mesh(new THREE.SphereGeometry(0.075,12,10),SK,null,-0.15,1.42,0);
+    mesh(new THREE.SphereGeometry(0.075,12,10),SK,null,0.15,1.42,0);
 
     // ── Neck + Head ──
-    mesh(new THREE.CylinderGeometry(0.058,0.07,0.1,12),SK,null,0,1.62,0);
-    var head=new THREE.Group(); head.position.set(0,1.78,0); root.add(head);
-    mesh(new THREE.SphereGeometry(0.135,20,18),SK,head,0,0,0,0,0,0,1,1.12,1.02);
-    // eyes
-    [-0.05,0.05].forEach(function(x){
-      mesh(new THREE.SphereGeometry(0.022,10,8),EW,head,x,0.02,0.118,0,0,0,1,0.7,0.6);
-      mesh(new THREE.SphereGeometry(0.011,8,8),IR,head,x,0.02,0.132);
+    mesh(new THREE.CylinderGeometry(0.05,0.058,0.11,12),SK,null,0,1.5,0);
+    var head=new THREE.Group(); head.position.set(0,1.66,0); root.add(head);
+    mesh(new THREE.SphereGeometry(0.125,22,20),SK,head,0,0,0,0,0,0,0.92,1.1,0.95); // oval face
+    mesh(new THREE.SphereGeometry(0.07,12,10),SK,head,0,-0.085,0.02,0,0,0,0.85,0.9,0.85); // chin/jaw
+    // eyes (almond, feminine)
+    [-0.045,0.045].forEach(function(x){
+      mesh(new THREE.SphereGeometry(0.026,12,10),EW,head,x,0.015,0.1,0,0,0,1,0.55,0.5);
+      mesh(new THREE.SphereGeometry(0.013,10,8),IR,head,x,0.015,0.115);
+      mesh(new THREE.SphereGeometry(0.005,8,6),M(0xffffff,0.2),head,x+0.004,0.022,0.122); // glint
+      // lashes/liner
+      mesh(capsule(0.004,0.04,6),HA,head,x,0.032,0.1,0,0,x>0?-0.25:0.25);
     });
     // brows
-    [-0.05,0.05].forEach(function(x){ mesh(capsule(0.005,0.04,6),HA,head,x,0.055,0.12,0,0,x>0?-0.2:0.2); });
-    // nose
-    mesh(capsule(0.012,0.035,8),SK,head,0,-0.01,0.135,0.3,0,0);
-    // lips
-    mesh(capsule(0.009,0.05,8),LP,head,0,-0.07,0.125,0,0,0,1,1,1);
+    [-0.045,0.045].forEach(function(x){ mesh(capsule(0.005,0.045,6),HA,head,x,0.058,0.105,0,0,x>0?-0.18:0.18); });
+    // nose (slim)
+    mesh(capsule(0.011,0.04,8),SK,head,0,-0.012,0.118,0.32,0,0);
+    mesh(new THREE.SphereGeometry(0.014,8,6),SK,head,0,-0.035,0.122);
+    // lips (fuller, feminine)
+    mesh(capsule(0.011,0.045,8),LP,head,0,-0.072,0.108,0,0,0,1,1,0.7);
+    mesh(new THREE.SphereGeometry(0.016,10,8),LP,head,0,-0.078,0.105,0,0,0,1,0.55,0.6);
+    // cheeks blush
+    [-0.07,0.07].forEach(function(x){ mesh(new THREE.CircleGeometry(0.022,12),M(0xd06a6a,0.6),head,x,-0.02,0.11); });
     // bindi
-    mesh(new THREE.CircleGeometry(0.012,12),BD,head,0,0.075,0.135);
-    // hair
-    mesh(new THREE.SphereGeometry(0.15,20,16),HA,head,0,0.02,-0.02,0,0,0,1,1.1,1);
-    mesh(capsule(0.05,0.5,12),HA,head,0,-0.35,-0.1); // braid
-    // earrings
-    [-0.13,0.13].forEach(function(x){ mesh(new THREE.SphereGeometry(0.018,8,8),GO,head,x,-0.07,0.02); });
+    mesh(new THREE.CircleGeometry(0.011,12),BD,head,0,0.072,0.118);
+    // ── Hair: parted, with long braid ──
+    mesh(new THREE.SphereGeometry(0.142,22,18),HA,head,0,0.025,-0.015,0,0,0,1,1.05,1.02);
+    mesh(new THREE.BoxGeometry(0.01,0.05,0.04),M(0x1a1008,0.5),head,0,0.1,0.1); // centre parting hint
+    // side hair framing face
+    [-0.115,0.115].forEach(function(x){ mesh(capsule(0.035,0.18,10),HA,head,x,-0.06,0.04); });
+    // long braid down the back
+    var braid=new THREE.Group(); braid.position.set(0,-0.08,-0.1); head.add(braid);
+    [0,1,2,3].forEach(function(s){ mesh(new THREE.SphereGeometry(0.05-s*0.007,12,10),HA,braid,0,-s*0.13,0); });
+    mesh(new THREE.ConeGeometry(0.025,0.1,8),M(0xc41040,0.5),braid,0,-0.5,0); // paranda tassel
+    // maang-tikka (forehead jewel)
+    mesh(new THREE.SphereGeometry(0.014,8,8),GO,head,0,0.14,0.06);
+    mesh(capsule(0.004,0.06,6),GO,head,0,0.105,0.085);
+    // earrings (jhumka)
+    [-0.118,0.118].forEach(function(x){ mesh(new THREE.SphereGeometry(0.016,8,8),GO,head,x,-0.05,0.01); mesh(new THREE.ConeGeometry(0.022,0.03,8),GO,head,x,-0.078,0.01,PI,0,0); });
+    // nose ring (nath)
+    mesh(new THREE.TorusGeometry(0.022,0.004,6,16),GO,head,-0.03,-0.04,0.1,0,0.4,0);
 
-    // ── Necklace ──
-    for(var a=0;a<11;a++){
-      var ang=(a-5)/5*0.9;
-      mesh(new THREE.SphereGeometry(0.015,8,8),GO,null,Math.sin(ang)*0.13,1.55-Math.abs(ang)*0.04,Math.cos(ang)*0.13);
+    // ── Necklace (haar) layered ──
+    for(var a=0;a<13;a++){ var ang=(a-6)/6*0.95; mesh(new THREE.SphereGeometry(0.013,8,8),GO,null,Math.sin(ang)*0.12,1.46-Math.abs(ang)*0.03,Math.cos(ang)*0.1+0.02); }
+    mesh(new THREE.SphereGeometry(0.022,10,8),GEM,null,0,1.36,0.14); // pendant
+
+    // ════ ARMS — pivot at shoulder, hang naturally ════
+    function buildArm(side){
+      var g=new THREE.Group(); g.position.set(0.15*side,1.42,0); root.add(g);
+      mesh(capsule(0.045,0.26,12),RO,g,0,-0.14,0);            // upper arm (sleeve)
+      mesh(capsule(0.036,0.24,12),SK,g,0,-0.42,0);            // forearm
+      mesh(new THREE.SphereGeometry(0.04,12,10),SK,g,0,-0.58,0); // hand
+      // fingers
+      for(var f=-1;f<=2;f++){ mesh(capsule(0.009,0.05,6),SK,g,f*0.016,-0.63,0.005); }
+      // bangles (choodiyan)
+      [0,1,2,3].forEach(function(b){ mesh(new THREE.TorusGeometry(0.04,0.007,6,16),GO,g,0,-0.5-b*0.018,0,PI/2,0,0); });
+      mesh(new THREE.TorusGeometry(0.047,0.006,6,16),GEM,g,0,-0.28,0,PI/2,0,0); // armlet
+      return g;
     }
+    var armL=buildArm(-1), armR=buildArm(1);
 
-    // ── Arms (groups for posing) ──
-    var armL=new THREE.Group(); armL.position.set(-0.17,1.4,0); root.add(armL);
-    mesh(capsule(0.05,0.24,10),RO,armL,-0.12,-0.12,0,0,0,0.4);
-    mesh(capsule(0.042,0.2,10),SK,armL,-0.24,-0.3,0,0,0,0.5);
-    mesh(new THREE.SphereGeometry(0.045,10,8),SK,armL,-0.32,-0.42,0);
-    [0,1,2].forEach(function(b){ mesh(new THREE.TorusGeometry(0.046,0.008,6,16),GO,armL,-0.27,-0.34-b*0.02,0,0.6,0,0.5); });
-
-    var armR=new THREE.Group(); armR.position.set(0.17,1.4,0); root.add(armR);
-    mesh(capsule(0.05,0.24,10),RO,armR,0.12,-0.12,0,0,0,-0.4);
-    mesh(capsule(0.042,0.2,10),SK,armR,0.24,-0.3,0,0,0,-0.5);
-    mesh(new THREE.SphereGeometry(0.045,10,8),SK,armR,0.32,-0.42,0);
-    [0,1,2].forEach(function(b){ mesh(new THREE.TorusGeometry(0.046,0.008,6,16),GO,armR,0.27,-0.34-b*0.02,0,0.6,0,-0.5); });
-
-    // ── Feet ──
-    [-0.12,0.12].forEach(function(x){ mesh(capsule(0.05,0.08,8),SK,null,x,0.04,0.05,PI/2,0,0); });
+    // ── Feet (peeking from under ghagra) ──
+    [-0.09,0.09].forEach(function(x){
+      mesh(capsule(0.04,0.06,8),SK,null,x,0.035,0.06,PI/2,0,0);
+      mesh(new THREE.TorusGeometry(0.038,0.005,6,16),GO,null,x,0.05,0.02,0,0,0); // payal
+    });
 
     // ── Floor ring ──
     var fring=mesh(new THREE.TorusGeometry(0.9,0.02,8,48),M(0x917aff,0.3,0.2,0x4030a0,0.6),null,0,0.01,0,PI/2,0,0);
@@ -158,15 +190,16 @@
     pg.setAttribute('position',new THREE.BufferAttribute(pos,3));
     scene.add(new THREE.Points(pg,new THREE.PointsMaterial({color:0x917aff,size:0.02,transparent:true,opacity:0.5})));
 
-    // ── Poses ──
+    // ── Poses (arms hang down from shoulders; +X forward, Z inward) ──
+    // armLZ: left arm tuck-in, armRZ: right arm tuck-in (mirrored), armX: raise forward
     var POSES={
-      idle:{armLZ:0.4,armRZ:-0.4,armLX:0,armRX:0,by:0,bp:0,hp:0},
-      sit:{armLZ:0.2,armRZ:-0.2,armLX:0.3,armRX:0.3,by:-0.35,bp:0.05,hp:0.05},
-      stand:{armLZ:0.15,armRZ:-0.15,armLX:0,armRX:0,by:0.02,bp:0,hp:-0.05},
-      clap:{armLZ:-0.5,armRZ:0.5,armLX:0.6,armRX:0.6,by:0,bp:0.05,hp:0.1},
-      pranaam:{armLZ:-0.7,armRZ:0.7,armLX:0.9,armRX:0.9,by:-0.05,bp:0.18,hp:0.25}
+      idle:   {armLZ:0.06,armRZ:0.06,armLX:0.0,armRX:0.0,by:0.0, bp:0,    hp:0},
+      sit:    {armLZ:0.10,armRZ:0.10,armLX:0.35,armRX:0.35,by:-0.32,bp:0.04,hp:0.04},
+      stand:  {armLZ:0.04,armRZ:0.04,armLX:0.0,armRX:0.0,by:0.03,bp:0,    hp:-0.04},
+      clap:   {armLZ:0.55,armRZ:0.55,armLX:1.25,armRX:1.25,by:0.0, bp:0.03,hp:0.08},
+      pranaam:{armLZ:0.62,armRZ:0.62,armLX:1.45,armRX:1.45,by:-0.04,bp:0.14,hp:0.2}
     };
-    var pose='idle', tgt=POSES.idle, cur={armLZ:0.4,armRZ:-0.4,armLX:0,armRX:0,by:0,bp:0,hp:0};
+    var pose='idle', tgt=POSES.idle, cur={armLZ:0.06,armRZ:0.06,armLX:0,armRX:0,by:0,bp:0,hp:0};
     window.setPose=function(p,el){
       pose=p; tgt=POSES[p];
       document.querySelectorAll('.btn').forEach(function(b){b.classList.remove('on');});
@@ -197,13 +230,13 @@
       for(var key in cur){ cur[key]+=(tgt[key]-cur[key])*k; }
 
       var clapOff=0;
-      if(pose==='clap'){ clapOff=Math.abs(Math.sin(t*6))*0.4; }
-      armL.rotation.z=cur.armLZ+clapOff;
-      armR.rotation.z=cur.armRZ-clapOff;
+      if(pose==='clap'){ clapOff=Math.abs(Math.sin(t*6))*0.18; }
+      armL.rotation.z=cur.armLZ+clapOff;     // left tucks toward centre (+z)
+      armR.rotation.z=-(cur.armRZ+clapOff);  // right mirrored (-z)
       armL.rotation.x=cur.armLX;
       armR.rotation.x=cur.armRX;
 
-      head.position.y=1.78+cur.by+Math.sin(t*0.65)*0.01;
+      head.position.y=1.66+cur.by+Math.sin(t*0.65)*0.01;
       head.rotation.x=cur.hp;
       root.position.y=cur.by+Math.sin(t*0.6)*0.006;
       root.rotation.y=Math.sin(t*0.28)*0.04;
