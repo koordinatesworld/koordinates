@@ -368,13 +368,13 @@
   function goClap() {
     if (stateLock) return;
     stateLock = true; STATE = 'CLAPPING';
-    // bring hands forward
-    tween(pose.L, { shZ: 0.28, uaX: 0.6, faX: 1.5, faZ: 0.7 }, 0.55, 'power2.out');
-    tween(pose.R, { shZ: 0.28, uaX: 0.6, faX: 1.5, faZ: 0.7 }, 0.55, 'power2.out');
-    tween(pose, { headX: 0.1, upperX: 0.05 }, 0.55, 'power2.out', function () {
+    // ── raise both arms in front (uaX forward, shZ tucked in, faZ toward midline)
+    tween(pose.L, { shZ: 0.25, uaX: 0.85, faX: 1.45, faZ: 0.78 }, 0.55, 'power2.out');
+    tween(pose.R, { shZ: 0.25, uaX: 0.85, faX: 1.45, faZ: 0.78 }, 0.55, 'power2.out');
+    tween(pose, { headX: 0.08, upperX: 0.04 }, 0.55, 'power2.out', function () {
       doClaps(5, function () {
-        showBubble('Thank you.\nDisclaimer accepted successfully.', 3000);
-        setTimeout(returnToOriginal, 1200);
+        showBubble('"darling — my whole work is to confuse you.\nand it seems to be working perfectly." 🙏', 3200);
+        setTimeout(returnToOriginal, 1400);
       });
     });
   }
@@ -384,19 +384,37 @@
     function clap() {
       if (i >= n) { if (done) done(); return; }
       i++;
-      // open
-      tween(pose.L, { faZ: 0.45 }, 0.12, 'power1.out');
-      tween(pose.R, { faZ: 0.45 }, 0.12, 'power1.out', function () {
-        // close (contact) + sound + sparkles
-        tween(pose.L, { faZ: 0.92 }, 0.1, 'power2.in');
-        tween(pose.R, { faZ: 0.92 }, 0.1, 'power2.in', function () {
+      // OPEN: palms apart (faZ smaller = hands move apart)
+      tween(pose.L, { faZ: 0.42 }, 0.10, 'power1.out');
+      tween(pose.R, { faZ: 0.42 }, 0.10, 'power1.out', function () {
+        // CLOSE: palms meet at centre (faZ bigger = hands swing inward and meet)
+        tween(pose.L, { faZ: 0.88 }, 0.09, 'power2.in');
+        tween(pose.R, { faZ: 0.88 }, 0.09, 'power2.in', function () {
           playClapSound();
           burstSparkles();
-          setTimeout(clap, 110);
+          setTimeout(clap, 120);
         });
       });
     }
     clap();
+  }
+
+  // "Not yet" → pranaam pose + laadle dialogue → exit screen
+  function goDecline() {
+    if (stateLock) return;
+    stateLock = true; STATE = 'PRANAAM';
+    // pranaam: arms raised higher, palms pressed together at chest
+    tween(pose.L, { shZ: 0.40, uaX: 0.65, faX: 1.72, faZ: 0.92 }, 0.8, 'power3.inOut');
+    tween(pose.R, { shZ: 0.40, uaX: 0.65, faX: 1.72, faZ: 0.92 }, 0.8, 'power3.inOut');
+    tween(pose, { headX: 0.3, upperX: 0.14 }, 0.8, 'power2.inOut', function () {
+      showBubble('"chal laadle... 🙏\nbahut shukriya —\nwarna intelligent ho jaate."', 0);
+      setTimeout(function () {
+        hideBubble();
+        var ex = document.getElementById('exit-screen');
+        if (ex) ex.classList.add('open');
+        returnToOriginal();
+      }, 2200);
+    });
   }
 
   function returnToOriginal() {
@@ -528,11 +546,23 @@
     if (hint) hint.style.opacity = '';
   }
   btnClose.addEventListener('click', closeModal);
-  btnDecline.addEventListener('click', closeModal);
   modalOv.addEventListener('click', function (e) { if (e.target === modalOv) closeModal(); });
+
   btnAccept.addEventListener('click', function () {
     closeModal();
-    goClap();                       // accept → clapping animation
+    goClap();  // accept → clapping animation + "Thank you"
+  });
+
+  btnDecline.addEventListener('click', function () {
+    closeModal();
+    goDecline(); // "not yet" → pranaam + laadle exit
+  });
+
+  var btnReturn = document.getElementById('btn-return');
+  if (btnReturn) btnReturn.addEventListener('click', function () {
+    var ex = document.getElementById('exit-screen');
+    if (ex) ex.classList.remove('open');
+    returnToOriginal();
   });
 
   /* ─────────────────────────────────────────────
