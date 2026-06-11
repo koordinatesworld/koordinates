@@ -1,0 +1,1950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>koordinates — where roots meet coordinates</title>
+
+  <!-- COPYRIGHT & OWNERSHIP -->
+  <meta name="author" content="koordinates/" />
+  <meta name="copyright" content="© 2025 koordinates/. All rights reserved." />
+  <meta name="robots" content="index, follow, noarchive" />
+  <meta name="dcterms.rights" content="All content on this site is original and protected under copyright law. Unauthorised reproduction is prohibited." />
+  <meta property="og:site_name" content="koordinates/" />
+  <meta property="og:type" content="website" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0f0f14;
+      --surface: #16161e;
+      --surface2: #1e1e2a;
+      --line: #252535;
+      --accent: #7c6af7;
+      --accent2: #00ddd6;
+      --light-bg: #f5f2ee;
+      --light-surface: #ffffff;
+      --light-text: #1a1a2e;
+      --accent3: #ff6b9d;
+      --gold: #f0a500;
+      --text: #ededf5;
+      --muted: #707089;
+      --dim: #383850;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.3rem 3rem;
+      background: rgba(15,15,20,0.88);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+    }
+    .logo { font-family: 'Space Mono', monospace; font-size: 1rem; color: var(--text); letter-spacing: -0.5px; }
+    .logo em { color: var(--accent); font-style: normal; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { color: #555570; text-decoration: none; font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid; place-items: center;
+      padding: 9rem 3rem 5rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 60px 60px; opacity: 0.35;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 80%);
+    }
+    .hero-glow {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 55% at 50% 0%, rgba(124,106,247,0.2) 0%, transparent 60%),
+        radial-gradient(ellipse 35% 35% at 85% 85%, rgba(0,221,214,0.1) 0%, transparent 50%),
+        radial-gradient(ellipse 30% 30% at 15% 70%, rgba(255,107,157,0.07) 0%, transparent 50%);
+    }
+    .hero-inner {
+      max-width: 1000px; width: 100%; position: relative; z-index: 1;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+    }
+    @media (max-width: 900px) { .hero-inner { grid-template-columns: 1fr; gap: 3rem; } }
+
+    .hero-eyebrow {
+      font-family: 'Space Mono', monospace; font-size: 0.68rem; letter-spacing: 4px;
+      text-transform: uppercase; color: var(--accent2); margin-bottom: 1.8rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .hero-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--accent2); }
+
+    h1 { font-size: clamp(2.8rem, 6vw, 5.5rem); font-weight: 900; line-height: 0.95; letter-spacing: -3px; margin-bottom: 2rem; }
+    h1 .l1 { display: block; color: var(--text); }
+    h1 .l2 { display: block; background: linear-gradient(100deg, var(--accent), var(--accent2) 60%, var(--accent3)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    .hero-quote {
+      font-size: 0.95rem; color: #55556a; line-height: 1.9; margin-bottom: 2.5rem;
+      font-style: italic; max-width: 420px;
+      border-left: 2px solid var(--accent); padding-left: 1.2rem;
+    }
+    .hero-quote cite { display: block; margin-top: 0.6rem; font-style: normal; font-size: 0.72rem; color: var(--accent); font-family: 'Space Mono', monospace; letter-spacing: 1px; }
+
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn { padding: 0.8rem 1.8rem; border-radius: 6px; font-size: 0.82rem; font-weight: 700; text-decoration: none; letter-spacing: 0.5px; text-transform: uppercase; transition: all 0.2s; display: inline-block; border: none; cursor: pointer; }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: #6a58e0; transform: translateY(-2px); box-shadow: 0 10px 28px rgba(124,106,247,0.35); }
+    .btn-ghost { background: transparent; color: #55556a; border: 1px solid var(--line); }
+    .btn-ghost:hover { border-color: var(--accent2); color: var(--accent2); }
+
+    /* GLOBE */
+    .hero-visual { display: flex; justify-content: center; align-items: center; }
+    .globe-wrap { position: relative; width: 340px; height: 340px; }
+    .globe-wrap svg { width: 100%; height: 100%; }
+    .globe-ring { position: absolute; inset: -20px; border: 1px solid rgba(124,106,247,0.15); border-radius: 50%; animation: spin 30s linear infinite; }
+    .globe-ring-2 { position: absolute; inset: -45px; border: 1px dashed rgba(0,221,214,0.1); border-radius: 50%; animation: spin 50s linear infinite reverse; }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .globe-dot { position: absolute; width: 8px; height: 8px; border-radius: 50%; background: var(--accent2); box-shadow: 0 0 10px var(--accent2); }
+    .globe-dot:nth-child(3) { top: 15%; left: 55%; }
+    .globe-dot:nth-child(4) { top: 60%; left: 20%; background: var(--accent3); box-shadow: 0 0 10px var(--accent3); }
+    .globe-dot:nth-child(5) { top: 40%; left: 75%; background: var(--gold); box-shadow: 0 0 10px var(--gold); }
+
+    /* TICKER */
+    .ticker { overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 1rem 0; background: var(--surface); }
+    .ticker-inner { display: flex; gap: 4rem; animation: ticker 28s linear infinite; width: max-content; }
+    .ticker-item { white-space: nowrap; font-family: 'Space Mono', monospace; font-size: 0.72rem; color: #404055; }
+    .ticker-item span { color: var(--accent); margin-right: 0.5rem; }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* PHILOSOPHY STRIP */
+    .philosophy {
+      background: linear-gradient(135deg, #13131c 0%, #1a1428 100%);
+      border-bottom: 1px solid var(--line);
+      padding: 5rem 3rem; text-align: center; position: relative; overflow: hidden;
+    }
+    .philosophy::before {
+      content: '"'; position: absolute; top: -2rem; left: 50%; transform: translateX(-50%);
+      font-size: 18rem; line-height: 1; color: rgba(124,106,247,0.04);
+      font-family: Georgia, serif; pointer-events: none;
+    }
+    .philosophy blockquote { max-width: 680px; margin: 0 auto; font-size: clamp(1.2rem, 3vw, 1.9rem); font-weight: 300; line-height: 1.65; color: #7070a0; font-style: italic; letter-spacing: -0.5px; }
+    .philosophy blockquote strong { color: var(--text); font-weight: 700; font-style: normal; }
+    .philosophy cite { display: block; margin-top: 1.5rem; font-size: 0.72rem; font-style: normal; color: var(--accent); font-family: 'Space Mono', monospace; letter-spacing: 3px; text-transform: uppercase; }
+
+    /* SECTION */
+    .section { max-width: 1200px; margin: 0 auto; padding: 7rem 3rem; }
+    .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; padding-bottom: 2rem; border-bottom: 1px solid var(--line); }
+    .section-label { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--accent2); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 0.8rem; }
+    h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; letter-spacing: -1.5px; line-height: 1.05; }
+    .section-count { font-family: 'Space Mono', monospace; font-size: 3.5rem; font-weight: 700; color: var(--dim); letter-spacing: -3px; line-height: 1; }
+
+    /* FEATURED */
+    .featured-card {
+      background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
+      padding: 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
+      margin-bottom: 1.5rem; text-decoration: none; color: inherit;
+      transition: border-color 0.25s, transform 0.25s; position: relative; overflow: hidden;
+    }
+    .featured-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3)); }
+    .featured-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    @media (max-width: 768px) { .featured-card { grid-template-columns: 1fr; } }
+
+    .featured-tag { display: inline-block; padding: 0.3rem 0.9rem; background: rgba(124,106,247,0.15); border: 1px solid rgba(124,106,247,0.3); border-radius: 999px; font-size: 0.68rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; }
+    .featured-card h3 { font-size: 1.7rem; font-weight: 900; letter-spacing: -0.8px; line-height: 1.2; margin-bottom: 1rem; }
+    .featured-card p { color: #55556a; font-size: 0.92rem; line-height: 1.8; margin-bottom: 1.5rem; }
+    .read-link { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--accent); letter-spacing: 1px; text-transform: uppercase; }
+
+    .feat-visual { width: 100%; aspect-ratio: 4/3; background: var(--surface2); border-radius: 12px; border: 1px solid var(--line); display: grid; place-items: center; overflow: hidden; position: relative; }
+    .feat-visual svg { width: 100%; height: 100%; }
+
+    /* BLOG GRID */
+    .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    @media (max-width: 900px) { .blog-grid { grid-template-columns: 1fr; } }
+
+    .blog-card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 2rem; text-decoration: none; color: inherit; transition: all 0.22s; display: block; position: relative; overflow: hidden; }
+    .blog-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.4); }
+    .blog-card-icon { width: 44px; height: 44px; background: var(--surface2); border-radius: 10px; display: grid; place-items: center; font-size: 1.3rem; margin-bottom: 1.2rem; border: 1px solid var(--line); }
+    .blog-cat { font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent2); margin-bottom: 0.7rem; }
+    .blog-card h3 { font-size: 0.95rem; font-weight: 700; line-height: 1.45; margin-bottom: 0.8rem; letter-spacing: -0.2px; }
+    .blog-card p { font-size: 0.82rem; color: #55556a; line-height: 1.7; }
+    .blog-arrow { margin-top: 1.5rem; font-size: 1rem; color: var(--dim); display: inline-block; transition: color 0.2s, transform 0.2s; }
+    .blog-card:hover .blog-arrow { color: var(--accent); transform: translateX(4px); }
+
+    /* OSHO CARDS */
+    .osho-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; margin-top: 0; }
+    @media (max-width: 768px) { .osho-grid { grid-template-columns: 1fr; } }
+
+    .osho-card { background: linear-gradient(135deg, var(--surface) 0%, #1a1428 100%); border: 1px solid var(--line); border-radius: 12px; padding: 2.5rem; position: relative; overflow: hidden; transition: border-color 0.2s; }
+    .osho-card:hover { border-color: rgba(240,165,0,0.3); }
+    .osho-card::after { content: ''; position: absolute; bottom: 0; right: 0; width: 100px; height: 100px; background: radial-gradient(circle, rgba(240,165,0,0.06) 0%, transparent 70%); }
+    .osho-card blockquote { font-size: 1rem; font-style: italic; color: #7070a0; line-height: 1.75; margin-bottom: 1rem; }
+    .osho-card blockquote strong { color: var(--text); font-style: normal; }
+    .osho-link { font-size: 0.78rem; color: var(--gold); font-family: 'Space Mono', monospace; letter-spacing: 1px; text-decoration: none; }
+    .osho-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); opacity: 0.7; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .osho-label::before { content: '◈'; font-size: 0.8rem; }
+
+    /* REELS */
+    .reels-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    @media (max-width: 900px) { .reels-grid { grid-template-columns: 1fr; } }
+
+    .reel-card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 2rem; transition: all 0.22s; }
+    .reel-card:hover { border-color: var(--accent3); transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,0.4); }
+    .reel-num { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--dim); margin-bottom: 1rem; letter-spacing: 2px; }
+    .reel-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent3); margin-bottom: 0.8rem; }
+    .reel-card h3 { font-size: 0.92rem; font-weight: 700; line-height: 1.45; margin-bottom: 0.7rem; }
+    .reel-card p { font-size: 0.8rem; color: #55556a; line-height: 1.65; }
+    .reel-tags { margin-top: 1rem; font-family: 'Space Mono', monospace; font-size: 0.62rem; color: var(--dim); }
+
+    /* CONTACT */
+    .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); }
+    @media (max-width: 768px) { .contact-wrap { grid-template-columns: 1fr; } }
+    .contact-left { padding: 7rem 3rem; border-right: 1px solid var(--line); }
+    .contact-right { padding: 7rem 3rem; }
+    .contact-left h2 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; letter-spacing: -2px; line-height: 1; margin-bottom: 1.5rem; }
+    .contact-left p { color: #55556a; line-height: 1.8; font-size: 0.95rem; max-width: 360px; margin-bottom: 2rem; }
+    .contact-email { font-family: 'Space Mono', monospace; font-size: 0.82rem; color: var(--accent2); display: block; margin-bottom: 2rem; }
+    .contact-item { display: flex; align-items: center; gap: 1rem; padding: 1.4rem 0; border-bottom: 1px solid var(--line); }
+    .contact-item:first-of-type { border-top: 1px solid var(--line); }
+    .ci-icon { width: 42px; height: 42px; background: var(--surface2); border-radius: 10px; display: grid; place-items: center; font-size: 1.1rem; flex-shrink: 0; border: 1px solid var(--line); }
+    .ci-text h4 { font-size: 0.85rem; font-weight: 700; margin-bottom: 0.2rem; }
+    .ci-text p { font-size: 0.75rem; color: #55556a; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--line); padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; }
+    .footer-logo { font-family: 'Space Mono', monospace; font-size: 0.85rem; color: #404055; }
+    .footer-logo em { color: var(--accent); font-style: normal; }
+    footer p { font-size: 0.72rem; color: #303045; font-family: 'Space Mono', monospace; }
+
+    @media (max-width: 600px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+      .hero { padding: 7rem 1.5rem 4rem; }
+      .section { padding: 5rem 1.5rem; }
+      .contact-left, .contact-right { padding: 4rem 1.5rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">ko<em>ord</em>inates/</div>
+  <ul class="nav-links">
+    <li><a href="#writing">Writing</a></li>
+    <li><a href="#philosophy">Philosophy</a></li>
+    <li><a href="#reels">Reels</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div>
+      <p class="hero-eyebrow">Independent Content Studio</p>
+      <h1>
+        <span class="l1">Ideas that</span>
+        <span class="l2">seek truth.</span>
+      </h1>
+      <div class="hero-quote">
+        "The moment you know yourself, you have known the most
+        mysterious thing in the whole universe."
+        <cite>— Osho</cite>
+      </div>
+      <div class="hero-cta">
+        <a href="#writing" class="btn btn-primary">Explore the work</a>
+        <a href="#contact" class="btn btn-ghost">Collaborate</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="globe-wrap">
+        <div class="globe-ring"></div>
+        <div class="globe-ring-2"></div>
+        <div class="globe-dot"></div>
+        <div class="globe-dot"></div>
+        <div class="globe-dot"></div>
+        <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="gg" cx="40%" cy="35%" r="65%">
+              <stop offset="0%" stop-color="#2a2040"/>
+              <stop offset="100%" stop-color="#0f0f14"/>
+            </radialGradient>
+            <radialGradient id="gw" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#7c6af7" stop-opacity="0.3"/>
+              <stop offset="100%" stop-color="#7c6af7" stop-opacity="0"/>
+            </radialGradient>
+            <clipPath id="cc"><circle cx="150" cy="150" r="120"/></clipPath>
+          </defs>
+          <circle cx="150" cy="150" r="140" fill="url(#gw)"/>
+          <circle cx="150" cy="150" r="120" fill="url(#gg)" stroke="#2e2e50" stroke-width="1.5"/>
+          <g clip-path="url(#cc)" stroke="#2e2e50" stroke-width="0.8" opacity="0.7">
+            <ellipse cx="150" cy="150" rx="120" ry="30"/>
+            <ellipse cx="150" cy="150" rx="120" ry="65"/>
+            <ellipse cx="150" cy="150" rx="120" ry="100"/>
+            <line x1="150" y1="30" x2="150" y2="270"/>
+            <ellipse cx="150" cy="150" rx="50" ry="120"/>
+            <ellipse cx="150" cy="150" rx="90" ry="120"/>
+          </g>
+          <g clip-path="url(#cc)" opacity="0.9">
+            <path d="M165 100 Q195 95 205 120 Q215 145 200 165 Q185 180 170 170 Q155 160 150 140 Q145 120 165 100Z" fill="#7c6af7" opacity="0.25"/>
+            <path d="M120 130 Q135 120 145 140 Q155 160 145 185 Q135 200 120 195 Q108 185 105 165 Q102 145 120 130Z" fill="#00ddd6" opacity="0.2"/>
+            <path d="M60 100 Q80 90 90 115 Q100 135 88 160 Q76 180 62 170 Q48 158 45 135 Q43 112 60 100Z" fill="#ff6b9d" opacity="0.18"/>
+          </g>
+          <circle cx="193" cy="145" r="5" fill="#00ddd6" opacity="0.9">
+            <animate attributeName="opacity" values="0.9;0.3;0.9" dur="2.5s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="193" cy="145" r="12" fill="none" stroke="#00ddd6" stroke-width="1" opacity="0.4">
+            <animate attributeName="r" values="8;16;8" dur="2.5s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.4;0;0.4" dur="2.5s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="150" cy="150" r="120" fill="none" stroke="#7c6af7" stroke-width="1" opacity="0.3"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item"><span>◆</span> Earth Observation</span>
+    <span class="ticker-item"><span>◆</span> Spatial Science</span>
+    <span class="ticker-item"><span>◆</span> Biology of Place</span>
+    <span class="ticker-item"><span>◆</span> Northeast India</span>
+    <span class="ticker-item"><span>◆</span> Visual Thinking</span>
+    <span class="ticker-item"><span>◆</span> Philosophy of Science</span>
+    <span class="ticker-item"><span>◆</span> Independent Research</span>
+    <span class="ticker-item"><span>◆</span> Content Studio</span>
+    <span class="ticker-item"><span>◆</span> Earth Observation</span>
+    <span class="ticker-item"><span>◆</span> Spatial Science</span>
+    <span class="ticker-item"><span>◆</span> Biology of Place</span>
+    <span class="ticker-item"><span>◆</span> Northeast India</span>
+    <span class="ticker-item"><span>◆</span> Visual Thinking</span>
+    <span class="ticker-item"><span>◆</span> Philosophy of Science</span>
+    <span class="ticker-item"><span>◆</span> Independent Research</span>
+    <span class="ticker-item"><span>◆</span> Content Studio</span>
+  </div>
+</div>
+
+<!-- PHILOSOPHY STRIP -->
+<div class="philosophy">
+  <blockquote>
+    "Science gives you <strong>the map.</strong>
+    Meditation gives you <strong>the territory.</strong>
+    The real journey begins only when you stop
+    <strong>confusing the two.</strong>"
+  </blockquote>
+  <cite>— koordinates perspective</cite>
+</div>
+
+<!-- WRITING -->
+<div class="section" id="writing">
+  <div class="section-header">
+    <div>
+      <p class="section-label">// Writing</p>
+      <h2>Notes that<br/>cut deep</h2>
+    </div>
+    <span class="section-count">06</span>
+  </div>
+
+  <a href="#post1" class="featured-card">
+    <div>
+      <span class="featured-tag">Featured Post</span>
+      <h3>The Map Is Not the Territory — Osho, Korzybski, and the Limits of GIS</h3>
+      <p>We build satellite maps of the entire earth — every river, every deforested patch, every shifting coastline — with millimetre precision. And yet, Osho kept saying: <em>"The map is not the territory. The word 'water' will not quench your thirst."</em> He was quoting Korzybski, a philosopher of language. But he was also, unknowingly, describing the deepest problem in geospatial science.</p>
+      <span class="read-link">Read the full piece →</span>
+    </div>
+    <div class="feat-visual">
+      <svg viewBox="0 0 280 210" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="280" height="210" fill="#1a1a28"/>
+        <g stroke="#252535" stroke-width="0.8">
+          <line x1="0" y1="42" x2="280" y2="42"/><line x1="0" y1="84" x2="280" y2="84"/>
+          <line x1="0" y1="126" x2="280" y2="126"/><line x1="0" y1="168" x2="280" y2="168"/>
+          <line x1="56" y1="0" x2="56" y2="210"/><line x1="112" y1="0" x2="112" y2="210"/>
+          <line x1="168" y1="0" x2="168" y2="210"/><line x1="224" y1="0" x2="224" y2="210"/>
+        </g>
+        <path d="M40 160 Q80 120 120 100 Q160 80 200 90 Q230 98 250 120" stroke="#7c6af7" stroke-width="1.5" fill="none" opacity="0.5"/>
+        <path d="M30 175 Q70 145 110 120 Q155 95 195 105 Q225 112 255 135" stroke="#7c6af7" stroke-width="1" fill="none" opacity="0.3"/>
+        <path d="M20 80 Q60 95 90 85 Q130 70 160 90 Q190 108 220 95 Q245 85 265 75" stroke="#00ddd6" stroke-width="2" fill="none" opacity="0.7" stroke-dasharray="4 3"/>
+        <rect x="50" y="110" width="30" height="25" rx="4" fill="#2a5a3a" opacity="0.7"/>
+        <rect x="90" y="100" width="25" height="20" rx="4" fill="#2a5a3a" opacity="0.5"/>
+        <rect x="180" y="120" width="35" height="28" rx="4" fill="#2a5a3a" opacity="0.6"/>
+        <rect x="0" y="0" width="280" height="3" fill="#00ddd6" opacity="0.15">
+          <animateTransform attributeName="transform" type="translate" values="0,0;0,210;0,0" dur="4s" repeatCount="indefinite"/>
+        </rect>
+        <text x="10" y="20" fill="#404055" font-size="8" font-family="monospace">26.4°N</text>
+        <text x="10" y="200" fill="#404055" font-size="8" font-family="monospace">94.2°E</text>
+        <circle cx="155" cy="95" r="4" fill="#ff6b9d" opacity="0.9">
+          <animate attributeName="opacity" values="1;0.3;1" dur="1.8s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="155" cy="95" r="10" fill="none" stroke="#ff6b9d" stroke-width="1" opacity="0.5">
+          <animate attributeName="r" values="6;18;6" dur="1.8s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.5;0;0.5" dur="1.8s" repeatCount="indefinite"/>
+        </circle>
+      </svg>
+    </div>
+  </a>
+
+  <div class="blog-grid">
+    <a href="#" class="blog-card">
+      <div class="blog-card-icon">🧬</div>
+      <p class="blog-cat">Biology</p>
+      <h3>Your DNA Is Not a Blueprint. It's a Conversation.</h3>
+      <p>Epigenetics proves that genes don't dictate — they respond. What you do, think, and feel rewrites the code.</p>
+      <span class="blog-arrow">→</span>
+    </a>
+    <a href="#" class="blog-card">
+      <div class="blog-card-icon">🗺️</div>
+      <p class="blog-cat">GIS</p>
+      <h3>Every Map Is a Lie. Here's Why That Matters.</h3>
+      <p>Projections, scale, and power. How cartography shapes geopolitics — and your perception of "normal."</p>
+      <span class="blog-arrow">→</span>
+    </a>
+    <a href="#" class="blog-card">
+      <div class="blog-card-icon">🌿</div>
+      <p class="blog-cat">Northeast India</p>
+      <h3>Assam Is Sinking. The Data Is Undeniable.</h3>
+      <p>30 years of satellite imagery. Brahmaputra erosion patterns. The numbers behind a slow catastrophe.</p>
+      <span class="blog-arrow">→</span>
+    </a>
+    <a href="#" class="blog-card">
+      <div class="blog-card-icon">🔬</div>
+      <p class="blog-cat">Research</p>
+      <h3>How to Read a Scientific Paper Without Losing Your Mind</h3>
+      <p>Methodology first. Abstract last. A system used across 40+ papers that actually works.</p>
+      <span class="blog-arrow">→</span>
+    </a>
+    <a href="#" class="blog-card">
+      <div class="blog-card-icon">✏️</div>
+      <p class="blog-cat">Visual Thinking</p>
+      <h3>Drawing Is Thinking. Here's the Neuroscience.</h3>
+      <p>Not aesthetic — neurological. What actually happens in your brain when you sketch an idea.</p>
+      <span class="blog-arrow">→</span>
+    </a>
+    <a href="#" class="blog-card">
+      <div class="blog-card-icon">🌍</div>
+      <p class="blog-cat">Earth Systems</p>
+      <h3>The Planet Doesn't Need Saving. We Do.</h3>
+      <p>Earth has survived five mass extinctions. The climate crisis is a human crisis, not a planetary one.</p>
+      <span class="blog-arrow">→</span>
+    </a>
+  </div>
+</div>
+
+<!-- VEDA × SCIENCE SECTION -->
+<div id="vedas" style="border-top:1px solid var(--line); background: linear-gradient(180deg, #0f0f14 0%, #13101e 100%);">
+  <div style="max-width:1200px; margin:0 auto; padding:7rem 3rem;">
+
+    <p style="font-family:'Space Mono',monospace; font-size:0.68rem; color:var(--gold); letter-spacing:3px; text-transform:uppercase; margin-bottom:1rem;">// The Ancient Code</p>
+    <h2 style="font-size:clamp(2rem,5vw,3.5rem); font-weight:900; letter-spacing:-2px; line-height:1.05; margin-bottom:1rem;">
+      The Vedas Knew.<br/><span style="background:linear-gradient(90deg,var(--gold),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Science Remembered.</span>
+    </h2>
+    <p style="color:var(--muted); font-size:1rem; line-height:1.8; max-width:620px; margin-bottom:1rem;">
+      4,000 years before satellites, before DNA sequencers, before GIS software —
+      the Rishis mapped the universe. Not with instruments. With awareness.
+      Click any sutra. See what they already knew.
+    </p>
+    <p style="font-family:'Space Mono',monospace; font-size:0.72rem; color:var(--accent); margin-bottom:3.5rem;">
+      ↓ tap a sutra to expand — Vedic text · science connection · Osho's lens
+    </p>
+
+    <!-- VEDA TABS -->
+    <div style="display:flex; gap:0.8rem; flex-wrap:wrap; margin-bottom:3rem;" id="veda-tabs">
+      <button onclick="showVeda('rig')" id="tab-rig" class="veda-tab active-tab">Rig Veda</button>
+      <button onclick="showVeda('atharva')" id="tab-atharva" class="veda-tab">Atharva Veda</button>
+      <button onclick="showVeda('yajur')" id="tab-yajur" class="veda-tab">Yajur Veda</button>
+      <button onclick="showVeda('sama')" id="tab-sama" class="veda-tab">Sama Veda</button>
+    </div>
+
+    <style>
+      .veda-tab {
+        padding: 0.6rem 1.4rem;
+        border-radius: 6px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        cursor: pointer;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        color: var(--muted);
+        transition: all 0.2s;
+        font-family: 'Space Mono', monospace;
+      }
+      .veda-tab:hover { border-color: var(--gold); color: var(--gold); }
+      .active-tab { background: rgba(240,165,0,0.12); border-color: var(--gold); color: var(--gold); }
+
+      .veda-panel { display: none; }
+      .veda-panel.active { display: block; }
+
+      .sutra-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        margin-bottom: 1rem;
+        overflow: hidden;
+        transition: border-color 0.2s;
+      }
+      .sutra-card:hover { border-color: rgba(240,165,0,0.35); }
+
+      .sutra-header {
+        padding: 1.8rem 2rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .sutra-header:hover { background: rgba(240,165,0,0.03); }
+
+      .sutra-ref {
+        font-family: 'Space Mono', monospace;
+        font-size: 0.65rem;
+        color: var(--gold);
+        letter-spacing: 2px;
+        margin-bottom: 0.5rem;
+        opacity: 0.7;
+      }
+
+      .sutra-sanskrit {
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--text);
+        line-height: 1.5;
+        font-style: italic;
+      }
+
+      .sutra-toggle {
+        font-size: 1.2rem;
+        color: var(--dim);
+        flex-shrink: 0;
+        transition: transform 0.3s;
+      }
+
+      .sutra-body {
+        display: none;
+        padding: 0 2rem 2rem;
+        border-top: 1px solid var(--line);
+      }
+
+      .sutra-body.open { display: block; }
+      .sutra-card.open .sutra-toggle { transform: rotate(45deg); color: var(--gold); }
+
+      .sutra-meaning {
+        padding: 1.2rem 0 1.5rem;
+        font-size: 0.95rem;
+        color: #8080a8;
+        line-height: 1.8;
+        font-style: italic;
+        border-bottom: 1px solid var(--line);
+        margin-bottom: 1.5rem;
+      }
+
+      .sutra-meaning strong { color: var(--text); font-style: normal; }
+
+      .three-cols {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1rem;
+        margin-top: 0.5rem;
+      }
+
+      @media (max-width: 768px) { .three-cols { grid-template-columns: 1fr; } }
+
+      .insight-box {
+        background: var(--surface2);
+        border-radius: 8px;
+        padding: 1.2rem;
+        border: 1px solid var(--line);
+      }
+
+      .insight-label {
+        font-family: 'Space Mono', monospace;
+        font-size: 0.6rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 0.6rem;
+        font-weight: 700;
+      }
+
+      .insight-box p {
+        font-size: 0.82rem;
+        line-height: 1.7;
+        color: #7070a0;
+      }
+
+      .insight-box p strong { font-style: normal; }
+    </style>
+
+    <!-- VEDA PANELS — rendered by JS from veda-data.js -->
+    <div id="veda-rig" class="veda-panel active"></div>
+    <div id="veda-atharva" class="veda-panel"></div>
+    <div id="veda-yajur" class="veda-panel"></div>
+    <div id="veda-sama" class="veda-panel"></div>
+
+    <script>
+const VEDA_DATA = {
+  rig: [
+    {
+      ref: "Rig Veda · 10.129.1 — Nasadiya Sukta",
+      sanskrit: "Nāsad āsīn no sad āsīt tadānīm nāsīd rajo no vyomā paro yat",
+      meaning: "Neither existence nor non-existence was there then. Neither sky nor the space beyond.",
+      geo: "GIS assigns coordinates to everything that exists — but this sutra describes the state before coordinates, before space had dimensions. The quantum vacuum cosmologists study is this exact pre-spatial state. Our most advanced satellite cannot point at 'before the universe.'",
+      bio: "Biology asks: what existed before the first cell? Before RNA? Before chemistry? The Nasadiya Sukta posed this exact question 3,500 years before astrobiology. The origin of life problem is the origin of existence problem — still unanswered.",
+      osho: "'This sutra is the most scientific thing ever written. The Rishi doesn't answer — he only asks. That is the mark of a real scientist. The moment you stop asking and start claiming, you leave science and enter dogma. The Nasadiya Sukta is pure inquiry — no conclusion. That is its genius.'"
+    },
+    {
+      ref: "Rig Veda · 1.164.46 — Agni Hymn",
+      sanskrit: "Ekam sad viprā bahudhā vadanti agnim yamam mātariśvānam āhuḥ",
+      meaning: "Truth is one — the wise call it by many names. They speak of Agni, Yama, Matarishvan.",
+      geo: "In GIS, one place gets infinite names — coordinates, polygon, land cover class, watershed, administrative unit. The same forest is simultaneously NDVI 0.72, 'dense vegetation,' 'protected area,' and 'home.' One territory, endless maps. The sutra knew classification is our limitation, not reality's.",
+      bio: "DNA is four base pairs — A, T, G, C — yet writes a bacterium, a banyan, and a human brain. One code, millions of proteins, infinite life forms. Modern bioinformatics names millions of genes; the Rishi said: one truth, many names.",
+      osho: "'This is the most dangerous sutra — it dissolves all walls. If truth is one, then science and spirituality are two maps of the same territory. The Rishis were original non-dualists — they would have laughed at our academic departments.'"
+    },
+    {
+      ref: "Rig Veda · 10.97.1 — Oshadhi Sukta",
+      sanskrit: "Yā oṣadhīḥ pūrvā jātās tisro yugāni āk purā manastihnāmi tāḥ śatam",
+      meaning: "The plants born in ancient times, three ages before the gods — I contemplate their hundred homes.",
+      geo: "Hyperspectral remote sensing maps medicinal plant distributions across entire landscapes. The Oshadhi Sukta was the world's first ethnobotanical spatial survey — 'hundred homes' are 100 recorded locations of healing plants. The first GIS field notes.",
+      bio: "Over 25% of modern pharmaceuticals derive from plants catalogued first in ancient Indian texts. The Vedic pharmacopoeia of 290+ plants is the oldest database of bioactive compounds ever assembled. Modern bioprospecting is reading this text.",
+      osho: "'The Rishi didn't study plants — he communed with them. Modern science studies from outside. The Vedic scientist became the plant. That is a different knowing. Neither is wrong — but participatory knowing is what science has forgotten entirely.'"
+    },
+    {
+      ref: "Rig Veda · 10.90.1 — Purusha Sukta",
+      sanskrit: "Sahasraśīrṣā puruṣaḥ sahasrākṣaḥ sahasrapāt sa bhūmiṃ viśvato vṛtvā atyatiṣṭhad daśāṅgulam",
+      meaning: "The cosmic being has a thousand heads, a thousand eyes, a thousand feet. It pervades the earth and extends beyond it by ten fingers.",
+      geo: "A being that sees in a thousand directions simultaneously — this is the satellite constellation. 400+ active satellites orbit Earth, each with multiple sensors, together forming a planetary nervous system that sees everything at once. The Purusha is the first conceptual remote sensing network.",
+      bio: "The human body has 37 trillion cells — each a 'head,' each seeing its local environment through receptors. The body is literally a thousand-sensed being. Modern systems biology studies the body as exactly this — a distributed intelligence with no single center.",
+      osho: "'The Purusha is not a god sitting above — it is existence itself becoming aware of itself through infinite eyes. Every creature is one of those eyes. You are the universe looking at itself. That is not poetry — that is the deepest physics.'"
+    },
+    {
+      ref: "Rig Veda · 1.164.20 — Two Birds",
+      sanskrit: "Dvā suparṇā sayujā sakhāyā samānaṃ vṛkṣam pariṣasvajāte",
+      meaning: "Two birds, inseparable companions, cling to the same tree. One eats its fruit; the other watches without eating.",
+      geo: "In remote sensing: the sensor records (eats data), the analyst observes (watches). Every GIS operation has two layers — the active data collection and the passive interpretive awareness. The tree is the landscape. The watcher-bird is the consciousness that gives spatial data meaning.",
+      bio: "In cellular biology: one strand of DNA acts as template (active), the other as complementary observer (passive). The double helix is literally two companions on the same tree. The watcher-strand preserves the code while the active-strand expresses it.",
+      osho: "'The eating bird is the ego — always consuming, accumulating, doing. The watching bird is the witness — the pure consciousness that simply sees. Meditation is the art of becoming the second bird. Science has perfected the first bird; the second bird has been completely forgotten.'"
+    },
+    {
+      ref: "Rig Veda · 10.168.1 — Vayu Sukta",
+      sanskrit: "Vātasya nu mahimānaṃ rathasya rujann eti stanayann asya ghoṣaḥ divispṛk",
+      meaning: "Now I shall proclaim the greatness of the wind — its chariot breaks and thunders, its sound touches the sky.",
+      geo: "Modern atmospheric science and wind mapping using Doppler radar, satellite scatterometers, and wind LiDAR all measure what this sutra describes: the kinetic force of air masses, their sound signatures, their sky-touching reach. Wind energy mapping is direct Vayu Sukta applied.",
+      bio: "Wind carries pollen, fungal spores, bacteria, viruses across continents. Aerobiology — the study of airborne biological particles — is entirely about Vayu as life-carrier. The 2020 pandemic demonstrated how 'the wind's chariot' distributes biological agents globally.",
+      osho: "'The Rishi is not worshipping wind as a primitive act. He is recognizing that wind is alive — it carries the breath of the whole planet. We are all breathing the same air that was breathed by every ancestor. Every breath is communion with all life.'"
+    },
+    {
+      ref: "Rig Veda · 7.103.1 — Manduka Sukta (Frog Hymn)",
+      sanskrit: "Samānaṃ ninyuḥ śaśapā iva prāyann apa svananti maṇḍūkāḥ",
+      meaning: "Like students reciting their teacher's words, the frogs croak together when the rains come.",
+      geo: "Frog populations are the most sensitive bioindicators of ecosystem health. Modern satellite-based habitat monitoring tracks wetland health through frog population density. This sutra documents the frog-rain-ecology relationship 3,000 years before modern bioacoustic monitoring.",
+      bio: "Frogs are ecological keystones: their skin microbiome is the richest pharmacological source on Earth. Over 200 compounds derived from amphibian skin peptides are in pharmaceutical research. The Rishi's frog hymn was an early recognition of amphibian biological significance.",
+      osho: "'The frogs wait all year for the rain and then sing together in one voice. That is the most democratic thing in nature — no conductor, no hierarchy, perfect harmony. Humans have conductors, governments, religions — and still cannot sing together.'"
+    },
+    {
+      ref: "Rig Veda · 1.164.11 — Wheel of Time",
+      sanskrit: "Dvādaśāraṃ nahi taj jarāya varvarti cakraṃ pari dyām ṛtasya",
+      meaning: "This twelve-spoked wheel of cosmic order rolls around the sky and does not decay.",
+      geo: "The twelve-month solar calendar is the oldest geospatial time system — it synchronizes human activity with Earth's orbital cycle. Modern GIS temporal analysis, phenological tracking, and seasonal land use change detection all run on this exact 12-division cycle described here.",
+      bio: "The circadian clock — the 24-hour biological cycle regulating all life — was discovered to be universal across species in 2017 (Nobel Prize). The 12-spoked cosmic wheel mirrors the 12-hour half-cycles of the circadian rhythm that governs every cell's gene expression.",
+      osho: "'The wheel rolls and does not decay — that is the definition of eternity. Not that it stops, not that it freezes — but that it rolls forever without wearing out. Life is not static bliss; it is eternal dynamic motion. The goal is not to stop the wheel but to become the axle.'"
+    },
+    {
+      ref: "Rig Veda · 10.125.1 — Devi Sukta (Vak)",
+      sanskrit: "Ahaṃ rudrebhir vasubhiś carāmy aham ādityair uta viśvadevaiḥ",
+      meaning: "I move with the storm gods and the bright ones — I am the one speech that runs through all the gods.",
+      geo: "Vak — cosmic speech or information — is the original information field concept. Modern GIS is built on spatial information theory: data as structured speech that describes the world. Remote sensing is the Earth 'speaking' in electromagnetic frequencies that we decode. Vak is the original information science.",
+      bio: "DNA is literally cosmic speech — a four-letter alphabet writing the entire book of life. The 'one speech that runs through all' is the genetic code: identical in bacteria, mushrooms, and humans. Molecular biology is decoding Vak.",
+      osho: "'Vak is not language — it is the intelligence that underlies language. Before any word is spoken, there is awareness. Before any gene is expressed, there is the field that makes expression possible. Scientists call it information. The Rishi called it the Goddess.'"
+    },
+    {
+      ref: "Rig Veda · 10.71.1 — Origin of Knowledge",
+      sanskrit: "Bṛhaspate prathamaṃ vāco agraṃ yat prairata nāmadheyaṃ dadhānāḥ",
+      meaning: "O Brihaspati, when the first origin of speech was established, giving names to things — that was the beginning.",
+      geo: "Geographic naming is the foundation of all spatial science. Toponymy — the study of place names — reveals how ancient communities understood their landscapes. GIS attribute tables are the modern version of the Rishi's first naming act: assigning identifiers to places.",
+      bio: "Gene nomenclature — naming genes — is one of the most contested activities in modern biology. When you name a gene, you fix its identity in the scientific community forever. This sutra says: the act of naming is the beginning of knowledge. Taxonomy is the biology of the Rishi's first act.",
+      osho: "'When Adam named the animals in Genesis, when the Rishi named the first things — they were not making a list. They were creating a relationship. Naming is not labeling — it is recognizing. The crisis of modern science is it names everything and recognizes nothing.'"
+    },
+    {
+      ref: "Rig Veda · 8.48.3 — Soma Hymn",
+      sanskrit: "Apāma somam amṛtā abhūmāganma jyotir avidāma devān",
+      meaning: "We have drunk Soma, we have become immortal, we have arrived at the light, we have found the gods.",
+      geo: "Soma has been identified by researchers as Ephedra, Amanita muscaria, and harmaline-containing plants — all with specific biogeographic ranges. The Soma geography — its collection sites in the mountains, its preparation routes — is the earliest documented pharmacogeography: medicine mapped to location.",
+      bio: "Modern psychopharmacology studies how plant compounds alter consciousness through molecular interaction with brain receptors. Soma was the original entheogen study — systematic observation of plant compounds on human awareness. The phrase 'we have become immortal' may describe telomerase activation — cells that stop aging.",
+      osho: "'Soma is not a drug — it is an invitation. The Rishi is saying: there are states of consciousness that make you feel immortal, luminous, divine — because that is what you actually are. The Soma is any experience that strips away the illusion of limitation. Meditation is Soma without the plant.'"
+    },
+    {
+      ref: "Rig Veda · 5.85.7 — Varuna Sukta",
+      sanskrit: "Pra tat te adya śipiviṣṭa nāma varuṇa prāvocan",
+      meaning: "O Varuna, today I proclaim your secret name — you who hold the cosmic law that binds the universe.",
+      geo: "Varuna's cosmic law (Ṛta) is gravity: the force that binds orbits, keeps rivers in valleys, holds atmospheres to planets. Every satellite orbit is calculated using Varuna's law. Newton 'discovered' what the Rishi named 3,000 years earlier.",
+      bio: "The laws of biochemistry — enzyme kinetics, DNA replication fidelity, protein folding rules — are Varuna's cosmic law in the biological realm. Life exists because molecular interactions follow strict, unbreakable rules. Varuna is the physical constant that makes biology possible.",
+      osho: "'Varuna is not a water god — he is the principle that things follow their nature. A river flows downward not by law but by its own truth. The Rishi understood that the universe is not governed by external law but by internal truth. That is 10,000 times more sophisticated than Newton.'"
+    },
+    {
+      ref: "Rig Veda · 10.85.1 — Surya Sukta (Sun Hymn)",
+      sanskrit: "Satyenottabhitā bhūmiḥ sūryeṇottabhitā dyauḥ",
+      meaning: "The Earth is held up by truth. The sky is held up by the Sun.",
+      geo: "Solar radiation drives all atmospheric and oceanic circulation — the engine of Earth's climate system. Remote sensing satellites measure solar reflected energy to map everything from vegetation to ocean temperature. The Sun literally 'holds up' every GIS layer that exists.",
+      bio: "Photosynthesis — the foundation of all food chains — is the Sun's energy converted to chemical energy by chlorophyll. Without solar input, no biological complexity is possible. The sutra's 'sky held by the Sun' is photochemistry: the Sun organises matter into life.",
+      osho: "'Truth holds the Earth and the Sun holds the sky — the Rishi is saying these are the same force. Gravity and truth are both the tendency of things to move toward their center. When you live in truth, you are aligned with gravity — you stop fighting existence and start moving with it.'"
+    },
+    {
+      ref: "Rig Veda · 1.22.20 — Vishnu's Stride",
+      sanskrit: "Tad viṣṇoḥ paramaṃ padaṃ sadā paśyanti sūrayaḥ",
+      meaning: "That supreme step of Vishnu, the wise ones always behold — like an eye fixed in the sky.",
+      geo: "Vishnu's three cosmic strides — earth, atmosphere, sky — describe the three atmospheric layers modern meteorology studies: troposphere, stratosphere, and outer space. The 'eye fixed in the sky' is the geostationary satellite — always watching, never moving relative to Earth.",
+      bio: "The three domains of life — Bacteria, Archaea, Eukarya — are biology's three cosmic strides. Vishnu's steps mapped the biological hierarchy that Carl Woese would discover in 1977 through rRNA sequencing. Three strides, three domains, one underlying unity.",
+      osho: "'The wise ones always behold that supreme step — meaning the ultimate truth is always visible to those who are awake. It is not hidden. The sky is always there. What is hidden is our capacity to see. Science trains the eye outward; meditation trains the eye inward. Both are needed.'"
+    },
+    {
+      ref: "Rig Veda · 10.81.2 — Vishvakarman (Cosmic Architect)",
+      sanskrit: "Yo naḥ pitā janitā yo vidhātā dhāmāni veda bhuvanāni viśvā",
+      meaning: "He who is our father and creator, the ordainer who knows all realms and all worlds.",
+      geo: "Vishvakarman — the cosmic builder — is the first concept of a universal design principle. Modern GIS spatial analysis reveals that landscapes follow fractal patterns and optimal geometries: river networks, coastlines, mountain ranges all conform to mathematical laws. The universe was built by a mathematician.",
+      bio: "Morphogenesis — how organisms build themselves from a single cell — is one of biology's deepest unsolved problems. The same 'architect' that shapes galaxies shapes embryos: fractal self-similarity, reaction-diffusion patterns, and golden ratio proportions appear at every biological scale.",
+      osho: "'Vishvakarman is not a craftsman who builds from the outside — existence architects itself from within. The seed contains the whole tree; the fertilized egg contains the whole person. The architect is inside, not outside. That is the difference between religion and the Vedic vision.'"
+    },
+    {
+      ref: "Rig Veda · 10.129.7 — Nasadiya Sukta (Final Verse)",
+      sanskrit: "Iyaṃ visṛṣṭir yata ābabhūva yadi vā dadhe yadi vā na — yo asy adhyakṣaḥ parame vyoman so aṅga veda yadi vā na veda",
+      meaning: "Who knows truly? Who here shall declare it — whence it was born, whence this creation came? The one who surveys it from the highest heaven — perhaps even he does not know.",
+      geo: "Even the most advanced Earth observation system — the full constellation of NASA, ESA, JAXA, and ISRO satellites combined — cannot answer why the universe exists or what exists beyond it. The limits of remote sensing are the limits the Rishi described: at the highest vantage point, the question remains open.",
+      bio: "The 'hard problem of consciousness' — why biological processes produce subjective experience — remains completely unsolved. Even if we map every neuron in a brain, we don't know why there is something it feels like to be that brain. The Rishi's 'perhaps even he does not know' is still accurate.",
+      osho: "'This is the most courageous verse in all of human literature. After 7 verses of cosmic inquiry, the Rishi says: we do not know. And perhaps even the highest being doesn't know. That honesty — that willingness to not-know — is the foundation of all real science and all real spirituality.'"
+    },
+    {
+      ref: "Rig Veda · 10.191.4 — Samjnana Sukta (Unity)",
+      sanskrit: "Samānī va ākūtiḥ samānā hṛdayāni vaḥ samānam astu vo mano yathā vaḥ susahāsati",
+      meaning: "Common be your intention, common your hearts, common your mind — so that you may live together in perfect harmony.",
+      geo: "Spatial data interoperability — the ability of different GIS systems to share and understand each other's data — requires exactly this: common standards, common data models, common coordinate systems. The Rishis knew that harmony requires shared reference frames. OGC standards are Samjnana Sukta applied.",
+      bio: "Cell signaling in multicellular organisms requires all cells to share common chemical languages (hormones, cytokines, neurotransmitters). Without common intentions at the molecular level, the organism collapses into cancer. Unity is not philosophy — it is biology.",
+      osho: "'Unity is not conformity. The Rishi says: same intention, same heart, same mind — but not the same action. Like an orchestra: same music, different instruments. Modern society has it backwards — same actions (uniforms, procedures) but no common heart. That is why it feels empty.'"
+    },
+    {
+      ref: "Rig Veda · 10.136.1 — Keshin Sukta (Long-haired Sage)",
+      sanskrit: "Keśy agniṃ keśī viṣaṃ keśī bibilti rodasī keśī viśvaṃ svar dṛśe",
+      meaning: "The long-haired one bears fire, bears poison, bears heaven and earth — the long-haired one reveals all the light of the world.",
+      geo: "The Keshin — the ecstatic wandering seer — mapped landscapes through direct experience before any cartographic instrument existed. Traditional ecological knowledge (TEK) embedded in such wanderers is now recognized as one of the most accurate and detailed spatial databases ever created, often surpassing satellite data for local ecology.",
+      bio: "The Keshin's 'bearing poison' describes the practice of mithridatism — deliberate exposure to toxins to develop immunity. Modern vaccinology and immunotherapy are based on this exact principle. Mithridates and the Keshin understood adaptive immunity 2,500 years before Jenner.",
+      osho: "'The Keshin wanders between worlds, carrying fire and poison — because enlightened consciousness holds opposites without being destroyed by them. Fire warms and burns. Poison kills and heals. The awakened one is not beyond danger — they are the one who can hold danger without fear.'"
+    },
+    {
+      ref: "Rig Veda · 1.89.1 — Visvani Deva",
+      sanskrit: "Ā no bhadrāḥ kratavo yantu viśvato adabdhāso aparītāsa udbhidaḥ",
+      meaning: "Let noble thoughts come to us from every direction — unobstructed, from all sides, unrestricted.",
+      geo: "Open data in GIS — the principle that spatial data should flow freely from all directions, unobstructed — is Rig Veda 1.89.1 in practice. OpenStreetMap, NASA Earthdata, USGS data portals: the free flow of geographic information is this sutra's modern expression.",
+      bio: "Scientific peer review depends on knowledge flowing from all directions — different labs, different countries, different disciplines converging on truth. The replication crisis in science happens when knowledge is blocked, hoarded, or biased. Open access publishing is Rig Veda 1.89.1.",
+      osho: "'Noble thoughts from every direction — not just from tradition, not just from scripture, not just from authority. The Rishi is asking for a democracy of truth. Every direction, every voice, every experience. That is why I read everything — philosophy, science, poetry. Truth doesn't hold a monopoly.'"
+    },
+    {
+      ref: "Rig Veda · 10.15.1 — Pitru Sukta (Ancestor Hymn)",
+      sanskrit: "Udīratām uta te gobhir aśvair ye ke ca mahāṃ ṛṣayaḥ",
+      meaning: "Rise up, all you great seers who came before — with your cattle and horses, your knowledge and vitality.",
+      geo: "Paleogeography — the study of ancient Earth surfaces — is literally summoning the knowledge of ancestors. Ice core data, ancient pollen records, and sediment layers preserve the spatial memory of past landscapes. Every GIS historical dataset is an invocation of geographic ancestors.",
+      bio: "Epigenetic inheritance — the transmission of acquired traits across generations through chemical marks on DNA — means our ancestors literally live in our genome. Trauma, famine, and environmental stress experienced by grandparents can alter gene expression in grandchildren. The ancestor hymn is epigenetic science.",
+      osho: "'Ancestors are not dead — they live in your cells, in your responses, in your fears and your gifts. Calling them up is not superstition; it is recognizing that you are the current form of an unbroken chain of life going back 4 billion years. You carry everyone who came before.'"
+    },
+    {
+      ref: "Rig Veda · 6.47.18 — Maya",
+      sanskrit: "Indro māyābhiḥ puru rūpa īyate",
+      meaning: "Indra assumes many forms through his power of Maya — the creative illusion.",
+      geo: "Map projections are Maya — every flat map distorts the spherical reality of Earth. Mercator, Robinson, Mollweide: each is a different 'form' of the same globe. GIS students learn that no projection is true; all are useful illusions. The Rishi described this epistemological problem 3,500 years ago.",
+      bio: "The cell membrane is biological Maya — it creates the illusion of a separate 'self' for each cell while allowing constant exchange of molecules. The boundary is real enough to maintain identity but permeable enough to sustain life. Every biological boundary is a functional illusion.",
+      osho: "'Maya does not mean the world is fake — it means you are seeing the world through the filter of your conditioning. The tree is real. But what you see as 'tree' is already your interpretation. Remove the filter and you see something that has no name — only presence. That is what meditation reveals.'"
+    },
+    {
+      ref: "Rig Veda · 10.72.1 — Devata Sukta (Origin of Gods)",
+      sanskrit: "Bṛhaspate prathamaṃ vāco agraṃ yat prairata nāmadheyaṃ dadhānāḥ",
+      meaning: "In the beginning was the impulse of existence — the first stirring in the void that preceded all creation.",
+      geo: "The cosmic microwave background radiation — the 'echo' of the Big Bang measurable in every direction of the sky — is the spatial trace of the first stirring the Rishi describes. Modern cosmological surveys map this first impulse across the entire observable universe.",
+      bio: "The RNA World Hypothesis proposes that before DNA, before proteins, self-replicating RNA molecules were the first 'stirring' of life. This first chemical impulse — information that could copy itself — is the biological equivalent of the Rishi's first creative act.",
+      osho: "'Before the first stirring, there was only potential — not emptiness, but fullness that had not yet expressed itself. Creation is not making something from nothing; it is the infinite becoming finite, the formless taking form, silence becoming sound. The Big Bang was existence sneezing.'"
+    },
+    {
+      ref: "Rig Veda · 10.90.3 — Purusha Sukta",
+      sanskrit: "Etāvān asya mahimā ato jyāyāṃś ca pūruṣaḥ pādo 'sya viśvā bhūtāni tripād asy āmṛtaṃ divi",
+      meaning: "Such is his greatness — yet even greater is the Purusha. One quarter of him is all beings; three quarters are immortal in the sky.",
+      geo: "This maps exactly to Earth system proportions: the observable biosphere (one quarter) is the thin living skin of Earth — soil, ocean surface, lower atmosphere. The three-quarters 'immortal' portion is the deep Earth, deep ocean, and deep space that sustains but transcends life. Earth science confirmed this ratio.",
+      bio: "Only about 15% of the human genome codes for proteins — the rest was called 'junk DNA' but is now known to regulate gene expression. The 'three-quarters immortal' may describe the regulatory genome: the vast non-coding portion that orchestrates all life while remaining itself unchanged.",
+      osho: "'Three-quarters immortal in the sky — the Rishi is saying most of you is already divine. The small part that eats, fears, and dies is one quarter. The vast part that witnesses, knows, and exists beyond time is three-quarters. Meditation is simply learning to live from the larger portion.'"
+    },
+    {
+      ref: "Rig Veda · 1.116.15 — Ashvin Healing Hymn",
+      sanskrit: "Yamī pumāṃsaṃ pṛthivī vitanvānā anenasvanta oṣadhīr marmṛjyate",
+      meaning: "The Earth, spreading wide, anoints the herbs that heal — she tends the sick with her medicines.",
+      geo: "Phytoremediation — using plants to clean contaminated soil — is one of the most promising fields in environmental GIS: spatial mapping of contamination zones matched with plant species that absorb heavy metals, hydrocarbons, and radioactive elements. Earth literally heals herself through her chemistry.",
+      bio: "The Ashvins were the physicians of the gods — the original description of a therapeutic protocol based on plant medicines, surgical techniques, and prosthetics (the Rigveda describes the first iron prosthetic leg). Modern biomedicine emerged from this tradition.",
+      osho: "'The Earth anoints the herbs that heal — healing is not something done to you, it is something the Earth does through you. The doctor, the medicine, the patient, the recovery — all are Earth's ways of maintaining itself. Illness is information. Healing is listening.'"
+    },
+    {
+      ref: "Rig Veda · 10.154.1 — Funeral Hymn / Immortality",
+      sanskrit: "Ye te śatam ye te sahasram yajñiyāsas tanvā sparśayanti",
+      meaning: "Those hundreds and thousands who touch the sacrificial post — may they ascend to the immortal realm.",
+      geo: "Biogeochemical cycles — carbon, nitrogen, phosphorus — are geological immortality: matter never dies, it cycles through rock, ocean, atmosphere, and living bodies forever. A carbon atom in your body may have been in a dinosaur, a volcano, an ancient sea. The sutra's 'immortal realm' is the biogeochemical cycle.",
+      bio: "Modern cryonics, telomere research, and senolytics all chase biological immortality. But the deeper discovery is that life itself is immortal at the level of information: DNA sequences from 700,000 years ago have been read intact. The genome is an immortality machine.",
+      osho: "'Immortality is not living forever as who you are. It is recognizing that you were never born and will never die — because you are not the body. The body is a temporary form taken by immortal existence. Death is not the end; it is a change of address.'"
+    }
+  ],
+
+  atharva: [
+    {
+      ref: "Atharva Veda · 12.1.1 — Prithvi Sukta",
+      sanskrit: "Satyam bṛhad ṛtam ugram dīkṣā tapo brahma yajñaḥ pṛthivīm dhārayanti",
+      meaning: "Truth, cosmic law, consecration, discipline, and sacrifice uphold the Earth.",
+      geo: "Earth System Science — the study of Earth as a self-regulating system — mirrors this exactly. Truth (physical constants), cosmic order (thermodynamics), discipline (feedback loops), and sacrifice (entropy) collectively maintain Earth's life-supporting conditions. The Gaia Hypothesis is this sutra's scientific paper.",
+      bio: "Soil is upheld by microbial truth — 10,000 species of bacteria per gram of healthy soil maintain nutrient cycles, pH balance, and water retention through their collective metabolism. Remove the microbiome and the Earth literally cannot hold itself up. Sacrifice (dead matter) feeds the living.",
+      osho: "'Truth holds the Earth — not prayers, not rituals, not temples. Truth: that things are what they are, not what we want them to be. The ecological crisis is a truth crisis. We wanted the Earth to be an infinite resource. Truth is reminding us of its limits with every flood and fire.'"
+    },
+    {
+      ref: "Atharva Veda · 12.1.12 — Prithvi Sukta",
+      sanskrit: "Yā te madhyam pṛthivi yā nābhis tad asmāsu ni dhāra viśvasya suṣmam",
+      meaning: "O Earth, that which is your centre, your navel — establish that in us. Bestow the vitality of all beings.",
+      geo: "The geoid — the true shape of Earth defined by gravitational equipotential surfaces — is the geodetic 'navel' that every GPS satellite references. All precise coordinate measurements correct for the geoid. The Rishi's Nābhi is the geodetic datum of modern surveying.",
+      bio: "The gut microbiome — the body's metabolic center — is now called the second brain. 70% of immunity, 90% of serotonin, and the regulation of metabolism all originate in the gut. The navel-as-life-center the Rishi addressed is the enteric nervous system.",
+      osho: "'The Rishi asks the Earth for permission. Not demanding, not extracting — requesting. Modern science extracts. Ancient science requested. The difference is not technological — it is the difference between a rapist and a lover. Same act, different consciousness.'"
+    },
+    {
+      ref: "Atharva Veda · 11.4.15 — Prana Sukta",
+      sanskrit: "Prāṇāya namo yasya sarvam idam vaśe yo bhūtaḥ sarvasyeśvaro",
+      meaning: "Homage to Prana — in whose power this whole world exists, who is lord of all.",
+      geo: "Network topology in GIS — the invisible relational structure that defines how nodes connect — is structurally identical to Prana. Watershed networks, road networks, ecological corridors all operate through invisible flow. The visible landscape is supported by invisible connectivity.",
+      bio: "ATP (adenosine triphosphate) is the universal energy currency of all life — the biological Prana. Every cell in every organism runs on ATP. Its production in the mitochondria, distribution through the cell, and consumption in every metabolic reaction is the precise mechanism the Rishi was observing.",
+      osho: "'Prana is not metaphor. The Rishis were empiricists of the inner world — they observed Prana the same way a scientist observes a cell: through disciplined, direct observation. Meditation was their microscope. The inner laboratory was as rigorous as any modern lab. We just lost the methodology.'"
+    },
+    {
+      ref: "Atharva Veda · 12.1.16 — Prithvi Sukta",
+      sanskrit: "Pṛthivī naḥ prathamā ni dhātu rāyo bhajeha sate",
+      meaning: "May the Earth, our first mother, grant us wealth and establish us here in life.",
+      geo: "Ecosystem services valuation — the economic quantification of what Earth provides — is the modern translation of this verse. Clean air, water purification, pollination, carbon storage: these are the 'wealth' Earth grants. GIS-based natural capital accounting puts a number on the Rishi's prayer.",
+      bio: "The Earth's soil contains 10^30 microorganisms — the greatest concentration of biological diversity anywhere. This microbial wealth is the source of most antibiotics, enzymes, and biochemicals that biotech relies on. Earth as first mother is also Earth as first pharmacy.",
+      osho: "'The Earth grants wealth not to those who demand it but to those who live in right relationship with it. Indigenous communities understood this — they took only what they needed. Modern civilization takes everything and then wonders why the wealth is gone.'"
+    },
+    {
+      ref: "Atharva Veda · 4.16.1 — Varuna Watches",
+      sanskrit: "Ut te nayanam varuṇo babhūva yāni sthitāni yāni carantīha",
+      meaning: "Varuna sees both what is still and what moves — his eye ranges over all creation.",
+      geo: "This is the description of Earth observation: a persistent all-seeing eye above. Modern geostationary satellites — positioned 36,000 km above Earth — continuously monitor all surface activity: fires, floods, storms, deforestation, conflict. Varuna's eye is operational 24/7 in the form of GOES, Meteosat, and Himawari satellites.",
+      bio: "The immune system is the body's Varuna — it watches all internal activity, distinguishes self from non-self, and responds to any deviation. Pattern recognition receptors monitor every cell; the adaptive immune system maintains a memory of every pathogen ever encountered. Nothing escapes Varuna's eye.",
+      osho: "'Varuna is not a spy — he is total awareness. The difference is that a spy judges and punishes; total awareness simply sees. When you are truly aware, you don't need to control yourself — the awareness itself transforms behavior. This is what meditation cultivates: Varuna-consciousness.'"
+    },
+    {
+      ref: "Atharva Veda · 11.8.18 — Skambha (Cosmic Pillar)",
+      sanskrit: "Kasmin skambhe pratiṣṭhitā dyauś ca bhūmiś ca kasmin",
+      meaning: "In what pillar are heaven and earth established? What is the axis upon which all things rest?",
+      geo: "Earth's rotational axis — the geographic poles — is the cosmic pillar of modern geodesy. All coordinate systems, all navigation, all GIS projections reference this axis. The geomagnetic axis, slightly different, guides migration, compass, and satellite attitude control. The Skambha is the Earth's axis system.",
+      bio: "The cytoskeleton — the internal scaffold of every cell — is the biological Skambha. Microtubules, actin filaments, and intermediate filaments form the axis around which all cellular activity organizes. Without the cytoskeletal pillar, the cell collapses. Heaven and Earth (nucleus and membrane) rest on it.",
+      osho: "'The Rishi asks: what holds everything up? Modern science answers: gravity, strong force, quantum fields. But the Rishi is asking a deeper question — what holds existence itself up? Not forces, not particles. The answer the Vedas give is consciousness. Awareness is the Skambha.'"
+    },
+    {
+      ref: "Atharva Veda · 8.7.1 — Oshadhi (Plant Medicine)",
+      sanskrit: "Yā oṣadhayo bahvīḥ śataviṣṭapā virūpā viśvarūpāś ca yāḥ",
+      meaning: "The plants, many and widespread, taking various forms and all forms — be they known or unknown to us.",
+      geo: "Plant species distribution modeling — using MaxEnt and similar algorithms with satellite climate data — predicts where medicinal plants can grow across entire landscapes. The 'unknown to us' plants the Rishi acknowledged are the basis of bioprospecting: systematically searching for undiscovered pharmacological resources in unmapped ecosystems.",
+      bio: "Over 80% of the world's plant species remain pharmacologically unstudied. The Rishi's 'unknown to us' plants represent one of biotech's largest unexplored territories. Every year, species go extinct before their chemistry is analyzed. The Atharva Veda was the first call for biodiversity conservation.",
+      osho: "'The plants take various forms and all forms — existence is endlessly creative. No two leaves are identical. No two snowflakes. No two human faces. The universe is allergic to repetition. Modern industrial agriculture forces nature into monocultures — that is the most violent thing humans have ever done.'"
+    },
+    {
+      ref: "Atharva Veda · 6.21.1 — Against Poison",
+      sanskrit: "Yat te viṣaṃ vṛścikasya yat sarpasya yat kīṭasya yat takṣakasya ca",
+      meaning: "The poison of the scorpion, the serpent, the insect, the Takshaka — may it be neutralized.",
+      geo: "Toxicological landscape mapping — GIS-based spatial analysis of venom-producing species distributions, snakebite hotspots, and antivenom supply chains — directly saves lives in rural India. WHO's snakebite strategy relies on exactly the spatial data the Rishi was cataloguing: which creatures, in which areas, with which poisons.",
+      bio: "Antivenoms are made from the very venoms they neutralize — a direct application of the Vedic pharmacological principle. Cone snail venom gave us ziconotide (pain medication). Spider toxins are being developed as pesticides. Scorpion venom contains chlorotoxin used in cancer surgery. The Rishi's poison catalog is a drug discovery pipeline.",
+      osho: "'The poison of the serpent and the medicine of the serpent come from the same source. This is the most important insight in all of pharmacy: the cure is hidden inside the disease. Homeopathy, immunotherapy, vaccines — all operate on this principle. The Rishi understood it as the fundamental law of existence.'"
+    },
+    {
+      ref: "Atharva Veda · 4.4.1 — Ayushya (Long Life)",
+      sanskrit: "Jīva gṛhāṇa prāṇaṃ punar āyuṣe gṛhāṇa oṣadhīnāṃ rasam",
+      meaning: "Take life, receive breath again — take the essence of plants for long life.",
+      geo: "Longevity geography — the spatial distribution of centenarian populations (Blue Zones) — shows that long-lived communities cluster in specific landscapes: Sardinia, Okinawa, Nicoya Peninsula, Loma Linda. GIS analysis of these zones reveals that terrain, plant diversity, air quality, and social geography combine to extend life.",
+      bio: "Caloric restriction, NAD+ precursors from plant compounds, and senolytic drugs that clear aging cells are the current frontiers of longevity research. Every major longevity molecule — resveratrol, quercetin, spermidine — comes from plants. The Rishi's 'essence of plants for long life' is geroscience.",
+      osho: "'The Rishi does not say: avoid death. He says: receive life fully. There is a difference. Avoiding death creates anxiety. Receiving life creates celebration. Long life is not the goal — full life is. A full life of 40 years is worth more than a half-life of 100 years.'"
+    },
+    {
+      ref: "Atharva Veda · 2.13.1 — Garbha (Embryo)",
+      sanskrit: "Yad garbho apsu yad oṣadhīṣu yad vṛkṣeṣu yaś ca sthāvara-jaṅgameṣu",
+      meaning: "The embryo in the waters, in the plants, in the trees — and in all things that move and stand still.",
+      geo: "Wetland mapping for amphibian breeding habitat, seed dispersal network analysis, and urban tree canopy mapping all deal with the spatial conditions required for embryonic development. The Rishi's observation that embryos exist in water, plants, and trees is the foundation of habitat mapping.",
+      bio: "All animal embryos pass through a stage where they are essentially aquatic. Human embryos have gill slits and fish-like tails. The Rishi's 'embryo in the waters' is embryonic recapitulation — the fact that ontogeny recapitulates phylogeny. Every organism re-enacts the full evolutionary history of life.",
+      osho: "'The embryo in the waters, in the plants, in the trees — the Rishi sees life not as individual events but as one continuous process of becoming. Birth is not a beginning; it is a continuation. You were already alive as a possibility before you were conceived. The cosmic embryo is always becoming.'"
+    },
+    {
+      ref: "Atharva Veda · 9.2.1 — Anna Sukta (Food)",
+      sanskrit: "Annaṃ vai prāṇaḥ annaṃ hi bhūtānāṃ jyeṣṭham",
+      meaning: "Food is life-breath — food is the eldest of all beings.",
+      geo: "Global food security mapping — the spatial analysis of crop yields, soil fertility, water availability, and climate stress zones — is the geospatial expression of this sutra. The FAO's GAEZ (Global Agro-Ecological Zones) database maps exactly where 'food as life-breath' can be sustained on a warming planet.",
+      bio: "The metabolic theory of ecology states that energy flow through food webs governs all ecological patterns: population size, body mass, lifespan. Food is not just energy — it is the organizing principle of all biological systems. The Rishi's 'food is eldest of all beings' is systems ecology.",
+      osho: "'When you eat consciously — knowing where the food came from, what life gave itself for it, what processes created it — eating becomes sacrament. Modern eating is unconscious consumption. The Rishi's anna puja (food prayer) was not superstition; it was an instruction to wake up at the dinner table.'"
+    },
+    {
+      ref: "Atharva Veda · 7.89.1 — Surya (Sun)",
+      sanskrit: "Ud asau sūrya āgāt viśvena sahasā saha",
+      meaning: "The Sun rises with all its power — bringing with it all forces of the universe.",
+      geo: "Solar irradiance is the primary driver of all GIS-measurable land surface processes: photosynthesis, evapotranspiration, surface temperature, wind, and ocean currents. Every satellite-derived climate product begins with solar irradiance measurement. The Rishi's 'all forces' rising with the Sun is solar forcing in Earth System Science.",
+      bio: "Photobiology — the study of light's effects on living systems — is one of the fastest-growing fields in medicine. Circadian rhythms, Vitamin D synthesis, photosynthesis, DNA repair, and photoperiodism in plant flowering all depend on solar input. The Sun doesn't just illuminate life — it regulates it at the molecular level.",
+      osho: "'Every sunrise is an invitation to begin again. The Sun doesn't remember yesterday's clouds — it rises with full power every morning. That is the lesson: don't carry yesterday into today. Rise with all your forces, as if for the first time, every single morning.'"
+    },
+    {
+      ref: "Atharva Veda · 10.7.12 — Skambha Pervades",
+      sanskrit: "Skambha idaṃ sarvam ābhati yo viśvaṃ bibharti",
+      meaning: "The cosmic pillar illuminates all this and bears the whole universe.",
+      geo: "In satellite geodesy, the International Terrestrial Reference Frame (ITRF) is the cosmic pillar — the single reference system that all Earth observations use. Every GPS coordinate, every DEM, every satellite image is referenced to this invisible axis that 'illuminates all' geospatial data and makes it coherent.",
+      bio: "In molecular biology, the central dogma — DNA to RNA to protein — is the cosmic pillar of biological information flow. It illuminates all of cellular life and bears the weight of genetic inheritance. Every biotechnology application is built around this central axis.",
+      osho: "'The pillar that bears all — in meditation this is called the witnessing consciousness. It does not act, does not speak, does not judge — it simply is, and by simply being, everything else holds together. The universe needs a center of pure awareness to hold its infinite periphery.'"
+    },
+    {
+      ref: "Atharva Veda · 11.1.1 — Brahmanda (Cosmic Egg)",
+      sanskrit: "Ye triṃśat tri ca lokās teṣu lokāntaraikṣata",
+      meaning: "In the thirty-three worlds and beyond them — existence looked at itself from between the worlds.",
+      geo: "Modern astronomy's multiverse theory — that our observable universe may be one of many — is the spatial scaling of this sutra. The James Webb Space Telescope looks between galaxies to map the cosmic web: the large-scale structure of the universe. 'Between the worlds' is where the largest structures hide.",
+      bio: "Interstitial space — the space between cells — is where 60% of the body's water exists. The extracellular matrix, lymphatic system, and tissue fluid in this 'between the worlds' space regulates inflammation, immune function, and cancer metastasis. The space between is as vital as the things themselves.",
+      osho: "'Between the worlds — that is where the real happens. Not in the solid objects but in the relationships between them. Not in the words but in the silence between them. The most important things in existence occupy no space: love, awareness, truth. They live between.'"
+    },
+    {
+      ref: "Atharva Veda · 6.41.1 — Vata (Wind and Breath)",
+      sanskrit: "Vāta ā vātu bheṣajaṃ śambhu mayobhu no hṛde prāṇāya jīvase",
+      meaning: "May the wind blow medicine to us — the beneficial, joy-giving one — to our heart, for breath and life.",
+      geo: "Atmospheric transport modeling tracks how wind carries pollutants, pollen, dust, and pathogens across landscapes. The Saharan dust that fertilizes the Amazon. The volcanic ash that disrupts aviation. The monsoon that determines agricultural calendars. Wind as medicine — the Rishi knew the atmosphere was a delivery system.",
+      bio: "Aerosolized drug delivery — inhaled medicines for asthma, COPD, and lung infections — is the biotech application of this verse. The nose, sinuses, and lungs are designed to receive medicine from the air. Phytoncides (airborne plant chemicals that boost immunity) are the original wind-medicines the Rishi catalogued.",
+      osho: "'Wind brings medicine — meaning healing comes to you. You don't always have to chase it. Sometimes the right thing to do is to open the window and breathe. Modern medicine is obsessed with intervention. The Rishi knew that sometimes the greatest medicine is allowing what is already moving to reach you.'"
+    },
+    {
+      ref: "Atharva Veda · 3.31.1 — Kṣetra (Field/Agriculture)",
+      sanskrit: "Śunaṃ vāhāḥ śunaṃ naro śunam kṛṣatu lāṅgalam",
+      meaning: "Blessed be the draught animals, blessed the men, blessed be the plough they drive.",
+      geo: "Precision agriculture — GPS-guided farming, soil sampling grids, variable rate irrigation — is GIS applied to the Rishi's blessed field. Modern crop yield modeling uses satellite data to optimize exactly what the Rishi prayed for: productive, healthy fields. The kṣetra is the original GIS polygon.",
+      bio: "Soil microbiome research shows that agricultural productivity depends entirely on invisible microbial communities: nitrogen-fixing bacteria, mycorrhizal fungi, and decomposers. The 'blessing' the Rishi invokes is the activation of these communities. Biofertilizers are the modern translation.",
+      osho: "'Blessed be the ones who work the earth — the farmers are the most undervalued people in any civilization. They are in direct dialogue with the cosmic law of growth: plant, tend, harvest, return. That cycle is the most honest life a human can live. The city has forgotten how food is made.'"
+    },
+    {
+      ref: "Atharva Veda · 10.8.1 — The Seer",
+      sanskrit: "Kaś cid eṣa vicaṣṭe yaḥ sthitaś ca pathaś ca",
+      meaning: "Who is this seer who looks upon both what is still and what moves?",
+      geo: "This is literally the description of a GIS operator — one who observes both static features (landforms, buildings) and dynamic processes (weather, traffic, population movement). The Rishi asks who this observer is. Remote sensing answers: it is the satellite. But who designed the satellite? Consciousness.",
+      bio: "The immune system's T-cells are molecular seers — they scan every cell in the body, distinguishing healthy from diseased, self from non-self, static from moving. This molecular surveillance system observes 'both what is still and what moves' at the scale of individual proteins.",
+      osho: "'Who is the seer? Not the eyes — eyes are instruments. Not the brain — the brain is a processor. The seer is the one who is aware that they are aware. That reflexive consciousness — awareness aware of itself — is what no instrument can locate and no science has explained. That is the real frontier.'"
+    },
+    {
+      ref: "Atharva Veda · 5.17.1 — Satya (Truth as Shield)",
+      sanskrit: "Satyena uttabhitā bhūmiḥ satyena uttabhitā dyauḥ",
+      meaning: "Truth supports the Earth; truth upholds the sky.",
+      geo: "In geodesy, truth means accuracy — how closely a measurement reflects reality. The entire edifice of GIS depends on truth: accurate coordinates, verified land cover classes, validated models. When spatial data is falsified (as in some government surveys), decisions based on it cause real harm. Truth is the foundation of spatial governance.",
+      bio: "Scientific truth in biology means reproducibility — the same experiment gives the same result. The replication crisis revealed that 50-70% of psychology studies and many biomedical studies cannot be reproduced. The Rishi's warning — untruth causes Earth and sky to collapse — is playing out in the credibility of science itself.",
+      osho: "'Truth is not a moral principle — it is a structural necessity. Lies require maintenance; they multiply and eventually collapse under their own weight. Truth needs no maintenance — it holds itself up. The Rishi says truth supports the Earth because that is literally, physically, scientifically accurate.'"
+    },
+    {
+      ref: "Atharva Veda · 11.6.7 — Brahmacharin (Student of Knowledge)",
+      sanskrit: "Ācāryaḥ mṛtyur varuṇo brahma tejāṃsi",
+      meaning: "The teacher is death, Varuna, the cosmic principle, and all energies — through the teacher, all of these act.",
+      geo: "Mentorship in geospatial science — how knowledge of remote sensing, cartography, and spatial analysis is transmitted — is not in manuals or software; it is in the direct transmission from experienced practitioners to students. The spatial intuition that makes a great GIS analyst cannot be taught from a textbook.",
+      bio: "Scientific mentorship is the biological transmission of knowledge — not genetic but cultural. Nobel laureates disproportionately have Nobel laureate advisors. The lineage of scientific knowledge follows the same inheritance rules as genetics. The teacher as cosmic force is the cultural DNA of science.",
+      osho: "'The real teacher does not give you knowledge — they give you the capacity to know. Information can be downloaded from anywhere. But the fire of genuine inquiry — the hunger to know for yourself — only passes from a burning person to another. You cannot light a fire from a cold source.'"
+    },
+    {
+      ref: "Atharva Veda · 7.4.1 — Universal Medicine",
+      sanskrit: "Idaṃ janāya bheṣajam idaṃ gobhyaḥ aśvebhyaḥ",
+      meaning: "This medicine is for people, for cattle, for horses — a universal remedy.",
+      geo: "One Health — the integrated approach to human, animal, and environmental health — is the geospatial operationalization of this verse. Disease surveillance systems that map human, animal, and environmental health simultaneously are the Rishi's universal medicine applied. Zoonotic disease prediction is One Health GIS.",
+      bio: "Many of the most powerful drugs work across species: antibiotics, antiparasitics, analgesics. Aspirin works in humans, dogs, and horses. Ivermectin treats parasites in nearly all mammals. The Rishi's universal medicine is the pharmacological conservation of biological mechanisms across the tree of life.",
+      osho: "'Universal medicine — the Rishi doesn't distinguish between human suffering and animal suffering. That is the most advanced medical ethics statement ever written: compassion that extends beyond the human. A doctor who only heals humans has a narrow compassion. The universe does not make that distinction.'"
+    },
+    {
+      ref: "Atharva Veda · 4.15.1 — Waters of Life",
+      sanskrit: "Āpaś śivāḥ śivatamaḥ śantamā āpaḥ",
+      meaning: "Waters are auspicious, the most auspicious, the most calming — blessings of the water.",
+      geo: "Hydrological mapping — watersheds, groundwater recharge zones, flood plains, aquifer depletion — is the spatial science of the Rishi's sacred waters. The global water crisis is mapped in detail: GIS shows exactly where the Rishi's 'most auspicious waters' are being depleted, polluted, and diverted.",
+      bio: "Water is the universal solvent of biochemistry — every enzyme reaction, every metabolic pathway, every cellular process occurs in water. The origin of life almost certainly occurred in water. The human body is 60% water; the brain is 75% water. 'Most calming' describes the parasympathetic response to water exposure — blue spaces reduce cortisol.",
+      osho: "'The Rishi calls water the most calming — because water has no resistance. It takes the shape of whatever contains it. It flows around obstacles. It erodes mountains not by force but by persistence. Water is the great teacher of non-resistance. In Chinese philosophy, this is the Tao. In the Vedas, it is āpaḥ.'"
+    },
+    {
+      ref: "Atharva Veda · 12.3.7 — Earth and Sky Together",
+      sanskrit: "Dyāvāpṛthivī ubhe etau lokau",
+      meaning: "Heaven and Earth — both these worlds are united.",
+      geo: "Atmosphere-land coupling is one of the central research questions in Earth System Science: how does the land surface affect the atmosphere, and vice versa? Land use change modifies local precipitation. Deforestation alters monsoon patterns. The Rishi's heaven-earth unity is the atmosphere-land feedback system.",
+      bio: "The vertical exchange of organisms between soil and atmosphere — bacteria, fungal spores, plant pollen, viral particles — makes the biosphere a single interconnected unit. Organisms from deep soil appear in the upper atmosphere. The boundary between earth and sky is biological fiction.",
+      osho: "'Heaven and Earth are united — they were never separate. The division is in the human mind, not in reality. Heaven is not above and Earth is not below — they are two faces of the same existence. When you understand this, you stop longing for heaven and start being present on Earth.'"
+    },
+    {
+      ref: "Atharva Veda · 8.2.18 — Immortality",
+      sanskrit: "Mā no hiṃsīj jātavedastiryañcam anu śāsatam",
+      meaning: "Do not harm us, O knower of all things — guide all that is born along the right path.",
+      geo: "Environmental impact assessment (EIA) — the mandatory evaluation of how projects will affect ecosystems — is this sutra's institutional form. The principle that all born things must be guided along a right path is the ethical foundation of conservation GIS, protected area management, and environmental law.",
+      bio: "The principle of 'do no harm' (primum non nocere) is the first law of medical ethics. It is also the operating principle of the immune system: it must destroy pathogens without destroying the host. Therapeutic index — the ratio between effective and harmful doses — is the pharmacological Rishi.",
+      osho: "'Guide all that is born along the right path — the Rishi is not asking for a protective god. He is stating a responsibility: anyone who knows has an obligation to guide those who don't. Knowledge without compassion is dangerous. The scientist who knows but does not act on that knowledge is complicit in harm.'"
+    },
+    {
+      ref: "Atharva Veda · 6.96.1 — Healing Waters",
+      sanskrit: "Apo hiṣṭhā mayo bhuvaḥ tā na ūrje dadhātana mahe raṇāya cakṣase",
+      meaning: "O Waters, you are the source of wellbeing — grant us strength, great joy, and the capacity to see.",
+      geo: "Blue space research — the spatial relationship between proximity to water and human health and wellbeing — is one of the fastest-growing fields in environmental health GIS. Studies consistently show that populations living near clean water bodies have lower stress, better mental health, and longer lives. The Rishi's wellbeing-water link is spatial epidemiology.",
+      bio: "Hydrotherapy, balneotherapy, and aquatic physiotherapy all demonstrate water's healing properties. Cold water immersion activates the vagus nerve and reduces inflammation. The 'capacity to see' the Rishi asks for may describe water's role in the visual system: the eye is 99% water; dehydration causes the first measurable loss of cognitive clarity.",
+      osho: "'The Rishi asks water for the capacity to see — not physical sight but inner clarity. Water is the element of the receptive, the feminine, the yielding. When the mind becomes like still water — receptive, undistorted — it reflects reality as it is. That is the capacity to see.'"
+    }
+  ],
+
+  yajur: [
+    {
+      ref: "Yajur Veda · Ishavasya Upanishad · 1",
+      sanskrit: "Īśāvāsyam idaṃ sarvaṃ yat kiñca jagatyāṃ jagat tena tyaktena bhuñjīthāḥ",
+      meaning: "All this — whatever moves in this moving world — is pervaded by the divine. Enjoy with renunciation; do not covet.",
+      geo: "Continuous spatial fields — temperature, gravity, electromagnetic radiation — pervade all space simultaneously. Every GIS coordinate exists within infinite overlapping fields. The principle that 'all is pervaded' is the mathematical foundation of raster data models: every point in space has a value for every variable.",
+      bio: "The epigenome pervades every cell — an invisible layer of chemical marks on DNA that responds to environment and experience. Like the divine pervading all things, the epigenome is everywhere at once, controlling gene expression. You are not just your genome — you are your entire experiential field.",
+      osho: "'All this is pervaded — there are no empty spaces, no isolated objects. Einstein spent 30 years searching for the unified field theory. The Rishi wrote it in one line 3,000 years ago. And he added: enjoy without coveting. The unified field is to be lived, not hoarded.'"
+    },
+    {
+      ref: "Yajur Veda · 36.17 — Shanti Mantra",
+      sanskrit: "Dyauḥ śāntirantarikṣaṃ śāntiḥ pṛthivī śāntirāpaḥ śāntiroṣadhayaḥ śāntiḥ",
+      meaning: "May sky be peaceful. May atmosphere be peaceful. May Earth be peaceful. May waters be peaceful. May plants be peaceful.",
+      geo: "This mantra lists Earth's vertical layers in precise order — outer space, atmosphere, land surface, hydrosphere, biosphere — matching the exact sequence of layers that modern Earth observation satellites monitor. The mantra is a pre-satellite remote sensing protocol: check all layers, one by one, for their state.",
+      bio: "The evolutionary sequence of life: atmospheric oxygen first, then liquid water, then land colonization, then plant life — this is the precise order of the Shanti Mantra. The prayer for peace follows the chronological order of life's emergence on Earth.",
+      osho: "'This mantra is not asking God for peace — it is reminding humans of their responsibility. When the Rishi says 'may the sky be peaceful,' he means: do not poison the sky. This is the oldest environmental protection law in human history. We just forgot to enforce it.'"
+    },
+    {
+      ref: "Yajur Veda · 36.24 — Asato Ma",
+      sanskrit: "Asato mā sadgamaya tamaso mā jyotirgamaya mṛtyor māmṛtaṃ gamaya",
+      meaning: "Lead me from the unreal to the real. Lead me from darkness to light. Lead me from death to immortality.",
+      geo: "In GIS, data quality management is the movement from unreal to real: removing positional errors, correcting attribute data, validating topology. Every data cleaning operation is Asato Ma applied. The progression from raw satellite data to verified spatial information follows this prayer exactly.",
+      bio: "The scientific method itself is Asato Ma — from hypothesis (unreal) to confirmed theory (real), from ignorance (darkness) to understanding (light), from disease (death) to treatment (immortality). Every experiment is a prayer from unreal to real.",
+      osho: "'From unreal to real — but what is real? The Rishi is not asking for more data. He is asking for the direct experience of what is. Science moves from wrong models to less wrong models. The Rishi asks to move beyond models entirely — to direct contact with existence. That is meditation's goal.'"
+    },
+    {
+      ref: "Yajur Veda · 40.5 — Ishavasya",
+      sanskrit: "Tad ejati tan naijati tad dūre tad vantike",
+      meaning: "It moves and it moves not. It is far and it is near. It is within all this and it is also outside all this.",
+      geo: "The concept of scale in GIS — that the same phenomenon appears differently at local vs global scales — is this verse's spatial expression. A river 'moves and moves not' depending on the temporal and spatial scale of observation. Land that appears static over years shifts dramatically over millennia. Scale dependency is the fundamental challenge of geospatial science.",
+      bio: "Quantum superposition — a particle existing in multiple states simultaneously — is the modern physics equivalent of 'moves and moves not.' In biology, this manifests as enzyme conformational flexibility: enzymes are both rigid enough to catalyze reactions and flexible enough to bind diverse substrates. Being and becoming simultaneously.",
+      osho: "'It moves and moves not — this is not a contradiction, it is a pointer to what words cannot capture. The flame moves constantly yet remains still. The river flows yet the river is always here. Existence is both process and permanence. Meditation takes you to the still center of the moving world.'"
+    },
+    {
+      ref: "Yajur Veda · 40.9 — Two Paths",
+      sanskrit: "Andhaṃ tamaḥ praviśanti ye 'vidyām upāsate tato bhūya iva te tamo ya u vidyāyāṃ ratāḥ",
+      meaning: "Into blind darkness enter those who worship ignorance alone. Into greater darkness enter those who are devoted to knowledge alone.",
+      geo: "Both the purely empirical GIS analyst (knowledge alone) and the purely intuitive traditional knowledge holder (each incomplete alone) miss the full picture. Integrated spatial science — combining satellite data with community knowledge, quantitative analysis with qualitative understanding — is the middle path this verse describes.",
+      bio: "Reductionist biology (knowledge alone — studying molecules in isolation) misses emergent properties. Systems biology that integrates molecular data with whole-organism behavior finds the truth. The verse warns against both pure reductionism and pure holism — integration is required.",
+      osho: "'This is the most radical statement in the Upanishads — those who worship ignorance fall into darkness, yes. But those devoted to knowledge alone fall into greater darkness. Pure rationalism without awareness becomes a very sophisticated prison. The greatest scientists have always been mystics too — Einstein, Bohr, Schrödinger.'"
+    },
+    {
+      ref: "Yajur Veda · 40.6 — The Wise One",
+      sanskrit: "Yas tu sarvāṇi bhūtāny ātmany evānupaśyati sarvabhūteṣu cātmānaṃ",
+      meaning: "The one who sees all beings in the Self and the Self in all beings — from this one, nothing is hidden.",
+      geo: "Systems thinking in GIS — seeing every spatial element as part of an interconnected whole — is this verse made operational. A forest fire in Assam affects monsoon patterns in Bengal which affects crop yields in Bihar. The analyst who sees all beings in the self sees all system components in every dataset.",
+      bio: "The concept of the holobiont — an organism and all its associated microorganisms as a single biological unit — is the modern equivalent of seeing all beings in the self. Your microbiome is you. Your mitochondria are ancient bacteria. The boundary between self and other is biologically permeable.",
+      osho: "'Nothing is hidden from the one who sees all beings in the Self — not because such a person has supernatural powers, but because they have no psychological barriers. When you see yourself in others, you become transparent to reality. Separation is the root of all blindness.'"
+    },
+    {
+      ref: "Yajur Veda · 40.4 — Self Everywhere",
+      sanskrit: "Anejaḍ ekaṃ manaso javīyo nainad devā āpnuvan pūrvam arṣat",
+      meaning: "Unmoving, the One is swifter than the mind — the gods cannot reach it, for it was there first.",
+      geo: "The speed of light — the ultimate spatial constant, swifter than any instrument, existing before any observation — is the closest physics gets to this verse. No GIS sensor can capture the moment of observation itself. The reference frame from which all coordinates are measured is always beyond the measurement.",
+      bio: "Consciousness precedes neural processing — the binding problem in neuroscience. Brain signals take 200-500 milliseconds to produce conscious experience, yet we perceive ourselves as acting in real time. The self that experiences is 'swifter than the mind' and was 'there first' — before the neuroscience can catch it.",
+      osho: "'Swifter than the mind — that is awareness. Thought moves fast, but awareness is there before thought. When you sit in meditation and watch a thought arise, you are already there before the thought — otherwise you could not watch it. The watcher is always prior to the watched.'"
+    },
+    {
+      ref: "Yajur Veda · 40.16 — Golden Disc",
+      sanskrit: "Hiraṇmayena pātreṇa satyasyāpihitaṃ mukham tat tvaṃ pūṣann apāvṛṇu satyadharmāya dṛṣṭaye",
+      meaning: "The face of truth is covered by a golden disc. O Sun, remove it so that I who am devoted to truth may behold it.",
+      geo: "Atmospheric scattering — the golden haze that prevents satellites from seeing Earth's surface clearly — is the golden disc the Rishi describes. Atmospheric correction algorithms in remote sensing are the 'removal of the golden disc': mathematical techniques to see through the atmosphere to the true surface below.",
+      bio: "In drug discovery, the pharmacophore (the true active core of a molecule) is often hidden within a larger molecular structure. Medicinal chemistry is the art of removing the 'golden disc' — stripping away non-essential molecular elements to reveal the active truth beneath.",
+      osho: "'Truth is covered by a golden disc — gold, mind you, not lead. The cover is beautiful. Our illusions are attractive, pleasant, comforting. Nobody wants to remove a golden cover. That is why most people never seek truth — they are too comfortable with their beautiful lies.'"
+    },
+    {
+      ref: "Yajur Veda · 40.11 — Two Aspects",
+      sanskrit: "Vidyāṃ cāvidyāṃ ca yas tad vedobhayaṃ saha avidyayā mṛtyuṃ tīrtvā vidyayāmṛtam aśnute",
+      meaning: "One who knows both knowledge and ignorance, crossing death through ignorance and gaining immortality through knowledge.",
+      geo: "Mixed methods in GIS research — combining quantitative satellite analysis with qualitative fieldwork and local knowledge — reflects crossing through 'ignorance' (the messy, uncertain, human-scale data) to gain the 'immortality' of comprehensive spatial understanding. Pure technical GIS without ground truth is incomplete.",
+      bio: "Autophagy — the cellular process of self-digestion where cells destroy their own damaged components — is biological 'crossing through ignorance': the cell must temporarily become less to become more. Cellular immortality (cancer resistance, longevity) requires first accepting cellular destruction. Dying and living simultaneously.",
+      osho: "'Crossing death through ignorance — the Rishi is saying: embrace what you don't know. Most people cling to what they know; that clinging is the real death. The willingness to not-know — to sit in ignorance without rushing to fill it with borrowed knowledge — is the doorway to real understanding.'"
+    },
+    {
+      ref: "Yajur Veda · 36.3 — Waters of Peace",
+      sanskrit: "Śāntā dyauḥ śāntā pṛthivī śāntam idaṃ urvantarikṣam",
+      meaning: "Peaceful is the sky, peaceful is the Earth, peaceful is this vast atmosphere.",
+      geo: "Ecosystem health indicators in remote sensing — NDVI (vegetation health), LST (land surface temperature), water quality indices — are the quantitative measurement of atmospheric and terrestrial peace. When these indices decline, the Shanti is broken. Environmental monitoring is measuring the Rishi's peace.",
+      bio: "Homeostasis — the body's maintenance of stable internal conditions despite external changes — is biological peace. Core temperature, blood pH, blood glucose: the body maintains these within tight ranges. When homeostasis fails, disease follows. The peaceful body is the homeostatic body.",
+      osho: "'Peace is not the absence of conflict — it is the presence of harmony. The storm is part of the peaceful sky; the earthquake is part of the peaceful Earth. Nature's peace includes all its violence. What the Rishi asks for is not a world without chaos but a consciousness that contains chaos without being destroyed by it.'"
+    },
+    {
+      ref: "Yajur Veda · 36.8 — Prayer for Vision",
+      sanskrit: "Cakṣur me cakṣuṣe vicakṣaṇaṃ tejasvi nāv adhīyataṃ",
+      meaning: "May my eye be the eye of the discerning — may we be filled with brilliance.",
+      geo: "Multispectral vision in remote sensing extends human sight across the electromagnetic spectrum — infrared, microwave, ultraviolet. The 'eye of the discerning' sees what the naked eye cannot: subsurface geology, vegetation stress, ocean temperature. Satellite sensors are the Rishi's prayer answered in silicon.",
+      bio: "Visual processing in the human brain involves 30% of the cortex — more than any other sense. But visual perception is mostly predictive modeling: the brain fills in 80% of what you 'see' from memory and expectation. True seeing — discerning perception — requires recognizing and correcting for these predictive illusions.",
+      osho: "'May my eye be discerning — not just seeing what is there, but seeing what is really there. Most seeing is remembering: you see what you expect, what you fear, what you desire. True vision is empty perception — seeing without the filter of the ego. That is what meditation cultivates.'"
+    },
+    {
+      ref: "Yajur Veda · 36.14 — All Directions",
+      sanskrit: "Namas te astu bhagavan viśveśvarāya mahādevāya tryambakāya",
+      meaning: "Salutation to you, lord of all, the great one who sees in all three directions simultaneously.",
+      geo: "360-degree satellite coverage — the complete spatial awareness of Earth observation systems that monitor all directions simultaneously — is the geospatial realization of this salutation. MODIS, VIIRS, and Sentinel satellites together provide near-complete temporal coverage of every square kilometer of Earth's surface.",
+      bio: "The vestibular system — the inner ear's spatial orientation mechanism — detects motion and position in all three spatial dimensions simultaneously. This three-dimensional awareness is the biological equivalent of the three-eyed Shiva: full spatial consciousness.",
+      osho: "'Three-eyed Shiva sees in all directions at once — including backward and inward. The third eye is not a mystical organ; it is metaphor for awareness that includes the observer. Two eyes see outward. The third eye turns inward and sees the seer. That is the total vision the Rishi prays for.'"
+    },
+    {
+      ref: "Yajur Veda · 40.1 — All Pervaded by Divine",
+      sanskrit: "Īśā vāsyam idaṃ sarvaṃ yat kiñca jagatyāṃ jagat",
+      meaning: "By the Lord alone is all this pervaded — whatever moves in the moving world.",
+      geo: "Field theory in physics — the idea that every point in space is filled with overlapping fields (gravitational, electromagnetic, quantum) — is the geophysical expression of this verse. No point in space is truly empty. Every GIS coordinate is embedded in multiple physical fields simultaneously.",
+      bio: "The extracellular matrix — a complex network of proteins and sugars that pervades all tissue — is the biological 'all pervaded.' Cells are embedded in it, communicate through it, and derive structural signals from it. Remove the extracellular matrix and cells lose their identity and organization.",
+      osho: "'The world moves and the Lord pervades it — not as a ruler but as water pervades ice. The ice is rigid and limited; the water is fluid and total. God is not above existence managing it; God is existence itself in its most fluid, most aware state.'"
+    },
+    {
+      ref: "Yajur Veda · 36.10 — Long Life",
+      sanskrit: "Śataṃ jīva śaradaḥ puruṣa śataṃ nandati śaradaḥ",
+      meaning: "Live a hundred autumns, O person — rejoice for a hundred autumns.",
+      geo: "Centenarian geography — the spatial mapping of populations that regularly live past 100 — reveals that longevity is landscape-dependent. The Blue Zones (Sardinia, Okinawa, Ikaria, Nicoya, Loma Linda) all share specific geographic, dietary, and social characteristics that GIS can now map and model.",
+      bio: "Telomere length, NAD+ levels, senescent cell burden — the biomarkers of aging that longevity research tracks — are all influenced by lifestyle, diet, and environment. The Vedic prescription for long life: meaningful work, community, plant-based nutrition, and connection to nature. Modern longevity science agrees on all four.",
+      osho: "'Live a hundred autumns — but note: rejoice for a hundred autumns. Not merely survive. The Rishi is not asking for biological endurance; he is asking for a hundred years of joy. A joyful 50 is infinitely preferable to a miserable 100. The goal of life is not length but depth.'"
+    },
+    {
+      ref: "Yajur Veda · 36.22 — Good Thoughts",
+      sanskrit: "Bhadraṃ karṇebhiḥ śṛṇuyāma devā bhadraṃ paśyemākṣabhir yajatrāḥ",
+      meaning: "May we hear with our ears only what is auspicious — may we see with our eyes only what is good.",
+      geo: "Signal-to-noise ratio in remote sensing — the ability to extract meaningful information from satellite data while filtering out interference — is the technical expression of this prayer. Environmental data quality, cloud masking, atmospheric correction: all are about hearing and seeing only what is true in the geospatial signal.",
+      bio: "Selective attention in neuroscience — the brain's ability to focus on relevant signals while suppressing irrelevant ones — is the biological expression of this verse. The cocktail party effect, visual attention, and sensory gating all reflect the brain's attempt to hear and see only what is meaningful. Dysfunction in these filters causes sensory overload disorders.",
+      osho: "'May we hear only what is auspicious — not what is pleasant, note. Auspicious means what leads to growth, to truth, to understanding. Sometimes the most auspicious thing is difficult to hear. This prayer is not for comfort; it is for clarity — the courage to hear what is true and the wisdom to recognize it.'"
+    },
+    {
+      ref: "Yajur Veda · 36.23 — Unity of Minds",
+      sanskrit: "Tān saṃ gacchadhvaṃ saṃ vadadhvaṃ saṃ vo manāṃsi jānatām",
+      meaning: "Come together, speak together — let your minds know the same principle.",
+      geo: "Spatial data standards — OGC, ISO 19115, INSPIRE Directive — are the geospatial attempt to create unity of minds: common languages, common formats, common reference systems that allow spatial information to flow freely across borders. Without common standards, GIS data cannot communicate.",
+      bio: "Cell signaling and intercellular communication depend on shared molecular languages: receptor-ligand pairs, gap junctions, quorum sensing in bacteria. Multicellular life required cells to 'speak together' — to develop common chemical vocabularies. Biotech disrupts and reprograms these conversations.",
+      osho: "'Come together and speak together — not to agree, but to share the same field of inquiry. A symposium where everyone agrees is not a meeting of minds; it is a mirror. Real unity comes from people holding the same questions, not the same answers. The same direction, not the same destination.'"
+    },
+    {
+      ref: "Yajur Veda · 31.1 — Purusha as All",
+      sanskrit: "Sahasraśīrṣā puruṣaḥ sahasrākṣaḥ sahasrapāt",
+      meaning: "The cosmic being has a thousand heads, a thousand eyes, a thousand feet.",
+      geo: "The Internet of Things (IoT) sensor network — thousands of environmental sensors feeding real-time data to GIS platforms — is the Purusha's thousand eyes made operational. Smart city sensors, weather stations, flood gauges, air quality monitors: together they form the planetary awareness the Rishi described.",
+      bio: "The human nervous system contains approximately 86 billion neurons, each with thousands of connections — literally a thousand-headed network of awareness. The brain's connectome — its complete wiring diagram — when fully mapped, will be the biological portrait of the Purusha.",
+      osho: "'Thousand heads, thousand eyes — the Purusha is not an individual. It is the cosmic collectivity. You are one of its eyes. Your seeing adds to the universe's self-awareness. When you close your eyes in meditation, the universe closes one of its eyes. That is how important you are.'"
+    },
+    {
+      ref: "Yajur Veda · 36.2 — Fire as Leader",
+      sanskrit: "Agnir jyotiḥ jyotir agniḥ svāhā",
+      meaning: "Fire is light. Light is fire. Svaha — so be it.",
+      geo: "Thermal remote sensing — measuring Earth's surface temperature via infrared radiation — is fire becoming light becoming data. Volcanic activity, wildfire spread, urban heat islands, and geothermal energy are all mapped through the fire-light equivalence the Rishi stated in four words.",
+      bio: "In biochemistry, fire and light are the same: bioluminescence (light from biochemical reactions), chemiluminescence (light from chemical bonds), and ATP synthesis (chemical energy from metabolic 'fire'). The mitochondria burns glucose and produces the cellular fire that powers all biological light.",
+      osho: "'Fire is light — this is not chemistry. The Rishi is saying: consciousness is energy. The fire of awareness is the same as the light of understanding. When you are fully present — fully awake, fully attentive — you burn with a light that illuminates everything around you without burning it.'"
+    },
+    {
+      ref: "Yajur Veda · 40.7 — Who Sees All in Self",
+      sanskrit: "Yasmin sarvāṇi bhūtāny ātmaivābhūd vijānataḥ tatra ko mohaḥ kaḥ śoka ekatvam anupaśyataḥ",
+      meaning: "When one knows that all beings have become the Self — what delusion, what sorrow can there be for the one who sees oneness?",
+      geo: "Ecological empathy — the capacity of a conservation scientist to feel the loss of a forest as their own loss — is this verse as professional ethics. Remote sensing analysts who feel the NDVI decline as personal decline make better conservation decisions than those who see only statistics. Seeing oneness is not mysticism — it is effective science.",
+      bio: "Mirror neurons — brain cells that fire both when you perform an action and when you observe another performing it — are the biological basis of seeing the self in all beings. Empathy has a neural substrate. The sutra's 'oneness' is a measurable neurological state.",
+      osho: "'What delusion can there be for one who sees oneness? Delusion requires distance — I versus the world. When the distance disappears, delusion has nowhere to stand. That is liberation — not a supernatural state but the natural state, the one before the ego erected its walls.'"
+    },
+    {
+      ref: "Yajur Veda · 40.14 — From Death to Immortality",
+      sanskrit: "Vāyur anilam amṛtam athedaṃ bhasmāntaṃ śarīram",
+      meaning: "May the breath return to the immortal air — let this body end in ashes.",
+      geo: "The carbon cycle — the planetary process by which dead organisms decompose, releasing carbon to the atmosphere, soil, and ocean — is the geochemical immortality of matter. The carbon in your body has been in ancient forests, ocean sediments, and volcanic eruptions. Ashes return to the cycle; breath returns to air.",
+      bio: "Decomposition is not death — it is transformation. The human body at death becomes food for 400 species of bacteria, fungi, and insects, which in turn become soil, which becomes plant, which becomes animal. Death is the most creative act in biology. The Rishi understood this as the body's gift to the cycle.",
+      osho: "'Let this body end in ashes and the breath return to immortal air — this is not resignation; it is liberation. The fear of death comes from identifying with the body. When you know yourself as the immortal breath — as awareness, not flesh — death becomes a door, not a wall.'"
+    },
+    {
+      ref: "Yajur Veda · 36.9 — Clarity and Strength",
+      sanskrit: "Tejosi śukram asi amṛtam asi vāyur asi prajāpatiḥ",
+      meaning: "You are brilliance. You are purity. You are immortality. You are the breath. You are the progenitor.",
+      geo: "In geodesy, the ideal datum — perfectly aligned with Earth's true shape, without distortion — would be brilliant, pure, and immortal: undistorted, uncorrupted, permanent. Every GIS system aspires to this ideal and compensates for the gap between the ideal and the actual. The prayer is for data integrity.",
+      bio: "Stem cells — undifferentiated, pure, immortal in their potential — are the biological expression of this verse. A stem cell is brilliance (full developmental potential), purity (uncommitted to a single fate), and immortality (can divide indefinitely). Biotech's quest for immortal stem cell lines is the prayer for Tejosi made practical.",
+      osho: "'You are immortality — the Rishi addresses this to the inner self, not the body. This is the most direct statement of identity in all literature: your nature is immortal. Not that you will become immortal, not that you might achieve immortality — you are immortality right now. The journey is not to get there; it is to realize you are already there.'"
+    },
+    {
+      ref: "Yajur Veda · 3.60 — Let Noble Thoughts Come",
+      sanskrit: "Ā no bhadrāḥ kratavo yantu viśvato adabdhāso aparītāsa udbhidaḥ",
+      meaning: "Let noble thoughts come to us from everywhere — unobstructed, from every side.",
+      geo: "Open geospatial data — the global commons of spatial information shared through platforms like OpenStreetMap, Copernicus, NASA Earthdata — is this prayer realized. When data flows freely from all directions without obstruction, the world's spatial understanding advances for everyone. Knowledge borders are as harmful as physical ones.",
+      bio: "Cross-disciplinary biology — genomics informing ecology, informing medicine, informing pharmacology — flourishes when knowledge moves freely across subdisciplines. Nobel Prize-winning discoveries disproportionately happen at the intersection of fields, where noble thoughts from every direction converge.",
+      osho: "'Unobstructed, from every side — the Rishi is describing the ideal mind: open in all directions, free of prejudice, ideology, or tradition that blocks the new. A mind that can only receive from certain directions is not a mind; it is a mailbox. The open mind is the greatest scientific instrument.'"
+    }
+  ],
+
+  sama: [
+    {
+      ref: "Sama Veda · 1.1 — Opening Invocation",
+      sanskrit: "Agna ā yāhi vītaye gṛṇāno havyadātaye ni hotā satsi barhiṣi",
+      meaning: "O Agni, come to our feast, praised one, to receive our offerings — be seated as the priest on the sacred grass.",
+      geo: "The Sama Veda's power lies in frequency — every verse was set to specific musical scales believed to resonate with natural forces. Modern remote sensing is entirely frequency-based: different wavelengths reveal different surface properties. Radar, LiDAR, multispectral imaging — all read the Earth through its electromagnetic frequencies.",
+      bio: "Cymatics — how sound frequencies organize physical matter into patterns — is now influencing biotech. Studies show specific frequencies affect cell growth, gene expression, and protein folding. Ultrasound is used in targeted drug delivery. The Sama Veda's sacred frequencies were applied bioacoustics.",
+      osho: "'The Sama Veda understood what modern science is rediscovering: existence is music. Not metaphor — literally. Every atom vibrates. Every cell has a frequency. The universe is a symphony, and the Rishis were its first musicians. Silence is not the absence of music; it is the deepest note.'"
+    },
+    {
+      ref: "Sama Veda · Chandogya Upanishad · 6.2.1",
+      sanskrit: "Sad eva somyedam agra āsīd ekam evādvitīyam tad aikṣata bahu syām prajāyeyeti",
+      meaning: "In the beginning there was only pure existence — one, without a second. It willed: may I be many. And so it became many.",
+      geo: "The Big Bang: all of spacetime emerged from a single point. All the complexity of the universe — every galaxy, every mapped coordinate — emerged from that one point. 'One without a second, that willed to become many' is the Big Bang described 3,000 years before Hubble.",
+      bio: "All life descends from LUCA — the Last Universal Common Ancestor, one cell billions of years ago that 'willed to be many.' Every species traces back to that one. 'One that became many' is the tree of life. The Chandogya Upanishad described LUCA before microbiology had a word for it.",
+      osho: "'It willed: may I be many — this is the most extraordinary sentence in all literature. The universe desired diversity. Existence chose to play. That is why there are a million species, a billion galaxies. Life is not an accident — it is existence's creative expression. Science calls it evolution. The Rishi called it divine play — Lila.'"
+    },
+    {
+      ref: "Sama Veda · Chandogya Upanishad · 3.14.1",
+      sanskrit: "Sarvaṃ khalv idaṃ brahma tajjalān iti śānta upāsīta",
+      meaning: "All this is Brahman — from it all things are born, into it they dissolve, and by it they are sustained. With tranquility, meditate on this.",
+      geo: "Earth System Science describes the planet as a single self-sustaining system: the biosphere is born from (solar energy + geology), sustained by (biogeochemical cycles), and returns to (decomposition and rock formation) the Earth system. The planet is Brahman — self-created, self-sustaining, self-recycling.",
+      bio: "The biosphere is autopoietic — self-creating and self-maintaining. Life creates the conditions for life: oxygen from photosynthesis enables respiration; decomposition returns nutrients for growth. The entire living system is born from itself, sustained by itself, and dissolves into itself. Biology discovered Brahman without using the word.",
+      osho: "'From it all things are born, into it they dissolve — this is not theology, it is ecology. Nothing is created from outside the system; nothing escapes the system. Everything that exists is a temporary form of the same energy. You are not in the universe — you are the universe taking a temporary human shape.'"
+    },
+    {
+      ref: "Sama Veda · Chandogya Upanishad · 6.8.7 — Tat Tvam Asi",
+      sanskrit: "Tat tvam asi śvetaketo",
+      meaning: "Thou art that, Shvetaketu.",
+      geo: "The observer is the observed — in remote sensing, the satellite that measures Earth is itself a product of Earth's materials, launched by Earth's gravity, powered by solar energy that Earth receives. The instrument is inseparable from the system it measures. You are that which you are studying.",
+      bio: "The scientist studying DNA is made of DNA. The neuroscientist studying the brain is using the brain to study itself. The immunologist is inside the immune system they describe. Tat tvam asi is the fundamental epistemological condition of all biology: the knower and the known are made of the same stuff.",
+      osho: "'Thou art that — three words that took 700 pages of German philosophy to say in Hegel's Phenomenology of Spirit. The Rishi said it in three syllables. And unlike Hegel, it is not a philosophical conclusion — it is a direct instruction: look at yourself and recognize what you are.'"
+    },
+    {
+      ref: "Sama Veda · Chandogya Upanishad · 1.1.1 — Om",
+      sanskrit: "Om ity etad akṣaram udgītham upāsīta",
+      meaning: "The syllable Om — meditate upon it as the essence of the Udgitha (the chant of the universe).",
+      geo: "The Schumann resonances — electromagnetic frequencies that resonate within the cavity between Earth's surface and the ionosphere, primarily at 7.83 Hz — are Earth's own 'Om.' This planetary frequency was detected by scientists in 1952 but was described as the vibrational signature of Earth by Vedic rishis millennia earlier.",
+      bio: "Infrasound at 7-8 Hz — the frequency range of Om chanting — has been shown to synchronize neural oscillations, reduce cortisol, increase alpha waves, and improve immune function. The vagus nerve, which connects the brain to most major organs, is directly activated by low-frequency vocal vibration. Om is vagal toning.",
+      osho: "'Om is not a word; it is the sound of the universe breathing. Modern physics discovered that the universe hums — the cosmic microwave background has a temperature that corresponds to a frequency. The universe is not silent; it is singing. Om is the name the Rishis gave to that song.'"
+    },
+    {
+      ref: "Sama Veda · Kena Upanishad · 1.1",
+      sanskrit: "Keneṣitaṃ patati preṣitaṃ manaḥ kena prāṇaḥ prathamaḥ praiti yuktaḥ",
+      meaning: "By what is the mind directed? What sets the first breath in motion? At whose bidding does the eye see?",
+      geo: "Sensor fusion in GIS — the question of what integrates data from multiple satellite sensors into a coherent picture — is the geospatial Kena question. Who or what sees through the camera? The algorithm processes, but something must design the algorithm, and something must interpret its output. The Rishi asks for the source of observation.",
+      bio: "The hard problem of consciousness — why neural processes give rise to subjective experience — is Kena Upanishad in neuroscience. We know which neurons fire when you see a red apple. We do not know why there is something it feels like to see red. The Kena question remains unanswered by neuroscience.",
+      osho: "'By what is the mind directed? The Rishi is not asking philosophically — he is pointing at the gap between the instrument and the operator. The eye is an instrument; who looks through it? The brain processes; who experiences the processing? Find that, and you have found what the Rishis were pointing at.'"
+    },
+    {
+      ref: "Sama Veda · Chandogya Upanishad · 6.9.1 — Rivers and Ocean",
+      sanskrit: "Yathā nadyaḥ syandamānāḥ samudre'staṃ gacchanti nāmarūpe vihāya",
+      meaning: "As rivers flowing into the ocean lose their name and form — so the individual knower merges into the supreme.",
+      geo: "Hydrological network analysis — how tributaries merge, lose their identity, and become the main stream — is the geospatial expression of this verse. A river's watershed is the spatial record of all the waters that will lose their identity in the ocean. Water provenance tracking in GIS follows each molecule to its oceanic dissolution.",
+      bio: "Cell differentiation and apoptosis — when specialized cells complete their function and dissolve back into the organism's chemical pool — is the biological river-to-ocean. Stem cells differentiate, perform their function, and then die, returning their molecular components to the body's common pool. Identity is borrowed, not permanent.",
+      osho: "'Rivers lose their name and form in the ocean — but do they lose their nature? No. Water remains water. What is lost is the boundary, the name, the separate identity. Enlightenment is not annihilation — it is dissolution of the wall between the river and the ocean. The water is there; only the bank is gone.'"
+    },
+    {
+      ref: "Sama Veda · Chandogya Upanishad · 6.10.1 — Trees and Sap",
+      sanskrit: "Yathā vṛkṣo vanaspatir... sarvāḥ śākhāḥ prasarpanti",
+      meaning: "As a tree spreads all its branches from a single root — all life spreads from a single source.",
+      geo: "Phylogeography — the study of the geographic distribution of genetic lineages — maps how all life spread from single ancestral populations across the planet. The tree of life is literally a geographic tree: species migrate, adapt, and diversify, but all branches trace to the same root location on the paleographic map.",
+      bio: "The tree of life discovered through rRNA sequencing (Carl Woese, 1977) showed that all life shares a common ancestor. The single root from which all branches emerge is LUCA. The Rishi's tree metaphor was structurally perfect: one root, three domains, millions of branches.",
+      osho: "'All spreads from a single source — and that source is available to you right now. The root is not in the past; the root is in the present. Underneath all your branches — all your roles, relationships, desires — there is still the root. Meditation is going back to the root while being fully alive in the branches.'"
+    },
+    {
+      ref: "Sama Veda · Chandogya Upanishad · 6.11.1 — Salt and Water",
+      sanskrit: "Udakumbham āvāhayitvā ātman māṃ lakṣatīti hovāca",
+      meaning: "After bringing a vessel of water, the teacher said: place salt in it. The salt dissolves and cannot be seen — yet it pervades the whole.",
+      geo: "In GIS, coordinate reference systems are invisible yet permeate all spatial data — you cannot 'see' the CRS in a dataset, but every point's location is defined by it. The invisible infrastructure of spatial reference is the salt in the water of geospatial data.",
+      bio: "Hormones, neurotransmitters, and dissolved minerals in blood plasma are salt-in-water biology: invisible in concentration yet pervading and organizing every cell's behavior. Trace minerals — iodine, selenium, zinc — are present in parts per billion but essential to every metabolic process. Invisible, pervasive, critical.",
+      osho: "'The salt dissolves and cannot be seen — yet it is there in every drop. That is how the divine pervades existence: not as a visible presence, not as a god you can point to, but as the taste of everything. Seek the divine as you would taste salt — not by looking, but by tasting existence directly.'"
+    },
+    {
+      ref: "Sama Veda · Chandogya Upanishad · 6.12.1 — Seed and Tree",
+      sanskrit: "Imaṃ nyagrodhaṃ... kā tanuḥ iti dahānam... etad yo na paśyasi... sa eṣa ātmā",
+      meaning: "Break open this seed of the Nyagrodha tree. Inside is nothing you can see. Yet from that nothingness, this great tree arises.",
+      geo: "Fractals in geomorphology: a small watershed drainage pattern is structurally identical to the Amazon basin. The seed-to-tree scaling principle is spatial self-similarity — the small contains the pattern of the large. Fractal analysis in GIS uses this seed-to-tree principle to analyze landscapes at multiple scales.",
+      bio: "The genome is the biological seed — a 3-billion-base-pair molecule that contains the complete blueprint for a 37-trillion-cell organism. From the 'nothingness' of a single fertilized cell grows a complete human being. The information density of DNA (10^15 bits per gram) is greater than any human-made data storage medium.",
+      osho: "'Inside is nothing you can see — yet from that nothingness, this great tree arises. The source of everything is nothing. Not emptiness, but a fullness so complete it appears as nothing to ordinary senses. The most creative force in the universe is the void. This is what quantum physics is discovering in its deepest investigations.'"
+    },
+    {
+      ref: "Sama Veda · Chandogya Upanishad · 6.13.1 — Return to Salt",
+      sanskrit: "Atha me tat āhārety uktvā rasam āharet",
+      meaning: "Now taste from this end. How is it? Salty. Now from the middle. How is it? Salty. Now throw it away and come to me.",
+      geo: "Spatial sampling theory — the principle that you must sample multiple points across a spatial distribution to characterize the whole — is this experiment applied to GIS. Tasting from different ends, the middle: spatial sampling ensures that the full distribution is captured. Biased sampling (tasting only from one end) gives incomplete truth.",
+      bio: "Pharmacokinetics — how drugs distribute through the body — is salt-in-water biology. Drug concentration must be measured at multiple tissue sites because a drug that is 'salty' (effective) at one location may be absent at another. Spatial distribution of molecules in the body is as important as their total quantity.",
+      osho: "'Throw it away and come to me — after the demonstration, discard the instrument. The salt-water experiment was a teaching tool; once you understand, release the tool. Science is full of tools that become prisons — methodologies that were once liberating become dogmas. Learn from the method and then throw it away.'"
+    },
+    {
+      ref: "Sama Veda · Chandogya Upanishad · 6.14.1 — The Blindfolded Man",
+      sanskrit: "Yathā puruṣaṃ gandhārebhyo bandhaṃ nītvā... sa etasminn eva dese mucyeta",
+      meaning: "A blindfolded man is led away from his homeland. Left alone in a strange land, he calls out. A passerby removes his blindfold and points the way home.",
+      geo: "GPS lost signal recovery — when a navigation system loses its reference and must re-acquire its position from available signals — is this parable in technology. The 'blindfolded' receiver reorients itself using satellite signals, landmark recognition, or dead reckoning. The passerby is the correction signal.",
+      bio: "Immune memory — how the adaptive immune system, once exposed to a pathogen, can rapidly reorient to fight it upon re-exposure — is the biological blindfolded man finding his way home. The antigen is the landmark; antibody production is the reorientation. Vaccination is deliberately creating the memory of 'home.'",
+      osho: "'A passerby removes the blindfold and points the way — the teacher does not carry you home. They only remove the blindfold. The capacity to go home was always there; only the blindfold prevented it. Spiritual teaching is blindfold removal, not transportation. You must walk home yourself.'"
+    },
+    {
+      ref: "Sama Veda · Kena Upanishad · 1.3 — Eye of the Eye",
+      sanskrit: "Na tatra cakṣur gacchati na vāg gacchati no manaḥ na vidmo na vijānīmo yathā etad anuśiṣyāt",
+      meaning: "There the eye does not go, nor speech, nor mind. We do not know and cannot understand how one would teach this.",
+      geo: "The observer effect in spatial science: the very act of mapping changes what is being mapped. Indigenous communities alter their behavior when they know their land is being surveyed. Animals relocate when sensor arrays are installed. The 'eye that cannot go there' is the principle that some spatial truths are inaccessible to observation itself.",
+      bio: "The observer effect in quantum biology: consciousness itself may be a quantum process that cannot be observed without destroying the phenomenon. The brain that studies itself cannot observe the moment of observation. Consciousness is the eye that cannot see itself seeing — the Kena paradox in neuroscience.",
+      osho: "'We do not know and cannot understand — this is the moment of true science. Not pretending to know, not forcing an explanation, not using borrowed vocabulary. Sitting with not-knowing. That is the beginning of wisdom. Most education teaches you to perform knowing; the Rishi teaches you to rest in not-knowing.'"
+    },
+    {
+      ref: "Sama Veda · Chandogya Upanishad · 3.19.1 — Cosmic Egg",
+      sanskrit: "Asad vā idam agra āsīt tato vai sad ajāyata tad aṇḍaṃ niravartata",
+      meaning: "In the beginning this was non-existence. From non-existence, existence was born. That became the cosmic egg.",
+      geo: "Cosmic inflation theory describes how the early universe expanded from a quantum fluctuation — from non-existence into the cosmic egg of the observable universe in 10^-36 seconds. Every coordinate in the current universe was contained in that original egg. Cosmological GIS — the mapping of the universe's large-scale structure — is the cartography of the hatching egg.",
+      bio: "Embryogenesis begins with nothing visible — a fertilized egg appears identical to an unfertilized one. Yet from this 'non-existence' of cellular complexity emerges a complete organism. The zygote is the biological cosmic egg: undifferentiated yet containing all differentiation, nothing visible yet everything potential.",
+      osho: "'From non-existence, existence was born — the Rishi is not describing the past. This is happening right now, in every moment. Every thought arises from the thoughtless. Every sound from silence. Every form from the formless. Creation is not an event that happened; it is what is happening continuously.'"
+    },
+    {
+      ref: "Sama Veda · Chandogya Upanishad · 7.25.2 — The Infinite",
+      sanskrit: "Yo vai bhūmā tat sukham alpe sukham nāsti bhūmaiva sukham",
+      meaning: "Where there is the infinite, there is joy. In the finite there is no joy. The infinite alone is joy.",
+      geo: "Scale and meaning in GIS: local maps reveal local truths; global analysis reveals global patterns. The joy of Earth observation science comes from the infinite perspective — seeing the entire planet as a single system, tracking cycles that span millennia. Finite data points are necessary but the infinite integrated dataset is where understanding — joy — lives.",
+      bio: "The field of synthetic biology attempts to design life from finite components. But the greatest advances in biology come from engaging with the infinite complexity of natural systems — the gut microbiome, the immune system, the brain. Finite reductionism has limits; engagement with infinite complexity has none.",
+      osho: "'In the finite there is no joy — because the finite always ends. Every pleasure based on a limited object ends when the object is gone, consumed, or changed. Joy that does not end can only come from the infinite. The infinite is your own consciousness — it has no edges, no beginning, no end. That is where joy lives permanently.'"
+    },
+    {
+      ref: "Sama Veda · Chandogya Upanishad · 8.14.1 — Akasha and Space",
+      sanskrit: "Ākāśo vai nāma nāmarūpayoḥ nirvahitā te yad antarā tad brahma",
+      meaning: "Space is the name-giver of name and form — between them is Brahman.",
+      geo: "In GIS, space is the canvas on which all phenomena are inscribed. Without spatial reference — without the ākāśa of coordinate space — no geographic data can exist. Space is not a container for phenomena; it is the condition that makes phenomena distinguishable. GPS measures ākāśa with 3-centimeter precision.",
+      bio: "In cellular biology, the space between molecules — the intermolecular space — determines whether reactions occur. Enzyme-substrate binding depends on spatial complementarity. The space between DNA base pairs is as important as the base pairs themselves. Molecular space is the biological ākāśa.",
+      osho: "'Between name and form is Brahman — the space between words is where meaning lives. A poem is not the words; it is the silence between them. Music is not the notes; it is the space between them. The Rishi is pointing at the gap — the creative nothing between all things. That gap is where existence comes from.'"
+    },
+    {
+      ref: "Sama Veda · Chandogya Upanishad · 7.9.1 — Mind as Infinite",
+      sanskrit: "Mano brahma iti upāsīta iti... mano vāva bhūmā",
+      meaning: "Meditate on mind as Brahman — mind itself is the infinite.",
+      geo: "Spatial reasoning — the mind's ability to understand three-dimensional space, navigate, read maps, and model landscapes — is one of the most complex cognitive functions. The mind that can contain a mental map of the entire Earth in a single thought is demonstrating its cosmic scale. GIS is externalized mind-space.",
+      bio: "Neural plasticity — the brain's ability to rewire itself in response to experience — means the mind is not a fixed structure but an infinite process of self-modification. A brain that can learn any language, master any skill, and contain any amount of knowledge is functionally infinite. The Rishi's 'mind is the infinite' is neuroplasticity.",
+      osho: "'Mind is the infinite — but the ordinary mind does not know this because it is too full of its own contents. A room full of furniture appears small. Empty the room and it appears vast. Empty the mind of opinions, memories, fears, and projections — and you will discover its infinite nature.'"
+    },
+    {
+      ref: "Sama Veda · Chandogya Upanishad · 4.3.1 — Food as Brahman",
+      sanskrit: "Annam brahmeti vyajānāt annāddhi khalv imāni bhūtāni jāyante",
+      meaning: "He knew food is Brahman — from food all beings are born, by food they live, into food they return.",
+      geo: "Food systems mapping — the spatial analysis of agricultural land, food supply chains, distribution networks, and food deserts — is the geospatial expression of 'food as Brahman.' Every human settlement is geographically organized around food access. Cities, rivers, trade routes: all follow the spatial logic of food as the organizing principle of civilization.",
+      bio: "Metabolomics — the comprehensive study of all metabolites in a biological system — is the science of food as Brahman at the molecular level. Every compound in the body traces to food: amino acids from protein, fatty acids from lipids, glucose from carbohydrates. The organism is continuously built from and returned to food.",
+      osho: "'From food all beings are born — the Rishi is not being poetic. This is biochemistry. You literally are what you eat: every protein in your body was built from amino acids you ingested. The Brahman that sustains all life is the sun's energy captured in plant molecules and passed through the food web. Eating is sacrament.'"
+    },
+    {
+      ref: "Sama Veda · Kena Upanishad · 2.2 — Known by Those Who Don't Know",
+      sanskrit: "Na tad vidur ye tad vā viduḥ na vidur ye tad vā na viduḥ",
+      meaning: "Those who think they know it do not know it. Those who think they do not know it — they know it.",
+      geo: "In GIS, the most dangerous operator is one who is certain they understand the data. Spatial data always has uncertainty, positional error, and classification limitations that the expert forgets after years of use. The beginner who says 'I don't understand this fully' is closer to the truth than the expert who has forgotten the data's limitations.",
+      bio: "In immunology, the paradox of self-tolerance: the immune system must recognize 'self' to not attack it, but too complete a recognition would make it unable to respond to pathogens that mimic self. 'Knowing' the self too well is dangerous. The immune system maintains a productive uncertainty about self.",
+      osho: "'Those who think they know do not know — because the moment you think you know, you stop looking. The known is a closed door. The unknown is an open invitation. The greatest scientists are those who maintain beginner's mind after decades of expertise. They know so much that they know how much they don't know.'"
+    },
+    {
+      ref: "Sama Veda · Chandogya Upanishad · 7.26.1 — Knowledge Feeds on Knowledge",
+      sanskrit: "Vijñānam upāsīta vijñāne khalv eva tad anāmnā viditam",
+      meaning: "Meditate on knowing — for through knowing, what cannot be known by name becomes known.",
+      geo: "Machine learning in GIS — where algorithms improve their spatial pattern recognition by processing more data — is vijñāna feeding on vijñāna. Deep learning systems trained on satellite imagery develop spatial understanding that cannot be explicitly named or programmed — it emerges from the process of knowing knowing itself.",
+      bio: "Metacognition — the ability of the brain to think about its own thinking — is the neuroscience of vijñāna. Organisms with metacognition can reflect on their knowledge states, recognize gaps, and direct learning accordingly. This capacity for self-directed learning is the evolutionary advantage of the largest prefrontal cortex in the animal kingdom.",
+      osho: "'Through knowing, what cannot be named becomes known — the deepest truths cannot be put into words. They are known directly, in the moment of experience. Music cannot be described; it must be heard. Love cannot be defined; it must be felt. The Rishi is pointing at the knowing that transcends language.'"
+    },
+    {
+      ref: "Sama Veda · Chandogya Upanishad · 8.3.4 — Self in the Heart",
+      sanskrit: "Etad vai tan manomayam annarasaya śarīraṃ tasminn ayam ākāśaḥ",
+      meaning: "This Self, made of mind and consisting of food-essence, is seated in the space within the heart.",
+      geo: "The concept of the centroid — the geometric center of a spatial distribution — is the geographic self in the heart. Every map has a center from which distances are measured. Every GIS analysis has a reference point. The 'space within the heart' is the geodetic datum from which all geospatial truth is measured.",
+      bio: "The cardiac pacemaker — the sinoatrial node — is located in the right atrium and generates the electrical impulse that coordinates every heartbeat. This tiny cluster of specialized cells is the biological 'self in the heart': the irreducible center that maintains the rhythm of life. Remove it and the organism loses coordination.",
+      osho: "'Seated in the space within the heart — smaller than an atom, yet the entire universe can be contained there. The heart-space is not anatomical; it is the space of pure awareness that exists within you. When all thoughts are still and all emotions are quiet, what remains is this vast, spacious awareness. That is the Self the Rishi describes.'"
+    },
+    {
+      ref: "Sama Veda · Chandogya Upanishad · 7.1.1 — Name and Form",
+      sanskrit: "Nāmarūpe vyākaravāṇīti sa hovāca nāma vāva nāmarūpayoḥ",
+      meaning: "Let me unfold name and form, he said. Name — name is the substance behind all name and form.",
+      geo: "The fundamental tension in GIS: between the continuous reality of the landscape and the discrete categories we assign to it. A forest gradually becomes a field — but our GIS land cover classification forces a binary choice. The 'name' creates a false boundary where only gradients exist. Fuzzy classification in GIS attempts to honor the reality behind the name.",
+      bio: "Species classification — the assignment of organisms to named taxonomic categories — constantly struggles with the reality that speciation is a continuum, not a discrete event. Ring species, hybridization zones, and cryptic species all demonstrate that nature doesn't recognize our Linnaean names. The name is the map; the organism is the territory.",
+      osho: "'Name is the substance behind all name and form — meaning the capacity to name is more fundamental than any particular name. Language itself, the naming function, is what the Rishi points to. Before you learned any names, there was pure awareness. Return to that — and you are in the space before all names.'"
+    },
+    {
+      ref: "Sama Veda · Chandogya Upanishad · 6.15.1 — Return to Source",
+      sanskrit: "Yathāgneḥ kṣudraṃ visphuliṅgaṃ vyuccaranti evaṃ vā asmāt ātmanaḥ sarve prāṇāḥ",
+      meaning: "As small sparks fly from a great fire — so from this great Self, all vital breaths emerge.",
+      geo: "Dispersal ecology — how populations spread from source habitats across landscapes — is spatial sparks-from-fire. GIS landscape connectivity analysis models exactly this: how individuals and species disperse from source populations (the great fire) through corridors to new habitats. Metapopulation theory is spark-from-fire dynamics.",
+      bio: "Stem cell differentiation — the process by which a single pluripotent stem cell gives rise to all the specialized cells of the body — is the biological sparks-from-fire. The zygote is the great fire; every nerve cell, liver cell, and muscle cell is a spark that emerged from it. Developmental biology maps the sparks.",
+      osho: "'From the great Self, all vital breaths emerge — and return. The spark flies out, burns brightly, and is reabsorbed. That is a life. The spark does not stay separate from the fire forever. Death is not the end of the spark — it is its return home. Seen from the fire, every death is a homecoming.'"
+    },
+    {
+      ref: "Sama Veda · Chandogya Upanishad · 7.23.1 — Infinite Happiness",
+      sanskrit: "Yo vai bhūmā tat sukham alpe sukham nāsti bhūmaiva sukham bhūmā tv eva vijijñāsitavyaḥ",
+      meaning: "Where there is the infinite, there is happiness. The infinite alone is what one should seek to know.",
+      geo: "The overview effect — the profound cognitive shift reported by astronauts seeing Earth from space — is the happiness of the infinite in geospatial form. Seeing the whole Earth as a single, fragile, borderless entity produces a lasting transformation in consciousness. The infinite perspective literally changes the brain.",
+      bio: "Flow state in neuroscience — the condition of complete absorption in an activity where self-consciousness disappears — corresponds to activation of the default mode network's deactivation. In flow, the brain's sense of bounded self dissolves into the infinite field of the activity. This is the happiness of the infinite in neurological terms.",
+      osho: "'The infinite alone is what one should seek to know — not more facts, not more data, not more credentials. The infinite is not something to add to your knowledge; it is what you find when you subtract everything you've added. Enlightenment is not gaining something; it is losing the illusion of finiteness.'"
+    }
+  ]
+};
+    </script>
+    <script>
+      /* ── render sutra cards from VEDA_DATA ── */
+      (function buildVedas() {
+        const keys = ['rig', 'atharva', 'yajur', 'sama'];
+        keys.forEach(key => {
+          const panel = document.getElementById('veda-' + key);
+          if (!panel || typeof VEDA_DATA === 'undefined') return;
+          panel.innerHTML = VEDA_DATA[key].map((s, i) => `
+            <div class="sutra-card" onclick="toggleSutra(this)">
+              <div class="sutra-header">
+                <div>
+                  <p class="sutra-ref">${s.ref}</p>
+                  <p class="sutra-sanskrit">"${s.sanskrit}"</p>
+                </div>
+                <span class="sutra-toggle">+</span>
+              </div>
+              <div class="sutra-body">
+                <p class="sutra-meaning"><strong>${s.meaning}</strong></p>
+                <div class="three-cols">
+                  <div class="insight-box">
+                    <p class="insight-label" style="color:var(--accent2);">🛰️ Geospatial Science</p>
+                    <p>${s.geo}</p>
+                  </div>
+                  <div class="insight-box">
+                    <p class="insight-label" style="color:var(--accent3);">🧬 Biotechnology</p>
+                    <p>${s.bio}</p>
+                  </div>
+                  <div class="insight-box">
+                    <p class="insight-label" style="color:var(--gold);">🌀 Osho's Lens</p>
+                    <p>${s.osho}</p>
+                  </div>
+                </div>
+              </div>
+            </div>`).join('');
+        });
+      })();
+
+      /* ── tab switching ── */
+      function showVeda(name) {
+        document.querySelectorAll('.veda-panel').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.veda-tab').forEach(t => t.classList.remove('active-tab'));
+        document.getElementById('veda-' + name).classList.add('active');
+        document.getElementById('tab-' + name).classList.add('active-tab');
+      }
+
+      function toggleSutra(card) {
+        const isOpen = card.classList.contains('open');
+        document.querySelectorAll('.sutra-card').forEach(c => {
+          c.classList.remove('open');
+          c.querySelector('.sutra-body').classList.remove('open');
+        });
+        if (!isOpen) {
+          card.classList.add('open');
+          card.querySelector('.sutra-body').classList.add('open');
+        }
+      }
+    </script>
+
+  </div>
+</div>
+
+
+<!-- FULL POST -->
+<div id="post1" style="border-top: 1px solid var(--line); background: var(--surface);">
+  <div style="max-width: 720px; margin: 0 auto; padding: 7rem 3rem;">
+
+    <p style="font-family:'Space Mono',monospace; font-size:0.68rem; color:var(--accent2); letter-spacing:3px; text-transform:uppercase; margin-bottom:1.5rem;">
+      // Osho × Geospatial Science — Full Essay
+    </p>
+
+    <h2 style="font-size:clamp(1.8rem,4vw,3rem); font-weight:900; letter-spacing:-1.5px; line-height:1.1; margin-bottom:2rem;">
+      The Map Is Not the Territory —<br/>Osho, Korzybski, and the Limits of GIS
+    </h2>
+
+    <p style="font-size:0.82rem; color:var(--accent3); font-family:'Space Mono',monospace; margin-bottom:3rem; letter-spacing:1px;">
+      6 min read &nbsp;·&nbsp; Philosophy × Earth Science
+    </p>
+
+    <div style="font-size:1.05rem; line-height:1.95; color:#c0c0d8;" class="post-body">
+
+      <p>We build satellite maps of the entire earth — every river bend, every deforested patch, every shifting coastline — with millimetre precision. Terabytes of data. Algorithms that can detect a single burned field from 700 kilometres above.</p>
+
+      <p style="margin-top:1.5rem;">And yet, Osho kept saying something that disturbs me every time I open QGIS:</p>
+
+      <blockquote style="border-left:3px solid var(--accent); padding:1.2rem 1.5rem; margin:2rem 0; background:rgba(124,106,247,0.06); border-radius:0 8px 8px 0;">
+        <p style="font-style:italic; color:#9090c0; font-size:1rem;">"The map is not the territory. The word 'water' will not quench your thirst. The word 'fire' will not burn your hand. All our knowledge is about maps — and we have completely forgotten the territory."</p>
+        <cite style="display:block; margin-top:0.8rem; font-style:normal; font-size:0.72rem; color:var(--accent); font-family:'Space Mono',monospace;">— Osho</cite>
+      </blockquote>
+
+      <p>He was borrowing from Alfred Korzybski — a Polish-American philosopher who coined the phrase in 1931. But Osho took it further. He wasn't just talking about language. He was talking about the entire project of human knowledge — science included.</p>
+
+      <h3 style="font-size:1.3rem; font-weight:800; letter-spacing:-0.5px; margin:2.5rem 0 1rem; color:var(--text);">What GIS Actually Does</h3>
+
+      <p>Geospatial Information Science is, at its core, the art of making maps. We take the living, breathing, chaotic reality of the earth and convert it into layers — raster layers, vector layers, spectral indices, classified polygons. We assign a number to a forest. We draw a boundary around a river. We give coordinates to a village.</p>
+
+      <p style="margin-top:1.5rem;">This is extraordinarily useful. NDVI tells us how much of a forest is dying. Flood inundation maps save thousands of lives. Land use classification tracks deforestation faster than any ground survey ever could.</p>
+
+      <p style="margin-top:1.5rem;">But here is what GIS cannot do: <strong style="color:var(--text);">it cannot capture what it feels like to stand inside that forest.</strong></p>
+
+      <p style="margin-top:1.5rem;">The 0.73 NDVI value of a tree does not contain the sound of rain on its leaves. The polygon boundary of the Brahmaputra does not hold the terror of a flood. The land cover class "cropland" does not know the name of the farmer who planted it, or the prayer she said before sowing.</p>
+
+      <h3 style="font-size:1.3rem; font-weight:800; letter-spacing:-0.5px; margin:2.5rem 0 1rem; color:var(--text);">Osho's Radical Point</h3>
+
+      <p>Osho wasn't anti-science. He was deeply read in physics, biology, psychology. What he was against was something subtler — the confusion of the representation with the reality.</p>
+
+      <p style="margin-top:1.5rem;">When a GIS analyst looks at a deforestation map and says "the forest is 40% degraded" — they are right. The data says so. But they are also missing something enormous: the forest doesn't know it's 40% degraded. The forest is just the forest — complete, present, indifferent to our classifications.</p>
+
+      <blockquote style="border-left:3px solid var(--gold); padding:1.2rem 1.5rem; margin:2rem 0; background:rgba(240,165,0,0.05); border-radius:0 8px 8px 0;">
+        <p style="font-style:italic; color:#9090c0; font-size:1rem;">"Science is great — but it only touches the circumference of existence. The centre remains untouched, unknown. And that centre is you."</p>
+        <cite style="display:block; margin-top:0.8rem; font-style:normal; font-size:0.72rem; color:var(--gold); font-family:'Space Mono',monospace;">— Osho</cite>
+      </blockquote>
+
+      <p>The "centre" Osho talks about — I think of it as the un-mappable. The thing that exists before you put a coordinate on it.</p>
+
+      <h3 style="font-size:1.3rem; font-weight:800; letter-spacing:-0.5px; margin:2.5rem 0 1rem; color:var(--text);">The Heisenberg Connection</h3>
+
+      <p>Physics stumbled into this same wall in 1927. Werner Heisenberg proved that the act of observing a particle changes its behaviour — you cannot know both the position and the momentum of an electron simultaneously. The measurement disturbs the measured.</p>
+
+      <p style="margin-top:1.5rem;">Remote sensing has its own version of this. When we fly a UAV over a wildlife corridor to map animal movement, the UAV disturbs the very animals we're mapping. When we classify a community's land use from satellite imagery, we impose categories that may not reflect how that community actually uses or understands the land.</p>
+
+      <p style="margin-top:1.5rem;"><strong style="color:var(--text);">The observer changes the observed.</strong> In quantum physics. In ecology. In GIS. And in Osho's meditation halls.</p>
+
+      <h3 style="font-size:1.3rem; font-weight:800; letter-spacing:-0.5px; margin:2.5rem 0 1rem; color:var(--text);">So What Do We Do With This?</h3>
+
+      <p>I'm not suggesting we stop making maps. Maps are among the most powerful tools humanity has ever built. Climate science, disaster response, biodiversity conservation — none of it is possible without spatial data.</p>
+
+      <p style="margin-top:1.5rem;">But Osho's point — and Korzybski's — is a call for humility. The map is a tool, not a truth. The GIS layer is a reduction, not a revelation. The satellite image is a single wavelength of a reality that exists in infinite dimensions.</p>
+
+      <p style="margin-top:1.5rem;">The best geospatial scientists I've read about — the ones doing genuinely groundbreaking work — always combine their spatial analysis with field visits, community interviews, indigenous knowledge systems. They know that the truth exists somewhere between the raster cell and the lived experience.</p>
+
+      <p style="margin-top:1.5rem;">That gap — between the coordinate and the place — is where the real work happens.</p>
+
+      <blockquote style="border-left:3px solid var(--accent2); padding:1.2rem 1.5rem; margin:2.5rem 0; background:rgba(0,221,214,0.05); border-radius:0 8px 8px 0;">
+        <p style="font-style:italic; color:#9090c0; font-size:1.1rem;">"Go beyond the map. The territory is waiting."</p>
+        <cite style="display:block; margin-top:0.8rem; font-style:normal; font-size:0.72rem; color:var(--accent2); font-family:'Space Mono',monospace;">— koordinates</cite>
+      </blockquote>
+
+    </div>
+
+    <div style="margin-top:3.5rem; padding-top:2rem; border-top:1px solid var(--line); display:flex; gap:0.6rem; flex-wrap:wrap;">
+      <span style="padding:0.3rem 0.9rem; border:1px solid var(--line); border-radius:999px; font-size:0.72rem; color:var(--muted); font-family:'Space Mono',monospace;">#osho</span>
+      <span style="padding:0.3rem 0.9rem; border:1px solid var(--line); border-radius:999px; font-size:0.72rem; color:var(--muted); font-family:'Space Mono',monospace;">#gis</span>
+      <span style="padding:0.3rem 0.9rem; border:1px solid var(--line); border-radius:999px; font-size:0.72rem; color:var(--muted); font-family:'Space Mono',monospace;">#geospatial</span>
+      <span style="padding:0.3rem 0.9rem; border:1px solid var(--line); border-radius:999px; font-size:0.72rem; color:var(--muted); font-family:'Space Mono',monospace;">#philosophy</span>
+      <span style="padding:0.3rem 0.9rem; border:1px solid var(--line); border-radius:999px; font-size:0.72rem; color:var(--muted); font-family:'Space Mono',monospace;">#remotesensing</span>
+      <span style="padding:0.3rem 0.9rem; border:1px solid var(--line); border-radius:999px; font-size:0.72rem; color:var(--muted); font-family:'Space Mono',monospace;">#consciousness</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- PHILOSOPHY -->
+<div class="section" id="philosophy" style="border-top: 1px solid var(--line);">
+  <div class="section-header">
+    <div>
+      <p class="section-label">// Perspective</p>
+      <h2>The rebel<br/>lens</h2>
+    </div>
+    <span class="section-count">04</span>
+  </div>
+  <div class="osho-grid">
+    <div class="osho-card">
+      <p class="osho-label">On Science & Consciousness</p>
+      <blockquote>"Science maps the outside world with incredible precision. But the <strong>inner universe</strong> — consciousness, awareness, the observer — remains unmapped. That is the real frontier."</blockquote>
+      <a href="#" class="osho-link">Explore this idea →</a>
+    </div>
+    <div class="osho-card">
+      <p class="osho-label">On Knowledge</p>
+      <blockquote>"Borrowed knowledge is not knowledge — it is memory. Real understanding only comes when you <strong>experience</strong> it, not when you memorize it for an exam."</blockquote>
+      <a href="#" class="osho-link">Read the reflection →</a>
+    </div>
+    <div class="osho-card">
+      <p class="osho-label">On Systems Thinking</p>
+      <blockquote>"Everything is connected. Cut a forest in Assam and you shift a monsoon over Bengal. The earth is not a collection of parts — it is <strong>one breathing organism.</strong>"</blockquote>
+      <a href="#" class="osho-link">See the data →</a>
+    </div>
+    <div class="osho-card">
+      <p class="osho-label">On Being Unconventional</p>
+      <blockquote>"The crowd always moves toward safety. The real thinker moves toward <strong>truth</strong> — even when truth is uncomfortable, unpublished, and alone."</blockquote>
+      <a href="#" class="osho-link">On this path →</a>
+    </div>
+  </div>
+</div>
+
+<!-- REELS -->
+<div class="section" id="reels" style="border-top: 1px solid var(--line);">
+  <div class="section-header">
+    <div>
+      <p class="section-label">// Short-form</p>
+      <h2>Reel<br/>concepts</h2>
+    </div>
+    <span class="section-count">06</span>
+  </div>
+  <div class="reels-grid">
+    <div class="reel-card">
+      <p class="reel-num">001</p>
+      <p class="reel-label">Earth Observation</p>
+      <h3>Your City — 30 Years of Change in 30 Seconds</h3>
+      <p>Satellite timelapse. Real data. No face. Just the earth telling its story.</p>
+      <p class="reel-tags">#gis #satellite #earthobservation #remotesensing</p>
+    </div>
+    <div class="reel-card">
+      <p class="reel-num">002</p>
+      <p class="reel-label">Osho Meets Science</p>
+      <h3>"The Observer Changes the Observed" — Quantum + Consciousness</h3>
+      <p>Heisenberg's uncertainty principle and Osho's witness consciousness. Eerily similar.</p>
+      <p class="reel-tags">#quantum #consciousness #philosophy #sciencereels</p>
+    </div>
+    <div class="reel-card">
+      <p class="reel-num">003</p>
+      <p class="reel-label">Northeast India</p>
+      <h3>Things the Rest of India Doesn't Know About Assam</h3>
+      <p>Biodiversity. Erosion. Tea monoculture impact. Backed entirely by satellite evidence.</p>
+      <p class="reel-tags">#assam #northeastindia #geodata #environment</p>
+    </div>
+    <div class="reel-card">
+      <p class="reel-num">004</p>
+      <p class="reel-label">Biology Reframe</p>
+      <h3>Your Body Is an Ecosystem, Not a Machine</h3>
+      <p>Microbiome. Epigenetics. Neuroplasticity. Modern biology is dismantling the industrial body myth.</p>
+      <p class="reel-tags">#biology #microbiome #bodyawareness #sciencereels</p>
+    </div>
+    <div class="reel-card">
+      <p class="reel-num">005</p>
+      <p class="reel-label">Visual Science</p>
+      <h3>Sketchnote a Complex Idea in 60 Seconds</h3>
+      <p>Hands only. Timelapse. One idea made completely clear with just a pen.</p>
+      <p class="reel-tags">#sketchnotes #visuallearning #studytok #explained</p>
+    </div>
+    <div class="reel-card">
+      <p class="reel-num">006</p>
+      <p class="reel-label">Rebel Thought</p>
+      <h3>Why the Most Dangerous Question Is "Why?"</h3>
+      <p>Kids ask why. Systems suppress it. Science demands it. Osho insisted on it. A 60-second essay.</p>
+      <p class="reel-tags">#philosophy #criticalthinking #rebel #genzmindset</p>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-wrap" id="contact">
+  <div class="contact-left">
+    <p class="section-label">// Drop a thought.</p>
+    <h2>Ask.<br/>Question.<br/>Collaborate.</h2>
+    <p style="color:#55556a; line-height:1.8; font-size:0.95rem; max-width:360px; margin-bottom:2rem;">
+      Got a question about the content? A topic you want explored? A disagreement with Osho?<br/><br/>
+      Leave your email — I'll write back.
+    </p>
+    <span class="contact-email">koordinates [at] gmail [dot] com</span>
+  </div>
+  <div class="contact-right" style="display:flex; align-items:center;">
+    <form id="query-form" style="width:100%;" onsubmit="handleQuery(event)">
+      <div style="margin-bottom:1.2rem;">
+        <label style="font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:2px; color:var(--muted); text-transform:uppercase; display:block; margin-bottom:0.5rem;">Your email</label>
+        <input type="email" id="q-email" required placeholder="you@somewhere.com"
+          style="width:100%; background:var(--surface2); border:1px solid var(--line); border-radius:8px; padding:0.9rem 1.2rem; color:var(--text); font-size:0.9rem; font-family:'Inter',sans-serif; outline:none; transition:border-color 0.2s;"
+          onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--line)'"/>
+      </div>
+      <div style="margin-bottom:1.5rem;">
+        <label style="font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:2px; color:var(--muted); text-transform:uppercase; display:block; margin-bottom:0.5rem;">Your question or message</label>
+        <textarea id="q-msg" required placeholder="What's on your mind..." rows="4"
+          style="width:100%; background:var(--surface2); border:1px solid var(--line); border-radius:8px; padding:0.9rem 1.2rem; color:var(--text); font-size:0.9rem; font-family:'Inter',sans-serif; outline:none; resize:vertical; transition:border-color 0.2s;"
+          onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--line)'"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%;">Send message →</button>
+      <p id="q-confirm" style="display:none; font-family:'Space Mono',monospace; font-size:0.72rem; color:var(--accent2); margin-top:1rem; text-align:center;">
+        ✓ Message received. I'll write back soon.
+      </p>
+    </form>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">ko<em>ord</em>inates/</div>
+  <div style="text-align:center; font-family:'Space Mono',monospace; font-size:0.65rem; color:#303045; line-height:1.8;">
+    <p style="color:#404058; margin-bottom:0.3rem;">© 2025 koordinates/ — All Rights Reserved.</p>
+    <p>All original content, writing, philosophy, and ideas on this site are protected under copyright law.<br/>
+    Unauthorised reproduction, redistribution, or commercial use without written permission is prohibited.</p>
+    <p style="margin-top:0.4rem; color:#2a2a40;">Copying content does not transfer ownership. Original authorship is timestamped and legally traceable.</p>
+  </div>
+  <p>© 2025 — ideas that seek truth.</p>
+</footer>
+
+<!-- POPUPS -->
+<style>
+  /* ── POPUP OVERLAY ── */
+  .popup-overlay {
+    position: fixed; inset: 0; background: rgba(10,10,20,0.82);
+    backdrop-filter: blur(6px); z-index: 9000;
+    display: flex; align-items: center; justify-content: center;
+    padding: 2rem; opacity: 0; pointer-events: none;
+    transition: opacity 0.4s;
+  }
+  .popup-overlay.open { opacity: 1; pointer-events: all; }
+  .popup-box {
+    background: #13101e; border: 1px solid rgba(124,106,247,0.35);
+    border-radius: 20px; max-width: 560px; width: 100%;
+    padding: 3rem 3rem 2.5rem; position: relative;
+    box-shadow: 0 0 60px rgba(124,106,247,0.18), 0 0 120px rgba(0,221,214,0.08);
+    transform: translateY(20px); transition: transform 0.4s;
+  }
+  .popup-overlay.open .popup-box { transform: translateY(0); }
+  .popup-close {
+    position: absolute; top: 1.2rem; right: 1.4rem;
+    background: none; border: none; color: #55556a;
+    font-size: 1.4rem; cursor: pointer; line-height: 1;
+    transition: color 0.2s;
+  }
+  .popup-close:hover { color: var(--accent); }
+  .popup-tag {
+    font-family: 'Space Mono', monospace; font-size: 0.62rem;
+    letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 1.2rem; display: block;
+  }
+  .popup-title {
+    font-size: 1.5rem; font-weight: 900; letter-spacing: -1px;
+    line-height: 1.2; margin-bottom: 1rem; color: var(--text);
+  }
+  .popup-body {
+    font-size: 0.92rem; line-height: 1.85; color: #8080a8;
+    margin-bottom: 1.5rem;
+  }
+  .popup-body strong { color: var(--text); }
+  .popup-visual {
+    text-align: center; padding: 1.5rem 0;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem; color: var(--accent2);
+    letter-spacing: 1px; line-height: 2;
+  }
+  .popup-footer-note {
+    font-family: 'Space Mono', monospace; font-size: 0.62rem;
+    color: #33334a; letter-spacing: 1px; text-align: right;
+  }
+
+  /* ── FLOATING TRIGGER BUTTONS ── */
+  #popup-triggers {
+    position: fixed; right: 1.5rem; top: 50%;
+    transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 0.7rem;
+    z-index: 800;
+  }
+  .ptrig {
+    width: 46px; height: 46px; border-radius: 50%;
+    border: 1px solid rgba(124,106,247,0.4);
+    background: rgba(19,16,30,0.92);
+    color: var(--accent2); font-size: 1.1rem;
+    cursor: pointer; display: flex; align-items: center;
+    justify-content: center; transition: all 0.25s;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 0 12px rgba(124,106,247,0.15);
+  }
+  .ptrig:hover {
+    background: rgba(124,106,247,0.18);
+    border-color: var(--accent);
+    box-shadow: 0 0 20px rgba(124,106,247,0.35);
+    transform: scale(1.1);
+  }
+  @media(max-width:768px){ #popup-triggers { right: 0.7rem; } }
+</style>
+
+<!-- FLOATING TRIGGER BUTTONS -->
+<div id="popup-triggers">
+  <button class="ptrig" onclick="openPopup('fib')"    title="Golden Ratio">φ</button>
+  <button class="ptrig" onclick="openPopup('schr')"   title="Schrödinger">ψ</button>
+  <button class="ptrig" onclick="openPopup('dna')"    title="DNA & Code">🧬</button>
+  <button class="ptrig" onclick="openPopup('earth')"  title="Earth Frequency">🌍</button>
+  <button class="ptrig" onclick="openPopup('fractal')" title="Fractals">∞</button>
+</div>
+
+<!-- OSHO WELCOME POPUP -->
+<div class="popup-overlay" id="pop-welcome">
+  <div class="popup-box">
+    <button class="popup-close" onclick="closePopup('welcome')">×</button>
+    <span class="popup-tag" style="color:var(--gold);">🌀 osho · welcome</span>
+    <p class="popup-title" id="osho-welcome-title"></p>
+    <p class="popup-body" id="osho-welcome-body"></p>
+    <p class="popup-footer-note">// koordinates/ — ideas that seek truth</p>
+  </div>
+</div>
+
+<!-- POPUP: GOLDEN RATIO -->
+<div class="popup-overlay" id="pop-fib">
+  <div class="popup-box">
+    <button class="popup-close" onclick="closePopup('fib')">×</button>
+    <span class="popup-tag" style="color:var(--accent);">φ = 1.6180339887...</span>
+    <p class="popup-title">The Universe Has a Favourite Number</p>
+    <div class="popup-visual">
+      1 → 1 → 2 → 3 → 5 → 8 → 13 → 21 → 34 → 55<br/>
+      <span style="color:var(--gold); font-size:1.4rem; letter-spacing:4px;">φ φ φ φ φ φ φ φ φ</span><br/>
+      <span style="color:#55556a;">sunflower seeds · nautilus shells · spiral galaxies · DNA</span>
+    </div>
+    <p class="popup-body">The <strong>Golden Ratio (φ ≈ 1.618)</strong> appears without being invited — in the spiral of a nautilus, the branching of your veins, the seeds of a sunflower, the arms of the Milky Way. <strong>Nobody designed this.</strong> The universe just prefers it. Fibonacci sequences, which generate φ, emerge in phyllotaxis (how leaves grow), in DNA's double helix proportions, and in the structure of black holes. <strong>Math was there before mathematicians.</strong></p>
+    <p class="popup-footer-note">φ² = φ + 1 — the only number that equals itself plus one</p>
+  </div>
+</div>
+
+<!-- POPUP: SCHRÖDINGER -->
+<div class="popup-overlay" id="pop-schr">
+  <div class="popup-box">
+    <button class="popup-close" onclick="closePopup('schr')">×</button>
+    <span class="popup-tag" style="color:var(--accent2);">ψ quantum mechanics</span>
+    <p class="popup-title">The Cat is Alive. The Cat is Dead. The Cat is Both.</p>
+    <div class="popup-visual">
+      |ψ⟩ = α|alive⟩ + β|dead⟩<br/>
+      <span style="color:var(--gold);">until you look — all possibilities coexist</span>
+    </div>
+    <p class="popup-body">In 1935, Erwin Schrödinger put a cat in a box (hypothetically). Until observed, the cat is <strong>simultaneously alive and dead</strong> — a superposition of all possible states. This isn't philosophy. This is how electrons, photons, and atoms actually behave. <strong>Observation collapses possibility into reality.</strong> The Rishis said something eerily similar 3,000 years ago: consciousness is what converts potential into existence. Schrödinger himself read the Upanishads and said they confirmed quantum mechanics.</p>
+    <p class="popup-footer-note">Schrödinger owned a copy of the Upanishads. Draw your own conclusions.</p>
+  </div>
+</div>
+
+<!-- POPUP: DNA -->
+<div class="popup-overlay" id="pop-dna">
+  <div class="popup-box">
+    <button class="popup-close" onclick="closePopup('dna')">×</button>
+    <span class="popup-tag" style="color:var(--accent3);">🧬 molecular code</span>
+    <p class="popup-title">Life is a 4-Letter Language Written in 3 Billion Words</p>
+    <div class="popup-visual">
+      A — T — G — C<br/>
+      <span style="color:var(--accent); letter-spacing:3px;">ATGCGTAACCTGATCGG...</span><br/>
+      <span style="color:#55556a;">× 3,000,000,000 base pairs = you</span>
+    </div>
+    <p class="popup-body">The entire instruction manual for building and running a human being is written in <strong>4 letters: A, T, G, C</strong>. These four nucleotides, in different sequences, encode 20,000+ genes, 200+ cell types, 86 billion neurons, and 37 trillion cells — all from a single fertilized egg. The same 4 letters write a bacterium, a banana (60% shared DNA with humans), and a blue whale. <strong>Life has one alphabet. Infinite stories.</strong></p>
+    <p class="popup-footer-note">You share 99.9% of your DNA with every other human alive.</p>
+  </div>
+</div>
+
+<!-- POPUP: EARTH FREQUENCY -->
+<div class="popup-overlay" id="pop-earth">
+  <div class="popup-box">
+    <button class="popup-close" onclick="closePopup('earth')">×</button>
+    <span class="popup-tag" style="color:var(--accent2);">🌍 schumann resonance</span>
+    <p class="popup-title">The Earth Has a Heartbeat. It's 7.83 Hz.</p>
+    <div class="popup-visual">
+      ∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿<br/>
+      <span style="color:var(--gold);">7.83 Hz — Earth's electromagnetic pulse</span><br/>
+      <span style="color:#55556a;">human alpha brain waves: 8–12 Hz</span>
+    </div>
+    <p class="popup-body">Between Earth's surface and the ionosphere sits a cavity that resonates at <strong>7.83 Hz</strong> — the Schumann Resonance, Earth's own electromagnetic heartbeat. Human alpha brain waves (relaxation, creativity, meditation) oscillate at <strong>8–12 Hz</strong> — almost identical. Ancient Indian texts described a universal cosmic frequency they called <em>Om</em>. In 1952, physicist W.O. Schumann measured it. <strong>The Rishis were not wrong. They were early.</strong></p>
+    <p class="popup-footer-note">During geomagnetic storms, human cortisol and anxiety spike. Correlation is not coincidence.</p>
+  </div>
+</div>
+
+<!-- POPUP: FRACTALS -->
+<div class="popup-overlay" id="pop-fractal">
+  <div class="popup-box">
+    <button class="popup-close" onclick="closePopup('fractal')">×</button>
+    <span class="popup-tag" style="color:var(--accent);">∞ fractal geometry</span>
+    <p class="popup-title">Zoom In Forever. It Never Gets Simpler.</p>
+    <div class="popup-visual">
+      △<br/>△△<br/>△ △ △<br/>△△ △△ △△<br/>
+      <span style="color:var(--gold);">the part contains the whole — always</span>
+    </div>
+    <p class="popup-body">A coastline measured with a 1km ruler is shorter than the same coastline measured with a 1m ruler — because every zoom reveals more detail. This is <strong>fractal geometry</strong>: infinite complexity at every scale, where the pattern of the whole repeats in every part. Your lungs, your blood vessels, the Amazon river network, lightning bolts, mountain ranges — all fractal. <strong>Nature never runs out of detail because it copies itself at every scale.</strong> The Vedic concept of Indra's Net — infinite jewels each reflecting all others — is fractal cosmology written 3,000 years before Mandelbrot.</p>
+    <p class="popup-footer-note">The Mandelbrot Set boundary is infinitely long. It fits in a 2-inch screen.</p>
+  </div>
+</div>
+
+<script>
+  /* ── POPUP SYSTEM ── */
+  function openPopup(id) {
+    document.querySelectorAll('.popup-overlay').forEach(p => p.classList.remove('open'));
+    const el = document.getElementById('pop-' + id);
+    if (el) el.classList.add('open');
+  }
+  function closePopup(id) {
+    const el = document.getElementById('pop-' + id);
+    if (el) el.classList.remove('open');
+  }
+  document.querySelectorAll('.popup-overlay').forEach(overlay => {
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) overlay.classList.remove('open');
+    });
+  });
+
+  /* ── OSHO WELCOME POPUP ── */
+  const oshoMsgs = [
+    {
+      title: "You opened a website. Existence noticed.",
+      body: "Osho said: <strong>'The moment you start thinking about what others will think of you, you have lost yourself.'</strong> You found this page. That means something in you is still searching — and searching is the most honest thing a human being can do. Stay curious. The answers are overrated."
+    },
+    {
+      title: "Still scrolling? Good. Stop when you find truth.",
+      body: "<strong>'A seeker is one who has the courage to open their eyes when everyone else is busy dreaming.'</strong> — Osho. You're here, on a page that refuses to simplify the world for you. That's not a coincidence. That's character."
+    },
+    {
+      title: "The universe is 13.8 billion years old. You arrived just in time.",
+      body: "Osho once said: <strong>'Life is not a problem to be solved. It is a mystery to be lived.'</strong> Science maps the mystery. Philosophy names it. Art makes you feel it. This website does all three — badly, honestly, and without apology."
+    },
+    {
+      title: "Your brain has 86 billion neurons. Use at least 3.",
+      body: "<strong>'Intelligence is dangerous. Intelligence means you will start thinking on your own.'</strong> — Osho. The content on this page was made for the 3 neurons that are still asking questions. The other 85,999,999,997 can take a break."
+    },
+    {
+      title: "Warning: ideas ahead. Side effects include curiosity.",
+      body: "Osho said: <strong>'Don't be a follower. Be a fellow traveller.'</strong> This isn't a guru website. It's a notebook — of someone who reads too much, sleeps too little, and finds the Vedas and GIS satellites equally fascinating. Welcome, fellow traveller."
+    }
+  ];
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      const msg = oshoMsgs[Math.floor(Math.random() * oshoMsgs.length)];
+      document.getElementById('osho-welcome-title').textContent = msg.title;
+      document.getElementById('osho-welcome-body').innerHTML = msg.body;
+      openPopup('welcome');
+    }, 3500);
+  });
+</script>
+
+<!-- CONTENT PROTECTION -->
+<script>
+  /* disable right-click */
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    return false;
+  });
+
+  /* disable text selection */
+  document.addEventListener('selectstart', function(e) {
+    e.preventDefault();
+    return false;
+  });
+
+  /* disable drag */
+  document.addEventListener('dragstart', function(e) {
+    e.preventDefault();
+    return false;
+  });
+
+  /* block keyboard shortcuts: Ctrl+C, Ctrl+U, Ctrl+S, Ctrl+A, F12, Ctrl+Shift+I/J */
+  document.addEventListener('keydown', function(e) {
+    // F12
+    if (e.key === 'F12') { e.preventDefault(); return false; }
+    if (e.ctrlKey || e.metaKey) {
+      const blocked = ['u','s','a','p'];
+      if (blocked.includes(e.key.toLowerCase())) { e.preventDefault(); return false; }
+      // Ctrl+Shift+I or Ctrl+Shift+J (devtools)
+      if (e.shiftKey && ['i','j','c'].includes(e.key.toLowerCase())) {
+        e.preventDefault(); return false;
+      }
+    }
+  });
+
+  /* devtools detection — show warning */
+  (function() {
+    const threshold = 160;
+    setInterval(function() {
+      if (window.outerWidth - window.innerWidth > threshold ||
+          window.outerHeight - window.innerHeight > threshold) {
+        document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#0f0f14;color:#7c6af7;font-family:monospace;font-size:1.2rem;text-align:center;padding:2rem;">⚠️ Access restricted.<br/><br/>This content is protected under copyright law.<br/>© 2025 koordinates/</div>';
+      }
+    }, 1000);
+  })();
+
+  /* copyright console message */
+  /* contact form handler */
+  function handleQuery(e) {
+    e.preventDefault();
+    const email = document.getElementById('q-email').value;
+    const msg = document.getElementById('q-msg').value;
+    // Open mailto with prefilled content
+    const subject = encodeURIComponent('Query from koordinates/ visitor');
+    const body = encodeURIComponent('From: ' + email + '\n\n' + msg);
+    window.location.href = 'mailto:koordinates@gmail.com?subject=' + subject + '&body=' + body;
+    document.getElementById('q-confirm').style.display = 'block';
+    document.getElementById('query-form').reset();
+  }
+
+  console.log('%c© 2025 koordinates/ — All Rights Reserved.', 'color:#7c6af7; font-size:14px; font-weight:bold;');
+  console.log('%cAll content is original and copyright protected. Scraping or copying without permission is illegal.', 'color:#ff6b9d; font-size:11px;');
+</script>
+
+</body>
+</html>
