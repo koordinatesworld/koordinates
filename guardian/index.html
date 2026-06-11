@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>The Guardian · koordinates</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── Loading screen ── -->
+  <div id="loader">
+    <div id="loader-title">The Guardian</div>
+    <div id="loader-bar-wrap"><div id="loader-bar"></div></div>
+    <div id="loader-sub">summoning the veiled one…</div>
+  </div>
+
+  <!-- ── 3D canvas ── -->
+  <canvas id="c"></canvas>
+
+  <!-- ── HUD ── -->
+  <div id="hud">// the guardian · keeper of the threshold</div>
+  <div id="hint">hover · click · accept the disclaimer</div>
+
+  <!-- ── Speech bubble ── -->
+  <div id="bubble"></div>
+
+  <!-- ── Sparkle particle overlay ── -->
+  <canvas id="particles"></canvas>
+
+  <!-- ── Disclaimer modal ── -->
+  <div id="modal-overlay">
+    <div id="modal">
+      <button id="modal-close" aria-label="close">✕</button>
+      <h2>Before You Enter</h2>
+      <div class="disclaimer-text">
+        I am the guardian of this threshold. What lies beyond is not a
+        verdict, only a view. <em>Do not rush to judge</em> — simply look,
+        and pass through. Some of it may strike you; some may not. Either
+        way, you leave as you came: free.
+        <br/><br/>
+        Cross only if you are ready to see without the need to conclude.
+      </div>
+      <div class="btn-row">
+        <button class="modal-btn" id="btn-decline">Not yet</button>
+        <button class="modal-btn" id="btn-accept">I accept</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Libraries (CDN, GitHub-Pages friendly, multi-fallback in script) ── -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.150.1/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+
+  <script src="script.js"></script>
+</body>
+</html>
