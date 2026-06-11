@@ -272,3 +272,41 @@ html, body {
   #bubble { max-width: 260px; font-size: .75rem; bottom: 32%; }
   #hud { font-size: .5rem; }
 }
+
+/* ── Exit screen ── */
+#exit-screen {
+  position: fixed; inset: 0;
+  background: rgba(4,1,12,.96);
+  backdrop-filter: blur(12px);
+  z-index: 60;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.8rem;
+  text-align: center;
+  padding: 3rem;
+}
+#exit-screen.open { display: flex; }
+.exit-big {
+  display: flex; flex-direction: column; gap: .5rem;
+  font-size: 1rem; line-height: 1.85; color: var(--text);
+  max-width: 520px;
+}
+.exit-haryanvi { font-family: var(--font); color: var(--gold2); font-size: 1.05rem; }
+.exit-eng      { color: var(--text-dim); font-size: .85rem; font-style: italic; }
+.exit-big strong { color: #fff; font-size: 1.15rem; letter-spacing: 1px; }
+.exit-note { font-size: .68rem; letter-spacing: 3px; color: rgba(201,146,42,.4); text-transform: uppercase; }
+
+/* ── modal subtitle + checkbox ── */
+.disclaimer-sub {
+  font-size: .68rem; letter-spacing: 3px; color: var(--text-dim);
+  text-transform: uppercase; margin-bottom: 16px; margin-top: -10px;
+}
+.ep-chk-label {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: .75rem; color: var(--text-dim); cursor: pointer;
+  margin-bottom: 8px; line-height: 1.5;
+}
+.ep-chk-label input { margin-top: 3px; accent-color: var(--gold); flex-shrink: 0; cursor: pointer; }
+#btn-accept:disabled { opacity: .35; cursor: not-allowed; pointer-events: none; }
