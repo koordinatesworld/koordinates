@@ -356,13 +356,14 @@
     if (stateLock) return;
     stateLock = true; STATE = 'NAMASTE';
     // raise both hands to chest, palms together, slight bow
-    tween(pose.L, { shZ: 0.34, uaX: 0.5, faX: 1.7, faZ: 0.95 }, 0.9, 'power3.inOut');
-    tween(pose.R, { shZ: 0.34, uaX: 0.5, faX: 1.7, faZ: 0.95 }, 0.9, 'power3.inOut');
-    tween(pose, { headX: 0.28, upperX: 0.12 }, 0.9, 'power2.inOut', function () {
-      showBubble('Namaste 🙏\nWelcome.\nPlease read the disclaimer carefully.', 3200);
+    var P = { shZ: 0.62, uaX: 0.45, faX: 1.78, faZ: 1.18 };
+    tween(pose.L, P, 1.0, 'power3.inOut');
+    tween(pose.R, P, 1.0, 'power3.inOut');
+    tween(pose, { headX: 0.3, upperX: 0.14 }, 1.0, 'power2.inOut', function () {
+      showBubble('Namaste 🙏\nWelcome.\nPlease read the disclaimer carefully.', 4500);
     });
-    // hold 3s, then return
-    setTimeout(returnToOriginal, 4200);
+    // hold longer, then return
+    setTimeout(returnToOriginal, 5500);
   }
 
   function goClap() {
@@ -399,21 +400,30 @@
     clap();
   }
 
-  // "Not yet" → pranaam pose + laadle dialogue → exit screen
+  // "Not yet" → graceful pranaam (palms join at chest) + laadle dialogue + laugh → exit
   function goDecline() {
     if (stateLock) return;
     stateLock = true; STATE = 'PRANAAM';
-    // pranaam: arms raised higher, palms pressed together at chest
-    tween(pose.L, { shZ: 0.40, uaX: 0.65, faX: 1.72, faZ: 0.92 }, 0.8, 'power3.inOut');
-    tween(pose.R, { shZ: 0.40, uaX: 0.65, faX: 1.72, faZ: 0.92 }, 0.8, 'power3.inOut');
-    tween(pose, { headX: 0.3, upperX: 0.14 }, 0.8, 'power2.inOut', function () {
-      showBubble('"chal laadle... 🙏\nbahut shukriya —\nwarna intelligent ho jaate."', 0);
+    // PRANAAM posture: shoulders tucked toward centre (high shZ), upper arms slightly
+    // forward, elbows sharply bent, forearms swung fully inward so palms PRESS together.
+    var P = { shZ: 0.62, uaX: 0.45, faX: 1.78, faZ: 1.18 };
+    tween(pose.L, P, 1.0, 'power3.inOut');
+    tween(pose.R, P, 1.0, 'power3.inOut');
+    // respectful deep head bow + slight upper-body lean
+    tween(pose, { headX: 0.34, upperX: 0.16 }, 1.0, 'power2.inOut', function () {
+      // hold the namaste a beat, then speak + soft laugh
+      setTimeout(function () {
+        showBubble('"chal laadle... 🙏\nbahut shukriya —\nwarna intelligent ho jaate."', 0);
+        playLaugh();
+        setTimeout(playLaugh, 1400); // second little giggle
+      }, 500);
+      // longer hold so the moment lands, then exit screen
       setTimeout(function () {
         hideBubble();
         var ex = document.getElementById('exit-screen');
         if (ex) ex.classList.add('open');
         returnToOriginal();
-      }, 2200);
+      }, 7000);
     });
   }
 
@@ -463,6 +473,38 @@
     o.frequency.setValueAtTime(300, now); o.frequency.exponentialRampToValueAtTime(110, now + 0.08);
     var g2 = c.createGain(); g2.gain.setValueAtTime(0.45, now); g2.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
     o.connect(g2); g2.connect(c.destination); o.start(now); o.stop(now + 0.12);
+  }
+
+  // soft female giggle (formant-style synthesis, no files)
+  function playLaugh() {
+    var c = getCtx(); if (!c) return;
+    var base = c.currentTime + 0.05;
+    // a gentle "ha-ha-ha-ha" — pitched vowel blips with vibrato, falling pitch
+    var notes = [0, 0.18, 0.36, 0.54, 0.72];
+    var pitches = [440, 470, 430, 400, 360];
+    notes.forEach(function (off, idx) {
+      var tt = base + off;
+      // two formants per blip to fake a vowel ("ah")
+      [[700, 0.5], [1100, 0.32]].forEach(function (fm) {
+        var o = c.createOscillator();
+        o.type = 'sawtooth';
+        o.frequency.setValueAtTime(pitches[idx], tt);
+        o.frequency.linearRampToValueAtTime(pitches[idx] * 0.92, tt + 0.12);
+        var bp = c.createBiquadFilter();
+        bp.type = 'bandpass'; bp.frequency.value = fm[0]; bp.Q.value = 6;
+        var g = c.createGain();
+        g.gain.setValueAtTime(0.0001, tt);
+        g.gain.exponentialRampToValueAtTime(fm[1] * 0.22, tt + 0.03);
+        g.gain.exponentialRampToValueAtTime(0.0001, tt + 0.14);
+        // vibrato
+        var lfo = c.createOscillator(); lfo.frequency.value = 6;
+        var lfoG = c.createGain(); lfoG.gain.value = 12;
+        lfo.connect(lfoG); lfoG.connect(o.frequency);
+        o.connect(bp); bp.connect(g); g.connect(c.destination);
+        o.start(tt); o.stop(tt + 0.16);
+        lfo.start(tt); lfo.stop(tt + 0.16);
+      });
+    });
   }
 
   /* ─────────────────────────────────────────────
