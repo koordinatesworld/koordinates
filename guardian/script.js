@@ -367,16 +367,11 @@
   }
 
   function goClap() {
-    if (stateLock) return;
-    stateLock = true; STATE = 'WELCOME';
-    // gentle graceful namaste gesture (no clapping), then the darling line
-    var P = { shZ: 0.62, uaX: 0.45, faX: 1.78, faZ: 1.18 };
-    tween(pose.L, P, 1.0, 'power3.inOut');
-    tween(pose.R, P, 1.0, 'power3.inOut');
-    tween(pose, { headX: 0.3, upperX: 0.14 }, 1.0, 'power2.inOut', function () {
-      showBubble('"darling — my whole work is to confuse you.\nand it seems to be working perfectly." 🙏', 5000);
-      setTimeout(returnToOriginal, 6000);
-    });
+    // Accept → show darling line (no movement), then signal parent site to enter.
+    showBubble('"darling — my whole work is to confuse you.\nand it seems to be working perfectly." 🙏', 6000);
+    setTimeout(function () {
+      try { if (window.parent && window.parent !== window) window.parent.postMessage('koordinates-enter', '*'); } catch (e) {}
+    }, 3200);
   }
 
   function doClaps(n, done) {
