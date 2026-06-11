@@ -368,15 +368,14 @@
 
   function goClap() {
     if (stateLock) return;
-    stateLock = true; STATE = 'CLAPPING';
-    // ── raise both arms in front (uaX forward, shZ tucked in, faZ toward midline)
-    tween(pose.L, { shZ: 0.25, uaX: 0.85, faX: 1.45, faZ: 0.78 }, 0.55, 'power2.out');
-    tween(pose.R, { shZ: 0.25, uaX: 0.85, faX: 1.45, faZ: 0.78 }, 0.55, 'power2.out');
-    tween(pose, { headX: 0.08, upperX: 0.04 }, 0.55, 'power2.out', function () {
-      doClaps(5, function () {
-        showBubble('"darling — my whole work is to confuse you.\nand it seems to be working perfectly." 🙏', 3200);
-        setTimeout(returnToOriginal, 1400);
-      });
+    stateLock = true; STATE = 'WELCOME';
+    // gentle graceful namaste gesture (no clapping), then the darling line
+    var P = { shZ: 0.62, uaX: 0.45, faX: 1.78, faZ: 1.18 };
+    tween(pose.L, P, 1.0, 'power3.inOut');
+    tween(pose.R, P, 1.0, 'power3.inOut');
+    tween(pose, { headX: 0.3, upperX: 0.14 }, 1.0, 'power2.inOut', function () {
+      showBubble('"darling — my whole work is to confuse you.\nand it seems to be working perfectly." 🙏', 5000);
+      setTimeout(returnToOriginal, 6000);
     });
   }
 
