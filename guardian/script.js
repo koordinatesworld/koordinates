@@ -366,12 +366,15 @@
     setTimeout(returnToOriginal, 5500);
   }
 
+  function enterSite() {
+    try { if (window.parent && window.parent !== window) window.parent.postMessage('koordinates-enter', '*'); } catch (e) {}
+  }
   function goClap() {
-    // Accept → show darling line (no movement), then signal parent site to enter.
-    showBubble('"darling — my whole work is to confuse you.\nand it seems to be working perfectly." 🙏', 6000);
-    setTimeout(function () {
-      try { if (window.parent && window.parent !== window) window.parent.postMessage('koordinates-enter', '*'); } catch (e) {}
-    }, 3200);
+    // Accept → show darling line, then signal parent site to enter (robust).
+    showBubble('"darling — my whole work is to confuse you.\nand it seems to be working perfectly." 🙏', 4000);
+    // let the darling line land, then signal the parent site (fire twice for safety)
+    setTimeout(enterSite, 2600);
+    setTimeout(enterSite, 3600);
   }
 
   function doClaps(n, done) {
