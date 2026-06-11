@@ -34,20 +34,43 @@
   <div id="modal-overlay">
     <div id="modal">
       <button id="modal-close" aria-label="close">✕</button>
-      <h2>Before You Enter</h2>
+      <h2>before you enter</h2>
+      <div class="disclaimer-sub">read. or don't. she'll know either way.</div>
       <div class="disclaimer-text">
-        I am the guardian of this threshold. What lies beyond is not a
-        verdict, only a view. <em>Do not rush to judge</em> — simply look,
-        and pass through. Some of it may strike you; some may not. Either
-        way, you leave as you came: free.
-        <br/><br/>
-        Cross only if you are ready to see without the need to conclude.
+        This space does not need your validation.<br/><br/>
+        No intellectual credentials required.<br/>
+        No prior enlightenment necessary.<br/>
+        Bring your questions. Leave your conclusions.<br/><br/>
+        If something lands — sit with it.<br/>
+        If nothing does — the exit is where you came from.<br/><br/>
+        <em>The universe has a refund policy. It's called tomorrow.</em>
       </div>
+      <label class="ep-chk-label">
+        <input type="checkbox" id="ep-chk" onchange="document.getElementById('btn-accept').disabled=!this.checked"/>
+        <span>I understand I'm entering at my own philosophical risk.</span>
+      </label>
       <div class="btn-row">
-        <button class="modal-btn" id="btn-decline">Not yet</button>
-        <button class="modal-btn" id="btn-accept">I accept</button>
+        <button class="modal-btn" id="btn-decline">not yet</button>
+        <button class="modal-btn" id="btn-accept" disabled>enter the coordinates →</button>
       </div>
     </div>
+  </div>
+
+  <!-- ── Exit screen (No path) ── -->
+  <div id="exit-screen">
+    <div class="exit-big">
+      <span class="exit-haryanvi">"Chal laadle, theek hai —</span>
+      <span class="exit-eng">Go on then, darling —</span>
+      <strong>grateful you didn't open.</strong><br/>
+      otherwise you'd become<br/>
+      <strong>dangerously intelligent.</strong>
+      <span class="exit-haryanvi" style="margin-top:1rem;">"Duniya mein itne samajhdaar log pehle se hi hain,</span>
+      <span class="exit-eng">the world already has quite enough clever people,</span>
+      <span class="exit-haryanvi">"ek aur ki zaroorat nahi thi." 🙏</span>
+      <span class="exit-eng">one more wasn't really necessary." 🙏</span>
+    </div>
+    <div class="exit-note">— koordinates/ wishes you a safe, uncomplicated existence</div>
+    <button class="modal-btn" id="btn-return">wait. i changed my mind.</button>
   </div>
 
   <!-- ── Libraries (CDN, GitHub-Pages friendly, multi-fallback in script) ── -->
