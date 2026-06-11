@@ -367,7 +367,19 @@
   }
 
   function enterSite() {
-    try { if (window.parent && window.parent !== window) window.parent.postMessage('koordinates-enter', '*'); } catch (e) {}
+    if (!(window.parent && window.parent !== window)) return; // running standalone
+    // 1) postMessage (works cross-origin)
+    try { window.parent.postMessage('koordinates-enter', '*'); } catch (e) {}
+    // 2) direct DOM fallback (same-origin: GitHub Pages) — hide the gate overlay
+    try {
+      var pdoc = window.parent.document;
+      var pep = pdoc.getElementById('ep');
+      if (pep) {
+        pep.style.transition = 'opacity 1s ease';
+        pep.style.opacity = '0';
+        setTimeout(function () { pep.style.display = 'none'; }, 1000);
+      }
+    } catch (e) {}
   }
   function goClap() {
     // Accept → show darling line, then signal parent site to enter (robust).
