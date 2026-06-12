@@ -533,8 +533,8 @@
     .sing-h1 { font-size: clamp(1.8rem, 5vw, 3.6rem); font-weight: 900; letter-spacing: -2px;
       display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.4rem 1rem; margin-bottom: 1rem; }
     .sh-word { position: relative; transition: all 0.3s; cursor: default; }
-    .sh-word[data-d="biology"]    { color: var(--accent3); text-shadow: 0 0 28px rgba(255,107,157,0.45); }
-    .sh-word[data-d="geography"]  { color: var(--accent2); text-shadow: 0 0 28px rgba(0,232,223,0.45); }
+    .sh-word[data-d="biotech"]        { color: var(--accent3); text-shadow: 0 0 28px rgba(255,107,157,0.45); }
+    .sh-word[data-d="geoinformatics"] { color: var(--accent2); text-shadow: 0 0 28px rgba(0,232,223,0.45); }
     .sh-word[data-d="philosophy"] { color: var(--gold);    text-shadow: 0 0 28px rgba(245,184,0,0.45); }
     .sh-word:hover { transform: translateY(-3px) scale(1.04); }
     .sh-op { color: #5a5580; font-weight: 300; font-size: 0.7em; }
@@ -630,14 +630,7 @@
     .gate-primary { border-color: rgba(0,232,223,0.4); background: rgba(0,232,223,0.06); }
     .gate-primary:hover { border-color: var(--accent2); background: rgba(0,232,223,0.12); box-shadow: 0 0 24px rgba(0,232,223,0.18); }
 
-    /* ============ GUITAR EASTER EGG ============ */
-    .guitar-egg { position: fixed; left: 1.4rem; bottom: 1.4rem; z-index: 850;
-      width: 40px; height: 40px; border-radius: 50%; border:1px solid rgba(255,107,157,0.25);
-      background: rgba(19,16,30,0.6); font-size: 1rem; cursor: pointer; opacity: 0.28;
-      transition: all 0.35s; backdrop-filter: blur(4px); animation: eggPulse 4.5s ease-in-out infinite; }
-    .guitar-egg:hover { opacity: 1; transform: rotate(-12deg) scale(1.2);
-      border-color: var(--accent3); box-shadow: 0 0 24px rgba(255,107,157,0.4); }
-    @keyframes eggPulse { 0%,92%,100%{ opacity:0.28; } 96%{ opacity:0.7; } }
+    /* ---- guitar funny popup video slots ---- */
     .guitar-box { max-width: 500px; }
     .guitar-videos { display:grid; grid-template-columns: 1fr 1fr; gap:1rem; margin: 1.4rem 0 1rem; }
     @media(max-width:560px){ .guitar-videos { grid-template-columns:1fr; } }
@@ -649,7 +642,96 @@
     .gv-cap { font-family:'Space Mono',monospace; font-size:0.62rem; letter-spacing:1px; color: var(--muted); }
     .gv-cap span { color: var(--accent3); }
 
-    @media(max-width:768px){ .guitar-egg{ left:0.8rem; bottom:0.8rem; } .sing-enter{ width:180px;height:180px;} }
+    @media(max-width:768px){ .sing-enter{ width:180px;height:180px;} }
+
+
+    /* ============ THE SWITCH STORY ============ */
+    .switch-sec { padding: 7rem 1.5rem; display:flex; justify-content:center;
+      background: linear-gradient(180deg, #0e0c1e 0%, #100e22 100%); }
+    .switch-inner { max-width: 980px; width:100%; text-align:center; }
+    .sw-eyebrow { font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:4px;
+      text-transform:uppercase; color:var(--muted); display:flex; align-items:center;
+      justify-content:center; gap:1rem; margin-bottom:1.8rem; }
+    .sw-line { width:50px; height:1px; background:var(--dim); }
+    .sw-title { font-size: clamp(1.7rem,4vw,2.8rem); font-weight:900; letter-spacing:-1.5px;
+      line-height:1.2; margin-bottom:1rem; }
+    .sw-hl { background:linear-gradient(100deg,var(--accent2),var(--accent));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+    .sw-lead { font-size:1.05rem; color:#9a93c8; max-width:560px; margin:0 auto 3.5rem; line-height:1.7; }
+    .sw-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-bottom:4rem; text-align:left; }
+    @media(max-width:820px){ .sw-grid{ grid-template-columns:1fr; } }
+    .sw-point { background:var(--surface); border:1px solid var(--line); border-radius:16px;
+      padding:1.8rem; transition:transform .25s, border-color .25s; }
+    .sw-point:hover { transform:translateY(-4px); border-color:rgba(0,232,223,0.35); }
+    .sw-num { font-family:'Space Mono',monospace; font-size:0.8rem; color:var(--accent2);
+      letter-spacing:2px; margin-bottom:0.8rem; }
+    .sw-point h3 { font-size:1.1rem; font-weight:800; margin-bottom:0.7rem; color:var(--text); line-height:1.3; }
+    .sw-point p { font-size:0.9rem; line-height:1.75; color:#8880b0; }
+    .sw-point strong { color:var(--accent2); } .sw-point em { color:var(--text); font-style:italic; }
+
+    /* zoom ladder */
+    .zoom-ladder { position:relative; display:flex; align-items:center; justify-content:center;
+      gap:1rem; flex-wrap:wrap; margin-bottom:1.2rem; }
+    .zl-node { display:flex; flex-direction:column; align-items:center; gap:0.5rem; min-width:120px; z-index:1; }
+    .zl-dot { width:74px; height:74px; border-radius:50%; display:grid; place-items:center;
+      font-size:1.9rem; background:var(--surface2); border:1px solid var(--line);
+      box-shadow:0 0 26px rgba(145,122,255,0.12); animation: zlFloat 4s ease-in-out infinite; }
+    .zl-bio { border-color:rgba(255,107,157,0.5); box-shadow:0 0 26px rgba(255,107,157,0.2); }
+    .zl-mid { border-color:rgba(145,122,255,0.5); box-shadow:0 0 26px rgba(145,122,255,0.2); animation-delay:.6s; }
+    .zl-geo { border-color:rgba(0,232,223,0.5); box-shadow:0 0 26px rgba(0,232,223,0.2); animation-delay:1.2s; }
+    @keyframes zlFloat { 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-7px);} }
+    .zl-scale { font-family:'Space Mono',monospace; font-size:0.72rem; color:var(--accent); letter-spacing:1px; }
+    .zl-lbl { font-size:0.8rem; font-weight:700; color:var(--text); line-height:1.3; }
+    .zl-lbl span { font-weight:400; font-size:0.68rem; color:var(--muted); }
+    .zl-arrow { font-family:'Space Mono',monospace; font-size:0.62rem; letter-spacing:2px;
+      text-transform:uppercase; color:var(--dim); }
+    @media(max-width:560px){ .zl-arrow{ transform:rotate(90deg); } }
+    .zoom-caption { font-size:0.95rem; color:#9a93c8; margin-bottom:3rem; }
+    .zoom-caption strong { color:var(--accent2); }
+    .sw-punch { font-size:clamp(1.05rem,2.2vw,1.35rem); line-height:1.7; color:var(--text);
+      max-width:720px; margin:0 auto; font-weight:500; }
+    .sw-punch span { display:block; margin-top:1rem; font-weight:900;
+      background:linear-gradient(100deg,var(--accent3),var(--neon) 50%,var(--accent2));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+
+    /* ============ GUITAR SECTION ============ */
+    .guitar-section { padding: 6rem 1.5rem; display:flex; justify-content:center;
+      background: radial-gradient(ellipse 55% 60% at 30% 50%, rgba(255,107,157,0.06), transparent 70%); }
+    .guitar-inner { max-width:980px; width:100%; display:grid; grid-template-columns:1.1fr 1fr;
+      gap:3rem; align-items:center; }
+    @media(max-width:820px){ .guitar-inner{ grid-template-columns:1fr; gap:2rem; text-align:center; } }
+    .guitar-stage { position:relative; cursor:pointer; padding:1rem;
+      animation: gtrSway 6s ease-in-out infinite; }
+    @keyframes gtrSway { 0%,100%{ transform:rotate(-1.5deg); } 50%{ transform:rotate(1.5deg); } }
+    .gtr-svg { width:100%; height:auto; overflow:visible;
+      filter: drop-shadow(0 14px 40px rgba(0,0,0,0.5)); }
+    /* vibrating strings */
+    .gstr { stroke-width:1; opacity:0.85; transform-box: fill-box; }
+    .gtr-stage:hover .gstr, .gtr-svg .gstr { animation: strVib 0.18s linear infinite; }
+    .gstr.s1{ animation-delay:0s;} .gstr.s2{ animation-delay:.03s;} .gstr.s3{ animation-delay:.06s;}
+    .gstr.s4{ animation-delay:.09s;} .gstr.s5{ animation-delay:.12s;} .gstr.s6{ animation-delay:.15s;}
+    @keyframes strVib { 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(0.6px);} }
+    /* sound waves */
+    .gwave { opacity:0; transform-origin:330px 120px; }
+    .gw1{ animation: gwExp 2.4s ease-out infinite; }
+    .gw2{ animation: gwExp 2.4s ease-out infinite .8s; }
+    .gw3{ animation: gwExp 2.4s ease-out infinite 1.6s; }
+    @keyframes gwExp { 0%{ transform:scale(0.3); opacity:0.7; } 100%{ transform:scale(1.9); opacity:0; } }
+    .gtr-tap { display:block; text-align:center; margin-top:0.6rem;
+      font-family:'Space Mono',monospace; font-size:0.62rem; letter-spacing:2px;
+      text-transform:uppercase; color:var(--accent3); opacity:0.6; }
+    .guitar-stage:hover .gtr-tap { opacity:1; }
+    .gtr-eyebrow { font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:3px;
+      text-transform:uppercase; color:var(--accent3); margin-bottom:1rem; }
+    .gtr-title { font-size:clamp(1.5rem,3.5vw,2.2rem); font-weight:900; letter-spacing:-1px;
+      line-height:1.2; margin-bottom:1.2rem; }
+    .gtr-title span { color:var(--accent3); }
+    .gtr-sub { font-size:0.96rem; line-height:1.8; color:#9a93c8; margin-bottom:1.8rem; }
+    .gtr-btn { font-family:'Space Mono',monospace; font-size:0.76rem; letter-spacing:2px;
+      text-transform:uppercase; font-weight:700; color:#fff; cursor:pointer;
+      padding:0.85rem 1.8rem; border-radius:8px; border:1px solid rgba(255,107,157,0.5);
+      background:rgba(255,107,157,0.08); transition:all .25s; }
+    .gtr-btn:hover { background:rgba(255,107,157,0.18); box-shadow:0 0 24px rgba(255,107,157,0.3); transform:translateY(-2px); }
 
 </style>
 </head>
@@ -782,9 +864,9 @@
   <div class="sing-overlay">
     <p class="sing-kicker">// three disciplines &nbsp;·&nbsp; one observer</p>
     <h1 class="sing-h1">
-      <span class="sh-word" data-d="biology">biology</span>
+      <span class="sh-word" data-d="biotech">biotech</span>
       <span class="sh-op">∩</span>
-      <span class="sh-word" data-d="geography">geography</span>
+      <span class="sh-word" data-d="geoinformatics">geoinformatics</span>
       <span class="sh-op">∩</span>
       <span class="sh-word" data-d="philosophy">philosophy</span>
     </h1>
@@ -815,14 +897,131 @@
       Most people pick a lane. I noticed the lanes were the same road.
       A genome is a map. A river is a sentence. A sutra is a dataset four
       thousand years deep. So I stopped switching fields and started
-      <em>collapsing</em> them — biology, geospatial science and philosophy
-      folded into a single way of looking. That fold is this website.
+      <em>collapsing</em> them — biotech, geoinformatics and philosophy folded into a single way of looking. That fold is this website.
     </p>
     <div class="mf-social">
       <a href="#" class="mf-link" id="btn-resume">resume</a>
       <a href="https://linkedin.com/in/dixitasaikia" target="_blank" rel="noopener" class="mf-link">linkedin</a>
       <a href="https://github.com/dixitasaikia222-hub" target="_blank" rel="noopener" class="mf-link">github</a>
       <a href="#contact" class="mf-link">say hello</a>
+    </div>
+  </div>
+</section>
+
+<!-- THE SWITCH: biotech -> geoinformatics -->
+<section class="switch-sec" id="switch">
+  <div class="switch-inner">
+    <p class="sw-eyebrow"><span class="sw-line"></span> the switch <span class="sw-line"></span></p>
+    <h2 class="sw-title">Everyone asked why a biotech kid<br>ran off to <span class="sw-hl">geoinformatics</span>.</h2>
+    <p class="sw-lead">Here's the honest answer — and why it was the smartest accident of my life.</p>
+
+    <div class="sw-grid">
+      <div class="sw-point">
+        <div class="sw-num">01</div>
+        <h3>I was already mapping. Just smaller.</h3>
+        <p>Biotech trained me to read the invisible — genes, proteins, the wiring of a single cell. One day it hit me: <strong>a cell is just a map at a brutal scale.</strong> I wasn't changing careers. I was changing the zoom level.</p>
+      </div>
+      <div class="sw-point">
+        <div class="sw-num">02</div>
+        <h3>Biology said life is information.</h3>
+        <p>Geoinformatics let me read that same information at the scale of a <strong>planet</strong> — rivers, heat, forests, floods, the slow breathing of the earth. Same obsession with patterns. Infinitely bigger canvas.</p>
+      </div>
+      <div class="sw-point">
+        <div class="sw-num">03</div>
+        <h3>I traded a microscope for a satellite.</h3>
+        <p>Better view. Same question: <em>what is actually here, and why is it arranged this way?</em> Turns out the universe uses the same handwriting whether you're looking at a chromosome or a coastline.</p>
+      </div>
+    </div>
+
+    <!-- ZOOM LADDER -->
+    <div class="zoom-ladder">
+      <div class="zl-rail"></div>
+      <div class="zl-node">
+        <div class="zl-dot zl-bio">🧬</div>
+        <div class="zl-scale">10⁻⁶ m</div>
+        <div class="zl-lbl">the cell<br><span>where I started</span></div>
+      </div>
+      <div class="zl-arrow">zoom out →</div>
+      <div class="zl-node">
+        <div class="zl-dot zl-mid">🧍</div>
+        <div class="zl-scale">10⁰ m</div>
+        <div class="zl-lbl">the body<br><span>the bridge</span></div>
+      </div>
+      <div class="zl-arrow">zoom out →</div>
+      <div class="zl-node">
+        <div class="zl-dot zl-geo">🌍</div>
+        <div class="zl-scale">10⁷ m</div>
+        <div class="zl-lbl">the earth<br><span>where I live now</span></div>
+      </div>
+    </div>
+    <p class="zoom-caption">Thirteen orders of magnitude. <strong>One question.</strong> I just kept zooming out.</p>
+
+    <p class="sw-punch">Biotech gave me the grammar of life. Geoinformatics handed me the map to find it. Philosophy keeps me honest about how little either of them actually knows. <span>I didn't switch fields — I refused to pick one.</span></p>
+  </div>
+</section>
+
+<!-- GUITAR · OFF THE CLOCK (animated graphic, opens funny popup) -->
+<section class="guitar-section" id="guitar">
+  <div class="guitar-inner">
+    <div class="guitar-stage" onclick="openPopup('guitar')" title="psst… tap me">
+      <svg class="gtr-svg" viewBox="0 0 480 240" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="gtrBody" cx="62%" cy="45%" r="60%">
+            <stop offset="0%" stop-color="#3a2a18"/>
+            <stop offset="55%" stop-color="#7a4a1e"/>
+            <stop offset="100%" stop-color="#2a1a0e"/>
+          </radialGradient>
+          <linearGradient id="gtrNeck" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#2a1c10"/>
+            <stop offset="100%" stop-color="#4a3320"/>
+          </linearGradient>
+        </defs>
+
+        <!-- sound waves -->
+        <g class="gtr-waves" fill="none" stroke="#00e8df" stroke-width="2">
+          <circle class="gwave gw1" cx="330" cy="120" r="40"/>
+          <circle class="gwave gw2" cx="330" cy="120" r="40"/>
+          <circle class="gwave gw3" cx="330" cy="120" r="40"/>
+        </g>
+
+        <!-- headstock -->
+        <rect x="30" y="100" width="34" height="40" rx="6" fill="#2a1c10" transform="rotate(-4 47 120)"/>
+        <circle cx="40" cy="108" r="3" fill="#d9c089"/><circle cx="40" cy="132" r="3" fill="#d9c089"/>
+        <circle cx="55" cy="106" r="3" fill="#d9c089"/><circle cx="55" cy="134" r="3" fill="#d9c089"/>
+        <!-- neck -->
+        <rect x="62" y="110" width="180" height="22" rx="3" fill="url(#gtrNeck)"/>
+        <g stroke="#1a120a" stroke-width="1.4">
+          <line x1="92" y1="110" x2="92" y2="132"/><line x1="122" y1="110" x2="122" y2="132"/>
+          <line x1="152" y1="110" x2="152" y2="132"/><line x1="182" y1="110" x2="182" y2="132"/>
+          <line x1="212" y1="110" x2="212" y2="132"/>
+        </g>
+        <!-- body -->
+        <ellipse cx="335" cy="121" rx="92" ry="78" fill="url(#gtrBody)" stroke="#1a0f06" stroke-width="2"/>
+        <ellipse cx="335" cy="121" rx="92" ry="78" fill="none" stroke="#caa46a" stroke-width="1.5" opacity="0.4"/>
+        <!-- sound hole -->
+        <circle cx="312" cy="121" r="26" fill="#120a04"/>
+        <circle cx="312" cy="121" r="26" fill="none" stroke="#caa46a" stroke-width="2" opacity="0.55"/>
+        <circle cx="312" cy="121" r="20" fill="none" stroke="#8a6a3a" stroke-width="1" opacity="0.4"/>
+        <!-- bridge -->
+        <rect x="372" y="108" width="16" height="26" rx="3" fill="#1a0f06"/>
+        <!-- STRINGS (vibrating) -->
+        <g class="gtr-strings" stroke="#e8e2c8">
+          <line class="gstr s1" x1="64" y1="113" x2="384" y2="112"/>
+          <line class="gstr s2" x1="64" y1="117" x2="384" y2="116"/>
+          <line class="gstr s3" x1="64" y1="121" x2="384" y2="121"/>
+          <line class="gstr s4" x1="64" y1="125" x2="384" y2="126"/>
+          <line class="gstr s5" x1="64" y1="129" x2="384" y2="130"/>
+          <line class="gstr s6" x1="64" y1="133" x2="384" y2="134"/>
+        </g>
+      </svg>
+      <span class="gtr-tap">tap to hear the damage</span>
+    </div>
+
+    <div class="guitar-copy">
+      <p class="gtr-eyebrow">// off the clock</p>
+      <h2 class="gtr-title">When the maps close,<br>the <span>guitar</span> comes out.</h2>
+      <p class="gtr-sub">Somewhere between a Fourier transform and a campfire chord, I picked up six strings. Fair warning — I'm not great. But a coordinate is just a frequency in space, so technically… this still counts as my field.</p>
+      <button class="gtr-btn" onclick="openPopup('guitar')">hear it (brace yourself) &rarr;</button>
     </div>
   </div>
 </section>
@@ -2753,9 +2952,6 @@ const VEDA_DATA = {
   <button class="ptrig" onclick="openPopup('earth')"  title="Earth Frequency">🌍</button>
   <button class="ptrig" onclick="openPopup('fractal')" title="Fractals">∞</button>
 </div>
-
-<!-- HIDDEN GUITAR EASTER EGG (a faint glyph that pulses; click = funny popup) -->
-<button class="guitar-egg" id="guitar-egg" title="" onclick="openPopup('guitar')">🎸</button>
 
 <!-- THE WORK GATE POPUP -->
 <div class="popup-overlay" id="pop-gate">
