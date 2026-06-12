@@ -367,26 +367,31 @@
   }
 
   function enterSite() {
-    if (!(window.parent && window.parent !== window)) return; // running standalone
-    // 1) postMessage (works cross-origin)
+    // 1) postMessage — works cross-origin and same-origin
     try { window.parent.postMessage('koordinates-enter', '*'); } catch (e) {}
-    // 2) direct DOM fallback (same-origin: GitHub Pages) — hide the gate overlay
+    try { window.top.postMessage('koordinates-enter', '*'); } catch (e) {}
+    // 2) direct function call — same-origin fallback
     try {
-      var pdoc = window.parent.document;
-      var pep = pdoc.getElementById('ep');
-      if (pep) {
-        pep.style.transition = 'opacity 1s ease';
-        pep.style.opacity = '0';
-        setTimeout(function () { pep.style.display = 'none'; }, 1000);
+      if (typeof window.parent._revealSite === 'function') {
+        window.parent._revealSite();
+      } else {
+        var pdoc = window.parent.document;
+        var pep = pdoc.getElementById('ep');
+        if (pep) {
+          pep.style.pointerEvents = 'none';
+          pep.style.transition = 'opacity 1s ease';
+          pep.style.opacity = '0';
+          setTimeout(function () { pep.style.display = 'none'; }, 1100);
+        }
       }
     } catch (e) {}
   }
   function goClap() {
-    // Accept → show darling line, then signal parent site to enter (robust).
+    // Accept → show darling line, then reveal the site
     showBubble('"darling — my whole work is to confuse you.\nand it seems to be working perfectly." 🙏', 4000);
-    // let the darling line land, then signal the parent site (fire twice for safety)
     setTimeout(enterSite, 2600);
     setTimeout(enterSite, 3600);
+    setTimeout(enterSite, 5000); // final safety call
   }
 
   function doClaps(n, done) {
