@@ -373,7 +373,58 @@
       .contact-left, .contact-right { padding: 4rem 1.5rem; }
       footer { flex-direction: column; gap: 1rem; text-align: center; }
     }
-  </style>
+  
+    /* NAREIN IDENTITY SECTION */
+    .narein-section {
+      padding: 5rem 3rem 4rem;
+      display: flex; justify-content: center;
+      background: linear-gradient(180deg, transparent 0%, rgba(145,122,255,0.04) 50%, transparent 100%);
+      border-top: 1px solid rgba(145,122,255,0.08);
+    }
+    .narein-inner {
+      max-width: 720px; width: 100%; text-align: center;
+    }
+    .narein-eyebrow {
+      font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--muted);
+      display: flex; align-items: center; justify-content: center; gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .ne-line { flex: 1; max-width: 80px; height: 1px; background: var(--dim); }
+    .narein-name {
+      margin-bottom: 1.8rem; line-height: 1;
+    }
+    .nn-first {
+      display: block; font-size: clamp(3rem, 8vw, 6rem); font-weight: 900;
+      letter-spacing: -4px; color: var(--text);
+    }
+    .nn-last {
+      display: block; font-size: clamp(3rem, 8vw, 6rem); font-weight: 900;
+      letter-spacing: -4px;
+      background: linear-gradient(100deg, var(--accent), var(--neon) 40%, var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      filter: drop-shadow(0 0 24px rgba(145,122,255,0.35));
+    }
+    .narein-philosophy {
+      font-size: 1.05rem; color: var(--muted); line-height: 1.9;
+      margin-bottom: 2.4rem; font-style: italic;
+    }
+    .narein-philosophy em { color: var(--accent2); font-style: normal; }
+    .np-sub {
+      display: block; margin-top: 0.6rem; font-size: 0.78rem;
+      font-family: 'Space Mono', monospace; letter-spacing: 1px;
+      color: var(--dim); font-style: normal; text-transform: uppercase;
+    }
+    .narein-cta { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-bottom: 1.6rem; }
+    .narein-tags { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; }
+
+    /* Hero centered when no left column */
+    .hero-inner--centered {
+      grid-template-columns: 1fr !important;
+      place-items: center;
+    }
+
+</style>
 </head>
 <body>
 <!-- ENTRY PORTAL -->
@@ -508,31 +559,7 @@
   <span class="math-float" style="top:45%;left:92%">∮E·dA=Q/ε₀</span>
   <span class="math-float" style="top:8%;left:50%">∫₋∞^∞ e⁻ˣ²dx=√π</span>
   <span class="math-float" style="top:85%;left:40%">ds²=−c²dt²+dx²+dy²+dz²</span>
-  <div class="hero-inner">
-    <div>
-      <p class="hero-eyebrow">MSc Geospatial Science · Remote Sensing · GIS</p>
-      <h1>
-        <span class="l1">Dixita</span>
-        <span class="l2">Saikia.</span>
-      </h1>
-      <div class="hero-tags">
-        <span class="htag">GIS</span>
-        <span class="htag htag-teal">Remote Sensing</span>
-        <span class="htag htag-pink">GeoAI</span>
-        <span class="htag">Spatial Intelligence</span>
-      </div>
-      <div class="hero-quote">
-        "The moment you know yourself, you have known the most
-        mysterious thing in the whole universe."
-        <cite>— the 93</cite>
-      </div>
-      <div class="hero-cta">
-        <a href="#" class="btn btn-primary" id="btn-resume">↓ Resume</a>
-        <a href="https://linkedin.com/in/dixitasaikia" target="_blank" rel="noopener" class="btn btn-social btn-li">in LinkedIn</a>
-        <a href="https://github.com/dixitasaikia222-hub" target="_blank" rel="noopener" class="btn btn-social btn-gh">{ } GitHub</a>
-        <a href="#contact" class="btn btn-ghost">Contact</a>
-      </div>
-    </div>
+  <div class="hero-inner hero-inner--centered">
     <div class="hero-visual">
       <div class="globe-wrap">
         <div class="globe-ring"></div>
@@ -577,6 +604,40 @@
           <circle cx="150" cy="150" r="120" fill="none" stroke="#7c6af7" stroke-width="1" opacity="0.3"/>
         </svg>
       </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- IDENTITY NAREIN -->
+<section class="narein-section">
+  <div class="narein-inner">
+    <div class="narein-eyebrow">
+      <span class="ne-line"></span>
+      <span>MSc Geospatial Science · Remote Sensing · GIS</span>
+      <span class="ne-line"></span>
+    </div>
+    <div class="narein-name">
+      <span class="nn-first">Dixita</span>
+      <span class="nn-last">Saikia</span>
+    </div>
+    <p class="narein-philosophy">
+      Not ideas that seek truth —<br>
+      but one of the billion infinite possibilities<br>
+      of <em>observing and anudhavaning</em> the pathless path to truth.<br>
+      <span class="np-sub">This website is that one possibility, entertained.</span>
+    </p>
+    <div class="narein-cta">
+      <a href="#" class="btn btn-primary" id="btn-resume">↓ Resume</a>
+      <a href="https://linkedin.com/in/dixitasaikia" target="_blank" rel="noopener" class="btn btn-social btn-li">in LinkedIn</a>
+      <a href="https://github.com/dixitasaikia222-hub" target="_blank" rel="noopener" class="btn btn-social btn-gh">{ } GitHub</a>
+      <a href="#contact" class="btn btn-ghost">Contact</a>
+    </div>
+    <div class="narein-tags">
+      <span class="htag">GIS</span>
+      <span class="htag htag-teal">Remote Sensing</span>
+      <span class="htag htag-pink">GeoAI</span>
+      <span class="htag">Spatial Intelligence</span>
     </div>
   </div>
 </section>
@@ -2539,7 +2600,7 @@ const VEDA_DATA = {
     Unauthorised reproduction, redistribution, or commercial use without written permission is prohibited.</p>
     <p style="margin-top:0.4rem; color:#2a2a40;">Copying content does not transfer ownership. Original authorship is timestamped and legally traceable.</p>
   </div>
-  <p>© 2025 — ideas that seek truth.</p>
+  <p>© 2026 — one of the infinite possibilities of observing the pathless path.</p>
 </footer>
 
 <!-- POPUPS -->
@@ -2635,7 +2696,7 @@ const VEDA_DATA = {
     <span class="popup-tag" style="color:var(--gold);">the man with 93 rolls royces — and still the most ungraspable person of the 20th century</span>
     <p class="popup-title" id="osho-welcome-title"></p>
     <p class="popup-body" id="osho-welcome-body"></p>
-    <p class="popup-footer-note">// koordinates/ — ideas that seek truth</p>
+    <p class="popup-footer-note">// koordinates/ — anudhavaning the pathless path to truth</p>
   </div>
 </div>
 
