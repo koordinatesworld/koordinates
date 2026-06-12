@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>koordinates — where roots meet coordinates</title>
+  <title>Dixita Saikia — Geospatial Scientist · koordinates</title>
 
   <!-- COPYRIGHT & OWNERSHIP -->
   <meta name="author" content="koordinates/" />
@@ -59,6 +59,8 @@
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a { color: #6060a0; text-decoration: none; font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
     .nav-links a:hover { color: var(--text); }
+    .nav-hire { color: var(--accent2) !important; border: 1px solid rgba(0,232,223,.3); padding: .3rem .9rem; border-radius: 4px; }
+    .nav-hire:hover { background: rgba(0,232,223,.1) !important; }
 
     /* HERO */
     .hero {
@@ -107,11 +109,19 @@
 
     .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
 
+    .hero-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.5rem; }
+    .htag { font-family: 'Space Mono', monospace; font-size: .65rem; letter-spacing: 2px; text-transform: uppercase; padding: .28rem .8rem; border-radius: 20px; border: 1px solid rgba(145,122,255,.35); color: var(--accent); background: rgba(145,122,255,.08); }
+    .htag-teal { border-color: rgba(0,232,223,.35); color: var(--accent2); background: rgba(0,232,223,.07); }
+    .htag-pink { border-color: rgba(255,107,157,.35); color: var(--accent3); background: rgba(255,107,157,.07); }
+
     .btn { padding: 0.8rem 1.8rem; border-radius: 6px; font-size: 0.82rem; font-weight: 700; text-decoration: none; letter-spacing: 0.5px; text-transform: uppercase; transition: all 0.2s; display: inline-block; border: none; cursor: pointer; }
     .btn-primary { background: linear-gradient(135deg, var(--accent), var(--neon)); color: #fff; box-shadow: 0 0 20px rgba(145,122,255,0.4); }
     .btn-primary:hover { background: linear-gradient(135deg, #7a62e8, var(--accent2)); transform: translateY(-2px); box-shadow: 0 10px 35px rgba(145,122,255,0.55); }
     .btn-ghost { background: transparent; color: #505075; border: 1px solid var(--line); }
     .btn-ghost:hover { border-color: var(--accent2); color: var(--accent2); }
+    .btn-social { background: rgba(255,255,255,.04); border: 1px solid var(--line); color: var(--muted); font-size: .72rem; padding: .7rem 1.2rem; }
+    .btn-li:hover { border-color: #0a66c2; color: #0a66c2; background: rgba(10,102,194,.08); }
+    .btn-gh:hover { border-color: var(--accent); color: var(--accent); background: rgba(145,122,255,.08); }
 
     /* GLOBE */
     .hero-visual { display: flex; justify-content: center; align-items: center; }
@@ -186,6 +196,90 @@
     .philosophy blockquote { max-width: 680px; margin: 0 auto; font-size: clamp(1.2rem, 3vw, 1.9rem); font-weight: 300; line-height: 1.65; color: #b8b0d8; font-style: italic; letter-spacing: -0.5px; }
     .philosophy blockquote strong { color: var(--text); font-weight: 700; font-style: normal; }
     .philosophy cite { display: block; margin-top: 1.5rem; font-size: 0.72rem; font-style: normal; color: var(--accent); font-family: 'Space Mono', monospace; letter-spacing: 3px; text-transform: uppercase; }
+
+    /* GIS LAB */
+    .gis-filters { display:flex; gap:.6rem; flex-wrap:wrap; margin-bottom:2.5rem; }
+    .gf-btn { font-family:'Space Mono',monospace; font-size:.65rem; letter-spacing:2px; text-transform:uppercase; padding:.4rem 1.1rem; border-radius:999px; border:1px solid var(--line); background:transparent; color:var(--muted); cursor:pointer; transition:all .2s; }
+    .gf-btn:hover,.gf-btn.active { border-color:var(--accent); color:var(--accent); background:rgba(145,122,255,.1); }
+    .gis-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+    @media(max-width:900px){ .gis-grid{ grid-template-columns:repeat(2,1fr); } }
+    @media(max-width:600px){ .gis-grid{ grid-template-columns:1fr; } }
+    .gis-card { background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:1.8rem; display:flex; flex-direction:column; gap:.9rem; transition:border-color .25s,transform .25s; position:relative; overflow:hidden; }
+    .gis-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--accent),var(--accent2)); opacity:0; transition:opacity .25s; }
+    .gis-card:hover { border-color:var(--accent); transform:translateY(-3px); }
+    .gis-card:hover::before { opacity:1; }
+    .gis-card.hidden { display:none; }
+    .gc-top { display:flex; justify-content:space-between; align-items:center; }
+    .gc-status { font-family:'Space Mono',monospace; font-size:.58rem; letter-spacing:1.5px; padding:.2rem .7rem; border-radius:999px; text-transform:uppercase; }
+    .gc-done { background:rgba(0,232,156,.12); color:#00e89c; border:1px solid rgba(0,232,156,.25); }
+    .gc-wip  { background:rgba(245,184,0,.1); color:#f5b800; border:1px solid rgba(245,184,0,.25); }
+    .gc-plan { background:rgba(145,122,255,.1); color:var(--accent); border:1px solid rgba(145,122,255,.25); }
+    .gc-year { font-family:'Space Mono',monospace; font-size:.6rem; color:var(--muted); }
+    .gc-icon { font-size:1.8rem; line-height:1; }
+    .gc-title { font-size:1rem; font-weight:800; letter-spacing:-.3px; line-height:1.3; color:var(--text); }
+    .gc-desc { font-size:.78rem; color:var(--muted); line-height:1.75; flex:1; }
+    .gc-meta { display:flex; flex-wrap:wrap; gap:.5rem; }
+    .gc-meta-item { font-family:'Space Mono',monospace; font-size:.6rem; color:var(--accent2); }
+    .gc-meta-item + .gc-meta-item::before { content:'·'; margin-right:.5rem; color:var(--dim); }
+    .gc-tags { display:flex; flex-wrap:wrap; gap:.4rem; }
+    .gct { font-size:.6rem; padding:.18rem .55rem; border-radius:4px; background:rgba(145,122,255,.08); border:1px solid rgba(145,122,255,.2); color:var(--accent); font-family:'Space Mono',monospace; }
+    .gc-link { font-family:'Space Mono',monospace; font-size:.65rem; color:var(--accent2); text-decoration:none; letter-spacing:1px; margin-top:.3rem; }
+    .gc-link:hover { text-decoration:underline; }
+    .gc-link-dim { color:var(--dim); cursor:default; }
+
+    /* THESIS MUSEUM */
+    .thesis-section { background:linear-gradient(180deg,transparent 0%,rgba(145,122,255,.04) 50%,transparent 100%); }
+    .thesis-title-card { background:var(--surface); border:1px solid rgba(145,122,255,.3); border-radius:16px; padding:2.5rem 3rem; margin-bottom:3rem; position:relative; overflow:hidden; }
+    .thesis-title-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--accent),var(--neon),var(--accent2)); }
+    .ttc-label { font-family:'Space Mono',monospace; font-size:.6rem; letter-spacing:4px; color:var(--accent2); text-transform:uppercase; margin-bottom:1rem; }
+    .ttc-main { font-size:clamp(1.1rem,2.5vw,1.5rem); font-weight:900; letter-spacing:-.5px; line-height:1.3; color:var(--text); margin-bottom:.6rem; }
+    .ttc-sub { font-size:.9rem; color:var(--muted); font-style:italic; margin-bottom:1.2rem; }
+    .ttc-meta-row { display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; font-family:'Space Mono',monospace; font-size:.62rem; color:var(--muted); }
+    .ttc-supervisors { margin-top:.4rem; color:rgba(145,122,255,.7); }
+    .thesis-stats { display:grid; grid-template-columns:repeat(6,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:14px; overflow:hidden; margin-bottom:3rem; }
+    @media(max-width:900px){ .thesis-stats{grid-template-columns:repeat(3,1fr);} }
+    @media(max-width:500px){ .thesis-stats{grid-template-columns:repeat(2,1fr);} }
+    .ts-item { background:var(--surface); padding:1.5rem 1.2rem; text-align:center; }
+    .ts-item-hot { background:rgba(255,107,57,.06); }
+    .ts-item-cool { background:rgba(0,232,223,.04); }
+    .ts-item-accent { background:rgba(145,122,255,.06); }
+    .ts-num { font-family:'Space Mono',monospace; font-size:1.35rem; font-weight:700; color:var(--text); letter-spacing:-.5px; line-height:1.2; }
+    .ts-item-hot .ts-num { color:#ff6b39; }
+    .ts-item-cool .ts-num { color:var(--accent2); }
+    .ts-item-accent .ts-num { color:var(--accent); font-size:.9rem; }
+    .ts-label { font-size:.68rem; font-weight:700; color:var(--text); margin:.4rem 0 .2rem; }
+    .ts-sub { font-size:.58rem; color:var(--muted); font-family:'Space Mono',monospace; }
+    .thesis-body { display:grid; grid-template-columns:1fr 1fr; gap:3rem; margin-bottom:4rem; }
+    @media(max-width:800px){ .thesis-body{grid-template-columns:1fr;} }
+    .tb-heading { font-family:'Space Mono',monospace; font-size:.68rem; letter-spacing:3px; text-transform:uppercase; color:var(--accent2); margin-bottom:1.2rem; }
+    .tb-text { font-size:.82rem; color:var(--muted); line-height:1.85; margin-bottom:1rem; }
+    .tb-text strong { color:var(--text); font-weight:700; }
+    .tb-keywords { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1.5rem; }
+    .kw { font-size:.62rem; padding:.25rem .7rem; border-radius:999px; border:1px solid rgba(0,232,223,.25); color:var(--accent2); background:rgba(0,232,223,.06); font-family:'Space Mono',monospace; }
+    .surface-bars { display:flex; flex-direction:column; gap:.85rem; }
+    .sb-row { display:grid; grid-template-columns:140px 1fr auto; gap:.8rem; align-items:center; }
+    .sb-label { font-size:.72rem; color:var(--muted); white-space:nowrap; }
+    .sb-bar-wrap { background:rgba(255,255,255,.05); border-radius:4px; height:8px; overflow:hidden; }
+    .sb-bar { height:100%; border-radius:4px; transition:width 1s ease; }
+    .sb-cool { background:linear-gradient(90deg,#00e8df,#00b4d8); }
+    .sb-mid  { background:linear-gradient(90deg,#f5b800,#f97316); }
+    .sb-warm { background:linear-gradient(90deg,#f97316,#ef4444); }
+    .sb-hot  { background:linear-gradient(90deg,#ef4444,#dc2626); }
+    .sb-val { font-family:'Space Mono',monospace; font-size:.58rem; white-space:nowrap; }
+    .sb-val-cool { color:#00e8df; }
+    .sb-val-mid  { color:#f5b800; }
+    .sb-val-warm { color:#f97316; }
+    .sb-val-hot  { color:#ef4444; }
+    .sb-note { font-size:.6rem; color:var(--dim); margin-top:.8rem; font-style:italic; font-family:'Space Mono',monospace; }
+    .thesis-method { background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:3rem; }
+    .method-steps { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; }
+    @media(max-width:900px){ .method-steps{grid-template-columns:repeat(2,1fr);} }
+    @media(max-width:600px){ .method-steps{grid-template-columns:1fr;} }
+    .ms-step { display:flex; flex-direction:column; gap:.8rem; }
+    .ms-num { font-family:'Space Mono',monospace; font-size:2rem; font-weight:700; color:var(--dim); line-height:1; }
+    .ms-title { font-size:.85rem; font-weight:800; color:var(--text); }
+    .ms-desc { font-size:.75rem; color:var(--muted); line-height:1.75; }
+    .section-sub { font-size:.8rem; color:var(--muted); max-width:500px; text-align:right; line-height:1.6; }
 
     /* SECTION */
     .section { max-width: 1200px; margin: 0 auto; padding: 7rem 3rem; }
@@ -372,16 +466,20 @@
 </div>
 <script>
 (function(){
-  // When the guardian (inside the iframe) signals acceptance, reveal the site.
+  function revealSite(){
+    var ep=document.getElementById('ep');
+    if(!ep||ep.dataset.hidden) return;
+    ep.dataset.hidden='1';
+    ep.style.pointerEvents='none';
+    ep.style.transition='opacity 1s ease';
+    ep.style.opacity='0';
+    setTimeout(function(){ ep.style.display='none'; }, 1100);
+  }
   window.addEventListener('message', function(e){
-    if(e && e.data === 'koordinates-enter'){
-      var ep=document.getElementById('ep');
-      if(!ep) return;
-      ep.style.transition='opacity 1s ease';
-      ep.style.opacity='0';
-      setTimeout(function(){ ep.style.display='none'; }, 1000);
-    }
+    if(e && e.data === 'koordinates-enter') revealSite();
   });
+  // Expose globally so same-origin direct call also works
+  window._revealSite = revealSite;
 })();
 </script>
 
@@ -390,15 +488,17 @@
 <nav>
   <div class="logo">ko<em>ord</em>inates/</div>
   <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#gis-lab">GIS Lab</a></li>
+    <li><a href="#thesis-museum">Thesis</a></li>
     <li><a href="#writing">Writing</a></li>
-    <li><a href="#philosophy">Philosophy</a></li>
-    <li><a href="#reels">Reels</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><a href="#" class="nav-hire">Hire Me ↗</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" id="home">
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
   <span class="math-float" style="top:12%;left:6%">e<sup>iπ</sup>+1=0</span>
@@ -410,19 +510,27 @@
   <span class="math-float" style="top:85%;left:40%">ds²=−c²dt²+dx²+dy²+dz²</span>
   <div class="hero-inner">
     <div>
-      <p class="hero-eyebrow">Independent Content Studio</p>
+      <p class="hero-eyebrow">MSc Geospatial Science · Remote Sensing · GIS</p>
       <h1>
-        <span class="l1">Ideas that</span>
-        <span class="l2">seek truth.</span>
+        <span class="l1">Dixita</span>
+        <span class="l2">Saikia.</span>
       </h1>
+      <div class="hero-tags">
+        <span class="htag">GIS</span>
+        <span class="htag htag-teal">Remote Sensing</span>
+        <span class="htag htag-pink">GeoAI</span>
+        <span class="htag">Spatial Intelligence</span>
+      </div>
       <div class="hero-quote">
         "The moment you know yourself, you have known the most
         mysterious thing in the whole universe."
         <cite>— the 93</cite>
       </div>
       <div class="hero-cta">
-        <a href="#writing" class="btn btn-primary">Explore the work</a>
-        <a href="#contact" class="btn btn-ghost">Collaborate</a>
+        <a href="#" class="btn btn-primary" id="btn-resume">↓ Resume</a>
+        <a href="https://linkedin.com/in/dixitasaikia" target="_blank" rel="noopener" class="btn btn-social btn-li">in LinkedIn</a>
+        <a href="https://github.com/dixitasaikia222-hub" target="_blank" rel="noopener" class="btn btn-social btn-gh">{ } GitHub</a>
+        <a href="#contact" class="btn btn-ghost">Contact</a>
       </div>
     </div>
     <div class="hero-visual">
@@ -564,7 +672,569 @@
   <cite>— koordinates perspective</cite>
 </div>
 
+<!-- ═══════════════════════════════════════
+     GIS LAB — Phase 3
+═══════════════════════════════════════ -->
+<div class="section" id="gis-lab">
+  <div class="section-header">
+    <p class="section-label">// geospatial work · 27 projects</p>
+    <h2 class="section-title">GIS Lab</h2>
+    <p class="section-sub">Field surveys · Satellite analysis · Spatial intelligence · GeoAI — spanning Assam, India &amp; the world</p>
+  </div>
+
+  <!-- Filter Tabs -->
+  <div class="gis-filters" id="gis-filters">
+    <button class="gf-btn active" data-filter="all">All</button>
+    <button class="gf-btn" data-filter="field">Field Survey</button>
+    <button class="gf-btn" data-filter="remote">Remote Sensing</button>
+    <button class="gf-btn" data-filter="urban">Urban Climate</button>
+    <button class="gf-btn" data-filter="geoai">GeoAI</button>
+    <button class="gf-btn" data-filter="hydro">Hydrology</button>
+    <button class="gf-btn" data-filter="planning">Planning</button>
+    <button class="gf-btn" data-filter="hazard">Hazard</button>
+    <button class="gf-btn" data-filter="environment">Environment</button>
+    <button class="gf-btn" data-filter="transport">Transport</button>
+    <button class="gf-btn" data-filter="social">Social Equity</button>
+  </div>
+
+  <div class="gis-grid" id="gis-grid">
+
+    <!-- P1: Thesis Project -->
+    <div class="gis-card" data-tags="field urban">
+      <div class="gc-top">
+        <span class="gc-status gc-done">✓ Published</span>
+        <span class="gc-year">2026</span>
+      </div>
+      <div class="gc-icon">🌡️</div>
+      <h3 class="gc-title">Deer Park Urban Microclimate</h3>
+      <p class="gc-desc">Field-measured air temperature & relative humidity across 6 surface types in Deer Park, Hauz Khas. IDW interpolation in QGIS revealed 12 °C thermal gradient between forested core and road surface — ground-truth evidence for urban green space cooling.</p>
+      <div class="gc-meta">
+        <span class="gc-meta-item">130 field readings</span>
+        <span class="gc-meta-item">6 surface types</span>
+        <span class="gc-meta-item">Pearson r = −0.827</span>
+      </div>
+      <div class="gc-tags">
+        <span class="gct">QGIS</span><span class="gct">IDW</span><span class="gct">Field Survey</span><span class="gct">Urban Heat Island</span>
+      </div>
+      <a href="#thesis-museum" class="gc-link">View thesis →</a>
+    </div>
+
+    <!-- P2: NE India Temperature Atlas -->
+    <div class="gis-card" data-tags="remote">
+      <div class="gc-top">
+        <span class="gc-status gc-wip">⟳ In Progress</span>
+        <span class="gc-year">2026</span>
+      </div>
+      <div class="gc-icon">🛰️</div>
+      <h3 class="gc-title">Northeast India Temperature Atlas</h3>
+      <p class="gc-desc">Seasonal land surface temperature (LST) mapping for Assam and four neighbouring states — Meghalaya, Nagaland, Manipur, Arunachal Pradesh — using MODIS Terra LST data. IDW surfaces reveal regional thermal gradients driven by elevation, forest cover, and the Brahmaputra floodplain.</p>
+      <div class="gc-meta">
+        <span class="gc-meta-item">5 states</span>
+        <span class="gc-meta-item">MODIS 1km LST</span>
+        <span class="gc-meta-item">Jan · Mar · Jun · Oct</span>
+      </div>
+      <div class="gc-tags">
+        <span class="gct">MODIS</span><span class="gct">LST</span><span class="gct">IDW</span><span class="gct">QGIS</span><span class="gct">Assam</span>
+      </div>
+      <span class="gc-link gc-link-dim">Coming soon</span>
+    </div>
+
+    <!-- P3: Delhi UHI via Landsat -->
+    <div class="gis-card" data-tags="remote urban">
+      <div class="gc-top">
+        <span class="gc-status gc-wip">⟳ In Progress</span>
+        <span class="gc-year">2026</span>
+      </div>
+      <div class="gc-icon">🔥</div>
+      <h3 class="gc-title">Delhi UHI · Landsat LST vs NDVI</h3>
+      <p class="gc-desc">Multi-temporal Urban Heat Island analysis of Delhi-NCR using Landsat 8/9 Band 10. NDVI derived from B4/B5 overlaid against land surface temperature — quantifying the inverse vegetation-heat relationship at 30 m resolution across summer and winter scenes.</p>
+      <div class="gc-meta">
+        <span class="gc-meta-item">30 m resolution</span>
+        <span class="gc-meta-item">Landsat 8/9</span>
+        <span class="gc-meta-item">2023–2026</span>
+      </div>
+      <div class="gc-tags">
+        <span class="gct">Landsat</span><span class="gct">LST</span><span class="gct">NDVI</span><span class="gct">UHI</span><span class="gct">Python</span>
+      </div>
+      <span class="gc-link gc-link-dim">Coming soon</span>
+    </div>
+
+    <!-- P4: Brahmaputra Flood Risk -->
+    <div class="gis-card" data-tags="hydro remote">
+      <div class="gc-top">
+        <span class="gc-status gc-plan">◉ Planned</span>
+        <span class="gc-year">2026</span>
+      </div>
+      <div class="gc-icon">🌊</div>
+      <h3 class="gc-title">Brahmaputra Flood Risk · Assam</h3>
+      <p class="gc-desc">Multi-layer flood risk model for Assam's Brahmaputra basin combining SRTM DEM, NDWI (Sentinel-2), historical inundation extents, and population density. Identifies high-risk settlement zones along the dynamic river channel — direct relevance to Assam's annual flood disaster.</p>
+      <div class="gc-meta">
+        <span class="gc-meta-item">Sentinel-2</span>
+        <span class="gc-meta-item">SRTM DEM</span>
+        <span class="gc-meta-item">Brahmaputra basin</span>
+      </div>
+      <div class="gc-tags">
+        <span class="gct">DEM</span><span class="gct">NDWI</span><span class="gct">Flood</span><span class="gct">Sentinel-2</span><span class="gct">Risk Mapping</span>
+      </div>
+      <span class="gc-link gc-link-dim">Coming soon</span>
+    </div>
+
+    <!-- P5: Green Cooling Index -->
+    <div class="gis-card" data-tags="urban geoai">
+      <div class="gc-top">
+        <span class="gc-status gc-plan">◉ Planned</span>
+        <span class="gc-year">2026</span>
+      </div>
+      <div class="gc-icon">🌿</div>
+      <h3 class="gc-title">Urban Green Cooling Index · Delhi Parks</h3>
+      <p class="gc-desc">Comparative micro-thermal study across 8 Delhi parks — Lodi Garden, Nehru Park, Central Ridge, Deer Park — ranking each by cooling efficiency (°C per hectare of green cover). A replicable methodology for park-level urban heat mitigation policy.</p>
+      <div class="gc-meta">
+        <span class="gc-meta-item">8 parks</span>
+        <span class="gc-meta-item">°C / hectare metric</span>
+        <span class="gc-meta-item">Policy-ready</span>
+      </div>
+      <div class="gc-tags">
+        <span class="gct">QGIS</span><span class="gct">LST</span><span class="gct">Green Space</span><span class="gct">Urban Policy</span>
+      </div>
+      <span class="gc-link gc-link-dim">Coming soon</span>
+    </div>
+
+    <!-- P6: GeoAI Land Cover -->
+    <div class="gis-card" data-tags="geoai remote">
+      <div class="gc-top">
+        <span class="gc-status gc-plan">◉ Planned</span>
+        <span class="gc-year">2026</span>
+      </div>
+      <div class="gc-icon">🤖</div>
+      <h3 class="gc-title">GeoAI Land Cover Classifier</h3>
+      <p class="gc-desc">Random Forest land-use / land-cover classification on Sentinel-2 multispectral imagery. Trained on ground-truth polygons to distinguish built-up, vegetation, waterbody, bare soil, and agricultural land — with accuracy assessment and confusion matrix.</p>
+      <div class="gc-meta">
+        <span class="gc-meta-item">Sentinel-2 (10 m)</span>
+        <span class="gc-meta-item">Random Forest</span>
+        <span class="gc-meta-item">6-class LULC</span>
+      </div>
+      <div class="gc-tags">
+        <span class="gct">Python</span><span class="gct">scikit-learn</span><span class="gct">Sentinel-2</span><span class="gct">ML</span><span class="gct">LULC</span>
+      </div>
+      <span class="gc-link gc-link-dim">Coming soon</span>
+    </div>
+
+    <!-- P7: Spatial Interpolation Comparison -->
+    <div class="gis-card" data-tags="field urban geoai">
+      <div class="gc-top">
+        <span class="gc-status gc-plan">◉ Planned</span>
+        <span class="gc-year">2026</span>
+      </div>
+      <div class="gc-icon">📐</div>
+      <h3 class="gc-title">IDW vs Kriging · Interpolation Benchmarking</h3>
+      <p class="gc-desc">Systematic comparison of IDW, Ordinary Kriging, and Spline interpolation methods on the same Deer Park temperature dataset. Cross-validation (leave-one-out RMSE) quantifies which method produces the most accurate microclimatic surface — methodological contribution to urban climate GIS.</p>
+      <div class="gc-meta">
+        <span class="gc-meta-item">3 methods</span>
+        <span class="gc-meta-item">Leave-one-out CV</span>
+        <span class="gc-meta-item">RMSE comparison</span>
+      </div>
+      <div class="gc-tags">
+        <span class="gct">Kriging</span><span class="gct">IDW</span><span class="gct">Spline</span><span class="gct">R / Python</span><span class="gct">Benchmarking</span>
+      </div>
+      <span class="gc-link gc-link-dim">Coming soon</span>
+    </div>
+
+    <!-- ── EXPANSION PIPELINE: 20 concept projects ── -->
+
+    <!-- 1 -->
+    <div class="gis-card" data-tags="planning urban">
+      <div class="gc-top"><span class="gc-status gc-plan">◉ Concept</span><span class="gc-year">2026</span></div>
+      <div class="gc-icon">🌳</div>
+      <h3 class="gc-title">Verdant Voids · Equitable Park Siting in Bengaluru</h3>
+      <p class="gc-desc">After Bengaluru's 2024 "Day Zero" water crisis and accelerating tree-cover loss, this study sites new neighbourhood parks in green-deficit wards using NDVI gaps, population density, and walkable access analysis.</p>
+      <div class="gc-meta"><span class="gc-meta-item">Bengaluru</span><span class="gc-meta-item">Ward-level equity</span><span class="gc-meta-item">NDVI deficit</span></div>
+      <div class="gc-tags"><span class="gct">Sentinel-2</span><span class="gct">QGIS</span><span class="gct">Census 2011</span><span class="gct">OSM</span></div>
+      <span class="gc-link gc-link-dim">Coming soon</span>
+    </div>
+
+    <!-- 2 -->
+    <div class="gis-card" data-tags="hydro hazard">
+      <div class="gc-top"><span class="gc-status gc-plan">◉ Concept</span><span class="gc-year">2026</span></div>
+      <div class="gc-icon">🌊</div>
+      <h3 class="gc-title">When the Brahmaputra Breathes · Char Flood-Risk, Assam</h3>
+      <p class="gc-desc">The 2024 Assam floods submerged 26 districts and killed 130+ Kaziranga animals. This SAR-based model maps flood exposure for vulnerable <em>char</em> (river-island) communities of Lower Assam using elevation and rainfall.</p>
+      <div class="gc-meta"><span class="gc-meta-item">Lower Assam</span><span class="gc-meta-item">Dhubri · Barpeta</span><span class="gc-meta-item">26 districts hit</span></div>
+      <div class="gc-tags"><span class="gct">Sentinel-1 SAR</span><span class="gct">CartoDEM</span><span class="gct">CHIRPS</span><span class="gct">GEE</span></div>
+      <span class="gc-link gc-link-dim">Coming soon</span>
+    </div>
+
+    <!-- 3 -->
+    <div class="gis-card" data-tags="social planning">
+      <div class="gc-top"><span class="gc-status gc-plan">◉ Concept</span><span class="gc-year">2026</span></div>
+      <div class="gc-icon">🛒</div>
+      <h3 class="gc-title">Nutrition Deserts · Food-Access Gaps in Mumbai</h3>
+      <p class="gc-desc">As Dharavi redevelopment and BDD-chawl projects reshape Mumbai's retail fabric (2023–25), this study maps low-income wards where fresh-food markets lie beyond walkable reach, using network distance analysis.</p>
+      <div class="gc-meta"><span class="gc-meta-item">Greater Mumbai</span><span class="gc-meta-item">Walk-distance</span><span class="gc-meta-item">Retail equity</span></div>
+      <div class="gc-tags"><span class="gct">OSM</span><span class="gct">pgRouting</span><span class="gct">QGIS</span><span class="gct">Census 2011</span></div>
+      <span class="gc-link gc-link-dim">Coming soon</span>
+    </div>
+
+    <!-- 4 -->
+    <div class="gis-card" data-tags="hazard remote">
+      <div class="gc-top"><span class="gc-status gc-plan">◉ Concept</span><span class="gc-year">2026</span></div>
+      <div class="gc-icon">🔥</div>
+      <h3 class="gc-title">Wildland-Urban Interface · Sierra Fire Zonation, California 🌍</h3>
+      <p class="gc-desc">Following the 2025 LA-area mega-fires, this global showcase zones fire risk across California's Sierra foothills where homes meet forest — combining fuel load, slope, and active-fire history into a WUI risk surface.</p>
+      <div class="gc-meta"><span class="gc-meta-item">California, USA</span><span class="gc-meta-item">WUI risk</span><span class="gc-meta-item">World project</span></div>
+      <div class="gc-tags"><span class="gct">MODIS Fire</span><span class="gct">Landsat 8/9</span><span class="gct">LANDFIRE</span><span class="gct">GEE</span></div>
+      <span class="gc-link gc-link-dim">Coming soon</span>
+    </div>
+
+    <!-- 5 -->
+    <div class="gis-card" data-tags="transport urban">
+      <div class="gc-top"><span class="gc-status gc-plan">◉ Concept</span><span class="gc-year">2026</span></div>
+      <div class="gc-icon">🚦</div>
+      <h3 class="gc-title">Black Spots · Crash-Hotspot Prediction in Pune</h3>
+      <p class="gc-desc">Aligned with MoRTH's 2023–24 national "black spot" rectification drive, this study uses kernel density estimation on crash records to flag Pune's most dangerous arterial junctions for two-wheeler safety intervention.</p>
+      <div class="gc-meta"><span class="gc-meta-item">Pune</span><span class="gc-meta-item">KDE hotspots</span><span class="gc-meta-item">Road safety</span></div>
+      <div class="gc-tags"><span class="gct">OSM</span><span class="gct">iRAD data</span><span class="gct">QGIS</span><span class="gct">Hotspot KDE</span></div>
+      <span class="gc-link gc-link-dim">Coming soon</span>
+    </div>
+
+    <!-- 6 -->
+    <div class="gis-card" data-tags="environment urban">
+      <div class="gc-top"><span class="gc-status gc-plan">◉ Concept</span><span class="gc-year">2026</span></div>
+      <div class="gc-icon">🌫️</div>
+      <h3 class="gc-title">Breathing Lines · Traffic vs NO₂ over Delhi-NCR</h3>
+      <p class="gc-desc">During the recurring GRAP-IV winter emergencies of 2024–25, this study correlates Sentinel-5P tropospheric NO₂ with road-traffic density to expose how the capital's congestion corridors drive its air-quality crisis.</p>
+      <div class="gc-meta"><span class="gc-meta-item">Delhi-NCR</span><span class="gc-meta-item">NO₂ × traffic</span><span class="gc-meta-item">GRAP-IV</span></div>
+      <div class="gc-tags"><span class="gct">Sentinel-5P</span><span class="gct">GEE</span><span class="gct">OSM</span><span class="gct">CPCB</span></div>
+      <span class="gc-link gc-link-dim">Coming soon</span>
+    </div>
+
+    <!-- 7 -->
+    <div class="gis-card" data-tags="environment remote">
+      <div class="gc-top"><span class="gc-status gc-plan">◉ Concept</span><span class="gc-year">2026</span></div>
+      <div class="gc-icon">☀️</div>
+      <h3 class="gc-title">Desert Sun Harvest · Solar Suitability in the Thar</h3>
+      <p class="gc-desc">With Bhadla Solar Park (2,245 MW) anchoring India's rise to the world's 3rd-largest solar producer, this AHP multi-criteria model identifies the next optimal utility-scale solar sites across Rajasthan's Thar belt.</p>
+      <div class="gc-meta"><span class="gc-meta-item">Bhadla · Jodhpur</span><span class="gc-meta-item">AHP-MCDA</span><span class="gc-meta-item">Slope · irradiance</span></div>
+      <div class="gc-tags"><span class="gct">SRTM</span><span class="gct">Global Solar Atlas</span><span class="gct">QGIS</span><span class="gct">NASA POWER</span></div>
+      <span class="gc-link gc-link-dim">Coming soon</span>
+    </div>
+
+    <!-- 8 -->
+    <div class="gis-card" data-tags="hazard remote">
+      <div class="gc-top"><span class="gc-status gc-plan">◉ Concept</span><span class="gc-year">2026</span></div>
+      <div class="gc-icon">⛰️</div>
+      <h3 class="gc-title">Slopes on Edge · Landslide Susceptibility, Wayanad</h3>
+      <p class="gc-desc">After the 30 July 2024 Wayanad disaster — India's deadliest landslide, 254+ lives lost to 572 mm of rain in 48 hours — this study models rainfall-triggered slope failure across the Western Ghats terrain.</p>
+      <div class="gc-meta"><span class="gc-meta-item">Wayanad, Kerala</span><span class="gc-meta-item">Susceptibility index</span><span class="gc-meta-item">254+ lives</span></div>
+      <div class="gc-tags"><span class="gct">CartoDEM</span><span class="gct">CHIRPS</span><span class="gct">GSI inventory</span><span class="gct">GEE</span></div>
+      <span class="gc-link gc-link-dim">Coming soon</span>
+    </div>
+
+    <!-- 9 -->
+    <div class="gis-card" data-tags="urban planning">
+      <div class="gc-top"><span class="gc-status gc-plan">◉ Concept</span><span class="gc-year">2026</span></div>
+      <div class="gc-icon">🏙️</div>
+      <h3 class="gc-title">Cool Canopies · Green-Roof Potential, Chandigarh</h3>
+      <p class="gc-desc">As the PM Surya Ghar rooftop boom turns India's rooftops into infrastructure, this study maps Chandigarh's flat-roof building stock to rank which rooftops best suit green-roof retrofits for cooling and stormwater control.</p>
+      <div class="gc-meta"><span class="gc-meta-item">Chandigarh</span><span class="gc-meta-item">Rooftop suitability</span><span class="gc-meta-item">Heat + runoff</span></div>
+      <div class="gc-tags"><span class="gct">Building footprints</span><span class="gct">Sentinel-2 LST</span><span class="gct">ArcGIS</span><span class="gct">Bhuvan</span></div>
+      <span class="gc-link gc-link-dim">Coming soon</span>
+    </div>
+
+    <!-- 10 -->
+    <div class="gis-card" data-tags="social planning">
+      <div class="gc-top"><span class="gc-status gc-plan">◉ Concept</span><span class="gc-year">2026</span></div>
+      <div class="gc-icon">🏥</div>
+      <h3 class="gc-title">The Last Mile of Care · Rural Health Access, Odisha</h3>
+      <p class="gc-desc">In Odisha's tribal KBK belt, this study uses road-network travel-time analysis to reveal villages stranded beyond reach of Ayushman Bharat health centres — quantifying the rural healthcare access gap.</p>
+      <div class="gc-meta"><span class="gc-meta-item">Koraput · KBK</span><span class="gc-meta-item">Travel-time</span><span class="gc-meta-item">PHC access</span></div>
+      <div class="gc-tags"><span class="gct">OSM</span><span class="gct">pgRouting</span><span class="gct">Census 2011</span><span class="gct">QGIS</span></div>
+      <span class="gc-link gc-link-dim">Coming soon</span>
+    </div>
+
+    <!-- 11 -->
+    <div class="gis-card" data-tags="remote hazard">
+      <div class="gc-top"><span class="gc-status gc-plan">◉ Concept</span><span class="gc-year">2026</span></div>
+      <div class="gc-icon">🏖️</div>
+      <h3 class="gc-title">Retreating Shores · Shoreline Forecasting, Jakarta 🌍</h3>
+      <p class="gc-desc">A global showcase on the world's fastest-sinking megacity — using DSAS shoreline-change statistics and InSAR subsidence to forecast where Jakarta's coast retreats next, as its "Giant Sea Wall" race accelerates.</p>
+      <div class="gc-meta"><span class="gc-meta-item">Jakarta, Indonesia</span><span class="gc-meta-item">DSAS + InSAR</span><span class="gc-meta-item">World project</span></div>
+      <div class="gc-tags"><span class="gct">Landsat 8/9</span><span class="gct">Sentinel-1</span><span class="gct">DSAS</span><span class="gct">GEE</span></div>
+      <span class="gc-link gc-link-dim">Coming soon</span>
+    </div>
+
+    <!-- 12 -->
+    <div class="gis-card" data-tags="urban environment">
+      <div class="gc-top"><span class="gc-status gc-plan">◉ Concept</span><span class="gc-year">2026</span></div>
+      <div class="gc-icon">🌡️</div>
+      <h3 class="gc-title">Thermal Inequity · Heat-Vulnerable Wards, Ahmedabad</h3>
+      <p class="gc-desc">2024 saw 700+ heat deaths across India. Building on Ahmedabad's pioneering Heat Action Plan, this study fuses Landsat land-surface temperature with social vulnerability to map which wards suffer the city's heat most unequally.</p>
+      <div class="gc-meta"><span class="gc-meta-item">Ahmedabad</span><span class="gc-meta-item">LST × vulnerability</span><span class="gc-meta-item">Heat Action Plan</span></div>
+      <div class="gc-tags"><span class="gct">Landsat TIRS</span><span class="gct">ECOSTRESS</span><span class="gct">GEE</span><span class="gct">Census wards</span></div>
+      <span class="gc-link gc-link-dim">Coming soon</span>
+    </div>
+
+    <!-- 13 -->
+    <div class="gis-card" data-tags="transport planning">
+      <div class="gc-top"><span class="gc-status gc-plan">◉ Concept</span><span class="gc-year">2026</span></div>
+      <div class="gc-icon">🔌</div>
+      <h3 class="gc-title">Charging the Grid · EV-Charger Siting, Hyderabad</h3>
+      <p class="gc-desc">With PM E-DRIVE (₹2,000 cr, 2024) funding 72,000 new public chargers, this study optimises Hyderabad's next charging locations using traffic flow, POI demand, and service-area coverage gaps.</p>
+      <div class="gc-meta"><span class="gc-meta-item">Hyderabad</span><span class="gc-meta-item">Service-area gaps</span><span class="gc-meta-item">PM E-DRIVE</span></div>
+      <div class="gc-tags"><span class="gct">OSM POI</span><span class="gct">pgRouting</span><span class="gct">QGIS</span><span class="gct">Traffic flow</span></div>
+      <span class="gc-link gc-link-dim">Coming soon</span>
+    </div>
+
+    <!-- 14 -->
+    <div class="gis-card" data-tags="environment remote">
+      <div class="gc-top"><span class="gc-status gc-plan">◉ Concept</span><span class="gc-year">2026</span></div>
+      <div class="gc-icon">🌲</div>
+      <h3 class="gc-title">Vanishing Green · Two Decades of Forest Loss, Western Ghats</h3>
+      <p class="gc-desc">As the 2024 draft notification places 56,825 km² of the Western Ghats under eco-sensitive protection, this Landsat time-series (1990–2024) quantifies decades of deforestation across Karnataka's Ghats.</p>
+      <div class="gc-meta"><span class="gc-meta-item">Karnataka Ghats</span><span class="gc-meta-item">34-yr time-series</span><span class="gc-meta-item">ESA 2024</span></div>
+      <div class="gc-tags"><span class="gct">Landsat archive</span><span class="gct">Hansen GFC</span><span class="gct">Sentinel-2</span><span class="gct">GEE</span></div>
+      <span class="gc-link gc-link-dim">Coming soon</span>
+    </div>
+
+    <!-- 15 -->
+    <div class="gis-card" data-tags="transport planning">
+      <div class="gc-top"><span class="gc-status gc-plan">◉ Concept</span><span class="gc-year">2026</span></div>
+      <div class="gc-icon">🚲</div>
+      <h3 class="gc-title">Cycling the Capital · Bike-Lane Network for Delhi</h3>
+      <p class="gc-desc">Revived by post-2024 pollution emergencies and the Master Plan 2041's non-motorised-transport push, this study designs an optimal connected cycle-lane network across Delhi using gradient, demand, and road-width analysis.</p>
+      <div class="gc-meta"><span class="gc-meta-item">Delhi</span><span class="gc-meta-item">Network design</span><span class="gc-meta-item">MPD 2041</span></div>
+      <div class="gc-tags"><span class="gct">OSM</span><span class="gct">SRTM gradient</span><span class="gct">pgRouting</span><span class="gct">QGIS</span></div>
+      <span class="gc-link gc-link-dim">Coming soon</span>
+    </div>
+
+    <!-- 16 -->
+    <div class="gis-card" data-tags="environment geoai">
+      <div class="gc-top"><span class="gc-status gc-plan">◉ Concept</span><span class="gc-year">2026</span></div>
+      <div class="gc-icon">🦋</div>
+      <h3 class="gc-title">Hotspots of Life · Conservation Corridors, Nilgiris</h3>
+      <p class="gc-desc">In the Nilgiri Biosphere — a global biodiversity hotspot — this study models species-occurrence and habitat connectivity to prioritise wildlife corridors, supporting elephant-corridor and ESA conservation planning.</p>
+      <div class="gc-meta"><span class="gc-meta-item">Nilgiris, TN</span><span class="gc-meta-item">Habitat connectivity</span><span class="gc-meta-item">MaxEnt</span></div>
+      <div class="gc-tags"><span class="gct">GBIF</span><span class="gct">Sentinel-2</span><span class="gct">MaxEnt</span><span class="gct">QGIS</span></div>
+      <span class="gc-link gc-link-dim">Coming soon</span>
+    </div>
+
+    <!-- 17 -->
+    <div class="gis-card" data-tags="hydro environment">
+      <div class="gc-top"><span class="gc-status gc-plan">◉ Concept</span><span class="gc-year">2026</span></div>
+      <div class="gc-icon">💧</div>
+      <h3 class="gc-title">Day Zero Approaching · Water-Scarcity Risk, Bengaluru</h3>
+      <p class="gc-desc">When the 2024 crisis dried nearly half of Bengaluru's 14,781 borewells, it became India's Day-Zero warning. This study fuses GRACE groundwater depletion, rainfall, and land-use to map future water-scarcity risk zones.</p>
+      <div class="gc-meta"><span class="gc-meta-item">Bengaluru</span><span class="gc-meta-item">GRACE groundwater</span><span class="gc-meta-item">~7,000 dry wells</span></div>
+      <div class="gc-tags"><span class="gct">GRACE</span><span class="gct">CHIRPS</span><span class="gct">CGWB</span><span class="gct">GEE</span></div>
+      <span class="gc-link gc-link-dim">Coming soon</span>
+    </div>
+
+    <!-- 18 -->
+    <div class="gis-card" data-tags="planning transport">
+      <div class="gc-top"><span class="gc-status gc-plan">◉ Concept</span><span class="gc-year">2026</span></div>
+      <div class="gc-icon">🚶</div>
+      <h3 class="gc-title">Walkable City · Pedestrian-Friendliness Index, Kolkata</h3>
+      <p class="gc-desc">Amid 2023–25 footpath-encroachment and street-redesign debates in Kolkata's dense core, this study builds a walkability index from footway continuity, crossing density, shade and street-level connectivity.</p>
+      <div class="gc-meta"><span class="gc-meta-item">Kolkata</span><span class="gc-meta-item">Walkability index</span><span class="gc-meta-item">Footway + shade</span></div>
+      <div class="gc-tags"><span class="gct">OSM footways</span><span class="gct">Sentinel-2 NDVI</span><span class="gct">QGIS</span><span class="gct">Census density</span></div>
+      <span class="gc-link gc-link-dim">Coming soon</span>
+    </div>
+
+    <!-- 19 -->
+    <div class="gis-card" data-tags="hazard planning">
+      <div class="gc-top"><span class="gc-status gc-plan">◉ Concept</span><span class="gc-year">2026</span></div>
+      <div class="gc-icon">🧭</div>
+      <h3 class="gc-title">Escape Routes · Cyclone Evacuation Network, Puri</h3>
+      <p class="gc-desc">Tested by Cyclone Dana (2024) and Remal, Odisha's evacuation model is world-renowned. This study uses network analysis to optimise shelter-allocation and evacuation routing for cyclone-prone Puri's coastal population.</p>
+      <div class="gc-meta"><span class="gc-meta-item">Puri, Odisha</span><span class="gc-meta-item">Shelter routing</span><span class="gc-meta-item">Cyclone Dana</span></div>
+      <div class="gc-tags"><span class="gct">OSM</span><span class="gct">CartoDEM</span><span class="gct">pgRouting</span><span class="gct">QGIS</span></div>
+      <span class="gc-link gc-link-dim">Coming soon</span>
+    </div>
+
+    <!-- 20 -->
+    <div class="gis-card" data-tags="geoai environment">
+      <div class="gc-top"><span class="gc-status gc-plan">◉ Concept</span><span class="gc-year">2026</span></div>
+      <div class="gc-icon">🌿</div>
+      <h3 class="gc-title">Invaders in the Grassland · Mapping Weed Spread, Kaziranga</h3>
+      <p class="gc-desc">2024 reports warn Mimosa and water-hyacinth are choking Kaziranga's rhino grasslands. This study uses multi-temporal Sentinel-2 classification to track invasive-species spread threatening one of Assam's crown habitats.</p>
+      <div class="gc-meta"><span class="gc-meta-item">Kaziranga, Assam</span><span class="gc-meta-item">Multi-temporal class.</span><span class="gc-meta-item">Rhino habitat</span></div>
+      <div class="gc-tags"><span class="gct">Sentinel-2</span><span class="gct">Landsat</span><span class="gct">GEE</span><span class="gct">Classification</span></div>
+      <span class="gc-link gc-link-dim">Coming soon</span>
+    </div>
+
+  </div><!-- /gis-grid -->
+</div><!-- /gis-lab -->
+
+<!-- ═══════════════════════════════════════
+     THESIS MUSEUM — Phase 4
+═══════════════════════════════════════ -->
+<div class="section thesis-section" id="thesis-museum">
+  <div class="section-header">
+    <p class="section-label">// MSc Thesis · DTU · 2026</p>
+    <h2 class="section-title">Thesis Museum</h2>
+    <p class="section-sub">Field Measurement of Air Temperature &amp; Relative Humidity — Deer Park, New Delhi</p>
+  </div>
+
+  <!-- Thesis Title Card -->
+  <div class="thesis-title-card">
+    <div class="ttc-label">DISSERTATION</div>
+    <h3 class="ttc-main">Field Measurement of Air Temperature and Relative Humidity in Deer Park, Hauz Khas, New Delhi</h3>
+    <p class="ttc-sub">A Spatial Analysis using IDW Interpolation</p>
+    <div class="ttc-meta-row">
+      <span>Dixita Saikia · 24/MSCGEO/06</span>
+      <span>·</span>
+      <span>MSc Geospatial Science</span>
+      <span>·</span>
+      <span>Delhi Technological University</span>
+      <span>·</span>
+      <span>May 2026</span>
+    </div>
+    <div class="ttc-meta-row ttc-supervisors">
+      <span>Supervised by Prof. K.C. Tiwari &amp; Prof. Debapriya Dutta</span>
+    </div>
+  </div>
+
+  <!-- Key Stats -->
+  <div class="thesis-stats">
+    <div class="ts-item">
+      <div class="ts-num">130</div>
+      <div class="ts-label">Field Readings</div>
+      <div class="ts-sub">Jan + March 2026</div>
+    </div>
+    <div class="ts-item">
+      <div class="ts-num">6</div>
+      <div class="ts-label">Surface Types</div>
+      <div class="ts-sub">Forest to Road</div>
+    </div>
+    <div class="ts-item ts-item-hot">
+      <div class="ts-num">12°C</div>
+      <div class="ts-label">Max Thermal Gap</div>
+      <div class="ts-sub">Forest vs Road, March</div>
+    </div>
+    <div class="ts-item ts-item-cool">
+      <div class="ts-num">−0.827</div>
+      <div class="ts-label">Pearson r (Ta vs RH)</div>
+      <div class="ts-sub">p &lt; 0.001</div>
+    </div>
+    <div class="ts-item">
+      <div class="ts-num">QGIS</div>
+      <div class="ts-label">Primary Tool</div>
+      <div class="ts-sub">IDW Interpolation</div>
+    </div>
+    <div class="ts-item ts-item-accent">
+      <div class="ts-num">Deer Park</div>
+      <div class="ts-label">Study Area</div>
+      <div class="ts-sub">Hauz Khas, South Delhi</div>
+    </div>
+  </div>
+
+  <!-- Two Column: Abstract + Surface Types -->
+  <div class="thesis-body">
+    <div class="tb-col">
+      <h4 class="tb-heading">Abstract</h4>
+      <p class="tb-text">Small urban green spaces play a crucial role in moderating local thermal environments within rapidly expanding cities, yet their internal microclimatic dynamics are frequently underexplored when research depends exclusively on satellite-derived land surface temperature.</p>
+      <p class="tb-text">This dissertation examines air temperature and relative humidity patterns across <strong>Deer Park, Hauz Khas, New Delhi</strong>, through systematic ground-level measurements combined with <strong>Inverse Distance Weighted (IDW) spatial interpolation</strong> conducted in QGIS.</p>
+      <p class="tb-text">IDW interpolation surfaces clearly delineated thermal gradients. Dense forest and lakeside zones maintained the lowest temperatures in both seasons, while road surfaces and open grounds formed consistent thermal hotspots.</p>
+      <div class="tb-keywords">
+        <span class="kw">Urban Heat Island</span>
+        <span class="kw">IDW Interpolation</span>
+        <span class="kw">QGIS</span>
+        <span class="kw">Urban Microclimate</span>
+        <span class="kw">Green Space</span>
+        <span class="kw">Field Survey</span>
+        <span class="kw">Delhi</span>
+      </div>
+    </div>
+    <div class="tb-col">
+      <h4 class="tb-heading">Surface Type Thermal Profile</h4>
+      <div class="surface-bars">
+        <div class="sb-row">
+          <span class="sb-label">🌳 Dense Woodland</span>
+          <div class="sb-bar-wrap"><div class="sb-bar sb-cool" style="width:28%"></div></div>
+          <span class="sb-val sb-val-cool">Coolest · ~20–22°C</span>
+        </div>
+        <div class="sb-row">
+          <span class="sb-label">💧 Lakeshore</span>
+          <div class="sb-bar-wrap"><div class="sb-bar sb-cool" style="width:34%"></div></div>
+          <span class="sb-val sb-val-cool">~22–24°C</span>
+        </div>
+        <div class="sb-row">
+          <span class="sb-label">🌿 Shrub Zone</span>
+          <div class="sb-bar-wrap"><div class="sb-bar sb-mid" style="width:52%"></div></div>
+          <span class="sb-val sb-val-mid">~25–28°C</span>
+        </div>
+        <div class="sb-row">
+          <span class="sb-label">🌾 Open Grassland</span>
+          <div class="sb-bar-wrap"><div class="sb-bar sb-mid" style="width:64%"></div></div>
+          <span class="sb-val sb-val-mid">~27–30°C</span>
+        </div>
+        <div class="sb-row">
+          <span class="sb-label">🚶 Paved Path</span>
+          <div class="sb-bar-wrap"><div class="sb-bar sb-warm" style="width:78%"></div></div>
+          <span class="sb-val sb-val-warm">~30–33°C</span>
+        </div>
+        <div class="sb-row">
+          <span class="sb-label">🛣️ Road Adjacent</span>
+          <div class="sb-bar-wrap"><div class="sb-bar sb-hot" style="width:100%"></div></div>
+          <span class="sb-val sb-val-hot">Hottest · ~32–36.5°C</span>
+        </div>
+      </div>
+      <p class="sb-note">March daytime observations · n=55 · Deer Park, Hauz Khas</p>
+    </div>
+  </div>
+
+  <!-- Methodology Timeline -->
+  <div class="thesis-method">
+    <h4 class="tb-heading" style="text-align:center;margin-bottom:2.5rem;">Methodology at a Glance</h4>
+    <div class="method-steps">
+      <div class="ms-step">
+        <div class="ms-num">01</div>
+        <div class="ms-body">
+          <div class="ms-title">Study Area Delineation</div>
+          <div class="ms-desc">Deer Park, Hauz Khas mapped in QGIS. Six surface environment categories defined: dense woodland, shrub zone, lakeshore, grassland, paved path, road-adjacent.</div>
+        </div>
+      </div>
+      <div class="ms-step">
+        <div class="ms-num">02</div>
+        <div class="ms-body">
+          <div class="ms-title">Field Data Collection</div>
+          <div class="ms-desc">Systematic ground-level readings across 51 points (January 2026) and 79 points (March 2026). Simultaneous air temperature and relative humidity recorded at each observation station.</div>
+        </div>
+      </div>
+      <div class="ms-step">
+        <div class="ms-num">03</div>
+        <div class="ms-body">
+          <div class="ms-title">GIS Database Preparation</div>
+          <div class="ms-desc">GPS-tagged observation points georeferenced in QGIS. OpenStreetMap base layer + field photographs integrated for surface classification validation.</div>
+        </div>
+      </div>
+      <div class="ms-step">
+        <div class="ms-num">04</div>
+        <div class="ms-body">
+          <div class="ms-title">IDW Interpolation</div>
+          <div class="ms-desc">Inverse Distance Weighted interpolation surfaces generated for air temperature and RH — January, March daytime, and March evening sessions. Thermal gradients visualised at continuous resolution.</div>
+        </div>
+      </div>
+      <div class="ms-step">
+        <div class="ms-num">05</div>
+        <div class="ms-body">
+          <div class="ms-title">Statistical Analysis</div>
+          <div class="ms-desc">Pearson correlation (Ta vs RH) = −0.827, p&lt;0.001. Descriptive statistics by surface category. Seasonal comparison: mean Ta rose 5.7°C from January to March daytime.</div>
+        </div>
+      </div>
+      <div class="ms-step">
+        <div class="ms-num">06</div>
+        <div class="ms-body">
+          <div class="ms-title">Findings &amp; Implications</div>
+          <div class="ms-desc">Up to 12°C thermal gradient between forested core and road surface. Evidence for green space conservation as heat mitigation strategy — policy-ready conclusions for Delhi urban planners.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /thesis-museum -->
+
 <!-- WRITING -->
+
 <div class="section" id="writing">
   <div class="section-header">
     <div>
@@ -2388,6 +3058,28 @@ const VEDA_DATA = {
   <div id="rr-quote-text"></div>
   <div class="rr-q-author">— the man with 93 rolls royces</div>
 </div>
+
+<script>
+/* ── GIS LAB FILTER ── */
+(function(){
+  var btns = document.querySelectorAll('.gf-btn');
+  var cards = document.querySelectorAll('.gis-card');
+  btns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      btns.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var f = btn.dataset.filter;
+      cards.forEach(function(card){
+        if(f === 'all' || (card.dataset.tags && card.dataset.tags.indexOf(f) !== -1)){
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+})();
+</script>
 
 <script>
 /* ── ROLLS ROYCE QUOTES ── */
