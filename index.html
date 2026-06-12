@@ -516,6 +516,141 @@
       font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--dim); letter-spacing: 1px;
     }
 
+
+    /* ============ SINGULARITY HERO ============ */
+    .hero { min-height: 100vh; padding: 0; display: block; position: relative; background: #07051a; }
+    #sing-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; z-index: 0; pointer-events: none; }
+    .hero-vignette { position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background: radial-gradient(ellipse 70% 70% at 50% 50%, transparent 35%, rgba(7,5,20,0.55) 80%, #07051a 100%); }
+    .sing-overlay {
+      position: relative; z-index: 2; min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 8rem 1.5rem 4rem; pointer-events: none;
+    }
+    .sing-overlay > * { pointer-events: auto; }
+    .sing-kicker { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 5px;
+      text-transform: uppercase; color: var(--accent2); margin-bottom: 2rem; opacity: 0.85; }
+    .sing-h1 { font-size: clamp(1.8rem, 5vw, 3.6rem); font-weight: 900; letter-spacing: -2px;
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.4rem 1rem; margin-bottom: 1rem; }
+    .sh-word { position: relative; transition: all 0.3s; cursor: default; }
+    .sh-word[data-d="biology"]    { color: var(--accent3); text-shadow: 0 0 28px rgba(255,107,157,0.45); }
+    .sh-word[data-d="geography"]  { color: var(--accent2); text-shadow: 0 0 28px rgba(0,232,223,0.45); }
+    .sh-word[data-d="philosophy"] { color: var(--gold);    text-shadow: 0 0 28px rgba(245,184,0,0.45); }
+    .sh-word:hover { transform: translateY(-3px) scale(1.04); }
+    .sh-op { color: #5a5580; font-weight: 300; font-size: 0.7em; }
+    .sing-eq { font-size: clamp(1.4rem, 3.5vw, 2.4rem); font-weight: 200; letter-spacing: -0.5px;
+      color: #fff; margin-bottom: 2rem; opacity: 0.92; }
+    .sing-sub { max-width: 600px; font-size: 1rem; line-height: 1.9; color: #9a93c8; margin-bottom: 3rem; }
+    .sing-sub em { color: var(--text); font-style: italic; }
+    .sing-cta { margin-bottom: 3.5rem; }
+    .sing-enter {
+      position: relative; width: 220px; height: 220px; border: none; background: none;
+      cursor: pointer; display: grid; place-items: center;
+    }
+    .se-ring { position: absolute; inset: 0; border-radius: 50%;
+      border: 1px solid rgba(0,232,223,0.35); animation: seSpin 14s linear infinite;
+      box-shadow: 0 0 30px rgba(0,232,223,0.12) inset; }
+    .se-ring::before { content:''; position:absolute; inset: 22px; border-radius:50%;
+      border: 1px dashed rgba(145,122,255,0.4); animation: seSpin 9s linear infinite reverse; }
+    @keyframes seSpin { to { transform: rotate(360deg); } }
+    .se-core { position: absolute; width: 110px; height: 110px; border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, #fff, var(--accent) 45%, #3a2f7a 100%);
+      box-shadow: 0 0 50px rgba(145,122,255,0.6), 0 0 100px rgba(0,232,223,0.25);
+      animation: corePulse 3.5s ease-in-out infinite; }
+    @keyframes corePulse { 0%,100%{ transform: scale(1); } 50%{ transform: scale(1.08); } }
+    .se-label { position: relative; z-index: 2; font-family:'Space Mono',monospace; font-size:0.72rem;
+      letter-spacing: 2px; text-transform: uppercase; color: #fff; font-weight: 700;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.6); }
+    .sing-enter:hover .se-core { transform: scale(1.14); box-shadow: 0 0 70px rgba(145,122,255,0.8), 0 0 140px rgba(0,232,223,0.4); }
+    .sing-scroll { font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:3px;
+      text-transform: uppercase; color:#4a4570; animation: scrollBob 2.2s ease-in-out infinite; }
+    @keyframes scrollBob { 0%,100%{ transform: translateY(0); opacity:0.6;} 50%{ transform: translateY(6px); opacity:1;} }
+
+    /* ============ MANIFESTO ============ */
+    .manifesto { padding: 7rem 1.5rem; display: flex; justify-content: center;
+      background: linear-gradient(180deg, #07051a 0%, #0e0c1e 100%); }
+    .manifesto-inner { max-width: 760px; text-align: center; }
+    .mf-eyebrow { font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:4px;
+      text-transform: uppercase; color: var(--muted); display:flex; align-items:center;
+      justify-content:center; gap:1rem; margin-bottom: 2.5rem; }
+    .mf-line { width: 60px; height:1px; background: var(--dim); }
+    .mf-statement { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; line-height: 1.5;
+      letter-spacing: -1px; color: var(--text); margin-bottom: 2rem; }
+    .mf-bio { color: var(--accent3); } .mf-geo { color: var(--accent2); } .mf-phil { color: var(--gold); }
+    .mf-body { font-size: 1rem; line-height: 2; color: #9a93c8; margin-bottom: 2.5rem; }
+    .mf-body em { color: var(--text); font-style: italic; }
+    .mf-social { display:flex; flex-wrap:wrap; justify-content:center; gap: 0.6rem 1.8rem; }
+    .mf-link { font-family:'Space Mono',monospace; font-size:0.72rem; letter-spacing:2px;
+      text-transform: uppercase; color: var(--muted); text-decoration:none;
+      border-bottom: 1px solid transparent; transition: all 0.2s; padding-bottom: 2px; }
+    .mf-link:hover { color: var(--accent2); border-color: var(--accent2); }
+
+    /* ============ THE VAULT (work teaser) ============ */
+    .vault { padding: 7rem 1.5rem; display:flex; justify-content:center; text-align:center;
+      background: radial-gradient(ellipse 60% 50% at 50% 40%, rgba(145,122,255,0.06), transparent 70%); }
+    .vault-inner { max-width: 620px; }
+    .vault-seal { position: relative; width: 200px; height: 200px; margin: 0 auto 2.5rem;
+      cursor: pointer; display: grid; place-items: center; }
+    .vs-ring { position:absolute; border-radius:50%; border:1px solid rgba(145,122,255,0.3); }
+    .vs-ring-1 { inset:0; animation: seSpin 20s linear infinite; }
+    .vs-ring-2 { inset:26px; border-style:dashed; border-color: rgba(0,232,223,0.3); animation: seSpin 13s linear infinite reverse; }
+    .vs-ring-3 { inset:52px; border-color: rgba(245,184,0,0.25); animation: seSpin 16s linear infinite; }
+    .vs-core { width: 84px; height:84px; border-radius:50%; display:grid; place-items:center;
+      font-family:'Space Mono',monospace; font-weight:700; font-size:1.6rem; color:#fff;
+      background: radial-gradient(circle at 40% 35%, #2a2550, #14101f);
+      border: 1px solid rgba(145,122,255,0.5);
+      box-shadow: 0 0 40px rgba(145,122,255,0.35); transition: all 0.3s; }
+    .vault-seal:hover .vs-core { box-shadow: 0 0 60px rgba(145,122,255,0.6); transform: scale(1.06); color: var(--accent2); }
+    .vault-kicker { font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:3px;
+      text-transform:uppercase; color: var(--accent); margin-bottom: 1rem; }
+    .vault-title { font-size: clamp(1.6rem,4vw,2.6rem); font-weight:900; letter-spacing:-1.5px;
+      line-height:1.2; margin-bottom: 1.2rem; }
+    .vault-sub { font-size: 0.98rem; line-height:1.8; color:#9a93c8; max-width:480px; margin:0 auto 2.2rem; }
+    .vault-btn { font-family:'Space Mono',monospace; font-size:0.78rem; letter-spacing:2px;
+      text-transform:uppercase; font-weight:700; color:#fff; cursor:pointer;
+      padding: 0.9rem 2rem; border-radius: 8px; border:1px solid rgba(0,232,223,0.5);
+      background: rgba(0,232,223,0.08); transition: all 0.25s; }
+    .vault-btn:hover { background: rgba(0,232,223,0.18); box-shadow: 0 0 26px rgba(0,232,223,0.3); transform: translateY(-2px); }
+
+    /* revealed work hidden until gate opens */
+    .work-hidden { display: none; }
+    body.work-unlocked .work-hidden { display: block; animation: workFade 0.8s ease; }
+    body.work-unlocked #work-vault { display: none; }
+    @keyframes workFade { from { opacity:0; transform: translateY(24px);} to {opacity:1; transform:none;} }
+
+    /* ============ GATE POPUP CHOICES ============ */
+    .gate-box { max-width: 520px; }
+    .gate-choices { display:flex; flex-direction:column; gap:0.9rem; margin: 1.6rem 0 1.2rem; }
+    .gate-btn { text-align:left; padding: 1rem 1.3rem; border-radius:12px; cursor:pointer;
+      border:1px solid var(--line); background: rgba(255,255,255,0.03); color: var(--text);
+      transition: all 0.2s; display:flex; flex-direction:column; gap:0.25rem; }
+    .gate-btn span { font-size: 0.95rem; font-weight:700; }
+    .gate-btn small { font-size: 0.72rem; color: var(--muted); font-family:'Space Mono',monospace; letter-spacing:1px; }
+    .gate-btn:hover { border-color: var(--accent); background: rgba(145,122,255,0.08); transform: translateX(3px); }
+    .gate-primary { border-color: rgba(0,232,223,0.4); background: rgba(0,232,223,0.06); }
+    .gate-primary:hover { border-color: var(--accent2); background: rgba(0,232,223,0.12); box-shadow: 0 0 24px rgba(0,232,223,0.18); }
+
+    /* ============ GUITAR EASTER EGG ============ */
+    .guitar-egg { position: fixed; left: 1.4rem; bottom: 1.4rem; z-index: 850;
+      width: 40px; height: 40px; border-radius: 50%; border:1px solid rgba(255,107,157,0.25);
+      background: rgba(19,16,30,0.6); font-size: 1rem; cursor: pointer; opacity: 0.28;
+      transition: all 0.35s; backdrop-filter: blur(4px); animation: eggPulse 4.5s ease-in-out infinite; }
+    .guitar-egg:hover { opacity: 1; transform: rotate(-12deg) scale(1.2);
+      border-color: var(--accent3); box-shadow: 0 0 24px rgba(255,107,157,0.4); }
+    @keyframes eggPulse { 0%,92%,100%{ opacity:0.28; } 96%{ opacity:0.7; } }
+    .guitar-box { max-width: 500px; }
+    .guitar-videos { display:grid; grid-template-columns: 1fr 1fr; gap:1rem; margin: 1.4rem 0 1rem; }
+    @media(max-width:560px){ .guitar-videos { grid-template-columns:1fr; } }
+    .gv-slot { aspect-ratio: 16/10; border-radius:12px; border:1px solid var(--line);
+      background: radial-gradient(ellipse at center, rgba(255,107,157,0.1), rgba(145,122,255,0.05));
+      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.6rem; }
+    .gv-play { width:42px;height:42px;border-radius:50%; display:grid;place-items:center;
+      background: rgba(255,107,157,0.15); border:1px solid rgba(255,107,157,0.5); color:var(--accent3); }
+    .gv-cap { font-family:'Space Mono',monospace; font-size:0.62rem; letter-spacing:1px; color: var(--muted); }
+    .gv-cap span { color: var(--accent3); }
+
+    @media(max-width:768px){ .guitar-egg{ left:0.8rem; bottom:0.8rem; } .sing-enter{ width:180px;height:180px;} }
+
 </style>
 </head>
 <body>
@@ -632,106 +767,62 @@
   <div class="logo">ko<em>ord</em>inates/</div>
   <ul class="nav-links">
     <li><a href="#home">Home</a></li>
-    <li><a href="#gis-lab" class="nav-feat nf-teal">GIS Lab</a></li>
+    <li><a href="#" class="nav-feat nf-teal" onclick="openPopup('gate');return false;">The Work</a></li>
     <li><a href="#vedas" class="nav-feat">Vedas</a></li>
-    <li><a href="#music">Music</a></li>
     <li><a href="#writing">Writing</a></li>
-    <li><a href="#thesis-museum">Thesis</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#" class="nav-hire">Hire Me ↗</a></li>
+    <li><a href="#" class="nav-hire" onclick="openPopup('gate');return false;">Work with me ↗</a></li>
   </ul>
 </nav>
 
-<!-- HERO -->
+<!-- HERO · THE SINGULARITY -->
 <section class="hero" id="home">
-  <div class="hero-grid"></div>
-  <div class="hero-glow"></div>
-  <span class="math-float" style="top:12%;left:6%">e<sup>iπ</sup>+1=0</span>
-  <span class="math-float" style="top:22%;left:88%">φ=1.618…</span>
-  <span class="math-float" style="top:65%;left:5%">∇²ψ=0</span>
-  <span class="math-float" style="top:75%;left:82%">S=k ln Ω</span>
-  <span class="math-float" style="top:45%;left:92%">∮E·dA=Q/ε₀</span>
-  <span class="math-float" style="top:8%;left:50%">∫₋∞^∞ e⁻ˣ²dx=√π</span>
-  <span class="math-float" style="top:85%;left:40%">ds²=−c²dt²+dx²+dy²+dz²</span>
-  <div class="hero-inner hero-inner--centered">
-    <div class="hero-visual">
-      <div class="globe-wrap">
-        <div class="globe-ring"></div>
-        <div class="globe-ring-2"></div>
-        <div class="globe-dot"></div>
-        <div class="globe-dot"></div>
-        <div class="globe-dot"></div>
-        <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="gg" cx="40%" cy="35%" r="65%">
-              <stop offset="0%" stop-color="#2a2040"/>
-              <stop offset="100%" stop-color="#0f0f14"/>
-            </radialGradient>
-            <radialGradient id="gw" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#7c6af7" stop-opacity="0.3"/>
-              <stop offset="100%" stop-color="#7c6af7" stop-opacity="0"/>
-            </radialGradient>
-            <clipPath id="cc"><circle cx="150" cy="150" r="120"/></clipPath>
-          </defs>
-          <circle cx="150" cy="150" r="140" fill="url(#gw)"/>
-          <circle cx="150" cy="150" r="120" fill="url(#gg)" stroke="#2e2e50" stroke-width="1.5"/>
-          <g clip-path="url(#cc)" stroke="#2e2e50" stroke-width="0.8" opacity="0.7">
-            <ellipse cx="150" cy="150" rx="120" ry="30"/>
-            <ellipse cx="150" cy="150" rx="120" ry="65"/>
-            <ellipse cx="150" cy="150" rx="120" ry="100"/>
-            <line x1="150" y1="30" x2="150" y2="270"/>
-            <ellipse cx="150" cy="150" rx="50" ry="120"/>
-            <ellipse cx="150" cy="150" rx="90" ry="120"/>
-          </g>
-          <g clip-path="url(#cc)" opacity="0.9">
-            <path d="M165 100 Q195 95 205 120 Q215 145 200 165 Q185 180 170 170 Q155 160 150 140 Q145 120 165 100Z" fill="#7c6af7" opacity="0.25"/>
-            <path d="M120 130 Q135 120 145 140 Q155 160 145 185 Q135 200 120 195 Q108 185 105 165 Q102 145 120 130Z" fill="#00ddd6" opacity="0.2"/>
-            <path d="M60 100 Q80 90 90 115 Q100 135 88 160 Q76 180 62 170 Q48 158 45 135 Q43 112 60 100Z" fill="#ff6b9d" opacity="0.18"/>
-          </g>
-          <circle cx="193" cy="145" r="5" fill="#00ddd6" opacity="0.9">
-            <animate attributeName="opacity" values="0.9;0.3;0.9" dur="2.5s" repeatCount="indefinite"/>
-          </circle>
-          <circle cx="193" cy="145" r="12" fill="none" stroke="#00ddd6" stroke-width="1" opacity="0.4">
-            <animate attributeName="r" values="8;16;8" dur="2.5s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" values="0.4;0;0.4" dur="2.5s" repeatCount="indefinite"/>
-          </circle>
-          <circle cx="150" cy="150" r="120" fill="none" stroke="#7c6af7" stroke-width="1" opacity="0.3"/>
-        </svg>
-      </div>
+  <canvas id="sing-canvas"></canvas>
+  <div class="hero-vignette"></div>
+  <div class="sing-overlay">
+    <p class="sing-kicker">// three disciplines &nbsp;·&nbsp; one observer</p>
+    <h1 class="sing-h1">
+      <span class="sh-word" data-d="biology">biology</span>
+      <span class="sh-op">∩</span>
+      <span class="sh-word" data-d="geography">geography</span>
+      <span class="sh-op">∩</span>
+      <span class="sh-word" data-d="philosophy">philosophy</span>
+    </h1>
+    <p class="sing-eq">&rarr;&nbsp; a single point of seeing</p>
+    <p class="sing-sub">Not a portfolio. A singularity — where the map of the earth, the code of the cell, and the silence between thoughts collapse into one question: <em>what is actually here?</em></p>
+    <div class="sing-cta">
+      <button class="sing-enter" onclick="openPopup('gate')">
+        <span class="se-ring"></span>
+        <span class="se-core"></span>
+        <span class="se-label">see what I've built</span>
+      </button>
     </div>
+    <p class="sing-scroll">scroll to wander &nbsp;&darr;</p>
   </div>
 </section>
 
 
-<!-- IDENTITY NAREIN -->
-<section class="narein-section">
-  <div class="narein-inner">
-    <div class="narein-eyebrow">
-      <span class="ne-line"></span>
-      <span>MSc Geospatial Science · Remote Sensing · GIS</span>
-      <span class="ne-line"></span>
-    </div>
-    <div class="narein-name">
-      <span class="nn-first">Dixita</span>
-      <span class="nn-last">Saikia</span>
-    </div>
-    <p class="narein-philosophy">
-      Not ideas that seek truth —<br>
-      but one of the billion infinite possibilities<br>
-      of <em>observing and anudhavaning</em> the pathless path to truth.<br>
-      <span class="np-sub">This website is that one possibility, entertained.</span>
+<!-- SINGULARITY MANIFESTO (no name, no degree) -->
+<section class="manifesto">
+  <div class="manifesto-inner">
+    <p class="mf-eyebrow"><span class="mf-line"></span> the merge <span class="mf-line"></span></p>
+    <p class="mf-statement">
+      I was trained to read <span class="mf-bio">cells</span>.
+      I learned to read <span class="mf-geo">landscapes</span>.
+      I never stopped reading <span class="mf-phil">the self</span>.
     </p>
-    <div class="narein-cta">
-      <a href="#" class="btn btn-primary" id="btn-resume">↓ Resume</a>
-      <a href="https://linkedin.com/in/dixitasaikia" target="_blank" rel="noopener" class="btn btn-social btn-li">in LinkedIn</a>
-      <a href="https://github.com/dixitasaikia222-hub" target="_blank" rel="noopener" class="btn btn-social btn-gh">{ } GitHub</a>
-      <a href="#contact" class="btn btn-ghost">Contact</a>
-    </div>
-    <div class="narein-tags">
-      <span class="htag">GIS</span>
-      <span class="htag htag-teal">Remote Sensing</span>
-      <span class="htag htag-pink">GeoAI</span>
-      <span class="htag">Spatial Intelligence</span>
+    <p class="mf-body">
+      Most people pick a lane. I noticed the lanes were the same road.
+      A genome is a map. A river is a sentence. A sutra is a dataset four
+      thousand years deep. So I stopped switching fields and started
+      <em>collapsing</em> them — biology, geospatial science and philosophy
+      folded into a single way of looking. That fold is this website.
+    </p>
+    <div class="mf-social">
+      <a href="#" class="mf-link" id="btn-resume">resume</a>
+      <a href="https://linkedin.com/in/dixitasaikia" target="_blank" rel="noopener" class="mf-link">linkedin</a>
+      <a href="https://github.com/dixitasaikia222-hub" target="_blank" rel="noopener" class="mf-link">github</a>
+      <a href="#contact" class="mf-link">say hello</a>
     </div>
   </div>
 </section>
@@ -830,6 +921,24 @@
 <!-- ═══════════════════════════════════════
      GIS LAB — Phase 3
 ═══════════════════════════════════════ -->
+<!-- THE VAULT (mysterious teaser — gates the real work) -->
+<section class="vault" id="work-vault">
+  <div class="vault-inner">
+    <div class="vault-seal" onclick="openPopup('gate')">
+      <div class="vs-ring vs-ring-1"></div>
+      <div class="vs-ring vs-ring-2"></div>
+      <div class="vs-ring vs-ring-3"></div>
+      <div class="vs-core">27</div>
+    </div>
+    <p class="vault-kicker">// the work is sealed</p>
+    <h2 class="vault-title">Twenty-seven projects.<br>One thesis. One condition.</h2>
+    <p class="vault-sub">I don't hand the work to everyone who scrolls by. Tell me why you're here — then the vault opens.</p>
+    <button class="vault-btn" onclick="openPopup('gate')">request access &rarr;</button>
+  </div>
+</section>
+
+<!-- REAL WORK (revealed only after the gate) -->
+<div id="work-revealed" class="work-hidden">
 <div class="section section-prime" id="gis-lab">
   <div class="prime-ribbon prime-ribbon-teal">★ Flagship Work</div>
   <div class="section-header">
@@ -1247,6 +1356,7 @@
     </div>
   </div>
 </div><!-- /thesis-museum -->
+</div><!-- /work-revealed -->
 
 <!-- WRITING -->
 
@@ -2456,55 +2566,6 @@ const VEDA_DATA = {
 </div>
 
 <!-- REELS -->
-<!-- MUSIC / GUITAR SECTION -->
-<div class="section section-prime" id="music" style="border-top:1px solid var(--line); position:relative; background: linear-gradient(180deg, #100e22 0%, #14101f 100%);">
-  <div class="prime-ribbon" style="color:var(--accent3); border-color:rgba(255,107,157,0.4); background:rgba(255,107,157,0.08); box-shadow:0 0 18px rgba(255,107,157,0.15);">♪ Off the Map</div>
-  <div class="section-header">
-    <div>
-      <p class="section-label" style="color:var(--accent3);">// Six Strings</p>
-      <h2 class="section-title" style="background:linear-gradient(100deg,var(--accent3),var(--neon) 60%,var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Maps by day,<br/>melodies by night.</h2>
-      <p class="section-sub">When I'm not interpolating temperature surfaces, I'm chasing chords. A coordinate is just a frequency in space â and a song is just a map of one.</p>
-    </div>
-  </div>
-
-  <div class="music-grid">
-    <div class="music-card music-card-empty">
-      <div class="mc-thumb">
-        <div class="mc-play">▶</div>
-        <div class="mc-strings"><span></span><span></span><span></span><span></span><span></span><span></span></div>
-      </div>
-      <div class="mc-body">
-        <p class="mc-label">Guitar Cover</p>
-        <h3 class="mc-title">Coming soon</h3>
-        <p class="mc-desc">First cover dropping here. Acoustic fingerstyle, recorded raw.</p>
-      </div>
-    </div>
-    <div class="music-card music-card-empty">
-      <div class="mc-thumb">
-        <div class="mc-play">▶</div>
-        <div class="mc-strings"><span></span><span></span><span></span><span></span><span></span><span></span></div>
-      </div>
-      <div class="mc-body">
-        <p class="mc-label">Original</p>
-        <h3 class="mc-title">Coming soon</h3>
-        <p class="mc-desc">An original composition in the works.</p>
-      </div>
-    </div>
-    <div class="music-card music-card-empty">
-      <div class="mc-thumb">
-        <div class="mc-play">▶</div>
-        <div class="mc-strings"><span></span><span></span><span></span><span></span><span></span><span></span></div>
-      </div>
-      <div class="mc-body">
-        <p class="mc-label">Live Loop</p>
-        <h3 class="mc-title">Coming soon</h3>
-        <p class="mc-desc">Layered live-loop experiment.</p>
-      </div>
-    </div>
-  </div>
-  <p class="music-note">// drop a YouTube or Instagram embed link into any card to publish a video</p>
-</div>
-
 <div class="section" id="reels" style="border-top: 1px solid var(--line);">
   <div class="section-header">
     <div>
@@ -2693,6 +2754,53 @@ const VEDA_DATA = {
   <button class="ptrig" onclick="openPopup('fractal')" title="Fractals">∞</button>
 </div>
 
+<!-- HIDDEN GUITAR EASTER EGG (a faint glyph that pulses; click = funny popup) -->
+<button class="guitar-egg" id="guitar-egg" title="" onclick="openPopup('guitar')">🎸</button>
+
+<!-- THE WORK GATE POPUP -->
+<div class="popup-overlay" id="pop-gate">
+  <div class="popup-box gate-box">
+    <button class="popup-close" onclick="closePopup('gate')">&times;</button>
+    <span class="popup-tag" style="color:var(--accent2);">// you reached for the work</span>
+    <p class="popup-title">Before I show you anything &mdash;</p>
+    <p class="popup-body">Most portfolios beg to be looked at. This one asks a question first. So, honestly: <strong>why are you here?</strong></p>
+    <div class="gate-choices">
+      <button class="gate-btn gate-primary" onclick="revealWork()">
+        <span>I want to see the work</span><small>27 projects + the thesis, unlocked</small>
+      </button>
+      <button class="gate-btn" onclick="closePopup('gate'); document.getElementById('contact').scrollIntoView({behavior:'smooth'});">
+        <span>Let's build something together</span><small>take me to contact &rarr;</small>
+      </button>
+    </div>
+    <p class="popup-footer-note">// curiosity is the only credential that matters here</p>
+  </div>
+</div>
+
+<!-- GUITAR FUNNY POPUP -->
+<div class="popup-overlay" id="pop-guitar">
+  <div class="popup-box guitar-box">
+    <button class="popup-close" onclick="closePopup('guitar')">&times;</button>
+    <span class="popup-tag" style="color:var(--accent3);">// you found the secret string</span>
+    <p class="popup-title">🎸 Okay, you caught me.</p>
+    <p class="popup-body">
+      Full disclosure: I know roughly <strong>three chords and one-and-a-half songs.</strong>
+      Management (me) accepts no responsibility for pitch, tempo, or the occasional dying-cat noise.
+      But hey &mdash; a coordinate is just a frequency in space, so technically this <em>is</em> geospatial work.
+    </p>
+    <div class="guitar-videos">
+      <div class="gv-slot">
+        <div class="gv-play">▶</div>
+        <p class="gv-cap">Cover #1 &middot; <span>coming soon</span></p>
+      </div>
+      <div class="gv-slot">
+        <div class="gv-play">▶</div>
+        <p class="gv-cap">Cover #2 &middot; <span>coming soon</span></p>
+      </div>
+    </div>
+    <p class="popup-footer-note">// shhh — this isn't on the menu</p>
+  </div>
+</div>
+
 <!-- THE 93 WELCOME POPUP -->
 <div class="popup-overlay" id="pop-welcome">
   <div class="popup-box">
@@ -2783,6 +2891,107 @@ const VEDA_DATA = {
 </div>
 
 <script>
+  /* ── REVEAL THE WORK ── */
+  function revealWork(){
+    document.body.classList.add('work-unlocked');
+    closePopup('gate');
+    setTimeout(function(){
+      var el = document.getElementById('work-revealed');
+      if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    }, 120);
+  }
+
+  /* ── SINGULARITY CANVAS ── */
+  (function(){
+    var cv = document.getElementById('sing-canvas');
+    if(!cv) return;
+    var ctx = cv.getContext('2d');
+    var DPR = Math.min(window.devicePixelRatio || 1, 2);
+    var W=0,H=0,cx=0,cy=0;
+    function resize(){
+      W = cv.clientWidth; H = cv.clientHeight;
+      cv.width = Math.max(1,W*DPR); cv.height = Math.max(1,H*DPR);
+      ctx.setTransform(DPR,0,0,DPR,0,0);
+      cx = W/2; cy = H*0.5;
+    }
+    window.addEventListener('resize', resize);
+
+    var FAM = [ [255,107,157], [0,232,223], [245,184,0] ]; // bio / geo / phil
+    var N = window.innerWidth < 700 ? 220 : 460;
+    var P = [];
+    function spawn(){
+      var maxR = Math.max(W,H)*0.62 + 120;
+      return {
+        c: FAM[(Math.random()*3)|0],
+        ang: Math.random()*Math.PI*2,
+        rad: 160 + Math.random()*maxR,
+        spin: 0.0008 + Math.random()*0.0016,
+        pull: 0.05 + Math.random()*0.13,
+        size: 0.6 + Math.random()*1.9,
+        tw: Math.random()*Math.PI*2,
+        px: null, py: null
+      };
+    }
+    for(var i=0;i<N;i++) P.push(spawn());
+
+    var mx=null, my=null;
+    window.addEventListener('pointermove', function(e){
+      var r = cv.getBoundingClientRect();
+      if(e.clientY < r.bottom){ mx = e.clientX - r.left; my = e.clientY - r.top; }
+      else { mx=my=null; }
+    });
+
+    var t=0;
+    function frame(){
+      t++;
+      ctx.fillStyle = 'rgba(7,5,20,0.30)';
+      ctx.fillRect(0,0,W,H);
+
+      var pulse = 0.5 + 0.5*Math.sin(t*0.02);
+      var coreR = 22 + pulse*9;
+
+      var g = ctx.createRadialGradient(cx,cy,0,cx,cy,coreR*3.6);
+      g.addColorStop(0,'rgba(255,255,255,0.9)');
+      g.addColorStop(0.16,'rgba(185,175,255,0.55)');
+      g.addColorStop(0.5,'rgba(124,106,247,0.16)');
+      g.addColorStop(1,'rgba(124,106,247,0)');
+      ctx.fillStyle=g;
+      ctx.beginPath(); ctx.arc(cx,cy,coreR*3.6,0,Math.PI*2); ctx.fill();
+
+      ctx.strokeStyle='rgba(0,232,223,'+(0.10+0.10*pulse)+')';
+      ctx.lineWidth=1;
+      ctx.beginPath(); ctx.ellipse(cx,cy,coreR*4.6,coreR*1.6,t*0.004,0,Math.PI*2); ctx.stroke();
+
+      ctx.globalCompositeOperation='lighter';
+      for(var k=0;k<P.length;k++){
+        var p=P[k];
+        p.ang += p.spin*(1 + 130/(p.rad+40));
+        p.rad -= p.pull*(1 + 60/(p.rad+30));
+        var x = cx + Math.cos(p.ang)*p.rad;
+        var y = cy + Math.sin(p.ang)*p.rad*0.6;
+        if(mx!=null){
+          var dx=x-mx, dy=y-my, d=Math.sqrt(dx*dx+dy*dy);
+          if(d<150 && d>0.5){ var f=(150-d)/150*9; x+=dx/d*f; y+=dy/d*f; }
+        }
+        if(p.rad < coreR*1.15){ P[k]=spawn(); continue; }
+        var c0=p.c, tw=0.35 + 0.65*Math.abs(Math.sin(p.tw + t*0.05));
+        if(p.px!=null){
+          ctx.strokeStyle='rgba('+c0[0]+','+c0[1]+','+c0[2]+','+(0.45*tw)+')';
+          ctx.lineWidth=p.size;
+          ctx.beginPath(); ctx.moveTo(p.px,p.py); ctx.lineTo(x,y); ctx.stroke();
+        }
+        ctx.fillStyle='rgba('+c0[0]+','+c0[1]+','+c0[2]+','+tw+')';
+        ctx.beginPath(); ctx.arc(x,y,p.size,0,Math.PI*2); ctx.fill();
+        p.px=x; p.py=y;
+      }
+      ctx.globalCompositeOperation='source-over';
+      requestAnimationFrame(frame);
+    }
+    resize();
+    ctx.fillStyle='#07051a'; ctx.fillRect(0,0,W,H);
+    frame();
+  })();
+
   /* ── POPUP SYSTEM ── */
   function openPopup(id) {
     document.querySelectorAll('.popup-overlay').forEach(p => p.classList.remove('open'));
