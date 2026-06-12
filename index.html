@@ -57,8 +57,13 @@
     .logo { font-family: 'Space Mono', monospace; font-size: 1rem; color: var(--text); letter-spacing: -0.5px; font-weight: 700; }
     .logo em { color: var(--accent); font-style: normal; }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-links a { color: #6060a0; text-decoration: none; font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--text); }
+    .nav-links a { color: #b4abe0; text-decoration: none; font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s, text-shadow 0.2s; }
+    .nav-links a:hover { color: #fff; }
+    .nav-feat { color: var(--gold) !important; position: relative; text-shadow: 0 0 14px rgba(245,184,0,0.35); }
+    .nav-feat::before { content: '\2737'; margin-right: 4px; font-size: 0.6rem; opacity: 0.85; }
+    .nav-feat:hover { color: #ffd76b !important; text-shadow: 0 0 18px rgba(245,184,0,0.6); }
+    .nav-feat.nf-teal { color: var(--accent2) !important; text-shadow: 0 0 14px rgba(0,232,223,0.35); }
+    .nav-feat.nf-teal:hover { color: #6ff5ee !important; text-shadow: 0 0 18px rgba(0,232,223,0.6); }
     .nav-hire { color: var(--accent2) !important; border: 1px solid rgba(0,232,223,.3); padding: .3rem .9rem; border-radius: 4px; }
     .nav-hire:hover { background: rgba(0,232,223,.1) !important; }
 
@@ -424,6 +429,93 @@
       place-items: center;
     }
 
+
+    /* PRIME / FLAGSHIP SECTIONS */
+    .section-prime { position: relative; }
+    .section-prime::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(245,184,0,0.06) 0%, transparent 60%);
+    }
+    .prime-ribbon {
+      position: absolute; top: 1.4rem; right: 2rem; z-index: 5;
+      font-family: 'Space Mono', monospace; font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      padding: 0.4rem 0.9rem; border-radius: 20px;
+      color: var(--gold); border: 1px solid rgba(245,184,0,0.4);
+      background: rgba(245,184,0,0.08); box-shadow: 0 0 18px rgba(245,184,0,0.15);
+      animation: primePulse 3s ease-in-out infinite;
+    }
+    .prime-ribbon-teal {
+      color: var(--accent2); border-color: rgba(0,232,223,0.4);
+      background: rgba(0,232,223,0.08); box-shadow: 0 0 18px rgba(0,232,223,0.15);
+    }
+    @keyframes primePulse { 0%,100% { opacity: 0.85; } 50% { opacity: 1; transform: scale(1.03); } }
+    .section-title-prime {
+      background: linear-gradient(100deg, var(--accent2), var(--accent) 60%, var(--neon));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      filter: drop-shadow(0 0 22px rgba(0,232,223,0.3));
+    }
+    @media (max-width: 640px) { .prime-ribbon { top: 0.8rem; right: 1rem; font-size: 0.55rem; } }
+
+
+    /* COMPACT THESIS */
+    .thesis-compact { opacity: 0.92; }
+    .thesis-mini {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center;
+      background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
+      padding: 2.5rem 3rem;
+    }
+    @media (max-width: 800px) { .thesis-mini { grid-template-columns: 1fr; gap: 2rem; } }
+    .tm-degree { font-family: 'Space Mono', monospace; font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+    .tm-title { font-size: 1.25rem; font-weight: 700; line-height: 1.4; margin-bottom: 0.8rem; color: var(--text); }
+    .tm-sub { color: var(--muted); font-size: 0.9rem; line-height: 1.7; margin-bottom: 1.4rem; }
+    .tm-college { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; font-size: 0.82rem; color: #8880b0; margin-bottom: 0.4rem; }
+    .tm-college-name { color: var(--accent2); font-weight: 700; }
+    .tm-college-dot { color: var(--dim); }
+    .tm-supervisors { font-size: 0.75rem; color: var(--dim); }
+    .tm-right { display: flex; gap: 1.8rem; }
+    @media (max-width: 800px) { .tm-right { justify-content: flex-start; } }
+    .tm-stat { display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .tm-num { font-size: 1.8rem; font-weight: 900; color: var(--text); line-height: 1; }
+    .tm-lbl { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-top: 0.4rem; }
+
+
+    /* MUSIC / GUITAR */
+    .music-grid {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+    }
+    @media (max-width: 800px) { .music-grid { grid-template-columns: 1fr; } }
+    .music-card {
+      background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+      overflow: hidden; transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    }
+    .music-card:hover { transform: translateY(-4px); border-color: rgba(255,107,157,0.4); box-shadow: 0 14px 40px rgba(255,107,157,0.12); }
+    .mc-thumb {
+      position: relative; aspect-ratio: 16/10; display: grid; place-items: center;
+      background: radial-gradient(ellipse at center, rgba(255,107,157,0.12), rgba(145,122,255,0.06));
+      border-bottom: 1px solid var(--line); overflow: hidden;
+    }
+    .mc-play {
+      width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center;
+      background: rgba(255,107,157,0.15); border: 1px solid rgba(255,107,157,0.5);
+      color: var(--accent3); font-size: 1.1rem; z-index: 2;
+      box-shadow: 0 0 24px rgba(255,107,157,0.25); transition: transform 0.2s;
+    }
+    .music-card:hover .mc-play { transform: scale(1.12); }
+    .mc-strings { position: absolute; inset: 0; display: flex; justify-content: space-around; opacity: 0.35; }
+    .mc-strings span { width: 1px; height: 100%; background: linear-gradient(180deg, transparent, var(--accent3), transparent); }
+    .mc-strings span:nth-child(odd) { background: linear-gradient(180deg, transparent, var(--accent), transparent); }
+    .mc-body { padding: 1.4rem 1.5rem 1.6rem; }
+    .mc-label { font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 2px; text-transform: uppercase; color: var(--accent3); margin-bottom: 0.6rem; }
+    .mc-title { font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
+    .mc-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+    .music-note {
+      max-width: 1100px; margin: 1.8rem auto 0; text-align: center;
+      font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--dim); letter-spacing: 1px;
+    }
+
 </style>
 </head>
 <body>
@@ -540,9 +632,11 @@
   <div class="logo">ko<em>ord</em>inates/</div>
   <ul class="nav-links">
     <li><a href="#home">Home</a></li>
-    <li><a href="#gis-lab">GIS Lab</a></li>
-    <li><a href="#thesis-museum">Thesis</a></li>
+    <li><a href="#gis-lab" class="nav-feat nf-teal">GIS Lab</a></li>
+    <li><a href="#vedas" class="nav-feat">Vedas</a></li>
+    <li><a href="#music">Music</a></li>
     <li><a href="#writing">Writing</a></li>
+    <li><a href="#thesis-museum">Thesis</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#" class="nav-hire">Hire Me ↗</a></li>
   </ul>
@@ -736,10 +830,11 @@
 <!-- ═══════════════════════════════════════
      GIS LAB — Phase 3
 ═══════════════════════════════════════ -->
-<div class="section" id="gis-lab">
+<div class="section section-prime" id="gis-lab">
+  <div class="prime-ribbon prime-ribbon-teal">★ Flagship Work</div>
   <div class="section-header">
     <p class="section-label">// geospatial work · 27 projects</p>
-    <h2 class="section-title">GIS Lab</h2>
+    <h2 class="section-title section-title-prime">GIS Lab</h2>
     <p class="section-sub">Field surveys · Satellite analysis · Spatial intelligence · GeoAI — spanning Assam, India &amp; the world</p>
   </div>
 
@@ -1128,170 +1223,29 @@
 <!-- ═══════════════════════════════════════
      THESIS MUSEUM — Phase 4
 ═══════════════════════════════════════ -->
-<div class="section thesis-section" id="thesis-museum">
+<div class="section thesis-compact" id="thesis-museum">
   <div class="section-header">
-    <p class="section-label">// MSc Thesis · DTU · 2026</p>
-    <h2 class="section-title">Thesis Museum</h2>
-    <p class="section-sub">Field Measurement of Air Temperature &amp; Relative Humidity — Deer Park, New Delhi</p>
+    <p class="section-label">// MSc Thesis</p>
+    <h2 class="section-title" style="font-size:clamp(1.6rem,3.5vw,2.4rem);">Thesis</h2>
   </div>
-
-  <!-- Thesis Title Card -->
-  <div class="thesis-title-card">
-    <div class="ttc-label">DISSERTATION</div>
-    <h3 class="ttc-main">Field Measurement of Air Temperature and Relative Humidity in Deer Park, Hauz Khas, New Delhi</h3>
-    <p class="ttc-sub">A Spatial Analysis using IDW Interpolation</p>
-    <div class="ttc-meta-row">
-      <span>Dixita Saikia · 24/MSCGEO/06</span>
-      <span>·</span>
-      <span>MSc Geospatial Science</span>
-      <span>·</span>
-      <span>Delhi Technological University</span>
-      <span>·</span>
-      <span>May 2026</span>
+  <div class="thesis-mini">
+    <div class="tm-left">
+      <div class="tm-degree">MSc Geospatial Science · 2026</div>
+      <h3 class="tm-title">Field Measurement of Air Temperature &amp; Relative Humidity in Deer Park, Hauz Khas, New Delhi</h3>
+      <p class="tm-sub">A spatial analysis using IDW interpolation in QGIS — quantifying urban green-space cooling.</p>
+      <div class="tm-college">
+        <span class="tm-college-name">Delhi Technological University</span>
+        <span class="tm-college-dot">·</span>
+        <span>Dixita Saikia · 24/MSCGEO/06</span>
+      </div>
+      <div class="tm-supervisors">Supervised by Prof. K.C. Tiwari &amp; Prof. Debapriya Dutta</div>
     </div>
-    <div class="ttc-meta-row ttc-supervisors">
-      <span>Supervised by Prof. K.C. Tiwari &amp; Prof. Debapriya Dutta</span>
+    <div class="tm-right">
+      <div class="tm-stat"><span class="tm-num">130</span><span class="tm-lbl">field readings</span></div>
+      <div class="tm-stat"><span class="tm-num">12&deg;C</span><span class="tm-lbl">thermal gap</span></div>
+      <div class="tm-stat"><span class="tm-num">6</span><span class="tm-lbl">surface types</span></div>
     </div>
   </div>
-
-  <!-- Key Stats -->
-  <div class="thesis-stats">
-    <div class="ts-item">
-      <div class="ts-num">130</div>
-      <div class="ts-label">Field Readings</div>
-      <div class="ts-sub">Jan + March 2026</div>
-    </div>
-    <div class="ts-item">
-      <div class="ts-num">6</div>
-      <div class="ts-label">Surface Types</div>
-      <div class="ts-sub">Forest to Road</div>
-    </div>
-    <div class="ts-item ts-item-hot">
-      <div class="ts-num">12°C</div>
-      <div class="ts-label">Max Thermal Gap</div>
-      <div class="ts-sub">Forest vs Road, March</div>
-    </div>
-    <div class="ts-item ts-item-cool">
-      <div class="ts-num">−0.827</div>
-      <div class="ts-label">Pearson r (Ta vs RH)</div>
-      <div class="ts-sub">p &lt; 0.001</div>
-    </div>
-    <div class="ts-item">
-      <div class="ts-num">QGIS</div>
-      <div class="ts-label">Primary Tool</div>
-      <div class="ts-sub">IDW Interpolation</div>
-    </div>
-    <div class="ts-item ts-item-accent">
-      <div class="ts-num">Deer Park</div>
-      <div class="ts-label">Study Area</div>
-      <div class="ts-sub">Hauz Khas, South Delhi</div>
-    </div>
-  </div>
-
-  <!-- Two Column: Abstract + Surface Types -->
-  <div class="thesis-body">
-    <div class="tb-col">
-      <h4 class="tb-heading">Abstract</h4>
-      <p class="tb-text">Small urban green spaces play a crucial role in moderating local thermal environments within rapidly expanding cities, yet their internal microclimatic dynamics are frequently underexplored when research depends exclusively on satellite-derived land surface temperature.</p>
-      <p class="tb-text">This dissertation examines air temperature and relative humidity patterns across <strong>Deer Park, Hauz Khas, New Delhi</strong>, through systematic ground-level measurements combined with <strong>Inverse Distance Weighted (IDW) spatial interpolation</strong> conducted in QGIS.</p>
-      <p class="tb-text">IDW interpolation surfaces clearly delineated thermal gradients. Dense forest and lakeside zones maintained the lowest temperatures in both seasons, while road surfaces and open grounds formed consistent thermal hotspots.</p>
-      <div class="tb-keywords">
-        <span class="kw">Urban Heat Island</span>
-        <span class="kw">IDW Interpolation</span>
-        <span class="kw">QGIS</span>
-        <span class="kw">Urban Microclimate</span>
-        <span class="kw">Green Space</span>
-        <span class="kw">Field Survey</span>
-        <span class="kw">Delhi</span>
-      </div>
-    </div>
-    <div class="tb-col">
-      <h4 class="tb-heading">Surface Type Thermal Profile</h4>
-      <div class="surface-bars">
-        <div class="sb-row">
-          <span class="sb-label">🌳 Dense Woodland</span>
-          <div class="sb-bar-wrap"><div class="sb-bar sb-cool" style="width:28%"></div></div>
-          <span class="sb-val sb-val-cool">Coolest · ~20–22°C</span>
-        </div>
-        <div class="sb-row">
-          <span class="sb-label">💧 Lakeshore</span>
-          <div class="sb-bar-wrap"><div class="sb-bar sb-cool" style="width:34%"></div></div>
-          <span class="sb-val sb-val-cool">~22–24°C</span>
-        </div>
-        <div class="sb-row">
-          <span class="sb-label">🌿 Shrub Zone</span>
-          <div class="sb-bar-wrap"><div class="sb-bar sb-mid" style="width:52%"></div></div>
-          <span class="sb-val sb-val-mid">~25–28°C</span>
-        </div>
-        <div class="sb-row">
-          <span class="sb-label">🌾 Open Grassland</span>
-          <div class="sb-bar-wrap"><div class="sb-bar sb-mid" style="width:64%"></div></div>
-          <span class="sb-val sb-val-mid">~27–30°C</span>
-        </div>
-        <div class="sb-row">
-          <span class="sb-label">🚶 Paved Path</span>
-          <div class="sb-bar-wrap"><div class="sb-bar sb-warm" style="width:78%"></div></div>
-          <span class="sb-val sb-val-warm">~30–33°C</span>
-        </div>
-        <div class="sb-row">
-          <span class="sb-label">🛣️ Road Adjacent</span>
-          <div class="sb-bar-wrap"><div class="sb-bar sb-hot" style="width:100%"></div></div>
-          <span class="sb-val sb-val-hot">Hottest · ~32–36.5°C</span>
-        </div>
-      </div>
-      <p class="sb-note">March daytime observations · n=55 · Deer Park, Hauz Khas</p>
-    </div>
-  </div>
-
-  <!-- Methodology Timeline -->
-  <div class="thesis-method">
-    <h4 class="tb-heading" style="text-align:center;margin-bottom:2.5rem;">Methodology at a Glance</h4>
-    <div class="method-steps">
-      <div class="ms-step">
-        <div class="ms-num">01</div>
-        <div class="ms-body">
-          <div class="ms-title">Study Area Delineation</div>
-          <div class="ms-desc">Deer Park, Hauz Khas mapped in QGIS. Six surface environment categories defined: dense woodland, shrub zone, lakeshore, grassland, paved path, road-adjacent.</div>
-        </div>
-      </div>
-      <div class="ms-step">
-        <div class="ms-num">02</div>
-        <div class="ms-body">
-          <div class="ms-title">Field Data Collection</div>
-          <div class="ms-desc">Systematic ground-level readings across 51 points (January 2026) and 79 points (March 2026). Simultaneous air temperature and relative humidity recorded at each observation station.</div>
-        </div>
-      </div>
-      <div class="ms-step">
-        <div class="ms-num">03</div>
-        <div class="ms-body">
-          <div class="ms-title">GIS Database Preparation</div>
-          <div class="ms-desc">GPS-tagged observation points georeferenced in QGIS. OpenStreetMap base layer + field photographs integrated for surface classification validation.</div>
-        </div>
-      </div>
-      <div class="ms-step">
-        <div class="ms-num">04</div>
-        <div class="ms-body">
-          <div class="ms-title">IDW Interpolation</div>
-          <div class="ms-desc">Inverse Distance Weighted interpolation surfaces generated for air temperature and RH — January, March daytime, and March evening sessions. Thermal gradients visualised at continuous resolution.</div>
-        </div>
-      </div>
-      <div class="ms-step">
-        <div class="ms-num">05</div>
-        <div class="ms-body">
-          <div class="ms-title">Statistical Analysis</div>
-          <div class="ms-desc">Pearson correlation (Ta vs RH) = −0.827, p&lt;0.001. Descriptive statistics by surface category. Seasonal comparison: mean Ta rose 5.7°C from January to March daytime.</div>
-        </div>
-      </div>
-      <div class="ms-step">
-        <div class="ms-num">06</div>
-        <div class="ms-body">
-          <div class="ms-title">Findings &amp; Implications</div>
-          <div class="ms-desc">Up to 12°C thermal gradient between forested core and road surface. Evidence for green space conservation as heat mitigation strategy — policy-ready conclusions for Delhi urban planners.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
 </div><!-- /thesis-museum -->
 
 <!-- WRITING -->
@@ -1390,7 +1344,8 @@
 </div>
 
 <!-- VEDA × SCIENCE SECTION -->
-<div id="vedas" style="border-top:1px solid var(--line); background: linear-gradient(180deg, #0f0f14 0%, #13101e 100%);">
+<div id="vedas" class="section-prime" style="border-top:1px solid var(--line); background: linear-gradient(180deg, #0f0f14 0%, #13101e 100%); position:relative;">
+  <div class="prime-ribbon">★ Signature Series</div>
   <div style="max-width:1200px; margin:0 auto; padding:7rem 3rem;">
 
     <p style="font-family:'Space Mono',monospace; font-size:0.68rem; color:var(--gold); letter-spacing:3px; text-transform:uppercase; margin-bottom:1rem;">// The Ancient Code</p>
@@ -2501,6 +2456,55 @@ const VEDA_DATA = {
 </div>
 
 <!-- REELS -->
+<!-- MUSIC / GUITAR SECTION -->
+<div class="section section-prime" id="music" style="border-top:1px solid var(--line); position:relative; background: linear-gradient(180deg, #100e22 0%, #14101f 100%);">
+  <div class="prime-ribbon" style="color:var(--accent3); border-color:rgba(255,107,157,0.4); background:rgba(255,107,157,0.08); box-shadow:0 0 18px rgba(255,107,157,0.15);">♪ Off the Map</div>
+  <div class="section-header">
+    <div>
+      <p class="section-label" style="color:var(--accent3);">// Six Strings</p>
+      <h2 class="section-title" style="background:linear-gradient(100deg,var(--accent3),var(--neon) 60%,var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Maps by day,<br/>melodies by night.</h2>
+      <p class="section-sub">When I'm not interpolating temperature surfaces, I'm chasing chords. A coordinate is just a frequency in space â and a song is just a map of one.</p>
+    </div>
+  </div>
+
+  <div class="music-grid">
+    <div class="music-card music-card-empty">
+      <div class="mc-thumb">
+        <div class="mc-play">▶</div>
+        <div class="mc-strings"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      </div>
+      <div class="mc-body">
+        <p class="mc-label">Guitar Cover</p>
+        <h3 class="mc-title">Coming soon</h3>
+        <p class="mc-desc">First cover dropping here. Acoustic fingerstyle, recorded raw.</p>
+      </div>
+    </div>
+    <div class="music-card music-card-empty">
+      <div class="mc-thumb">
+        <div class="mc-play">▶</div>
+        <div class="mc-strings"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      </div>
+      <div class="mc-body">
+        <p class="mc-label">Original</p>
+        <h3 class="mc-title">Coming soon</h3>
+        <p class="mc-desc">An original composition in the works.</p>
+      </div>
+    </div>
+    <div class="music-card music-card-empty">
+      <div class="mc-thumb">
+        <div class="mc-play">▶</div>
+        <div class="mc-strings"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      </div>
+      <div class="mc-body">
+        <p class="mc-label">Live Loop</p>
+        <h3 class="mc-title">Coming soon</h3>
+        <p class="mc-desc">Layered live-loop experiment.</p>
+      </div>
+    </div>
+  </div>
+  <p class="music-note">// drop a YouTube or Instagram embed link into any card to publish a video</p>
+</div>
+
 <div class="section" id="reels" style="border-top: 1px solid var(--line);">
   <div class="section-header">
     <div>
