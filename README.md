@@ -3,7 +3,7 @@
 
 The personal portfolio of **Dixita Saikia** — M.Sc. Geospatial Science,
 Delhi Technological University. Exploring the Earth through GIS, remote
-sensing, and data, with a design inspired by Vedic philosophy.
+sensing, and data.
 
  **Live site:** https://koordinatesworld.github.io/koordinates/
 
